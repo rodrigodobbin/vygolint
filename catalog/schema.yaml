@@ -11,3 +11,7 @@ criterio:
   viabilidade: [alta, media, baixa]
   fontes_evidencia: [codigo, documentacao, video]
   escala: [atendido, parcial, nao_atendido]
+  opcionais: [definicoes]
+  definicoes:
+    chaves: [glossario, locais, termos_comuns]   # glossario: lista de chaves de definicoes.yaml; locais: {termo: texto}; termos_comuns: {gatilho: justificativa}
+    campos_lint: [enunciado, evidencia.*.procedimento, evidencia.*.indicadores, escala.*]

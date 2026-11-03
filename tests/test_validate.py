@@ -1,7 +1,7 @@
 import unittest
 
-from helpers import categorias_validas, diretriz_valida, schema_valido
-from vygolint_catalog.validate import validate_diretriz
+from helpers import REPO, categorias_validas, diretriz_valida, glossario_valido, schema_valido
+from vygolint_catalog.validate import load_definicoes, validate_diretriz
 from vygolint_catalog.validate import validate_catalogo
 
 
@@ -180,3 +180,113 @@ class ValidateCatalogoTest(unittest.TestCase):
         self.assertTrue(any("esperado AA" in e for e in errors))
         a["criterios"][0]["nivel"] = "AA"
         self.assertEqual(validate_catalogo([a]), [])
+
+
+def _glossario():
+    return load_definicoes(REPO / "catalog" / "definicoes.yaml")
+
+
+class DefinicoesCriterioTest(unittest.TestCase):
+    def setUp(self):
+        self.schema = schema_valido()
+        self.categorias = categorias_validas()
+        self.g = _glossario()
+
+    def check(self, d):
+        return validate_diretriz(d, self.schema, self.categorias, self.g)
+
+    def _com_missao(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["enunciado"] = "Toda ação incorreta do jogador em uma missão recebe mensagem que indica o que fazer"
+        c["definicoes"] = {"glossario": ["missao"]}
+        return d
+
+    def test_valid_reference_passes(self):
+        self.assertEqual(self.check(self._com_missao()), [])
+
+    def test_without_glossary_param_nothing_is_checked(self):
+        d = self._com_missao()
+        d["criterios"][0]["definicoes"] = {"glossario": ["nao_existe"]}
+        self.assertEqual(validate_diretriz(d, self.schema, self.categorias), [])
+
+    def test_unknown_key(self):
+        d = self._com_missao()
+        d["criterios"][0]["definicoes"]["glossario"] = ["missao", "nao_existe"]
+        self.assertTrue(any("nao_existe" in e for e in self.check(d)))
+
+    def test_gatilho_without_key_is_error(self):
+        d = self._com_missao()
+        d["criterios"][0]["definicoes"] = {}
+        errors = self.check(d)
+        self.assertTrue(any('"missão"' in e and "missao" in e for e in errors), errors)
+
+    def test_gatilho_in_indicator_and_scale_is_linted(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["evidencia"]["codigo"]["indicadores"].append("mensagem cita o desafio")
+        self.assertTrue(any("desafio" in e for e in self.check(d)))
+        d = diretriz_valida()
+        d["criterios"][0]["escala"]["parcial"] = "Alguns cenários orientam"
+        self.assertTrue(any("cenario_jogavel" in e for e in self.check(d)))
+
+    def test_justificativa_is_not_linted(self):
+        d = diretriz_valida()
+        d["criterios"][0]["nivel_justificativa"]["texto"] = "A missão é o centro da ZDP."
+        self.assertEqual(self.check(d), [])
+
+    def test_key_listed_but_unused_is_error(self):
+        d = diretriz_valida()
+        d["criterios"][0]["definicoes"] = {"glossario": ["missao"]}
+        self.assertTrue(any("missao" in e and "nenhum gatilho" in e for e in self.check(d)))
+
+    def test_glossary_text_cascades(self):
+        # cenario_jogavel's text mentions "missão" and "caminho obrigatório": both keys are required.
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["enunciado"] = "Em todo cenário jogável o feedback orienta"
+        c["definicoes"] = {"glossario": ["cenario_jogavel"]}
+        errors = self.check(d)
+        self.assertTrue(any("missao" in e for e in errors), errors)
+        self.assertTrue(any("caminho_obrigatorio" in e for e in errors), errors)
+        c["definicoes"]["glossario"] += ["missao", "caminho_obrigatorio"]
+        self.assertEqual(self.check(d), [])
+
+    def test_locais_shape_and_count_as_usage(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["definicoes"] = {"locais": {"dispositivo": "um elemento presente na abertura da missão"}, "glossario": ["missao"]}
+        self.assertEqual(self.check(d), [])
+        c["definicoes"]["locais"] = {"dispositivo": ""}
+        self.assertTrue(any("locais" in e for e in self.check(d)))
+        c["definicoes"]["locais"] = ["dispositivo"]
+        self.assertTrue(any("locais" in e for e in self.check(d)))
+
+    def test_termos_comuns_silences_lint_with_justification(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["escala"]["parcial"] = "O cenário de erro orienta em parte"
+        c["definicoes"] = {"termos_comuns": {"cenário": "sentido corrente de situação, não o cenário jogável"}}
+        self.assertEqual(self.check(d), [])
+        c["definicoes"]["termos_comuns"] = {"cenário": ""}
+        self.assertTrue(any("termos_comuns" in e for e in self.check(d)))
+        c["definicoes"]["termos_comuns"] = {"foguete": "x"}
+        self.assertTrue(any("foguete" in e for e in self.check(d)))
+        c["definicoes"] = {"termos_comuns": {"cenário": "x"}, "glossario": ["cenario_jogavel", "missao", "caminho_obrigatorio"]}
+        self.assertTrue(any("termos_comuns" in e and "glossario" in e for e in self.check(d)))
+
+    def test_inline_definitions_are_forbidden(self):
+        d = self._com_missao()
+        c = d["criterios"][0]
+        c["escala"]["parcial"] += ". Definição: missão é uma unidade do jogo"
+        self.assertTrue(any("Definição" in e for e in self.check(d)))
+        d = self._com_missao()
+        d["criterios"][0]["enunciado"] += "; missão é " + self.g["missao"]["texto"]
+        self.assertTrue(any("glossário" in e and "missao" in e for e in self.check(d)))
+
+    def test_unknown_definicoes_key_and_shape(self):
+        d = self._com_missao()
+        d["criterios"][0]["definicoes"]["extra"] = 1
+        self.assertTrue(any("extra" in e for e in self.check(d)))
+        d["criterios"][0]["definicoes"] = "missao"
+        self.assertTrue(any("definicoes" in e for e in self.check(d)))

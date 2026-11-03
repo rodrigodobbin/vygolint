@@ -26,6 +26,9 @@ class GlossarioTest(unittest.TestCase):
         doc = glossario_valido()
         doc["termos"][0]["chave"] = "Missão"
         self.assertTrue(any("chave" in e for e in validate_definicoes(doc)))
+        doc = glossario_valido()
+        doc["termos"][0]["chave"] = ["x"]
+        self.assertTrue(any("chave" in e for e in validate_definicoes(doc)))
 
     def test_duplicate_key_and_duplicate_gatilho(self):
         doc = glossario_valido()
