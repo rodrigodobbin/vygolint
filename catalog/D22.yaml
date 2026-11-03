@@ -1,0 +1,54 @@
+id: D22
+categoria: mediacao
+diretriz: "O jogo, quando aplicado em sala de aula, cria oportunidades para o professor atuar como mediador / facilitador"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: "Somente quando o jogo é aplicado em sala de aula"
+criterios:
+  - id: D22.1
+    nivel: AA
+    enunciado: "A documentação descreve, para cada desafio, ao menos um momento de mediação, isto é, um ponto da sessão com a intervenção do professor prevista e o objetivo de aprendizagem que ela trabalha; Definições: documentação é o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo; desafio é cada missão ou minijogo; objetivo de aprendizagem é o listado na documentação; intervenção do professor é uma ação do professor sobre os jogadores durante a sessão, em sala de aula, dentro ou fora do jogo, presencialmente ou por qualquer canal (perguntar, explicar, orientar ou discutir o resultado), e não exige canal de comunicação dentro do jogo (D06 e D07); momento de mediação é um ponto da sessão que a documentação identifica (por exemplo, ao falhar no desafio, ao concluí-lo ou em pausa indicada), com a intervenção do professor prevista nesse ponto e o objetivo de aprendizagem que a intervenção trabalha; descrição que cite só o ponto, sem a intervenção do professor ou sem o objetivo de aprendizagem, não é momento de mediação"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: alta
+      texto: "Na zona de desenvolvimento proximal, o professor é o outro mais experiente que ajusta o apoio ao que o aluno ainda não faz sozinho, e a mediação fora do jogo é a leitura de D22 adotada também em D06. A exigência de um momento por desafio é uma convenção operacional do vygolint: cada desafio tem objetivo de aprendizagem e dificuldade próprios, e uma intervenção descrita para um desafio não prevê a ajuda de que outro precisa. A essencialidade é média porque o jogo também medeia por si (D17 a D21). Escrever momentos de intervenção em um guia ou no GDD não exige mudança no jogo; viabilidade alta."
+    evidencia:
+      codigo: null
+      documentacao:
+        procedimento: "Listar os desafios descritos na documentação e, para cada um, localizar os momentos de mediação descritos, verificando os três elementos de cada momento: o ponto da sessão, a intervenção do professor e o objetivo de aprendizagem. Definições: documentação é o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo; desafio é cada missão ou minijogo; objetivo de aprendizagem é o listado na documentação; intervenção do professor é uma ação do professor sobre os jogadores durante a sessão, em sala de aula, dentro ou fora do jogo, presencialmente ou por qualquer canal (perguntar, explicar, orientar ou discutir o resultado), e não exige canal de comunicação dentro do jogo (D06 e D07); momento de mediação é um ponto da sessão que a documentação identifica (por exemplo, ao falhar no desafio, ao concluí-lo ou em pausa indicada), com a intervenção do professor prevista nesse ponto e o objetivo de aprendizagem que a intervenção trabalha; descrição que cite só o ponto, sem a intervenção do professor ou sem o objetivo de aprendizagem, não é momento de mediação"
+        indicadores:
+          - "todos os desafios descritos na documentação foram listados (mínimo 1)"
+          - "cada desafio listado tem ao menos um momento de mediação descrito com os três elementos: ponto da sessão, intervenção do professor e objetivo de aprendizagem"
+          - "o objetivo de aprendizagem citado em cada momento de mediação consta da lista de objetivos de aprendizagem da documentação"
+      video: null
+    escala:
+      atendido: "Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado"
+      parcial: "Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado, e ao menos outro desafio não tem"
+      nao_atendido: "Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado"
+    depende_de: []
+  - id: D22.2
+    nivel: AAA
+    enunciado: "O jogo oferece ao professor um recurso de acompanhamento que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade; Definições: documentação é o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo; desafio é cada missão ou minijogo; recurso de acompanhamento do professor é uma tela, painel ou relatório (exibido no jogo ou em outra ferramenta, ou exportado em arquivo) destinado ao professor, e não ao jogador, que mostra dados por jogador ou por grupo, e não apenas agregados da turma; resultado por desafio é o registro de se o jogador ou o grupo concluiu cada desafio; dado de dificuldade é o número de tentativas, a lista de erros ou o tempo gasto em cada desafio"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: baixa
+      texto: "A mediação do professor na zona de desenvolvimento proximal depende de saber o que cada aluno já faz sozinho e onde precisa de ajuda; com uma turma inteira jogando, o professor não observa cada jogador, e um registro de resultado e de dificuldade por desafio indica onde intervir. A essencialidade é média porque o professor pode mediar por observação direta, que D22.1 já trata. Viabilidade baixa: exige guardar registros por jogador além da sessão e uma tela ou exportação própria para o professor, que a maioria dos jogos educacionais não tem."
+    evidencia:
+      codigo:
+        procedimento: "Procurar telas, rotas, funções ou exportações restritas ao professor (perfil de professor, senha ou modo docente) que leiam registros por jogador ou por grupo, e listar os campos que elas exibem ou exportam. Verificar se há resultado por desafio e ao menos um dado de dificuldade por jogador ou grupo. Definições: documentação é o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo; desafio é cada missão ou minijogo; recurso de acompanhamento do professor é uma tela, painel ou relatório (exibido no jogo ou em outra ferramenta, ou exportado em arquivo) destinado ao professor, e não ao jogador, que mostra dados por jogador ou por grupo, e não apenas agregados da turma; resultado por desafio é o registro de se o jogador ou o grupo concluiu cada desafio; dado de dificuldade é o número de tentativas, a lista de erros ou o tempo gasto em cada desafio. Regra de desempate: se o código e a documentação divergirem sobre o recurso, vale o código; sem código, a documentação; código que existe mas não traz dado sobre o recurso conta como sem código para esse recurso, e documentação que não o descreve conta como sem documentação para esse recurso"
+        indicadores:
+          - "o recurso de acompanhamento foi localizado, com a tela, rota, função ou exportação que o implementa e a restrição de acesso ao professor (mínimo 0 recursos)"
+          - "o recurso lista dados por jogador ou por grupo, e não apenas agregados da turma"
+          - "o recurso lista o resultado por desafio e ao menos um dado de dificuldade (indica o estado atendido); se lista só um dos dois, indica o estado parcial"
+      documentacao:
+        procedimento: "Verificar na documentação a descrição de tela, painel ou relatório para o professor e dos campos que ele traz por jogador ou por grupo. Definições: documentação é o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo; desafio é cada missão ou minijogo; recurso de acompanhamento do professor é uma tela, painel ou relatório (exibido no jogo ou em outra ferramenta, ou exportado em arquivo) destinado ao professor, e não ao jogador, que mostra dados por jogador ou por grupo, e não apenas agregados da turma; resultado por desafio é o registro de se o jogador ou o grupo concluiu cada desafio; dado de dificuldade é o número de tentativas, a lista de erros ou o tempo gasto em cada desafio. Regra de desempate: se o código e a documentação divergirem sobre o recurso, vale o código; sem código, a documentação; código que existe mas não traz dado sobre o recurso conta como sem código para esse recurso, e documentação que não o descreve conta como sem documentação para esse recurso"
+        indicadores:
+          - "a documentação descreve o recurso de acompanhamento, quem o acessa e como é acessado (mínimo 0 recursos)"
+          - "a documentação lista os campos do recurso e indica que são por jogador ou por grupo"
+          - "os campos listados incluem o resultado por desafio e ao menos um dado de dificuldade (indica o estado atendido); se incluem só um dos dois, indica o estado parcial"
+      video: null
+    escala:
+      atendido: "O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado"
+      parcial: "O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado"
+      nao_atendido: "O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado"
+    depende_de: []
