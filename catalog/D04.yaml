@@ -1,0 +1,31 @@
+id: D04
+categoria: interacao
+diretriz: "O jogador deve interagir com os objetos dos cenários"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D04.1
+    nivel: A
+    enunciado: "Ao menos um objeto de cada cenário responde à interação do jogador com mudança de estado ou com informação relacionada ao conteúdo do jogo"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Para Vigotski o conhecimento é construído na atividade sobre objetos e instrumentos, e interagir com o ambiente é a forma pela qual o jogador exerce essa atividade. Um cenário apenas contemplativo reduz o jogador a espectador. Programar resposta a clique, toque ou colisão é recurso básico de qualquer motor de jogo."
+    evidencia:
+      codigo:
+        procedimento: "Listar os objetos de cada cenário que têm tratador de interação (clique, toque, colisão, uso de item) e o efeito de cada tratador"
+        indicadores:
+          - "cada cenário tem ao menos um objeto com tratador de interação"
+          - "o efeito do tratador é mudança de estado do objeto ou exibição de informação ligada ao conteúdo"
+      documentacao: null
+      video:
+        procedimento: "Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida"
+        indicadores:
+          - "ao menos um objeto interagido por cenário"
+          - "o objeto muda de estado ou exibe informação ligada ao conteúdo"
+    escala:
+      atendido: "Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação ligada ao conteúdo"
+      parcial: "Alguns cenários têm objeto interativo; outros não têm, ou o objeto responde sem relação com o conteúdo"
+      nao_atendido: "Nenhum objeto dos cenários responde à interação do jogador"
+    depende_de: []

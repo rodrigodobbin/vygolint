@@ -1,0 +1,32 @@
+id: D08
+categoria: interacao
+diretriz: "O jogador deve trocar informações com os mecanismos do jogo"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D08.1
+    nivel: A
+    enunciado: "Em ao menos uma situação do jogo, um personagem não jogável ou mecanismo entrega informação ao jogador e em seguida recebe dele uma resposta, escolha ou item que altera o que o jogo exibe a seguir"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Em Vigotski, a interação com o meio é mediada por signos e instrumentos, e uma troca de mão dupla com o jogo faz do sistema um interlocutor, e não um painel de exibição. Se o jogo só emite informação, o jogador permanece receptor. Diálogos com escolhas e entrega de itens são mecânicas comuns e de baixo custo."
+    evidencia:
+      codigo:
+        procedimento: "Localizar diálogos, quadros de pergunta e mecanismos de entrega ou recebimento de itens e verificar se a resposta do jogador é registrada e muda o estado ou o conteúdo seguinte"
+        indicadores:
+          - "o mecanismo emite informação ao jogador"
+          - "a entrada do jogador (escolha, resposta, item) é lida pelo mecanismo"
+          - "a entrada do jogador altera a próxima saída do mecanismo ou o estado do jogo"
+      documentacao: null
+      video:
+        procedimento: "Registrar cada troca entre o jogador e personagem ou mecanismo, anotando a informação recebida, a entrada do jogador e o que o jogo exibe depois"
+        indicadores:
+          - "ao menos uma troca completa observada (informação recebida, entrada do jogador, resposta do jogo)"
+          - "o que o jogo exibe depois difere conforme a entrada do jogador"
+    escala:
+      atendido: "O jogo apresenta trocas de dois sentidos com mecanismos, e a entrada do jogador altera a resposta do jogo, em mais de uma situação"
+      parcial: "Há uma única situação de troca de dois sentidos, ou as trocas existem mas a entrada do jogador não altera a resposta do jogo"
+      nao_atendido: "Os mecanismos apenas emitem informação ao jogador, sem receber entrada dele"
+    depende_de: []

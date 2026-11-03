@@ -1,0 +1,59 @@
+id: D03
+categoria: interacao
+diretriz: "O desenvolvimento das atividades/missões/minijogos deve ser autorregulado pelo jogador"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D03.1
+    nivel: A
+    enunciado: "O jogador inicia cada atividade, missão ou minijogo por uma ação própria e o jogo não avança de uma para a próxima sem essa ação"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Atividade, em Vigotski, é conduzida pelo sujeito; a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz. Se o jogo conduz o jogador de uma etapa à seguinte, o controle permanece no sistema. Basta condicionar a transição a uma ação do jogador, o que não exige recurso técnico especial."
+    evidencia:
+      codigo:
+        procedimento: "Localizar as transições entre missões e minijogos e verificar o que as dispara"
+        indicadores:
+          - "a transição é disparada por entrada do jogador (botão, escolha, interação)"
+          - "não há transição disparada apenas por temporizador ou por término automático da etapa anterior"
+      documentacao: null
+      video:
+        procedimento: "Registrar cada transição entre atividades e anotar se houve ação do jogador antes da mudança"
+        indicadores:
+          - "ao menos 3 transições observadas"
+          - "cada transição é precedida por ação do jogador"
+    escala:
+      atendido: "Todas as transições observadas ou identificadas no código dependem de ação do jogador"
+      parcial: "Parte das transições depende de ação do jogador; outras ocorrem automaticamente"
+      nao_atendido: "As atividades se sucedem automaticamente, sem ação do jogador"
+    depende_de: []
+  - id: D03.2
+    nivel: A
+    enunciado: "O jogador conclui cada atividade em seu próprio ritmo: nenhuma atividade tem limite de tempo obrigatório para ser concluída, ou o limite pode ser desativado ou ampliado pelo jogador"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Regular a própria atividade inclui decidir quando agir e quanto tempo dedicar a uma tarefa; cronômetro imposto desloca essa decisão para o sistema e pressiona o jogador a responder antes de elaborar. A zona de desenvolvimento proximal difere entre jogadores, então o ritmo também difere. Remover ou tornar opcional o limite de tempo é de baixo custo."
+    evidencia:
+      codigo:
+        procedimento: "Procurar temporizadores associados a missões e minijogos e verificar o que ocorre quando o tempo se esgota e se há opção de desativá-los"
+        indicadores:
+          - "existência de temporizador com consequência de falha ao esgotar"
+          - "existência de configuração que desativa ou amplia o temporizador"
+      documentacao:
+        procedimento: "Verificar no GDD as regras de tempo de cada atividade"
+        indicadores:
+          - "indicação de quais atividades têm limite de tempo"
+          - "indicação de opção do jogador para alterar o limite"
+      video:
+        procedimento: "Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite"
+        indicadores:
+          - "ao menos 3 atividades observadas"
+          - "o jogador permanece na atividade sem ser interrompido por esgotamento de tempo"
+    escala:
+      atendido: "Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite"
+      parcial: "Parte das atividades tem limite de tempo obrigatório; as demais não têm"
+      nao_atendido: "Todas as atividades têm limite de tempo obrigatório que o jogador não pode alterar"
+    depende_de: []

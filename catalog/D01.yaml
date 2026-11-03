@@ -1,0 +1,32 @@
+id: D01
+categoria: interacao
+diretriz: "Os desafios do jogo devem ser direcionados a resolução de problemas"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D01.1
+    nivel: A
+    enunciado: "Cada missão ou minijogo apresenta uma situação-problema cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Desafios de repetição mecânica reduzem o jogo a treino de estímulo e resposta, o que Carvalho (2020) busca afastar. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional."
+    evidencia:
+      codigo: null
+      documentacao:
+        procedimento: "Listar no documento de design (GDD) cada missão e minijogo e identificar a situação-problema e as alternativas de decisão previstas"
+        indicadores:
+          - "cada missão ou minijogo descreve uma situação-problema"
+          - "há ao menos duas alternativas de resolução ou uma decisão a ser tomada pelo jogador"
+      video:
+        procedimento: "Registrar o início e o fim de cada missão ou minijogo observado e anotar qual decisão o jogador tomou para concluí-lo"
+        indicadores:
+          - "ao menos 3 missões ou minijogos observados"
+          - "em cada um, o jogador escolhe ou combina elementos para resolver a situação"
+          - "concluir o desafio não depende de repetir a mesma ação até o fim"
+    escala:
+      atendido: "Todas as missões e minijogos observados ou documentados exigem uma decisão do jogador para serem resolvidos"
+      parcial: "Parte das missões e minijogos exige decisão; os demais se resolvem repetindo uma ação"
+      nao_atendido: "Nenhuma missão ou minijogo exige decisão do jogador além de repetir uma ação"
+    depende_de: []

@@ -1,0 +1,31 @@
+id: D02
+categoria: interacao
+diretriz: "Avaliar os conteúdos ensinados no jogo de forma a transcender o contexto que eles foram abordados, possibilitando a transposição dos conceitos para resolução de outras situações-problema"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D02.1
+    nivel: A
+    enunciado: "Existe ao menos um desafio que exige aplicar um conceito já apresentado em um cenário ou situação diferente daquele em que o conceito foi introduzido"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: media
+      texto: "Em Vigotski, conceitos científicos se consolidam quando o sujeito os generaliza e os usa de modo consciente em situações novas, e não quando os repete no contexto de origem. Avaliar apenas no cenário de introdução mede memorização do contexto, não domínio do conceito. Exige planejar variações de cenário para o mesmo conteúdo, o que aumenta o esforço de conteúdo e de design; viabilidade média."
+    evidencia:
+      codigo: null
+      documentacao:
+        procedimento: "Mapear no GDD, para cada conceito, o cenário de introdução e os cenários em que ele é cobrado em desafios"
+        indicadores:
+          - "tabela ou lista associando conceito, cenário de introdução e cenário de avaliação"
+          - "ao menos um conceito é cobrado em cenário distinto do de introdução"
+      video:
+        procedimento: "Registrar o cenário e o momento em que cada conceito é introduzido e o cenário em que o mesmo conceito é cobrado depois"
+        indicadores:
+          - "ao menos um conceito aparece em dois cenários ou missões diferentes"
+          - "o desafio do segundo cenário só se resolve aplicando o conceito apresentado no primeiro"
+    escala:
+      atendido: "Todos os conceitos centrais do jogo são cobrados ao menos uma vez em cenário diferente do de introdução"
+      parcial: "Ao menos um conceito é cobrado em cenário diferente do de introdução, mas outros conceitos centrais são cobrados só no cenário em que foram apresentados"
+      nao_atendido: "Todos os conceitos são cobrados apenas no cenário em que foram introduzidos"
+    depende_de: []

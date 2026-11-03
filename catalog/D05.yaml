@@ -1,0 +1,31 @@
+id: D05
+categoria: interacao
+diretriz: "O jogador deve explorar livremente o cenário"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D05.1
+    nivel: A
+    enunciado: "Em ao menos um cenário, o jogador alcança áreas ou objetos que não pertencem ao caminho da missão em curso, sem que o jogo o impeça ou o conduza de volta ao objetivo"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: media
+      texto: "A exploração é a atividade do jogador sobre o ambiente: é por ela que ele formula hipóteses e descobre relações, em vez de receber um percurso pronto. Um cenário reduzido ao caminho da missão converte a exploração em seguimento de instruções. Construir áreas além do caminho principal acrescenta trabalho de arte e de nível; viabilidade média."
+    evidencia:
+      codigo: null
+      documentacao:
+        procedimento: "Verificar no GDD ou nos mapas de nível as áreas de cada cenário e se existem regiões fora do caminho da missão"
+        indicadores:
+          - "mapa ou descrição que indica áreas fora do caminho da missão"
+          - "ausência de regra que bloqueie o acesso a essas áreas durante a missão"
+      video:
+        procedimento: "Observar o jogador deixando o caminho da missão e registrar o que o jogo faz em seguida"
+        indicadores:
+          - "o jogador visita ao menos uma área fora do caminho da missão"
+          - "o jogo não interrompe, bloqueia nem reposiciona o jogador por causa disso"
+    escala:
+      atendido: "Todos os cenários jogáveis têm áreas fora do caminho da missão acessíveis sem bloqueio"
+      parcial: "Ao menos um cenário tem áreas acessíveis fora do caminho da missão; os demais restringem o jogador ao caminho"
+      nao_atendido: "Nenhum cenário permite alcançar áreas fora do caminho da missão em curso"
+    depende_de: []
