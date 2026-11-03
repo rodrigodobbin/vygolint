@@ -14,19 +14,21 @@ criterios:
       texto: "Em Vigotski, a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz, e decidir o que fazer a seguir é parte desse controle. Num jogo estritamente linear a ordem é decidida pelo sistema, e o jogador apenas executa a sequência. Oferecer atividades em paralelo exige estrutura de progressão não linear e conteúdo que não dependa de uma ordem fixa; viabilidade média."
     evidencia:
       codigo:
-        procedimento: "Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis"
+        procedimento: "Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis. Verificar também, dentro de cada atividade, se o código aceita mais de uma ordem para executar as ações (objetos, perguntas ou etapas)"
         indicadores:
           - "existe estado do jogo em que duas ou mais atividades estão desbloqueadas simultaneamente"
           - "a atividade iniciada é determinada por entrada do jogador (menu, mapa, interação), não por ordem fixa no código"
+          - "dentro de ao menos uma atividade, o código aceita mais de uma ordem para executar as ações (objetos, perguntas ou etapas), sem impor sequência fixa"
       documentacao: null
       video:
-        procedimento: "Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia"
+        procedimento: "Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia. Registrar também, dentro de cada atividade, se a interface apresenta duas ou mais ações (objetos, perguntas ou etapas) disponíveis ao mesmo tempo e em que ordem o jogador as executa"
         indicadores:
           - "ao menos um ponto em que duas ou mais atividades aparecem disponíveis ao mesmo tempo (menu, mapa ou cenário)"
-          - "o jogador inicia uma delas e a outra permanece disponível ou é iniciada depois"
+          - "o jogador inicia uma delas; a outra pode permanecer disponível, ser iniciada depois ou ficar indisponível após a escolha (escolha excludente)"
+          - "dentro de ao menos uma atividade, a interface apresenta duas ou mais ações (objetos, perguntas ou etapas) disponíveis ao mesmo tempo e o jogador escolhe a ordem de execução"
     escala:
       atendido: "Em ao menos um ponto, o jogador escolhe entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo"
-      parcial: "O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem de elementos dentro de uma atividade (como objetos, perguntas ou etapas)"
+      parcial: "O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem das ações dentro de uma atividade (como objetos, perguntas ou etapas)"
       nao_atendido: "As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa"
     depende_de: []
   - id: D03.2
@@ -72,10 +74,11 @@ criterios:
           - "indicação de quais atividades têm limite de tempo"
           - "indicação de opção do jogador para alterar o limite"
       video:
-        procedimento: "Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite"
+        procedimento: "Observar cada atividade registrando se há contador de tempo visível, o que ocorre quando ele chega a zero e se o jogador pode permanecer na atividade sem limite"
         indicadores:
           - "todas as atividades presentes no vídeo foram observadas (mínimo 1)"
           - "o jogador permanece na atividade sem ser interrompido por esgotamento de tempo"
+          - "não há contador de tempo visível cujo esgotamento encerre ou reprove a atividade; se há contador visível e o vídeo mostra seu esgotamento, a atividade não termina nem falha"
     escala:
       atendido: "Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite"
       parcial: "Ao menos uma atividade tem limite de tempo obrigatório e ao menos outra não tem"

@@ -7,7 +7,7 @@ aplicabilidade: null
 criterios:
   - id: D02.1
     nivel: A
-    enunciado: "Cada conceito listado como objetivo de aprendizagem no GDD (ou documento equivalente) é cobrado ao menos uma vez em uma missão ou cenário com estrutura de problema diferente daquela em que foi introduzido"
+    enunciado: "Cada conceito listado como objetivo de aprendizagem no GDD ou documento equivalente é cobrado ao menos uma vez em uma missão ou cenário com estrutura de problema diferente daquela em que foi introduzido"
     nivel_justificativa:
       essencialidade: alta
       viabilidade: media
@@ -15,17 +15,17 @@ criterios:
     evidencia:
       codigo: null
       documentacao:
-        procedimento: "Extrair do GDD (ou documento equivalente) a lista de objetivos de aprendizagem e mapear, para cada conceito, a missão ou cenário de introdução e as missões ou cenários em que ele é cobrado. Se o documento não lista objetivos de aprendizagem, registrar a ausência e classificar o critério como nao_atendido. Considerar estrutura de problema diferente quando mudam o objetivo da missão ou o conjunto de objetos ou dados que o jogador manipula; mudar apenas o mapa ou a aparência do cenário não conta"
+        procedimento: "Extrair do GDD ou documento equivalente a lista de objetivos de aprendizagem e mapear, para cada conceito, a missão ou cenário de introdução e as missões ou cenários em que ele é cobrado. Se o documento não lista objetivos de aprendizagem, registrar a ausência e classificar o critério como nao_atendido. Considerar estrutura de problema diferente quando mudam o objetivo da missão ou o conjunto de objetos ou dados que o jogador manipula; mudar apenas o mapa ou a aparência do cenário não conta"
         indicadores:
-          - "tabela ou lista associando cada conceito do GDD, a missão ou cenário de introdução e a missão ou cenário de avaliação"
+          - "tabela ou lista associando cada conceito do GDD ou documento equivalente, a missão ou cenário de introdução e a missão ou cenário de avaliação"
           - "para cada conceito, a missão de avaliação tem objetivo ou conjunto de objetos ou dados manipulados diferente do da missão de introdução"
       video:
-        procedimento: "Para cada conceito listado no GDD, registrar a missão e o momento em que ele é introduzido e a missão em que o mesmo conceito é cobrado depois, comparando o objetivo e os objetos manipulados nas duas"
+        procedimento: "Para cada conceito listado no GDD ou documento equivalente, registrar a missão e o momento em que ele é introduzido e a missão em que o mesmo conceito é cobrado depois, comparando o objetivo e os objetos manipulados nas duas"
         indicadores:
           - "o conceito aparece em duas missões ou cenários diferentes"
           - "o desafio da segunda missão só se resolve aplicando o conceito apresentado na primeira e tem objetivo ou objetos manipulados diferentes"
     escala:
-      atendido: "Todos os conceitos listados como objetivo de aprendizagem são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução"
-      parcial: "Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado é cobrado só na situação em que foi apresentado"
-      nao_atendido: "Nenhum conceito listado é cobrado fora da situação em que foi introduzido, ou o GDD não lista objetivos de aprendizagem"
+      atendido: "Todos os conceitos listados como objetivo de aprendizagem no GDD ou documento equivalente são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução"
+      parcial: "Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado não é cobrado fora da situação em que foi apresentado (inclui o conceito que não é cobrado em nenhuma missão ou cenário)"
+      nao_atendido: "Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem"
     depende_de: []

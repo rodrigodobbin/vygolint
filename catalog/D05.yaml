@@ -13,17 +13,22 @@ criterios:
       viabilidade: media
       texto: "Em Vigotski o conhecimento se constrói na atividade do sujeito sobre o meio, e é o jogador quem decide o que investigar. Um cenário reduzido ao caminho da missão limita essa atividade ao que o jogo prescreve e converte a exploração em seguimento de instruções. Construir áreas além do caminho principal acrescenta trabalho de arte e de nível; viabilidade média."
     evidencia:
-      codigo: null
+      codigo:
+        procedimento: "Localizar, em cada cenário jogável, os acessos a áreas ou objetos que nenhum objetivo da missão exige (portas, colisores, gatilhos, verificações do estado da missão) e verificar se alguma condição impede o acesso, interrompe o jogador ou o reposiciona no caminho da missão"
+        indicadores:
+          - "existem áreas ou objetos fora do caminho da missão com acesso ou interação ativos"
+          - "nenhuma verificação do estado da missão bloqueia o acesso a essas áreas ou objetos"
+          - "nenhuma lógica interrompe o jogador ou o reposiciona no caminho da missão quando ele se afasta dele"
       documentacao:
         procedimento: "Identificar no GDD ou nos mapas de nível, para cada cenário, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige"
         indicadores:
           - "o GDD ou mapa descreve áreas ou objetos acessíveis fora do caminho da missão, isto é, que nenhum objetivo da missão exige"
           - "o GDD descreve o deslocamento do jogador até essas áreas durante a missão"
+          - "o GDD descreve essas áreas ou objetos como acessíveis em qualquer estado da missão e descreve que o jogador pode sair do caminho e voltar a ele sem ser interrompido nem reposicionado"
       video:
-        procedimento: "Observar o jogador deixando o caminho da missão e registrar o que o jogo faz em seguida"
+        procedimento: "Nos momentos em que o jogador deixa o caminho da missão, registrar o que o jogo faz em seguida. O vídeo só confirma a evidência de código ou documentação: a ausência de saída do caminho no vídeo não é evidência de restrição nem de liberdade, e interrupção, bloqueio ou reposicionamento observados valem como evidência de restrição"
         indicadores:
-          - "o jogador visita ao menos uma área ou objeto fora do caminho da missão em cada cenário observado"
-          - "o jogo não interrompe, bloqueia nem reposiciona o jogador por causa disso"
+          - "em cada saída do caminho da missão registrada no vídeo (mínimo 0), o jogo não interrompe, bloqueia nem reposiciona o jogador"
     escala:
       atendido: "Todos os cenários jogáveis têm áreas ou objetos fora do caminho da missão acessíveis sem bloqueio"
       parcial: "Ao menos um cenário tem áreas ou objetos acessíveis fora do caminho da missão e ao menos outro cenário restringe o jogador ao caminho"

@@ -20,7 +20,7 @@ criterios:
           - "o efeito do manipulador é mudança de estado ou exibição de informação que se relaciona a um objetivo de aprendizagem do GDD"
       documentacao: null
       video:
-        procedimento: "Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD"
+        procedimento: "Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD. Considerar que a resposta se relaciona a um objetivo quando a informação exibida ou o novo estado enuncia, exemplifica ou testa um conceito listado, ou é dado necessário para resolver um desafio ligado a ele"
         indicadores:
           - "ao menos um objeto interagido por cenário"
           - "o objeto muda de estado ou exibe informação que se relaciona a um objetivo de aprendizagem do GDD"

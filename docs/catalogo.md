@@ -31,19 +31,19 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D01.1 — Nível A
 
-**Enunciado.** Cada missão ou minijogo apresenta uma situação-problema cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação
+**Enunciado.** Cada missão ou minijogo apresenta uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível, cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema
 
 **Justificativa do nível.** essencialidade alta, viabilidade alta. Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Em um desafio de repetição mecânica o jogador executa a mesma ação sem escolher entre alternativas, de modo que a atividade não exige operar com o conteúdo. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional.
 
 **Evidência.**
 - Código: não se aplica
-- Documentação: Listar no documento de design (GDD) cada missão e minijogo e identificar a situação-problema e as alternativas de decisão previstas. Indicadores: cada missão ou minijogo descreve uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível; uma pergunta com alternativas de resposta, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema
-- Vídeo: Registrar o início e o fim de cada missão ou minijogo observado e anotar qual decisão o jogador tomou para concluí-lo. Indicadores: todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1); em cada um, o jogador escolhe ou combina elementos para resolver a situação; concluir o desafio não depende de repetir a mesma ação até o fim
+- Documentação: Listar no documento de design (GDD) ou documento equivalente cada missão e minijogo e identificar a situação-problema (estado inicial, objetivo e ações possíveis) e as decisões previstas. Situação-problema exige estado inicial, objetivo e mais de uma ação possível; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta. Indicadores: cada missão ou minijogo descreve uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível; a resolução descrita exige uma decisão do jogador e não se reduz a repetir uma mesma ação nem a escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador
+- Vídeo: Registrar o início e o fim de cada missão ou minijogo observado, anotar o estado inicial, o objetivo e as ações disponíveis ao jogador e anotar qual decisão ele tomou para concluí-lo. Situação-problema exige estado inicial, objetivo e mais de uma ação possível; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta. Indicadores: todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1); cada um apresenta uma situação-problema: estado inicial visível, objetivo e mais de uma ação disponível ao jogador; o jogador resolve a situação por ações que transformam o estado inicial, e não apenas escolhendo entre alternativas prontas; concluir o desafio não depende de repetir a mesma ação até o fim
 
 **Escala.**
-- Atendido: Todas as missões e minijogos observados ou documentados exigem uma decisão do jogador para serem resolvidos
-- Parcial: Ao menos uma missão ou minijogo exige decisão do jogador, e ao menos outra se resolve repetindo uma ação
-- Não atendido: Nenhuma missão ou minijogo exige decisão do jogador além de repetir uma ação
+- Atendido: Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado, cuja resolução exige uma decisão do jogador
+- Parcial: Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado
+- Não atendido: Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado
 
 **Depende de.** —
 
@@ -56,19 +56,19 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D02.1 — Nível A
 
-**Enunciado.** Cada conceito listado como objetivo de aprendizagem no GDD (ou documento equivalente) é cobrado ao menos uma vez em uma missão ou cenário com estrutura de problema diferente daquela em que foi introduzido
+**Enunciado.** Cada conceito listado como objetivo de aprendizagem no GDD ou documento equivalente é cobrado ao menos uma vez em uma missão ou cenário com estrutura de problema diferente daquela em que foi introduzido
 
 **Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski, conceitos científicos se consolidam quando o sujeito os generaliza e os usa de modo consciente em situações novas, e não quando os repete no contexto de origem. Avaliar apenas na situação de introdução mede memorização do contexto, não domínio do conceito. Exige planejar variações de situação para cada conteúdo, o que aumenta o esforço de conteúdo e de design; viabilidade média.
 
 **Evidência.**
 - Código: não se aplica
-- Documentação: Extrair do GDD (ou documento equivalente) a lista de objetivos de aprendizagem e mapear, para cada conceito, a missão ou cenário de introdução e as missões ou cenários em que ele é cobrado. Se o documento não lista objetivos de aprendizagem, registrar a ausência e classificar o critério como nao_atendido. Considerar estrutura de problema diferente quando mudam o objetivo da missão ou o conjunto de objetos ou dados que o jogador manipula; mudar apenas o mapa ou a aparência do cenário não conta. Indicadores: tabela ou lista associando cada conceito do GDD, a missão ou cenário de introdução e a missão ou cenário de avaliação; para cada conceito, a missão de avaliação tem objetivo ou conjunto de objetos ou dados manipulados diferente do da missão de introdução
-- Vídeo: Para cada conceito listado no GDD, registrar a missão e o momento em que ele é introduzido e a missão em que o mesmo conceito é cobrado depois, comparando o objetivo e os objetos manipulados nas duas. Indicadores: o conceito aparece em duas missões ou cenários diferentes; o desafio da segunda missão só se resolve aplicando o conceito apresentado na primeira e tem objetivo ou objetos manipulados diferentes
+- Documentação: Extrair do GDD ou documento equivalente a lista de objetivos de aprendizagem e mapear, para cada conceito, a missão ou cenário de introdução e as missões ou cenários em que ele é cobrado. Se o documento não lista objetivos de aprendizagem, registrar a ausência e classificar o critério como nao_atendido. Considerar estrutura de problema diferente quando mudam o objetivo da missão ou o conjunto de objetos ou dados que o jogador manipula; mudar apenas o mapa ou a aparência do cenário não conta. Indicadores: tabela ou lista associando cada conceito do GDD ou documento equivalente, a missão ou cenário de introdução e a missão ou cenário de avaliação; para cada conceito, a missão de avaliação tem objetivo ou conjunto de objetos ou dados manipulados diferente do da missão de introdução
+- Vídeo: Para cada conceito listado no GDD ou documento equivalente, registrar a missão e o momento em que ele é introduzido e a missão em que o mesmo conceito é cobrado depois, comparando o objetivo e os objetos manipulados nas duas. Indicadores: o conceito aparece em duas missões ou cenários diferentes; o desafio da segunda missão só se resolve aplicando o conceito apresentado na primeira e tem objetivo ou objetos manipulados diferentes
 
 **Escala.**
-- Atendido: Todos os conceitos listados como objetivo de aprendizagem são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução
-- Parcial: Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado é cobrado só na situação em que foi apresentado
-- Não atendido: Nenhum conceito listado é cobrado fora da situação em que foi introduzido, ou o GDD não lista objetivos de aprendizagem
+- Atendido: Todos os conceitos listados como objetivo de aprendizagem no GDD ou documento equivalente são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução
+- Parcial: Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado não é cobrado fora da situação em que foi apresentado (inclui o conceito que não é cobrado em nenhuma missão ou cenário)
+- Não atendido: Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem
 
 **Depende de.** —
 
@@ -86,13 +86,13 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 **Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski, a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz, e decidir o que fazer a seguir é parte desse controle. Num jogo estritamente linear a ordem é decidida pelo sistema, e o jogador apenas executa a sequência. Oferecer atividades em paralelo exige estrutura de progressão não linear e conteúdo que não dependa de uma ordem fixa; viabilidade média.
 
 **Evidência.**
-- Código: Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis. Indicadores: existe estado do jogo em que duas ou mais atividades estão desbloqueadas simultaneamente; a atividade iniciada é determinada por entrada do jogador (menu, mapa, interação), não por ordem fixa no código
+- Código: Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis. Verificar também, dentro de cada atividade, se o código aceita mais de uma ordem para executar as ações (objetos, perguntas ou etapas). Indicadores: existe estado do jogo em que duas ou mais atividades estão desbloqueadas simultaneamente; a atividade iniciada é determinada por entrada do jogador (menu, mapa, interação), não por ordem fixa no código; dentro de ao menos uma atividade, o código aceita mais de uma ordem para executar as ações (objetos, perguntas ou etapas), sem impor sequência fixa
 - Documentação: não se aplica
-- Vídeo: Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia. Indicadores: ao menos um ponto em que duas ou mais atividades aparecem disponíveis ao mesmo tempo (menu, mapa ou cenário); o jogador inicia uma delas e a outra permanece disponível ou é iniciada depois
+- Vídeo: Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia. Registrar também, dentro de cada atividade, se a interface apresenta duas ou mais ações (objetos, perguntas ou etapas) disponíveis ao mesmo tempo e em que ordem o jogador as executa. Indicadores: ao menos um ponto em que duas ou mais atividades aparecem disponíveis ao mesmo tempo (menu, mapa ou cenário); o jogador inicia uma delas; a outra pode permanecer disponível, ser iniciada depois ou ficar indisponível após a escolha (escolha excludente); dentro de ao menos uma atividade, a interface apresenta duas ou mais ações (objetos, perguntas ou etapas) disponíveis ao mesmo tempo e o jogador escolhe a ordem de execução
 
 **Escala.**
 - Atendido: Em ao menos um ponto, o jogador escolhe entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo
-- Parcial: O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem de elementos dentro de uma atividade (como objetos, perguntas ou etapas)
+- Parcial: O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem das ações dentro de uma atividade (como objetos, perguntas ou etapas)
 - Não atendido: As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa
 
 **Depende de.** —
@@ -124,7 +124,7 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 **Evidência.**
 - Código: Procurar temporizadores associados a missões e minijogos e verificar o que ocorre quando o tempo se esgota e se há opção de desativá-los. Indicadores: existência de temporizador com consequência de falha ao esgotar; existência de configuração que desativa ou amplia o temporizador
 - Documentação: Verificar no GDD as regras de tempo de cada atividade. Indicadores: indicação de quais atividades têm limite de tempo; indicação de opção do jogador para alterar o limite
-- Vídeo: Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite. Indicadores: todas as atividades presentes no vídeo foram observadas (mínimo 1); o jogador permanece na atividade sem ser interrompido por esgotamento de tempo
+- Vídeo: Observar cada atividade registrando se há contador de tempo visível, o que ocorre quando ele chega a zero e se o jogador pode permanecer na atividade sem limite. Indicadores: todas as atividades presentes no vídeo foram observadas (mínimo 1); o jogador permanece na atividade sem ser interrompido por esgotamento de tempo; não há contador de tempo visível cujo esgotamento encerre ou reprove a atividade; se há contador visível e o vídeo mostra seu esgotamento, a atividade não termina nem falha
 
 **Escala.**
 - Atendido: Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite
@@ -149,7 +149,7 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 **Evidência.**
 - Código: Listar os objetos de cada cenário que têm manipulador de evento (handler) de interação (clique, toque, colisão, uso de item) e o efeito de cada manipulador, e comparar o efeito com os objetivos de aprendizagem do GDD. Considerar que o efeito se relaciona a um objetivo quando a informação exibida ou o novo estado enuncia, exemplifica ou testa um conceito listado, ou é dado necessário para resolver um desafio ligado a ele. Indicadores: cada cenário tem ao menos um objeto com manipulador de evento de interação; o efeito do manipulador é mudança de estado ou exibição de informação que se relaciona a um objetivo de aprendizagem do GDD
 - Documentação: não se aplica
-- Vídeo: Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD. Indicadores: ao menos um objeto interagido por cenário; o objeto muda de estado ou exibe informação que se relaciona a um objetivo de aprendizagem do GDD
+- Vídeo: Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD. Considerar que a resposta se relaciona a um objetivo quando a informação exibida ou o novo estado enuncia, exemplifica ou testa um conceito listado, ou é dado necessário para resolver um desafio ligado a ele. Indicadores: ao menos um objeto interagido por cenário; o objeto muda de estado ou exibe informação que se relaciona a um objetivo de aprendizagem do GDD
 
 **Escala.**
 - Atendido: Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD
@@ -172,9 +172,9 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 **Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski o conhecimento se constrói na atividade do sujeito sobre o meio, e é o jogador quem decide o que investigar. Um cenário reduzido ao caminho da missão limita essa atividade ao que o jogo prescreve e converte a exploração em seguimento de instruções. Construir áreas além do caminho principal acrescenta trabalho de arte e de nível; viabilidade média.
 
 **Evidência.**
-- Código: não se aplica
-- Documentação: Identificar no GDD ou nos mapas de nível, para cada cenário, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige. Indicadores: o GDD ou mapa descreve áreas ou objetos acessíveis fora do caminho da missão, isto é, que nenhum objetivo da missão exige; o GDD descreve o deslocamento do jogador até essas áreas durante a missão
-- Vídeo: Observar o jogador deixando o caminho da missão e registrar o que o jogo faz em seguida. Indicadores: o jogador visita ao menos uma área ou objeto fora do caminho da missão em cada cenário observado; o jogo não interrompe, bloqueia nem reposiciona o jogador por causa disso
+- Código: Localizar, em cada cenário jogável, os acessos a áreas ou objetos que nenhum objetivo da missão exige (portas, colisores, gatilhos, verificações do estado da missão) e verificar se alguma condição impede o acesso, interrompe o jogador ou o reposiciona no caminho da missão. Indicadores: existem áreas ou objetos fora do caminho da missão com acesso ou interação ativos; nenhuma verificação do estado da missão bloqueia o acesso a essas áreas ou objetos; nenhuma lógica interrompe o jogador ou o reposiciona no caminho da missão quando ele se afasta dele
+- Documentação: Identificar no GDD ou nos mapas de nível, para cada cenário, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige. Indicadores: o GDD ou mapa descreve áreas ou objetos acessíveis fora do caminho da missão, isto é, que nenhum objetivo da missão exige; o GDD descreve o deslocamento do jogador até essas áreas durante a missão; o GDD descreve essas áreas ou objetos como acessíveis em qualquer estado da missão e descreve que o jogador pode sair do caminho e voltar a ele sem ser interrompido nem reposicionado
+- Vídeo: Nos momentos em que o jogador deixa o caminho da missão, registrar o que o jogo faz em seguida. O vídeo só confirma a evidência de código ou documentação: a ausência de saída do caminho no vídeo não é evidência de restrição nem de liberdade, e interrupção, bloqueio ou reposicionamento observados valem como evidência de restrição. Indicadores: em cada saída do caminho da missão registrada no vídeo (mínimo 0), o jogo não interrompe, bloqueia nem reposiciona o jogador
 
 **Escala.**
 - Atendido: Todos os cenários jogáveis têm áreas ou objetos fora do caminho da missão acessíveis sem bloqueio
