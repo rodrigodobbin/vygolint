@@ -5,6 +5,8 @@ from pathlib import Path
 
 import yaml
 
+from .levels import derive_nivel
+
 
 def load_yaml(path):
     return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
@@ -123,4 +125,36 @@ def validate_diretriz(d, schema, categorias):
         elif isinstance(did, str):
             for c in crit:
                 _validate_criterio(c, did, schema, errors)
+    return errors
+
+
+def validate_catalogo(diretrizes):
+    """Cross-file checks over structurally valid guidelines."""
+    errors = []
+    vistos_d = set()
+    vistos_c = set()
+    for d in diretrizes:
+        if d["id"] in vistos_d:
+            errors.append(f"{d['id']}: id de diretriz duplicado")
+        vistos_d.add(d["id"])
+        for c in d["criterios"]:
+            if c["id"] in vistos_c:
+                errors.append(f"{d['id']}/{c['id']}: id de critério duplicado")
+            vistos_c.add(c["id"])
+    for d in diretrizes:
+        for c in d["criterios"]:
+            prefix = f"{d['id']}/{c['id']}"
+            nj = c["nivel_justificativa"]
+            esperado = derive_nivel(nj["essencialidade"], nj["viabilidade"], d["modalidade"])
+            if c["nivel"] != esperado:
+                errors.append(
+                    f"{prefix}: nivel declarado {c['nivel']} mas esperado {esperado} "
+                    f"(essencialidade {nj['essencialidade']}, viabilidade {nj['viabilidade']}, modalidade {d['modalidade']})"
+                )
+            for grupo in c["depende_de"]:
+                for alvo in grupo:
+                    if alvo == c["id"]:
+                        errors.append(f"{prefix}: depende_de aponta para si mesmo")
+                    elif alvo not in vistos_c:
+                        errors.append(f"{prefix}: depende_de aponta para critério inexistente: {alvo}")
     return errors

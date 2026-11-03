@@ -2,6 +2,7 @@ import unittest
 
 from helpers import categorias_validas, diretriz_valida, schema_valido
 from vygolint_catalog.validate import validate_diretriz
+from vygolint_catalog.validate import validate_catalogo
 
 
 class ValidateDiretrizTest(unittest.TestCase):
@@ -108,3 +109,64 @@ class ValidateDiretrizTest(unittest.TestCase):
         d = diretriz_valida()
         d["criterios"][0]["depende_de"] = [["D06.1", "D07.1"]]
         self.assertEqual(self.check(d), [])
+
+
+def _segunda_diretriz():
+    d = diretriz_valida()
+    d["id"] = "D06"
+    d["categoria"] = "interacao"
+    d["diretriz"] = "O jogador deve trocar informações com outros jogadores por comunicação síncrona"
+    c = d["criterios"][0]
+    c["id"] = "D06.1"
+    c["nivel"] = "AAA"
+    c["nivel_justificativa"]["essencialidade"] = "media"
+    c["nivel_justificativa"]["viabilidade"] = "baixa"
+    return d
+
+
+class ValidateCatalogoTest(unittest.TestCase):
+    def test_valid_catalog_has_no_errors(self):
+        self.assertEqual(validate_catalogo([diretriz_valida(), _segunda_diretriz()]), [])
+
+    def test_duplicate_diretriz_id(self):
+        errors = validate_catalogo([diretriz_valida(), diretriz_valida()])
+        self.assertTrue(any("duplicado" in e and "D17" in e for e in errors))
+
+    def test_duplicate_criterio_id_across_files(self):
+        a = diretriz_valida()
+        b = _segunda_diretriz()
+        b["criterios"][0]["id"] = "D06.1"
+        b["criterios"].append(dict(b["criterios"][0]))
+        errors = validate_catalogo([a, b])
+        self.assertTrue(any("duplicado" in e and "D06.1" in e for e in errors))
+
+    def test_depende_de_unknown_target(self):
+        a = diretriz_valida()
+        a["criterios"][0]["depende_de"] = [["D99.1"]]
+        errors = validate_catalogo([a])
+        self.assertTrue(any("D99.1" in e for e in errors))
+
+    def test_depende_de_self_reference(self):
+        a = diretriz_valida()
+        a["criterios"][0]["depende_de"] = [["D17.1"]]
+        errors = validate_catalogo([a])
+        self.assertTrue(any("si mesmo" in e for e in errors))
+
+    def test_depende_de_resolves_across_files(self):
+        a = diretriz_valida()
+        a["criterios"][0]["depende_de"] = [["D06.1"]]
+        self.assertEqual(validate_catalogo([a, _segunda_diretriz()]), [])
+
+    def test_declared_level_must_match_table(self):
+        a = diretriz_valida()
+        a["criterios"][0]["nivel"] = "AAA"
+        errors = validate_catalogo([a])
+        self.assertTrue(any("nivel" in e and "esperado A" in e for e in errors))
+
+    def test_pode_rule_applied_in_coherence_check(self):
+        a = diretriz_valida()
+        a["modalidade"] = "pode"
+        errors = validate_catalogo([a])
+        self.assertTrue(any("esperado AA" in e for e in errors))
+        a["criterios"][0]["nivel"] = "AA"
+        self.assertEqual(validate_catalogo([a]), [])
