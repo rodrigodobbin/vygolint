@@ -21,7 +21,7 @@ Spec: `docs/superpowers/specs/2026-11-03-catalogo-conformidade-design.md`.
 - Não existe "não se aplica" por ausência de recurso.
 - `docs/catalogo.md` e `docs/catalogo.tex` são gerados; nunca editar à mão.
 - Saída do build é determinística: diretrizes ordenadas por id, sem data ou hora.
-- Comandos de teste: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v`. Build: `python3 scripts/build_catalog.py`.
+- Comandos de teste: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v`; execução focada: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_<modulo>.py -v` (a forma `tests.test_x` não funciona porque os testes importam `helpers` de `tests/`). Build: `python3 scripts/build_catalog.py`.
 - Todo commit termina com a linha `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`.
 - Idioma dos arquivos de catálogo e docs: português. Código, nomes de função e mensagens de commit: inglês.
 
@@ -219,7 +219,7 @@ class DeriveNivelTest(unittest.TestCase):
 
 - [ ] **Step 2: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_levels -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_levels.py -v`
 Expected: `ModuleNotFoundError: No module named 'vygolint_catalog.levels'`
 
 - [ ] **Step 3: Implementar**
@@ -263,7 +263,7 @@ def derive_nivel(essencialidade: str, viabilidade: str, modalidade: str = "deve"
 
 - [ ] **Step 4: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_levels -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_levels.py -v`
 Expected: `Ran 4 tests ... OK`
 
 - [ ] **Step 5: Commit**
@@ -537,7 +537,7 @@ class ValidateDiretrizTest(unittest.TestCase):
 
 - [ ] **Step 5: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_validate -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v`
 Expected: `ModuleNotFoundError: No module named 'vygolint_catalog.validate'`
 
 - [ ] **Step 6: Implementar `validate.py`**
@@ -675,7 +675,7 @@ def validate_diretriz(d, schema, categorias):
 
 - [ ] **Step 7: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_validate -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v`
 Expected: `Ran 16 tests ... OK`
 
 - [ ] **Step 8: Commit**
@@ -768,7 +768,7 @@ class ValidateCatalogoTest(unittest.TestCase):
 
 - [ ] **Step 2: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_validate -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v`
 Expected: `ImportError: cannot import name 'validate_catalogo'`
 
 - [ ] **Step 3: Implementar**
@@ -810,7 +810,7 @@ def validate_catalogo(diretrizes):
 
 - [ ] **Step 4: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_validate -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v`
 Expected: `Ran 24 tests ... OK`
 
 - [ ] **Step 5: Commit**
@@ -906,7 +906,7 @@ class RenderMarkdownTest(unittest.TestCase):
 
 - [ ] **Step 2: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_render -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_render.py -v`
 Expected: `ModuleNotFoundError: No module named 'vygolint_catalog.render'`
 
 - [ ] **Step 3: Implementar**
@@ -1005,7 +1005,7 @@ def render_markdown(diretrizes, categorias):
 
 - [ ] **Step 4: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_render -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_render.py -v`
 Expected: `Ran 7 tests ... OK`
 
 - [ ] **Step 5: Commit**
@@ -1064,7 +1064,7 @@ class RenderLatexTest(unittest.TestCase):
 
 - [ ] **Step 2: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_render -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_render.py -v`
 Expected: `ImportError: cannot import name 'escape_latex'`
 
 - [ ] **Step 3: Implementar**
@@ -1121,7 +1121,7 @@ def render_latex(diretrizes, categorias):
 
 - [ ] **Step 4: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_render -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_render.py -v`
 Expected: `Ran 10 tests ... OK`
 
 - [ ] **Step 5: Commit**
@@ -1221,7 +1221,7 @@ class BuildTest(unittest.TestCase):
 
 - [ ] **Step 2: Rodar e ver falhar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_build -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_build.py -v`
 Expected: `ModuleNotFoundError: No module named 'vygolint_catalog.build'`
 
 - [ ] **Step 3: Implementar `build.py`**
@@ -1315,7 +1315,7 @@ if __name__ == "__main__":
 
 - [ ] **Step 5: Rodar e ver passar**
 
-Run: `PYTHONPATH=scripts python3 -m unittest tests.test_build -v`
+Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_build.py -v`
 Expected: `Ran 5 tests ... OK`
 
 - [ ] **Step 6: Rodar a suíte completa**
