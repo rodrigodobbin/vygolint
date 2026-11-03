@@ -7,7 +7,7 @@ aplicabilidade: null
 criterios:
   - id: D12.1
     nivel: AAA
-    enunciado: "O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo que persiste no jogo; elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível ao jogador depois de concluída a ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+    enunciado: "O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo que persiste no jogo"
     nivel_justificativa:
       essencialidade: baixa
       viabilidade: media
@@ -25,7 +25,7 @@ criterios:
           - "o GDD descreve quais elementos o jogador combina e qual artefato resulta da combinação"
           - "o GDD descreve onde o artefato permanece disponível depois de criado e em que condições deixa de existir"
       video:
-        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de construção no vídeo não prova que o jogo não a oferece. Registrar o momento em que o jogador combina elementos e verificar, em momentos posteriores da gravação, se o artefato resultante continua disponível. Definições: elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de construção no vídeo não prova que o jogo não a oferece. Registrar o momento em que o jogador combina elementos e verificar, em momentos posteriores da gravação, se o artefato resultante continua disponível"
         indicadores:
           - "ao menos um momento em que o jogador combina dois ou mais elementos e um objeto, estrutura ou configuração novo, identificável como unidade, passa a existir"
           - "em momento posterior da gravação, o artefato continua disponível ao jogador (no cenário, inventário ou lista)"
@@ -34,3 +34,11 @@ criterios:
       parcial: "O jogador combina dois ou mais elementos por ação própria, mas o resultado não permanece disponível depois da ação de combinar (por exemplo, a combinação é apenas avaliada como correta ou incorreta e descartada)"
       nao_atendido: "O jogador não combina elementos para obter resultado novo; as ações disponíveis só manipulam elementos já existentes no jogo"
     depende_de: []
+    definicoes:
+      glossario: [documentacao_equivalente]
+      locais:
+        "elemento": "uma peça, item, bloco, valor ou outro objeto disponível ao jogador"
+        "artefato novo": "um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade"
+        "persiste": "quando permanece disponível ao jogador depois de concluída a ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+      termos_comuns:
+        "cenário": "lugar do jogo em que o artefato fica disponível («no cenário, inventário ou lista»), e não o cenário jogável"

@@ -29,3 +29,7 @@ criterios:
       parcial: "Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado não é cobrado fora da situação em que foi apresentado (inclui o conceito que não é cobrado em nenhuma missão ou cenário)"
       nao_atendido: "Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem"
     depende_de: []
+    definicoes:
+      glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]
+      termos_comuns:
+        "cenário": "lugar ou situação do jogo em que o conceito é introduzido ou cobrado («missão ou cenário», «aparência do cenário»), e não o cenário jogável"
