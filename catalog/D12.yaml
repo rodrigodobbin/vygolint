@@ -1,0 +1,36 @@
+id: D12
+categoria: interacao
+diretriz: "O jogo deve fornecer mecanismos para o jogador construir coisas"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D12.1
+    nivel: AAA
+    enunciado: "O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo que persiste no jogo; elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível ao jogador depois de concluída a ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+    nivel_justificativa:
+      essencialidade: baixa
+      viabilidade: media
+      texto: "Construir é uma forma de atividade sobre objetos e instrumentos, e em Vigotski o sujeito externaliza o que compreende ao produzir algo com eles. A essencialidade é baixa porque a atividade do jogador pode se dar por outras vias, como resolver problemas (D01), explorar o cenário (D05) ou coletar informações (D11). Implementar combinação e persistência de objetos criados pelo jogador exige regras e estado adicionais; viabilidade média."
+    evidencia:
+      codigo:
+        procedimento: "Localizar a lógica de combinação, criação ou montagem de objetos e verificar se o resultado é registrado no estado do jogo. Elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+        indicadores:
+          - "uma ação do jogador combina dois ou mais elementos e instancia um objeto, estrutura ou configuração identificável como unidade que não existia antes"
+          - "o artefato criado é adicionado ao estado do jogo (cenário, inventário ou lista) e não é destruído ao fim da ação de combinar"
+          - "o artefato só é removido por ação do jogador ou consumido em uso posterior"
+      documentacao:
+        procedimento: "Verificar no GDD ou documento equivalente a mecânica de construção. Elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
+        indicadores:
+          - "o GDD descreve quais elementos o jogador combina e qual artefato resulta da combinação"
+          - "o GDD descreve onde o artefato permanece disponível depois de criado e em que condições deixa de existir"
+      video:
+        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de construção no vídeo não prova que o jogo não a oferece. Registrar o momento em que o jogador combina elementos e verificar, em momentos posteriores da gravação, se o artefato resultante continua disponível. Elemento, artefato novo e persistência têm o sentido do enunciado"
+        indicadores:
+          - "ao menos um momento em que o jogador combina dois ou mais elementos e um objeto, estrutura ou configuração novo, identificável como unidade, passa a existir"
+          - "em momento posterior da gravação, o artefato continua disponível ao jogador (no cenário, inventário ou lista)"
+    escala:
+      atendido: "O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo, nos termos do enunciado, que persiste no jogo"
+      parcial: "O jogador combina dois ou mais elementos por ação própria, mas o resultado não permanece disponível depois da ação de combinar (por exemplo, a combinação é apenas avaliada como correta ou incorreta e descartada)"
+      nao_atendido: "O jogador não combina elementos para obter resultado novo; as ações disponíveis só manipulam elementos já existentes no jogo"
+    depende_de: []

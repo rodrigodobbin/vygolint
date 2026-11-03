@@ -1,0 +1,36 @@
+id: D11
+categoria: interacao
+diretriz: "O jogador deve coletar informações"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D11.1
+    nivel: A
+    enunciado: "O jogador coleta ao menos uma informação e ao menos uma informação coletada é usada depois em missão ou desafio; informação é um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem listado no GDD ou documento equivalente; coletar é obter a informação por ação própria de modo que o jogo a guarde (inventário, diário, caderno ou painel) para consulta ou uso posterior; uso posterior é uma missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Em Vigotski, as funções psicológicas superiores, como a memória e a atenção voluntárias, se desenvolvem com apoio de instrumentos e signos externos, e registros guardados funcionam como esse apoio. Coletar informação que será necessária mais tarde obriga o jogador a selecionar, reter e relacionar dados em vez de reagir ao que está na tela. Um mecanismo de inventário ou de registro é padrão no desenvolvimento de jogos; viabilidade alta."
+    evidencia:
+      codigo:
+        procedimento: "Localizar a mecânica de coleta (inventário, diário, caderno, painel) e as verificações dessas estruturas nas missões e desafios. Informação é um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem do GDD ou documento equivalente. Coletar é obter por ação do jogador de modo que o jogo guarde a informação; uso posterior é uma missão ou desafio posterior à coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo da informação"
+        indicadores:
+          - "uma ação do jogador (interação, seleção, resposta) adiciona uma informação a uma estrutura persistente do jogo (inventário, diário, caderno ou painel)"
+          - "a informação coletada se relaciona a ao menos um objetivo de aprendizagem do GDD ou documento equivalente"
+          - "uma condição de missão ou desafio posterior à coleta verifica a posse, o valor ou o conteúdo da informação coletada"
+      documentacao:
+        procedimento: "Verificar no GDD ou documento equivalente a mecânica de coleta e o uso das informações coletadas. Informação é um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem listado nesse documento. Coletar é obter por ação do jogador de modo que o jogo guarde a informação; uso posterior é uma missão ou desafio posterior à coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo da informação"
+        indicadores:
+          - "o GDD descreve o que o jogador coleta, como o jogo o guarda e a qual objetivo de aprendizagem a informação se relaciona"
+          - "o GDD descreve a missão ou desafio posterior que exige a posse, o valor ou o conteúdo da informação coletada"
+      video:
+        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de coleta ou de uso no vídeo não prova que o jogo não os tem. Registrar os momentos de coleta e os momentos em que a informação coletada é exigida. Informação é um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem do GDD ou documento equivalente. Coletar é obter por ação do jogador de modo que o jogo guarde a informação; uso posterior é uma missão ou desafio posterior à coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo da informação"
+        indicadores:
+          - "ao menos um momento em que o jogador obtém por ação própria uma informação e ela passa a constar em inventário, diário, caderno ou painel"
+          - "ao menos um momento posterior em que uma missão ou desafio exige a posse, o valor ou o conteúdo da informação coletada para ser resolvido ou avançado"
+    escala:
+      atendido: "O jogador coleta ao menos uma informação, nos termos do enunciado, e ao menos uma informação coletada é usada depois em missão ou desafio"
+      parcial: "O jogador coleta ao menos uma informação, nos termos do enunciado, mas nenhuma informação coletada é usada depois em missão ou desafio"
+      nao_atendido: "O jogador não coleta nenhuma informação, nos termos do enunciado: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não se relaciona a objetivo de aprendizagem"
+    depende_de: []

@@ -1,0 +1,27 @@
+id: D10
+categoria: interacao
+diretriz: "O jogo deve viabilizar o comportamento ativo do jogador"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D10.1
+    nivel: A
+    enunciado: "Nenhum trecho passivo do jogo dura mais de 120 segundos contínuos; trecho passivo é um intervalo contínuo em que a interface não oferece ao jogador nenhuma ação que altere o estado do jogo (mover-se, selecionar, manipular objeto, responder, construir), restando apenas assistir, ler, avançar texto ou pular cena"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Para Vigotski, o conhecimento se constrói na atividade do sujeito, e não na recepção de informação pronta. Longos trechos em que o jogador só assiste ou lê o tornam espectador e interrompem a atividade que sustenta a aprendizagem. Encurtar cenas e textos corridos ou intercalar ações do jogador é decisão de projeto, sem custo técnico especial; viabilidade alta."
+    evidencia:
+      codigo: null
+      documentacao: null
+      video:
+        procedimento: "Assistir a toda a gravação e registrar os intervalos em que a interface não oferece ao jogador nenhuma ação que altere o estado do jogo, restando apenas assistir, ler, avançar texto ou pular cena. A classificação depende do que a interface oferece, não de o jogador agir ou não: um intervalo em que há ações disponíveis e o jogador não as usa não é trecho passivo. Medir a duração de cada trecho passivo pelos marcadores de tempo do vídeo. Avaliar somente o que foi gravado"
+        indicadores:
+          - "todos os trechos passivos registrados no vídeo foram anotados com início e fim (mínimo 0)"
+          - "a duração contínua de cada trecho passivo, medida pelos marcadores de tempo, é de no máximo 120 segundos"
+    escala:
+      atendido: "Nenhum trecho passivo registrado no vídeo dura mais de 120 segundos contínuos"
+      parcial: "Um único trecho passivo registrado no vídeo dura mais de 120 segundos contínuos"
+      nao_atendido: "Dois ou mais trechos passivos registrados no vídeo duram mais de 120 segundos contínuos cada um"
+    depende_de: []

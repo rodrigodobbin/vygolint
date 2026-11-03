@@ -1,0 +1,33 @@
+id: D15
+categoria: interacao
+diretriz: "O jogo deve estimular a interação entre jogadores por diversas ferramentas de comunicação"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D15.1
+    nivel: AAA
+    enunciado: "O jogo oferece ao menos duas ferramentas distintas de comunicação entre jogadores; ferramenta de comunicação é um recurso do jogo pelo qual um jogador envia conteúdo a outro jogador; duas ferramentas são distintas quando diferem no meio (texto, voz ou sinais predefinidos, como emotes e marcadores) ou na temporalidade (entrega em tempo real ou registro lido em sessão posterior); dois canais de mesmo meio e mesma temporalidade, como um chat geral e um chat privado, contam como uma única ferramenta"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: baixa
+      texto: "Em Vigotski, a linguagem é instrumento de mediação, e diferentes instrumentos semióticos (fala, escrita, sinais) dão ao jogador mais de um meio de se fazer entender e de entender o outro. A essencialidade é média porque um único canal já sustenta a interação social (D06, D07). Manter dois ou mais canais, com infraestrutura de rede e de persistência para cada um, é custo elevado para jogos educacionais; viabilidade baixa."
+    evidencia:
+      codigo:
+        procedimento: "Localizar os módulos de comunicação entre jogadores (chat de texto, voz, mensagens persistidas, sinais predefinidos) e classificar cada um por meio e temporalidade. Duas ferramentas são distintas quando diferem no meio (texto, voz ou sinais predefinidos) ou na temporalidade (tempo real ou registro lido em sessão posterior); canais de mesmo meio e mesma temporalidade contam como uma única ferramenta. Contar as ferramentas distintas"
+        indicadores:
+          - "existe módulo que envia conteúdo de um jogador a outro jogador"
+          - "cada módulo foi classificado por meio (texto, voz ou sinais predefinidos) e por temporalidade (tempo real ou sessão posterior)"
+          - "há ao menos dois módulos que diferem no meio ou na temporalidade"
+      documentacao:
+        procedimento: "Verificar no GDD ou documento equivalente a lista de ferramentas de comunicação entre jogadores e classificar cada uma por meio e temporalidade. Duas ferramentas são distintas quando diferem no meio (texto, voz ou sinais predefinidos) ou na temporalidade (tempo real ou registro lido em sessão posterior); canais de mesmo meio e mesma temporalidade contam como uma única ferramenta"
+        indicadores:
+          - "o GDD descreve cada ferramenta de comunicação, seu meio e sua temporalidade"
+          - "o GDD descreve ao menos duas ferramentas que diferem no meio ou na temporalidade"
+      video: null
+    escala:
+      atendido: "O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado"
+      parcial: "O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado"
+      nao_atendido: "O jogo não oferece ferramenta de comunicação entre jogadores"
+    depende_de:
+      - [D06.1, D07.1]

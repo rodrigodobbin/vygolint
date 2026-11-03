@@ -1,0 +1,34 @@
+id: D14
+categoria: interacao
+diretriz: "O jogador deve conseguir inserir comentários no jogo que ficarão disponíveis para outros jogadores"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D14.1
+    nivel: AA
+    enunciado: "O jogador escreve um comentário associado a um local ou objeto do jogo e o jogo o exibe a outro jogador, em sessão posterior, quando este alcança esse local ou objeto; comentário é um texto digitado pelo jogador; outro jogador é um jogador com perfil ou conta diferente do autor; sessão posterior é uma sessão iniciada depois do término da sessão em que o comentário foi escrito"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: media
+      texto: "Em Vigotski, os signos produzidos por uma pessoa mediam a atividade de outras, e um comentário deixado num local do jogo funciona como mediação entre jogadores que nem precisam estar presentes juntos. A essencialidade é média porque a interação entre jogadores também ocorre em tempo real (D06) e por trocas assíncronas sem local associado (D07). Exige persistência de dados fora da sessão, associação ao local ou objeto e distinção entre perfis; viabilidade média."
+    evidencia:
+      codigo:
+        procedimento: "Localizar a escrita e a leitura de comentários e verificar onde são guardados e como são exibidos. Comentário é um texto digitado pelo jogador; outro jogador é um jogador com perfil ou conta diferente do autor; sessão posterior é uma sessão iniciada depois do término da sessão em que o comentário foi escrito"
+        indicadores:
+          - "existe campo de entrada que grava o texto digitado junto com um identificador de local ou objeto e o identificador do autor"
+          - "o comentário é guardado fora do estado da sessão (arquivo, banco de dados ou servidor) e sobrevive ao fim dela"
+          - "ao jogador alcançar o local ou objeto, o jogo lê e exibe comentários de autores com perfil diferente do jogador atual"
+          - "se a leitura não filtra por local ou objeto e exibe os comentários numa lista geral, anotar (indica o estado parcial)"
+      documentacao: null
+      video:
+        procedimento: "O vídeo só confirma a evidência de código: a ausência do comentário no vídeo não prova que o jogo não o persiste. Exigir duas gravações: uma em que um jogador escreve o comentário em um local ou objeto e outra, de sessão posterior e com perfil diferente, em que o outro jogador alcança o mesmo local ou objeto. Comentário, outro jogador e sessão posterior têm o sentido do enunciado"
+        indicadores:
+          - "na primeira gravação, o jogador digita um comentário e o associa a um local ou objeto"
+          - "na segunda gravação, de sessão posterior e com perfil diferente, o jogador alcança o mesmo local ou objeto e o comentário é exibido"
+          - "se, na segunda gravação, o comentário de outro jogador aparece numa lista geral, sem o jogador ter alcançado local ou objeto associado, anotar (indica o estado parcial)"
+    escala:
+      atendido: "Comentário escrito por um jogador, associado a um local ou objeto, é exibido a outro jogador em sessão posterior, quando este alcança esse local ou objeto"
+      parcial: "Comentário escrito por um jogador é exibido a outros jogadores em sessão posterior, mas não está associado a local ou objeto do jogo (por exemplo, aparece numa lista geral)"
+      nao_atendido: "Nenhum comentário escrito por um jogador é exibido a outros jogadores em sessão posterior"
+    depende_de: []

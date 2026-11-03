@@ -1,0 +1,32 @@
+id: D09
+categoria: interacao
+diretriz: "O jogador deve se comunicar por linguagem escrita"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D09.1
+    nivel: AA
+    enunciado: "Em ao menos um ponto do jogo, o jogador produz texto livre, isto é, digita uma sequência de caracteres de sua escolha em um campo de entrada (ou em teclado exibido na tela que permita qualquer sequência) e o jogo a recebe, como em chat, resposta aberta, anotação ou nome de item; compor a mensagem apenas por seleção de palavras ou frases prontas não conta como texto livre"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: alta
+      texto: "Em Vigotski, a linguagem é instrumento de mediação que organiza o pensamento, e a escrita exige que o sujeito formule por conta própria o que quer dizer. Quando o jogador apenas lê ou seleciona frases prontas, o jogo dispensa essa formulação. A essencialidade é média porque a comunicação também ocorre por fala (D06) ou por ação no jogo. Um campo de entrada de texto é recurso padrão das ferramentas de desenvolvimento; viabilidade alta."
+    evidencia:
+      codigo:
+        procedimento: "Localizar campos de entrada de texto (input fields, teclados exibidos na tela) e verificar se aceitam qualquer sequência de caracteres digitada pelo jogador ou se o conteúdo é escolhido de uma lista fechada de opções. Texto livre é uma sequência de caracteres digitada pelo jogador em campo de entrada, sem ser escolhida de lista de opções prontas. Verificar também se o jogo lê o conteúdo digitado"
+        indicadores:
+          - "existe campo de entrada de texto ou teclado na tela que aceita qualquer sequência de caracteres digitada pelo jogador, sem lista fechada de opções"
+          - "um manipulador de evento (handler) ou função do jogo lê o texto digitado e o usa (exibe, guarda, envia ou avalia)"
+          - "se não há campo desse tipo, existe composição de mensagem ou resposta apenas por seleção de palavras ou frases prontas (usado para identificar o estado parcial)"
+      documentacao: null
+      video:
+        procedimento: "O vídeo só confirma a evidência de código: a ausência de digitação no vídeo não prova que o jogo não oferece texto livre. Registrar os momentos em que o jogador digita ou compõe texto e anotar se ele digita caracteres de sua escolha ou seleciona opções prontas. Texto livre é uma sequência de caracteres digitada pelo jogador em campo de entrada, sem ser escolhida de lista de opções prontas"
+        indicadores:
+          - "ao menos um momento em que o jogador digita caracteres de sua escolha em campo de entrada e o texto aparece no jogo"
+          - "nos momentos de composição de texto registrados (mínimo 0), o jogador seleciona palavras ou frases prontas em vez de digitar (indica o estado parcial)"
+    escala:
+      atendido: "Em ao menos um ponto do jogo, o jogador digita texto livre em campo de entrada (ou teclado exibido na tela que permita qualquer sequência) e o jogo o recebe"
+      parcial: "O jogador compõe mensagens ou respostas apenas por seleção de palavras ou frases prontas oferecidas pelo jogo, sem digitar texto livre"
+      nao_atendido: "O jogador não produz texto em nenhum ponto do jogo; só lê, escolhe entre opções não textuais ou age sobre objetos"
+    depende_de: []
