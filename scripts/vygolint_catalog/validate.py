@@ -30,7 +30,7 @@ def _check_evidencia_fonte(prefix, nome, fonte, errors):
     return True
 
 
-_INLINE_RE = re.compile(r"Defini(ções|ção):")
+_INLINE_RE = re.compile(r"Defini(ções|ção):", re.IGNORECASE)
 
 
 def textos_do_criterio(c):
@@ -142,6 +142,10 @@ def _validate_criterio(c, diretriz_id, schema, errors, glossario=None):
     for campo in cs["obrigatorios"]:
         if campo not in c:
             errors.append(f"{prefix}: campo obrigatório ausente: {campo}")
+    permitidos = set(cs["obrigatorios"]) | set(cs.get("opcionais", []))
+    for campo in c:
+        if campo not in permitidos:
+            errors.append(f"{prefix}: campo desconhecido: {campo}")
     if "id" in c:
         if not isinstance(cid, str) or not re.fullmatch(cs["id_padrao"], cid):
             errors.append(f"{prefix}: id de critério fora do padrão")
@@ -297,9 +301,9 @@ def validate_definicoes(doc):
             errors.append(f"{prefix}: gatilhos deve ser lista não vazia de textos")
         elif isinstance(gs, list):
             for g in gs:
-                if g in gatilhos:
-                    errors.append(f"{prefix}: gatilho {g!r} já usado por {gatilhos[g]}")
-                gatilhos[g] = chave
+                if g.lower() in gatilhos:
+                    errors.append(f"{prefix}: gatilho {g!r} já usado por {gatilhos[g.lower()]}")
+                gatilhos[g.lower()] = chave
     return errors
 
 

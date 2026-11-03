@@ -35,7 +35,7 @@ criterios:
     escala:
       atendido: "O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, e ao menos uma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições"
       parcial: "O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições"
-      nao_atendido: "O jogador não coleta nenhuma informação, nos termos do enunciado e das definições: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem"
+      nao_atendido: "O jogador não coleta nenhuma informação, nos termos do enunciado e das definições, isto é, nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]

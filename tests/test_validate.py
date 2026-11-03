@@ -1,8 +1,52 @@
+import copy
 import unittest
 
 from helpers import REPO, categorias_validas, diretriz_valida, glossario_valido, schema_valido
-from vygolint_catalog.validate import load_definicoes, validate_diretriz
-from vygolint_catalog.validate import validate_catalogo
+from vygolint_catalog.validate import load_definicoes, validate_catalogo, validate_definicoes, validate_diretriz
+
+
+class GlossarioTest(unittest.TestCase):
+    def test_repo_glossary_is_valid(self):
+        self.assertEqual(validate_definicoes(glossario_valido()), [])
+
+    def test_load_returns_map_by_key(self):
+        g = load_definicoes(REPO / "catalog" / "definicoes.yaml")
+        self.assertIn("missao", g)
+        self.assertEqual(g["missao"]["termo"], "missão")
+        self.assertIn("missões", g["missao"]["gatilhos"])
+        self.assertTrue(g["missao"]["texto"].startswith("uma unidade do jogo"))
+
+    def test_required_fields_and_shapes(self):
+        doc = glossario_valido()
+        del doc["termos"][0]["texto"]
+        self.assertTrue(any("missao" in e and "texto" in e for e in validate_definicoes(doc)))
+        doc = glossario_valido()
+        doc["termos"][0]["gatilhos"] = []
+        self.assertTrue(any("gatilhos" in e for e in validate_definicoes(doc)))
+        doc = glossario_valido()
+        doc["termos"][0]["chave"] = "Missão"
+        self.assertTrue(any("chave" in e for e in validate_definicoes(doc)))
+        doc = glossario_valido()
+        doc["termos"][0]["chave"] = ["x"]
+        self.assertTrue(any("chave" in e for e in validate_definicoes(doc)))
+
+    def test_duplicate_key_and_duplicate_gatilho(self):
+        doc = glossario_valido()
+        doc["termos"].append(copy.deepcopy(doc["termos"][0]))
+        errors = validate_definicoes(doc)
+        self.assertTrue(any("duplicad" in e and "missao" in e for e in errors))
+        doc = glossario_valido()
+        doc["termos"][1]["gatilhos"].append("missão")
+        self.assertTrue(any("gatilho" in e and "missão" in e for e in validate_definicoes(doc)))
+
+    def test_gatilho_collision_is_case_insensitive(self):
+        doc = glossario_valido()
+        doc["termos"][1]["gatilhos"].append("Missão")  # "missão" belongs to missao
+        self.assertTrue(any("gatilho" in e and "Missão" in e for e in validate_definicoes(doc)))
+
+    def test_non_map_document(self):
+        self.assertTrue(validate_definicoes(["x"]))
+        self.assertTrue(validate_definicoes({"termos": "x"}))
 
 
 class ValidateDiretrizTest(unittest.TestCase):
@@ -33,6 +77,11 @@ class ValidateDiretrizTest(unittest.TestCase):
         d = diretriz_valida()
         d["categoria"] = "magia"
         self.assertTrue(any("categoria" in e for e in self.check(d)))
+
+    def test_unknown_criterio_field_is_rejected(self):
+        d = diretriz_valida()
+        d["criterios"][0]["definicao"] = {}
+        self.assertTrue(any("desconhecido" in e and "definicao" in e for e in self.check(d)))
 
     def test_non_string_categoria_is_error_not_crash(self):
         d = diretriz_valida()
@@ -310,6 +359,11 @@ class DefinicoesCriterioTest(unittest.TestCase):
         d = self._com_missao()
         d["criterios"][0]["enunciado"] += "; missão é " + self.g["missao"]["texto"]
         self.assertTrue(any("glossário" in e and "missao" in e for e in self.check(d)))
+
+    def test_inline_definitions_lowercase_is_forbidden(self):
+        d = self._com_missao()
+        d["criterios"][0]["escala"]["parcial"] += ". definições: missão é uma unidade do jogo"
+        self.assertTrue(any("inline" in e for e in self.check(d)))
 
     def test_unknown_definicoes_key_and_shape(self):
         d = self._com_missao()

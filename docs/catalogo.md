@@ -537,7 +537,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 **Escala.**
 - Atendido: O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, e ao menos uma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições
 - Parcial: O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições
-- Não atendido: O jogador não coleta nenhuma informação, nos termos do enunciado e das definições: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem
+- Não atendido: O jogador não coleta nenhuma informação, nos termos do enunciado e das definições, isto é, nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem
 
 **Depende de.** —
 
