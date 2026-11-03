@@ -21,7 +21,7 @@ from migrate_definicoes import (  # noqa: E402
     normalizar_clausula,
     relatorio_markdown,
 )
-from verify_definicoes import _parser, comparar_criterio, comparar_diretriz, main as verify_main  # noqa: E402
+from verify_definicoes import _parser, comparar_criterio, comparar_diretriz, main as verify_main, validar_aceitas  # noqa: E402
 
 
 class GlossarioTest(unittest.TestCase):
@@ -499,6 +499,36 @@ class VerifyTest(unittest.TestCase):
         # adicoes[0] (from _variante) is not needed once the mapping applies, so it is not used either.
         self.assertEqual(usadas, {"clausulas[0]"})
 
+    def test_frases_substitute_a_phrase_of_the_stage_1_text_only_when_listed(self):
+        self.antigo["escala"]["atendido"] = "Todas orientam, nos termos do enunciado"
+        self.novo["escala"]["atendido"] = "Todas orientam, nos termos do enunciado e das definições"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("escala.atendido" in d for d in diffs), diffs)
+        frase = {"de": "nos termos do enunciado", "para": "nos termos do enunciado e das definições", "tipo": "decisao", "decisao": 12}
+        self.aceitas["frases"] = [frase]
+        usadas = set()
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas, usadas=usadas), [])
+        self.assertEqual(usadas, {"frases[0]"})
+        # A phrase change that no entry lists is still reported, even next to a listed one.
+        self.novo["escala"]["atendido"] = "Quase todas orientam, nos termos do enunciado e das definições"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("escala.atendido" in d and "Quase todas" in d for d in diffs), diffs)
+
+    def test_malformed_frase_entry_is_not_applied(self):
+        self.antigo["escala"]["atendido"] = "Todas orientam, nos termos do enunciado"
+        self.novo["escala"]["atendido"] = "Todas orientam, nos termos do enunciado e das definições"
+        base = {"de": "nos termos do enunciado", "para": "nos termos do enunciado e das definições"}
+        ruins = [{"de": base["de"]}, {"para": base["para"]}, dict(base, de=""), dict(base, para=""), dict(base, para=None),
+                 dict(base, criterio="D17.1"), dict(base, tipo="decisao"), "nos termos do enunciado"]
+        for ruim in ruins:
+            self.aceitas["frases"] = [ruim]
+            self.assertTrue(validar_aceitas(self.aceitas), ruim)
+            diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+            self.assertTrue(any("escala.atendido" in d for d in diffs), (ruim, diffs))
+        self.aceitas["frases"] = [base]
+        self.assertEqual(validar_aceitas(self.aceitas), [])
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
 
 class VerifyCliTest(unittest.TestCase):
     """End to end on a throwaway git repo: --base, --only, --catalog, --aceitas, exit code."""
@@ -571,15 +601,19 @@ class VerifyCliTest(unittest.TestCase):
         self.write_aceitas(clausulas=[{"de": "outra = coisa", "para": "x", "tipo": "equivalente"}],
                            adicoes=[{"criterio": "D17.1", "chave": "desafio"}],
                            remocoes=[{"criterio": "D17.1", "clausula": "nada = nada"}],
-                           campos=[{"criterio": "D17.1", "campo": "enunciado", "de": "a", "para": "b"}])
+                           campos=[{"criterio": "D17.1", "campo": "enunciado", "de": "a", "para": "b"}],
+                           frases=[{"de": "frase ausente", "para": "outra frase"}])
         code, out = self.run_main("--aceitas", str(self.aceitas))
         self.assertEqual(code, 1, out)
         self.assertIn("aceitas não usadas: clausulas[1] de=outra = coisa", out)
         self.assertIn("aceitas não usadas: adicoes[0]", out)
         self.assertIn("aceitas não usadas: remocoes[0]", out)
         self.assertIn("aceitas não usadas: campos[0]", out)
+        self.assertIn("aceitas não usadas: frases[0] de=frase ausente", out)
         self.assertNotIn("clausulas[0]", out)
-        self.assertIn("4 diferença", out)
+        self.assertIn("5 diferença", out)
+        code, out = self.run_main("--only", "D17", "--aceitas", str(self.aceitas))
+        self.assertNotIn("frases[0]", out)
 
     def test_file_missing_at_base_is_reported(self):
         (self.cat / "D18.yaml").write_text((self.cat / "D17.yaml").read_text(encoding="utf-8"), encoding="utf-8")
@@ -587,6 +621,7 @@ class VerifyCliTest(unittest.TestCase):
         self.assertEqual(code, 1, out)
         self.assertIn("D18", out)
 
-    def test_repo_aceitas_file_has_the_four_lists(self):
+    def test_repo_aceitas_file_has_the_known_lists(self):
         doc = yaml.safe_load((REPO / "scripts" / "definicoes_aceitas.yaml").read_text(encoding="utf-8"))
-        self.assertEqual(set(doc), {"clausulas", "adicoes", "remocoes", "campos"})
+        self.assertLessEqual({"clausulas", "adicoes", "remocoes", "campos"}, set(doc))
+        self.assertLessEqual(set(doc), {"clausulas", "adicoes", "remocoes", "campos", "frases"})

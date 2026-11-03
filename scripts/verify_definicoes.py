@@ -6,7 +6,8 @@ Usage: python3 scripts/verify_definicoes.py [--base main] [--only D28,D39] [--ca
 For every criterion it checks that
   1. the text outside the definitions is unchanged (after removing the stage-1 definition blocks with
      the same extractor the migration used, and ignoring ", nos termos das definições" on both sides),
-     except for the accepted `campos` edits;
+     except for the accepted `campos` edits and the global `frases` substitutions (each `de` phrase of
+     the stage-1 text, after the definition blocks are removed, is replaced by its `para` before comparing);
   2. the set of definition clauses is unchanged (stage-1 blocks vs. glossary keys + `locais`), except
      for the accepted `clausulas` substitutions, `adicoes` and `remocoes`;
   3. nothing else in the criterion or the diretriz changed (nivel, nivel_justificativa, depende_de, …).
@@ -18,9 +19,9 @@ compared as written (whitespace collapsed, final period dropped). Accepted entri
 messages print it ready to paste.
 
 Accepted entries are validated up front: a malformed entry (e.g. a `clausulas` entry without `para`,
-an unknown `tipo`, `tipo: decisao` without `decisao`) is reported and never applied. Every entry that
-was never used in the run is reported too ("aceitas não usadas"); with --only, entries scoped to "*" or
-to a diretriz outside --only are not checked for use.
+an unknown `tipo`, `tipo: decisao` without `decisao`, a `frases` entry with `criterio`) is reported and
+never applied. Every entry that was never used in the run is reported too ("aceitas não usadas"); with
+--only, entries scoped to "*" (`frases` included) or to a diretriz outside --only are not checked for use.
 
 Exit 1 on any unaccepted difference, malformed or unused accepted entry, or --only id without a file.
 """
@@ -40,7 +41,7 @@ from migrate_definicoes import _definicao, clausulas, extrair_blocos  # noqa: E4
 from vygolint_catalog.validate import load_definicoes, textos_do_criterio  # noqa: E402
 
 _PONTEIRO_RE = re.compile(r",? \bnos termos das definições\b")
-_LISTAS = ("clausulas", "adicoes", "remocoes", "campos")
+_LISTAS = ("clausulas", "adicoes", "remocoes", "campos", "frases")
 _TIPOS = ("equivalente", "decisao")
 
 
@@ -111,7 +112,10 @@ def _erro_entrada(lista, a):
     """Why accepted entry `a` of `lista` is malformed, or None when it is well formed."""
     if not isinstance(a, dict):
         return "não é mapa"
-    if "criterio" in a or lista != "clausulas":
+    if lista == "frases":
+        if "criterio" in a:
+            return "frases são globais (sem 'criterio')"
+    elif "criterio" in a or lista != "clausulas":
         if not _str(a.get("criterio")):
             return "sem 'criterio'"
     if "tipo" in a or lista == "clausulas":
@@ -146,6 +150,11 @@ def _erro_entrada(lista, a):
                 return "sem 'de'"
             if not isinstance(a.get("para"), str):
                 return "sem 'para'"
+    elif lista == "frases":
+        if not _str(a.get("de")):
+            return "sem 'de'"
+        if not _str(a.get("para")):
+            return "sem 'para'"
     return None
 
 
@@ -219,6 +228,7 @@ def comparar_criterio(antigo, novo, glossario, aceitas, usadas=None):
     diffs = []
     usadas = set() if usadas is None else usadas
     campos_ac = [(eid, a) for eid, a in _entradas(aceitas, "campos") if _aplica(a, cid)]
+    frases = _entradas(aceitas, "frases")
 
     # 3. Non-text fields.
     ea, en = _estrutura(antigo), _estrutura(novo)
@@ -243,6 +253,11 @@ def comparar_criterio(antigo, novo, glossario, aceitas, usadas=None):
         for b in blocos:
             for cl in _clausulas_de_corpo(b):
                 velhas.setdefault(cl, campo)
+        for eid, a in frases:
+            de = _ws(a["de"])
+            if de in _ws(sem_defs):
+                sem_defs = _ws(sem_defs).replace(de, _ws(a["para"]))
+                usadas.add(eid)
         # The pointer is stripped on both sides: stage 1 already used it outside the blocks (D29).
         esperado = _norm_campo(_PONTEIRO_RE.sub("", sem_defs)) if campo in antigos else "(campo inexistente)"
         obtido = _norm_campo(_PONTEIRO_RE.sub("", novos[campo])) if campo in novos else "(campo inexistente)"
