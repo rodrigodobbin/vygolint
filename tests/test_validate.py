@@ -305,3 +305,30 @@ class DefinicoesCriterioTest(unittest.TestCase):
         self.assertTrue(any("extra" in e for e in self.check(d)))
         d["criterios"][0]["definicoes"] = "missao"
         self.assertTrue(any("definicoes" in e for e in self.check(d)))
+
+    def test_bare_glossary_text_in_ordinary_sentence_is_not_a_definition(self):
+        # desafio's glossary text ("cada missão ou minijogo") is an ordinary phrase; only "desafio é <texto>" repeats it.
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["enunciado"] = "Cada missão ou minijogo apresenta uma situação-problema"
+        c["definicoes"] = {"glossario": ["missao", "minijogo", "situacao_problema"]}
+        self.assertEqual(self.check(d), [])
+        # Lowercase mid-sentence form matches the bare glossary text exactly (the old substring check rejected it).
+        c["enunciado"] = "Na diretriz, cada missão ou minijogo apresenta uma situação-problema"
+        self.assertEqual(self.check(d), [])
+
+    def test_repeated_definition_by_termo_is_detected(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["enunciado"] = "O desafio é cada missão ou minijogo"
+        c["definicoes"] = {"glossario": ["desafio", "missao", "minijogo"]}
+        errors = self.check(d)
+        self.assertTrue(any("glossário" in e and "desafio" in e for e in errors), errors)
+
+    def test_repeated_definition_by_gatilho_is_detected_case_insensitive(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["enunciado"] = "Caminho da missão é " + self.g["caminho_obrigatorio"]["texto"]
+        c["definicoes"] = {"glossario": ["caminho_obrigatorio", "missao"]}
+        errors = self.check(d)
+        self.assertTrue(any("glossário" in e and "caminho_obrigatorio" in e for e in errors), errors)

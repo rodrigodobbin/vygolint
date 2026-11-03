@@ -56,6 +56,15 @@ def textos_do_criterio(c):
     return out
 
 
+def _definicao_repetida_re(e):
+    """Regex for a repeated glossary definition: "<termo|gatilho> (é|são) <texto>"."""
+    termo = re.sub(r"\s*\([^)]*\)\s*$", "", e["termo"]).strip()
+    nomes = [termo] + list(e["gatilhos"])
+    alternativas = "|".join(re.escape(n) for n in nomes if n)
+    texto = r"\s+".join(re.escape(parte) for parte in e["texto"].split())
+    return re.compile(rf"(?:{alternativas})\s+(?:é|são)\s+{texto}", re.IGNORECASE)
+
+
 def _validate_definicoes_criterio(c, prefix, schema, glossario, errors):
     defs = c.get("definicoes", {})
     if defs is None:
@@ -94,11 +103,12 @@ def _validate_definicoes_criterio(c, prefix, schema, glossario, errors):
                 f"{prefix}: definicoes.termos_comuns lista {g!r} mas glossario também lista {gatilho_para_chave[g]}"
             )
     campos = textos_do_criterio(c)
+    repetidas = {e["chave"]: _definicao_repetida_re(e) for e in glossario.values()}
     for campo, texto in campos:
         if _INLINE_RE.search(texto):
             errors.append(f"{prefix}: {campo} contém definição inline ('Definição:'/'Definições:'); use o campo definicoes")
         for e in glossario.values():
-            if e["texto"] in texto:
+            if repetidas[e["chave"]].search(texto):
                 errors.append(f"{prefix}: {campo} repete o texto do glossário de {e['chave']}; use definicoes.glossario")
     corpus_proprio = " ".join(t for _, t in campos).lower()
     corpus_base = corpus_proprio + " " + " ".join(locais.values()).lower()
