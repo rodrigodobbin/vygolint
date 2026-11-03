@@ -36,9 +36,9 @@ criterios:
           - "ao menos um momento posterior em que o estado organizado aparece de novo, depois de o jogador sair da tela ou do momento em que operou"
           - "a relação da informação com objetivo de aprendizagem foi verificada no código ou na documentação e não no vídeo"
     escala:
-      atendido: "O jogador executa ao menos uma operação de organização, o estado organizado persiste e é consultado depois, nos termos do enunciado"
-      parcial: "O jogador executa ao menos uma operação de organização e o estado organizado persiste, mas nenhuma consulta posterior existe, nos termos do enunciado"
-      nao_atendido: "O jogador não executa nenhuma operação de organização, ou o estado organizado não persiste, nos termos do enunciado (inclui inventário, diário ou lista preenchidos automaticamente pelo jogo e anotação em texto livre sem estrutura escolhida)"
+      atendido: "O jogador executa ao menos uma operação de organização, o estado organizado persiste e é consultado depois, nos termos do enunciado e das definições"
+      parcial: "O jogador executa ao menos uma operação de organização e o estado organizado persiste, mas nenhuma consulta posterior existe, nos termos do enunciado e das definições"
+      nao_atendido: "O jogador não executa nenhuma operação de organização, ou o estado organizado não persiste, nos termos do enunciado e das definições (inclui inventário, diário ou lista preenchidos automaticamente pelo jogo e anotação em texto livre sem estrutura escolhida)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem, sessao_de_jogo]

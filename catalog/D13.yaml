@@ -33,9 +33,9 @@ criterios:
           - "a conclusão da missão ou tarefa é registrada depois da ação de cada um desses jogadores"
           - "se a conclusão é registrada com a ação de apenas um dos jogadores que a missão aceita, anotar (indica o estado parcial)"
     escala:
-      atendido: "Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado"
-      parcial: "Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado, mas o jogo registra a conclusão com a ação de apenas um deles"
-      nao_atendido: "Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado"
+      atendido: "Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado e das definições"
+      parcial: "Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles"
+      nao_atendido: "Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado e das definições"
     depende_de:
       - [D06.1, D07.1]
     definicoes:

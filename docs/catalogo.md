@@ -15,9 +15,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - **cenário jogável** (âncora D29; gatilhos: cenário): cada espaço do jogo (mapa, sala ou fase) em que o jogador executa ações e em que há uma missão em curso; cenário em que nenhuma missão está em curso (hub, sandbox) não tem caminho obrigatório e não é cenário jogável
 - **caminho obrigatório (caminho da missão)** (âncora D05; gatilhos: caminho obrigatório, caminho da missão): a sequência de objetivos exigidos para completar a missão em curso, e fora do caminho obrigatório é tudo o que nenhum desses objetivos exige
 - **situação-problema** (âncora D01; gatilhos: situação-problema): uma situação com estado inicial, objetivo e mais de uma ação possível, cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema
-- **GDD ou documento equivalente** (âncora D22; gatilhos: GDD, documento equivalente): o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
+- **GDD ou documento equivalente** (âncora D22 (texto novo); gatilhos: GDD, documento equivalente): o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - **objetivo de aprendizagem** (âncora D31; gatilhos: objetivo de aprendizagem, objetivos de aprendizagem): cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
-- **sessão de jogo** (âncora D36; gatilhos: sessão de jogo): o período contínuo entre o jogador iniciar o jogo, ou carregar um estado salvo, e encerrá-lo (fechar o jogo ou voltar ao menu inicial)
+- **sessão de jogo** (âncora D36 (texto novo); gatilhos: sessão de jogo): o período contínuo entre o jogador iniciar o jogo, ou carregar um estado salvo, e encerrá-lo (fechar o jogo ou voltar ao menu inicial)
 
 ## Resumo
 
@@ -99,9 +99,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - concluir o desafio não depende de repetir a mesma ação até o fim
 
 **Escala.**
-- Atendido: Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado, cuja resolução exige uma decisão do jogador
-- Parcial: Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado
-- Não atendido: Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado
+- Atendido: Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado e das definições, cuja resolução exige uma decisão do jogador
+- Parcial: Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado
+- Não atendido: Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições
 
 **Depende de.** —
 
@@ -428,7 +428,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *texto livre*: uma sequência de caracteres digitada pelo jogador em campo de entrada (ou em teclado exibido na tela que permita qualquer sequência), sem ser escolhida de lista de opções prontas, e recebida pelo jogo
 - *composição por seleção*: escolher, em lista fechada oferecida pelo jogo, palavras ou frases prontas que o jogo exibe ou envia como mensagem do jogador sem avaliá-las como certas ou erradas (opção de diálogo, chat rápido, montagem de frase por palavras), e não conta como texto livre
 - *alternativa de múltipla escolha*: uma opção que o jogo avalia como certa ou errada para uma pergunta ou tarefa; escolher uma alternativa de múltipla escolha, com texto escrito ou não, não é composição por seleção nem produção de texto
-- *precedência*: se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)
+- *opção avaliada como certa ou errada*: se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)
 
 **Enunciado.** Em ao menos um ponto do jogo, o jogador produz texto livre, como em chat, resposta aberta, anotação ou nome de item
 
@@ -447,8 +447,8 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - nos momentos de escolha registrados (mínimo 0), o jogador escolhe apenas alternativas de múltipla escolha, incluindo opções avaliadas como certas ou erradas mesmo quando exibidas como mensagem do jogador (não contam como produção de texto)
 
 **Escala.**
-- Atendido: Em ao menos um ponto do jogo, o jogador digita texto livre, nos termos do enunciado, e o jogo recebe esse texto
-- Parcial: O jogador compõe mensagens por seleção, nos termos do enunciado, sem digitar texto livre em nenhum ponto do jogo
+- Atendido: Em ao menos um ponto do jogo, o jogador digita texto livre, nos termos do enunciado e das definições, e o jogo recebe esse texto
+- Parcial: O jogador compõe mensagens por seleção, nos termos do enunciado e das definições, sem digitar texto livre em nenhum ponto do jogo
 - Não atendido: O jogador não digita texto livre nem compõe mensagem por seleção em nenhum ponto do jogo; só lê, escolhe alternativas de múltipla escolha (incluindo opções avaliadas como certas ou erradas, mesmo exibidas como mensagem do jogador), escolhe opções não textuais ou age sobre objetos
 
 **Depende de.** —
@@ -489,9 +489,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - cada trecho pulado teve o comprimento integral determinado ou foi registrado como não determinado
 
 **Escala.**
-- Atendido: Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado
-- Parcial: Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado
-- Não atendido: Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado
+- Atendido: Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
+- Parcial: Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
+- Não atendido: Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
 
 **Depende de.** —
 
@@ -535,9 +535,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - a relação da informação coletada com objetivo de aprendizagem foi verificada no código ou na documentação e não no vídeo
 
 **Escala.**
-- Atendido: O jogador coleta ao menos uma informação, nos termos do enunciado, e ao menos uma informação coletada é usada depois em missão ou desafio, nos termos do enunciado
-- Parcial: O jogador coleta ao menos uma informação, nos termos do enunciado, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado
-- Não atendido: O jogador não coleta nenhuma informação, nos termos do enunciado: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem
+- Atendido: O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, e ao menos uma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições
+- Parcial: O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições
+- Não atendido: O jogador não coleta nenhuma informação, nos termos do enunciado e das definições: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem
 
 **Depende de.** —
 
@@ -575,7 +575,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - em momento posterior da gravação, o artefato continua disponível ao jogador (no cenário, inventário ou lista)
 
 **Escala.**
-- Atendido: O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo, nos termos do enunciado, que persiste no jogo
+- Atendido: O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo, nos termos do enunciado e das definições, que persiste no jogo
 - Parcial: O jogador combina dois ou mais elementos por ação própria, mas o resultado não permanece disponível depois da ação de combinar (por exemplo, a combinação é apenas avaliada como correta ou incorreta e descartada)
 - Não atendido: O jogador não combina elementos para obter resultado novo; as ações disponíveis só manipulam elementos já existentes no jogo
 
@@ -618,9 +618,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - se a conclusão é registrada com a ação de apenas um dos jogadores que a missão aceita, anotar (indica o estado parcial)
 
 **Escala.**
-- Atendido: Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado
-- Parcial: Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado, mas o jogo registra a conclusão com a ação de apenas um deles
-- Não atendido: Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado
+- Atendido: Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado e das definições
+- Parcial: Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles
+- Não atendido: Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado e das definições
 
 **Depende de.** (D06.1 ou D07.1)
 
@@ -695,9 +695,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Vídeo: não se aplica
 
 **Escala.**
-- Atendido: O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado
-- Parcial: O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado
-- Não atendido: O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado
+- Atendido: O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado e das definições
+- Parcial: O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições
+- Não atendido: O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições
 
 **Depende de.** (D06.1 ou D07.1)
 
@@ -812,9 +812,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os pontos registrados em que ocorrências comparáveis recebem a mesma mensagem, ou mensagens que diferem só pelo resultado, pelo nome do jogador, pela pontuação ou por sinônimos, foram anotados (indica o estado parcial quando ao menos um ponto atende ao item anterior)
 
 **Escala.**
-- Atendido: Existe ao menos um ponto de feedback avaliado e todos os pontos de feedback avaliados exibem feedback individualizado, nos termos do enunciado
-- Parcial: Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado
-- Não atendido: Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado, ou não existe ponto de feedback avaliado
+- Atendido: Existe ao menos um ponto de feedback avaliado e todos os pontos de feedback avaliados exibem feedback individualizado, nos termos do enunciado e das definições
+- Parcial: Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado e das definições
+- Não atendido: Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, ou não existe ponto de feedback avaliado
 
 **Depende de.** —
 
@@ -859,9 +859,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - cada desafio registrado tem elementos diferentes para ao menos duas funções, nos termos da definição
 
 **Escala.**
-- Atendido: Todos os desafios documentados ou gravados exigem ao menos duas funções psicológicas superiores, nos termos do enunciado
-- Parcial: Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado, e ao menos outro exige menos de duas
-- Não atendido: Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado
+- Atendido: Todos os desafios documentados ou gravados exigem ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições
+- Parcial: Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições, e ao menos outro exige menos de duas
+- Não atendido: Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições
 
 **Depende de.** —
 
@@ -898,9 +898,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - para cada mecanismo registrado, foi anotado se o desafio segue em curso e o jogador ainda precisa decidir (pista) ou se o jogo exibe a resposta final ou executa a solução (entrega da solução completa)
 
 **Escala.**
-- Atendido: Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado
-- Parcial: Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado
-- Não atendido: Não existe mecanismo de ajuda, nos termos do enunciado, em nenhum desafio
+- Atendido: Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado e das definições
+- Parcial: Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado e das definições
+- Não atendido: Não existe mecanismo de ajuda, nos termos do enunciado e das definições, em nenhum desafio
 
 **Depende de.** —
 
@@ -942,9 +942,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - depois de cada simulação registrada, foi anotado se o jogador passa a controlar o desafio
 
 **Escala.**
-- Atendido: Em ao menos um desafio existe uma simulação que não substitui a ação do jogador, nos termos do enunciado
-- Parcial: Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado
-- Não atendido: Não existe simulação, nos termos do enunciado, em nenhum desafio
+- Atendido: Em ao menos um desafio existe uma simulação que não substitui a ação do jogador, nos termos do enunciado e das definições
+- Parcial: Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado e das definições
+- Não atendido: Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio
 
 **Depende de.** —
 
@@ -981,9 +981,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Vídeo: não se aplica
 
 **Escala.**
-- Atendido: Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado
-- Parcial: Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado, e ao menos outro desafio não tem
-- Não atendido: Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado
+- Atendido: Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado e das definições
+- Parcial: Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado e das definições, e ao menos outro desafio não tem
+- Não atendido: Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado e das definições
 
 **Depende de.** —
 
@@ -1016,9 +1016,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Vídeo: não se aplica
 
 **Escala.**
-- Atendido: O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado
-- Parcial: O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado
-- Não atendido: O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado
+- Atendido: O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado e das definições
+- Parcial: O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado e das definições
+- Não atendido: O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado e das definições
 
 **Depende de.** —
 
@@ -1039,7 +1039,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *GDD ou documento equivalente*: o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - *objetivo de aprendizagem*: cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
 - *narrativa*: a sequência de eventos, cenas, personagens e diálogos que o jogo apresenta ao jogador
-- *conteúdo*: o listado no documento de design (GDD) ou documento equivalente
+- *conteúdo de aprendizagem*: o listado no documento de design (GDD) ou documento equivalente
 - *situação trata de um objetivo de aprendizagem*: quando o texto, a fala ou a cena da situação cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem
 - *posição*: uma opção ou resposta (escolhida ou digitada) do jogador, numa situação, que o jogo não avalia como certa ou errada, isto é, que não concede, retira nem condiciona pontuação, progresso ou conclusão do desafio conforme a opção ou resposta; alternativa que o jogo avalia como certa ou errada é múltipla escolha e não é posição
 - *consequência narrativa*: o evento, a fala de personagem ou a mudança no cenário ou na história, exibido depois da posição, que retoma ou depende da posição escolhida (no código ou no GDD, um ramo diferente para cada posição; no vídeo, conteúdo exibido que cita ou responde à posição escolhida)
@@ -1065,9 +1065,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - na mesma situação, o conteúdo exibido depois da escolha cita ou responde à posição escolhida
 
 **Escala.**
-- Atendido: A narrativa apresenta ao menos um dilema, nos termos do enunciado
-- Parcial: A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)
-- Não atendido: A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)
+- Atendido: A narrativa apresenta ao menos um dilema, nos termos do enunciado e das definições
+- Parcial: A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado e das definições (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)
+- Não atendido: A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado e das definições (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)
 
 **Depende de.** —
 
@@ -1111,9 +1111,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - o vídeo confirma que dois recursos são alternativos válidos quando o mesmo desafio é concluído com recursos diferentes, na mesma gravação ou em gravações distintas; o desafio concluído com um só recurso confirma apenas que esse recurso é válido
 
 **Escala.**
-- Atendido: Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado
-- Parcial: Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)
-- Não atendido: Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)
+- Atendido: Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado e das definições
+- Parcial: Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado e das definições (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)
+- Não atendido: Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado e das definições (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)
 
 **Depende de.** —
 
@@ -1134,7 +1134,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *caminho obrigatório (caminho da missão)*: a sequência de objetivos exigidos para completar a missão em curso, e fora do caminho obrigatório é tudo o que nenhum desses objetivos exige
 - *GDD ou documento equivalente*: o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - *objetivo de aprendizagem*: cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
-- *conteúdo*: o listado no documento de design (GDD) ou documento equivalente
+- *conteúdo de aprendizagem*: o listado no documento de design (GDD) ou documento equivalente
 - *conteúdo opcional*: uma parte do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que trata de um objetivo de aprendizagem, isto é, cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem, e cujo acesso nenhum objetivo do caminho da missão em curso exige, de modo que o jogador conclui a missão sem acessá-lo
 - *conteúdos opcionais disponíveis ao mesmo tempo*: conteúdos opcionais que o jogador pode acessar em um mesmo estado do jogo, por ação própria (menu, interação ou deslocamento) e não por disparo automático; escolher a ordem de atividades obrigatórias é tratado em D03 e escolher entre recursos para o mesmo desafio é tratado em D24, e nenhum dos dois é escolha de conteúdo opcional
 
@@ -1159,9 +1159,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - o vídeo confirma que um conteúdo é opcional quando mostra a missão em curso concluída sem que o jogador o tenha acessado, estando ele oferecido pela interface; a ausência dessa conclusão no vídeo não prova que o conteúdo seja exigido
 
 **Escala.**
-- Atendido: Existem ao menos dois conteúdos opcionais disponíveis ao mesmo tempo que tratam de objetivos de aprendizagem diferentes, nos termos do enunciado
-- Parcial: Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)
-- Não atendido: Não existe nenhum conteúdo opcional, nos termos do enunciado (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)
+- Atendido: Existem ao menos dois conteúdos opcionais disponíveis ao mesmo tempo que tratam de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições
+- Parcial: Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)
+- Não atendido: Não existe nenhum conteúdo opcional, nos termos do enunciado e das definições (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)
 
 **Depende de.** —
 
@@ -1205,9 +1205,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os nomes, apelidos ou números exibidos nessa tela correspondem a jogadores, e não a personagens não jogáveis; se o vídeo não permite verificar essa correspondência, a verificação fica a cargo do código ou do GDD e, sem eles, a tela não confirma o estado atendido
 
 **Escala.**
-- Atendido: Existe ao menos uma competição com comparação visível aos jogadores, nos termos do enunciado
-- Parcial: Existe competição, nos termos do enunciado, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)
-- Não atendido: O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)
+- Atendido: Existe ao menos uma competição com comparação visível aos jogadores, nos termos do enunciado e das definições
+- Parcial: Existe competição, nos termos do enunciado e das definições, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)
+- Não atendido: O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)
 
 **Depende de.** —
 
@@ -1249,9 +1249,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - ao menos uma ação de um jogador habilita, libera, fornece ou muda um acesso, recurso, informação ou as ações que outro jogador participante pode ou precisa executar, com timestamp da ação e do efeito
 
 **Escala.**
-- Atendido: Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado
-- Parcial: Existe missão ou tarefa com objetivo compartilhado, nos termos do enunciado, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
-- Não atendido: Nenhuma missão ou tarefa tem objetivo compartilhado, nos termos do enunciado (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
+- Atendido: Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado e das definições
+- Parcial: Existe missão ou tarefa com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
+- Não atendido: Nenhuma missão ou tarefa tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
 
 **Depende de.** (D13.1)
 
@@ -1291,9 +1291,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - a resolução de cada dispositivo não aparece na abertura e aparece em trecho posterior, exibido depois de o jogador executar ao menos uma ação do objetivo da missão; se o vídeo termina antes da resolução, anotar resolução não observada, caso em que o dispositivo não é confirmado pelo vídeo
 
 **Escala.**
-- Atendido: A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado
-- Parcial: Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado, e ao menos outra missão não tem
-- Não atendido: Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)
+- Atendido: A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado e das definições
+- Parcial: Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições, e ao menos outra missão não tem
+- Não atendido: Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)
 
 **Depende de.** —
 
@@ -1335,9 +1335,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - cada obtenção registrada foi classificada como incentivo de exploração, quando nenhum objetivo da missão em curso exigia o que foi obtido e o jogador estava fora do caminho obrigatório, ou como obtenção exigida pelo caminho obrigatório; a descoberta só é classificada como incentivo quando o conteúdo não existe no caminho obrigatório, e a informação só quando não é apenas a descrição do objeto ou da área visitados e se relaciona a objetivo de aprendizagem do GDD ou a missão do jogo; só as classificadas como incentivo confirmam o estado atendido para o cenário em que ocorrem, desde que haja missão em curso nele
 
 **Escala.**
-- Atendido: Existe ao menos um cenário jogável e todos os cenários jogáveis têm ao menos um incentivo de exploração, nos termos do enunciado
-- Parcial: Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado, e ao menos outro cenário jogável não tem
-- Não atendido: Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)
+- Atendido: Existe ao menos um cenário jogável e todos os cenários jogáveis têm ao menos um incentivo de exploração, nos termos do enunciado e das definições
+- Parcial: Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições, e ao menos outro cenário jogável não tem
+- Não atendido: Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)
 
 **Depende de.** —
 
@@ -1356,8 +1356,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *GDD ou documento equivalente*: o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - *premissa do jogo*: a situação em que o jogador é colocado no início da primeira missão (papel do jogador, local, tarefa e problema a resolver)
 - *referente real*: uma situação, prática, profissão, fenômeno ou projeto que existe ou ocorre fora do jogo e que o GDD ou documento equivalente identifica por nome ou descrição específica (por exemplo, um projeto de pesquisa nomeado, uma profissão, um processo ambiental documentado); não contam cenário ou enredo fictício, lugar real usado só como pano de fundo sem que a tarefa do jogador corresponda a algo do referente, e descrição genérica como "o mundo real" ou "o dia a dia"; a premissa corresponde ao referente real quando o GDD indica ao menos um elemento da premissa (papel do jogador, local, tarefa ou problema a resolver) que descreve como o mesmo elemento do referente (mesmo papel, local, tarefa ou problema)
-- *quantidade de elementos*: um elemento é o mínimo que liga a premissa ao referente, e a diretriz não fixa quantidade maior
+- *correspondência da premissa ao referente real*: um elemento é o mínimo que liga a premissa ao referente, e a diretriz não fixa quantidade maior
 - *fonte do referente*: documento externo ao jogo que o GDD cita para descrever o referente (referência bibliográfica, página do projeto ou da instituição, norma, relatório ou registro de entrevista com profissionais), identificado por autoria ou endereço; menção sem identificação, como "segundo especialistas", não é fonte
+- *documento equivalente neste critério*: sem GDD, a tela de abertura, a tela de créditos ou a tela Sobre do jogo conta como documento equivalente para este critério
 - *escopo*: esta diretriz avalia só a premissa e o referente: a presença do conteúdo em situações do jogo é tratada em D31 e os objetos do cotidiano são tratados em D32
 - *cenário* (sentido corrente): em «cenário ou enredo fictício» (local referente real), cenário está no sentido corrente de ambientação inventada, e não no de cenário jogável (D29)
 
@@ -1378,9 +1379,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - o jogo exibe a fonte do referente, identificada por autoria ou endereço, na abertura, nos créditos ou na tela Sobre; com GDD, fonte exibida confirma a fonte que o GDD cita e fonte não exibida não altera o grau do GDD; sem GDD, fonte exibida leva ao estado atendido e fonte não exibida leva ao estado parcial, desde que o referente e a correspondência estejam exibidos
 
 **Escala.**
-- Atendido: O GDD ou documento equivalente nomeia um referente real para a premissa do jogo, indica ao menos um elemento da premissa que corresponde a esse referente e cita a fonte do referente, nos termos do enunciado
-- Parcial: O GDD nomeia um referente real para a premissa e indica ao menos um elemento da premissa que corresponde a esse referente, nos termos do enunciado, mas não cita a fonte do referente
-- Não atendido: O GDD não nomeia referente real para a premissa, ou nomeia mas não indica elemento da premissa que corresponda a ele, nos termos do enunciado (inclui premissa fictícia, lugar real só como pano de fundo, descrição genérica do referente e ausência de GDD ou documento equivalente)
+- Atendido: O GDD ou documento equivalente nomeia um referente real para a premissa do jogo, indica ao menos um elemento da premissa que corresponde a esse referente e cita a fonte do referente, nos termos do enunciado e das definições
+- Parcial: O GDD nomeia um referente real para a premissa e indica ao menos um elemento da premissa que corresponde a esse referente, nos termos do enunciado e das definições, mas não cita a fonte do referente
+- Não atendido: O GDD não nomeia referente real para a premissa, ou nomeia mas não indica elemento da premissa que corresponda a ele, nos termos do enunciado e das definições (inclui premissa fictícia, lugar real só como pano de fundo, descrição genérica do referente e ausência de GDD ou documento equivalente)
 
 **Depende de.** —
 
@@ -1427,9 +1428,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os objetivos da lista do GDD que a gravação não mostra foram anotados como não avaliados pelo vídeo, e os observados só em apresentação isolada ou em situação não descrita como real foram anotados; o vídeo sozinho só indica atendido quando todos os objetivos listados estão confirmados em situação real, e sem código nem GDD o resultado diferente disso é não confirmado; havendo código ou GDD para algum objetivo, o vídeo confirma o objetivo que não tem esse dado, objetivo a objetivo
 
 **Escala.**
-- Atendido: Existe ao menos um objetivo de aprendizagem listado e todo objetivo de aprendizagem listado é apresentado em ao menos uma situação real do jogo, nos termos do enunciado
-- Parcial: Ao menos um objetivo de aprendizagem listado é apresentado em ao menos uma situação real do jogo, nos termos do enunciado, e ao menos outro objetivo listado não é
-- Não atendido: Nenhum objetivo de aprendizagem é apresentado em situação real do jogo, nos termos do enunciado (inclui conteúdo só em glossário, menu de ajuda, tela de texto, pergunta de quiz que só pede nome ou definição ou situação fictícia, e GDD ou documento equivalente sem lista de objetivos de aprendizagem). Sem código nem GDD que descrevam onde os objetivos aparecem, e sem confirmação de todo objetivo listado pelo vídeo, o resultado é não confirmado e, por falta de evidência, o grau padrão é não atendido
+- Atendido: Existe ao menos um objetivo de aprendizagem listado e todo objetivo de aprendizagem listado é apresentado em ao menos uma situação real do jogo, nos termos do enunciado e das definições
+- Parcial: Ao menos um objetivo de aprendizagem listado é apresentado em ao menos uma situação real do jogo, nos termos do enunciado e das definições, e ao menos outro objetivo listado não é
+- Não atendido: Nenhum objetivo de aprendizagem é apresentado em situação real do jogo, nos termos do enunciado e das definições (inclui conteúdo só em glossário, menu de ajuda, tela de texto, pergunta de quiz que só pede nome ou definição ou situação fictícia, e GDD ou documento equivalente sem lista de objetivos de aprendizagem). Sem código nem GDD que descrevam onde os objetivos aparecem, e sem confirmação de todo objetivo listado pelo vídeo, o resultado é não confirmado e, por falta de evidência, o grau padrão é não atendido
 
 **Depende de.** —
 
@@ -1461,7 +1462,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - todos os objetos interativos foram listados, cada um com o manipulador de evento da ação do jogador e a resposta do jogo (mínimo 0 objetos)
   - todos os objetos de cenário sem manipulador de evento de ação do jogador foram listados, cada um com nome e função (mínimo 0 objetos)
   - ao menos um objeto interativo listado é representado com o nome e a função que tem fora do jogo e consta no GDD como item do cotidiano do público-alvo
-  - se ao menos um objeto de cenário listado sem manipulador de evento é item do cotidiano do público-alvo, nos termos do enunciado, e nenhum objeto interativo é item do cotidiano, anotar (indica o estado parcial)
+  - se ao menos um objeto de cenário listado sem manipulador de evento é item do cotidiano do público-alvo, nos termos do enunciado e das definições, e nenhum objeto interativo é item do cotidiano, anotar (indica o estado parcial)
 - Documentação: Verificar no GDD ou documento equivalente a descrição do público-alvo, a lista de itens do cotidiano dele e os objetos do jogo com a ação que o jogador executa sobre cada um. Regra de desempate: a classificação de um objeto como item do cotidiano do público-alvo vem só do GDD ou documento equivalente; para decidir se o objeto existe no jogo e é interativo, se as fontes divergirem vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre um objeto conta como sem código para esse objeto, e GDD que não descreve um objeto conta como sem GDD para esse objeto
   - o GDD descreve o público-alvo (faixa etária, série ou perfil) e cita os itens do cotidiano dele, ou os objetos de um local da rotina atribuído a ele
   - ao menos um objeto do jogo descrito no GDD é item do cotidiano do público-alvo e o GDD descreve a ação que o jogador executa sobre ele e a resposta do jogo
@@ -1472,9 +1473,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os itens do cotidiano do público-alvo vistos só como elemento visual do cenário, sem ação do jogador, foram anotados (indica o estado parcial quando nenhum objeto interativo é item do cotidiano)
 
 **Escala.**
-- Atendido: Ao menos um objeto interativo do jogo é item do cotidiano do público-alvo descrito no GDD ou documento equivalente, nos termos do enunciado
-- Parcial: O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)
-- Não atendido: O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)
+- Atendido: Ao menos um objeto interativo do jogo é item do cotidiano do público-alvo descrito no GDD ou documento equivalente, nos termos do enunciado e das definições
+- Parcial: O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado e das definições, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)
+- Não atendido: O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado e das definições (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)
 
 **Depende de.** —
 
@@ -1517,9 +1518,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Vídeo: não se aplica
 
 **Escala.**
-- Atendido: Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado
-- Parcial: O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)
-- Não atendido: O jogo não registra métrica de desempenho, nos termos do enunciado (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)
+- Atendido: Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado e das definições
+- Parcial: O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)
+- Não atendido: O jogo não registra métrica de desempenho, nos termos do enunciado e das definições (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)
 
 **Depende de.** —
 
@@ -1564,9 +1565,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - em ao menos um par registrado, o valor do parâmetro do desafio posterior difere entre as duas ocorrências; a diferença confirma o estado atendido, e a ausência de diferença ou de par não prova que o jogo não personaliza
 
 **Escala.**
-- Atendido: Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma ação anterior do jogador e produz valores diferentes conforme a ação, nos termos do enunciado
-- Parcial: O jogo guarda ao menos uma ação anterior do jogador, nos termos do enunciado, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui ação que só altera o enredo, a aparência ou o texto de feedback e ação que só decide entre avançar para o próximo desafio e repetir o mesmo desafio)
-- Não atendido: O jogo não guarda ação anterior do jogador, nos termos do enunciado (inclui jogo que não guarda escolhas nem ações do jogador, e jogo que guarda só métrica de desempenho ou só a seleção direta do desafio ou do nível). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
+- Atendido: Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma ação anterior do jogador e produz valores diferentes conforme a ação, nos termos do enunciado e das definições
+- Parcial: O jogo guarda ao menos uma ação anterior do jogador, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui ação que só altera o enredo, a aparência ou o texto de feedback e ação que só decide entre avançar para o próximo desafio e repetir o mesmo desafio)
+- Não atendido: O jogo não guarda ação anterior do jogador, nos termos do enunciado e das definições (inclui jogo que não guarda escolhas nem ações do jogador, e jogo que guarda só métrica de desempenho ou só a seleção direta do desafio ou do nível). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
 
 **Depende de.** —
 
@@ -1608,9 +1609,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - ao menos um momento em que um jogador abre e joga, dentro do jogo, desafio criado por outro jogador foi registrado, com timestamp; o desafio aberto confirma a disponibilização quando é o mesmo desafio criado em momento registrado por jogador diferente do que o abre, ou quando o jogo exibe como autor um jogador diferente do que o abre
 
 **Escala.**
-- Atendido: Existe uma mecânica em que o jogador cria um desafio e o jogo o disponibiliza a outro jogador para que o jogue, nos termos do enunciado
-- Parcial: O jogador cria um desafio, nos termos do enunciado, mas o jogo não o disponibiliza a outro jogador (só o autor o joga, ou outra pessoa o joga na mesma instalação e sob a mesma identidade de jogador do autor, sem que o desafio fique guardado sob outra identidade de jogador)
-- Não atendido: O jogador não cria desafio, nos termos do enunciado (inclui construção de objetos sem condição de conclusão e escolha ou configuração de desafios prontos). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
+- Atendido: Existe uma mecânica em que o jogador cria um desafio e o jogo o disponibiliza a outro jogador para que o jogue, nos termos do enunciado e das definições
+- Parcial: O jogador cria um desafio, nos termos do enunciado e das definições, mas o jogo não o disponibiliza a outro jogador (só o autor o joga, ou outra pessoa o joga na mesma instalação e sob a mesma identidade de jogador do autor, sem que o desafio fique guardado sob outra identidade de jogador)
+- Não atendido: O jogador não cria desafio, nos termos do enunciado e das definições (inclui construção de objetos sem condição de conclusão e escolha ou configuração de desafios prontos). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
 
 **Depende de.** (D07.1)
 
@@ -1660,9 +1661,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - a relação da informação com objetivo de aprendizagem foi verificada no código ou na documentação e não no vídeo
 
 **Escala.**
-- Atendido: O jogador executa ao menos uma operação de organização, o estado organizado persiste e é consultado depois, nos termos do enunciado
-- Parcial: O jogador executa ao menos uma operação de organização e o estado organizado persiste, mas nenhuma consulta posterior existe, nos termos do enunciado
-- Não atendido: O jogador não executa nenhuma operação de organização, ou o estado organizado não persiste, nos termos do enunciado (inclui inventário, diário ou lista preenchidos automaticamente pelo jogo e anotação em texto livre sem estrutura escolhida)
+- Atendido: O jogador executa ao menos uma operação de organização, o estado organizado persiste e é consultado depois, nos termos do enunciado e das definições
+- Parcial: O jogador executa ao menos uma operação de organização e o estado organizado persiste, mas nenhuma consulta posterior existe, nos termos do enunciado e das definições
+- Não atendido: O jogador não executa nenhuma operação de organização, ou o estado organizado não persiste, nos termos do enunciado e das definições (inclui inventário, diário ou lista preenchidos automaticamente pelo jogo e anotação em texto livre sem estrutura escolhida)
 
 **Depende de.** —
 
@@ -1707,9 +1708,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - as unidades registradas cuja abertura não declara estado inicial e objetivo foram anotadas (indica o estado parcial quando ao menos uma unidade atende)
 
 **Escala.**
-- Atendido: Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado
-- Parcial: Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado, e ao menos outra unidade avaliada não apresenta
-- Não atendido: Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado, ou não existe unidade avaliada
+- Atendido: Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições
+- Parcial: Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, e ao menos outra unidade avaliada não apresenta
+- Não atendido: Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, ou não existe unidade avaliada
 
 **Depende de.** —
 
@@ -1757,9 +1758,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os itens registrados sem texto na tela foram anotados, conferindo antes no código ou no GDD se há legenda ativável (indica o estado parcial quando ao menos um item tem forma escrita)
 
 **Escala.**
-- Atendido: Existe ao menos um item avaliado e todos os itens avaliados têm forma escrita, nos termos do enunciado
-- Parcial: Ao menos um item avaliado tem forma escrita, nos termos do enunciado, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado)
-- Não atendido: Nenhum item avaliado tem forma escrita, nos termos do enunciado, ou não existe item avaliado
+- Atendido: Existe ao menos um item avaliado e todos os itens avaliados têm forma escrita, nos termos do enunciado e das definições
+- Parcial: Ao menos um item avaliado tem forma escrita, nos termos do enunciado e das definições, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado e das definições)
+- Não atendido: Nenhum item avaliado tem forma escrita, nos termos do enunciado e das definições, ou não existe item avaliado
 
 **Depende de.** —
 
@@ -1804,9 +1805,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - os desafios registrados em que o vídeo mostra sinal que aponta o elemento foram anotados (indica o estado parcial quando todo detalhe observado é sinalizado)
 
 **Escala.**
-- Atendido: Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado
-- Parcial: Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado, mas todo detalhe exigido é sinalizado explicitamente
-- Não atendido: Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)
+- Atendido: Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado e das definições
+- Parcial: Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado e das definições, mas todo detalhe exigido é sinalizado explicitamente
+- Não atendido: Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado e das definições (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)
 
 **Depende de.** —
 
@@ -1857,8 +1858,8 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - as respostas registradas com uma só modalidade, ou só com sinal de falha, foram anotadas (indica o estado parcial quando ao menos uma resposta atende aos dois itens anteriores)
 
 **Escala.**
-- Atendido: Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado
-- Parcial: Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado, e ao menos outra resposta avaliada não atende a esses dois requisitos
-- Não atendido: Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado, ou não existe resposta avaliada (inclui resposta só com sinal de falha)
+- Atendido: Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado e das definições
+- Parcial: Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, e ao menos outra resposta avaliada não atende a esses dois requisitos
+- Não atendido: Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, ou não existe resposta avaliada (inclui resposta só com sinal de falha)
 
 **Depende de.** (D17.1)

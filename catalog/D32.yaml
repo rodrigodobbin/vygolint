@@ -19,7 +19,7 @@ criterios:
           - "todos os objetos interativos foram listados, cada um com o manipulador de evento da ação do jogador e a resposta do jogo (mínimo 0 objetos)"
           - "todos os objetos de cenário sem manipulador de evento de ação do jogador foram listados, cada um com nome e função (mínimo 0 objetos)"
           - "ao menos um objeto interativo listado é representado com o nome e a função que tem fora do jogo e consta no GDD como item do cotidiano do público-alvo"
-          - "se ao menos um objeto de cenário listado sem manipulador de evento é item do cotidiano do público-alvo, nos termos do enunciado, e nenhum objeto interativo é item do cotidiano, anotar (indica o estado parcial)"
+          - "se ao menos um objeto de cenário listado sem manipulador de evento é item do cotidiano do público-alvo, nos termos do enunciado e das definições, e nenhum objeto interativo é item do cotidiano, anotar (indica o estado parcial)"
       documentacao:
         procedimento: "Verificar no GDD ou documento equivalente a descrição do público-alvo, a lista de itens do cotidiano dele e os objetos do jogo com a ação que o jogador executa sobre cada um. Regra de desempate: a classificação de um objeto como item do cotidiano do público-alvo vem só do GDD ou documento equivalente; para decidir se o objeto existe no jogo e é interativo, se as fontes divergirem vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre um objeto conta como sem código para esse objeto, e GDD que não descreve um objeto conta como sem GDD para esse objeto"
         indicadores:
@@ -33,9 +33,9 @@ criterios:
           - "ao menos um objeto registrado é interativo, é representado com o nome e a função que tem fora do jogo e consta no GDD como item do cotidiano do público-alvo; o vídeo sem GDD não classifica o objeto como item do cotidiano do público-alvo"
           - "os itens do cotidiano do público-alvo vistos só como elemento visual do cenário, sem ação do jogador, foram anotados (indica o estado parcial quando nenhum objeto interativo é item do cotidiano)"
     escala:
-      atendido: "Ao menos um objeto interativo do jogo é item do cotidiano do público-alvo descrito no GDD ou documento equivalente, nos termos do enunciado"
-      parcial: "O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)"
-      nao_atendido: "O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)"
+      atendido: "Ao menos um objeto interativo do jogo é item do cotidiano do público-alvo descrito no GDD ou documento equivalente, nos termos do enunciado e das definições"
+      parcial: "O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado e das definições, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)"
+      nao_atendido: "O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado e das definições (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

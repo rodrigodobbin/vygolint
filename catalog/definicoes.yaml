@@ -1,7 +1,8 @@
 # Glossário do catálogo vygolint. Cada definição compartilhada existe uma vez aqui.
 # Um critério a referencia em `definicoes.glossario` (lista de chaves); o build
 # imprime o texto uma vez por critério e falha se o texto do critério usa um
-# gatilho sem listar a chave. `ancora` é a diretriz de onde a redação veio.
+# gatilho sem listar a chave. `ancora` é a diretriz de onde a redação veio, com
+# «(texto novo)» quando a etapa 1 não tinha essa redação em nenhum critério.
 # Lido por scripts/vygolint_catalog/validate.py.
 termos:
   - chave: missao
@@ -37,7 +38,7 @@ termos:
   - chave: documentacao_equivalente
     termo: GDD ou documento equivalente
     gatilhos: [GDD, documento equivalente]
-    ancora: D22
+    ancora: "D22 (texto novo)"
     texto: "o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta"
   - chave: objetivo_de_aprendizagem
     termo: objetivo de aprendizagem
@@ -47,5 +48,5 @@ termos:
   - chave: sessao_de_jogo
     termo: sessão de jogo
     gatilhos: [sessão de jogo]
-    ancora: D36
+    ancora: "D36 (texto novo)"
     texto: "o período contínuo entre o jogador iniciar o jogo, ou carregar um estado salvo, e encerrá-lo (fechar o jogo ou voltar ao menu inicial)"

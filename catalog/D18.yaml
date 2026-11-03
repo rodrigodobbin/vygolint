@@ -33,9 +33,9 @@ criterios:
           - "nos pontos registrados, as mensagens de ocorrências comparáveis diferem em informação que cita ou descreve o que o jogador fez"
           - "os pontos registrados em que ocorrências comparáveis recebem a mesma mensagem, ou mensagens que diferem só pelo resultado, pelo nome do jogador, pela pontuação ou por sinônimos, foram anotados (indica o estado parcial quando ao menos um ponto atende ao item anterior)"
     escala:
-      atendido: "Existe ao menos um ponto de feedback avaliado e todos os pontos de feedback avaliados exibem feedback individualizado, nos termos do enunciado"
-      parcial: "Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado"
-      nao_atendido: "Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado, ou não existe ponto de feedback avaliado"
+      atendido: "Existe ao menos um ponto de feedback avaliado e todos os pontos de feedback avaliados exibem feedback individualizado, nos termos do enunciado e das definições"
+      parcial: "Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado e das definições"
+      nao_atendido: "Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, ou não existe ponto de feedback avaliado"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

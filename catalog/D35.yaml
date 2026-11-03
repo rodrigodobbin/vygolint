@@ -32,9 +32,9 @@ criterios:
           - "ao menos um momento em que o jogador define elemento de conteúdo e condição de conclusão de um desafio e o jogo o guarda foi registrado, com timestamp"
           - "ao menos um momento em que um jogador abre e joga, dentro do jogo, desafio criado por outro jogador foi registrado, com timestamp; o desafio aberto confirma a disponibilização quando é o mesmo desafio criado em momento registrado por jogador diferente do que o abre, ou quando o jogo exibe como autor um jogador diferente do que o abre"
     escala:
-      atendido: "Existe uma mecânica em que o jogador cria um desafio e o jogo o disponibiliza a outro jogador para que o jogue, nos termos do enunciado"
-      parcial: "O jogador cria um desafio, nos termos do enunciado, mas o jogo não o disponibiliza a outro jogador (só o autor o joga, ou outra pessoa o joga na mesma instalação e sob a mesma identidade de jogador do autor, sem que o desafio fique guardado sob outra identidade de jogador)"
-      nao_atendido: "O jogador não cria desafio, nos termos do enunciado (inclui construção de objetos sem condição de conclusão e escolha ou configuração de desafios prontos). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido"
+      atendido: "Existe uma mecânica em que o jogador cria um desafio e o jogo o disponibiliza a outro jogador para que o jogue, nos termos do enunciado e das definições"
+      parcial: "O jogador cria um desafio, nos termos do enunciado e das definições, mas o jogo não o disponibiliza a outro jogador (só o autor o joga, ou outra pessoa o joga na mesma instalação e sob a mesma identidade de jogador do autor, sem que o desafio fique guardado sob outra identidade de jogador)"
+      nao_atendido: "O jogador não cria desafio, nos termos do enunciado e das definições (inclui construção de objetos sem condição de conclusão e escolha ou configuração de desafios prontos). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido"
     depende_de:
       - [D07.1]
     definicoes:

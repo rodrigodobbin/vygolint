@@ -35,9 +35,9 @@ criterios:
           - "em ao menos um desafio registrado, nenhum marcador, destaque, texto ou fala visto ou ouvido no vídeo se refere ao elemento antes da ação do jogador"
           - "os desafios registrados em que o vídeo mostra sinal que aponta o elemento foram anotados (indica o estado parcial quando todo detalhe observado é sinalizado)"
     escala:
-      atendido: "Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado"
-      parcial: "Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado, mas todo detalhe exigido é sinalizado explicitamente"
-      nao_atendido: "Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)"
+      atendido: "Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado e das definições"
+      parcial: "Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado e das definições, mas todo detalhe exigido é sinalizado explicitamente"
+      nao_atendido: "Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado e das definições (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente]

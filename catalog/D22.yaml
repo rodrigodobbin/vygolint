@@ -22,9 +22,9 @@ criterios:
           - "o objetivo de aprendizagem citado em cada momento de mediação consta da lista de objetivos de aprendizagem da documentação"
       video: null
     escala:
-      atendido: "Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado"
-      parcial: "Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado, e ao menos outro desafio não tem"
-      nao_atendido: "Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado"
+      atendido: "Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado e das definições"
+      parcial: "Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado e das definições, e ao menos outro desafio não tem"
+      nao_atendido: "Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado e das definições"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]
@@ -54,9 +54,9 @@ criterios:
           - "os campos listados incluem o resultado por desafio e ao menos um dado de dificuldade (indica o estado atendido); se incluem só um dos dois, indica o estado parcial"
       video: null
     escala:
-      atendido: "O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado"
-      parcial: "O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado"
-      nao_atendido: "O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado"
+      atendido: "O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado e das definições"
+      parcial: "O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado e das definições"
+      nao_atendido: "O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado e das definições"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

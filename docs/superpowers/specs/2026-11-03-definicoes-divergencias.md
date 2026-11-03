@@ -1,6 +1,6 @@
 # Definições compartilhadas — divergências encontradas e decisões pendentes
 
-Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml` (plano `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`). Enquanto uma decisão está pendente, o catálogo usa a redação do arquivo âncora, indicada em cada item. A lista legível por máquina está em `scripts/definicoes_aceitas.yaml`: cada entrada com `tipo: decisao` traz em `decisao` o número do item abaixo.
+Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml` (plano `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`). Enquanto uma decisão está pendente, o catálogo usa a redação do arquivo âncora, indicada em cada item; a decisão 12 já foi aplicada (pode ser revertida). A lista legível por máquina está em `scripts/definicoes_aceitas.yaml`: cada entrada com `tipo: decisao` traz em `decisao` o número do item abaixo.
 
 "Etapa 1" é o texto do catálogo em `main`, antes da migração. Cada decisão pode ser respondida com uma de três opções:
 
@@ -19,11 +19,13 @@ Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml`
 | 5 | `cenario_jogavel` | D04.1 | «cada cenário» passa a excluir hub e sandbox sem missão em curso |
 | 6 | `situacao_problema` (indicador de vídeo) | D01.1 | o indicador ainda redefine o termo com «visível» e «disponível ao jogador» |
 | 7 | `documentacao_equivalente` | 37 critérios | texto novo: o documento precisa descrever o conteúdo do jogo, e material de divulgação ou de loja deixa de contar |
-| 8 | `objetivo_de_aprendizagem` | D22.1 | de «o listado na documentação» para «conceito, fato ou procedimento listado» |
-| 9 | `objetivo_de_aprendizagem` + local `conteúdo` | D19.1, D23.1, D25.1 | o termo composto «conteúdo e objetivo de aprendizagem» é dividido; o objetivo fica restrito como no item 8 |
+| 8 | `objetivo_de_aprendizagem` | D22.1, D04.1, D11.1, D36.1 | de «o listado na documentação» (ou sem definição) para «conceito, fato ou procedimento listado» |
+| 9 | `objetivo_de_aprendizagem` + local `conteúdo de aprendizagem` | D19.1, D23.1, D25.1 | o termo composto «conteúdo e objetivo de aprendizagem» é dividido; o objetivo fica restrito como no item 8 |
 | 10 | `sessao_de_jogo` | D36.1 | texto novo: voltar ao menu inicial encerra a sessão, e carregar um estado salvo inicia outra |
 | 11 | `persiste` (local) | D12.1 | das duas redações do mesmo critério, fica a do enunciado («ao jogador», «concluída») |
-| 12 | «nos termos do enunciado» nas escalas | 30 arquivos | nenhuma mudança de texto; decidir se o ponteiro passa a ser «nos termos das definições» |
+| 12 | «nos termos do enunciado» nas escalas | 30 arquivos | **aplicada**: o ponteiro passou a «nos termos do enunciado e das definições» em todo o catálogo |
+| 13 | `documentacao_equivalente` × regra de D30 | D30.1 | sem GDD, as telas de abertura, créditos ou Sobre contam como documento equivalente só em D30; local novo explicita a exceção |
+| 14 | `missao` acrescentada | 21 critérios | o jogo sem divisão em missões passa a contar como uma missão, e fase, capítulo ou nível com objetivo e conclusão próprios passam a contar como missão |
 
 ### Decisão 1 — `desafio`: incluir "etapa com condição de conclusão própria"?
 
@@ -84,24 +86,25 @@ Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml`
 ### Decisão 8 — `objetivo_de_aprendizagem` em D22: «o listado na documentação»
 
 - **Âncora aplicada:** D31 — «cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados».
-- **Variante da etapa 1:** D22.1 — «objetivo de aprendizagem é o listado na documentação».
-- **O que muda:** o objetivo fica restrito a conceito, fato ou procedimento. Um objetivo listado na documentação que seja outra coisa (uma atitude, um valor, uma competência socioemocional) deixa de contar, e o momento de mediação que só trabalha esse objetivo deixa de valer em D22.1.
-- **Critérios afetados:** D22.1. Lista de aceitas: `clausulas` D22.1 (`decisao: 8`).
-- **Proposta:** aceitar âncora (é a mesma restrição que D31 já impõe aos demais critérios). Adotar variante seria um local em D22.1, `objetivo de aprendizagem`: «o listado na documentação», no lugar da chave do glossário.
+- **Variante da etapa 1:** D22.1 — «objetivo de aprendizagem é o listado na documentação». Em D04.1, D11.1 e D36.1 o termo era usado sem definição, no sentido de «o que o GDD lista como objetivo».
+- **O que muda:** o objetivo fica restrito a conceito, fato ou procedimento. Um objetivo listado na documentação que seja outra coisa (uma atitude, um valor, uma competência socioemocional) deixa de contar, e o momento de mediação que só trabalha esse objetivo deixa de valer em D22.1. A mesma restrição chega, pela chave acrescentada, a três critérios que não definiam o termo: em D04.1, o objeto cuja resposta só se relaciona a um objetivo desse tipo deixa de contar; em D11.1 e D36.1, o local `informação` («… relativo a ao menos um objetivo de aprendizagem listado no GDD …») encolhe junto, e a informação ligada só a uma atitude ou valor deixa de ser informação para o critério.
+- **Critérios afetados:** D22.1, D04.1, D11.1, D36.1. Lista de aceitas: `clausulas` D22.1 e `adicoes` D04.1, D11.1 e D36.1 com `chave: objetivo_de_aprendizagem` (`decisao: 8`). D02.1 e D29.1 também receberam a chave sem decisão: D02.1 já conta por conceito («cada conceito listado como objetivo»), e em D29.1 a informação vale também quando se relaciona à missão.
+- **Proposta:** aceitar âncora (é a mesma restrição que D31 já impõe aos demais critérios). Adotar variante seria um local em D22.1, `objetivo de aprendizagem`: «o listado na documentação», no lugar da chave do glossário, e um local equivalente («o listado no GDD ou documento equivalente») em D04.1, D11.1 e D36.1.
 
 ### Decisão 9 — `objetivo_de_aprendizagem` e `conteúdo` em D19, D23 e D25
 
-- **Âncora aplicada:** `objetivo_de_aprendizagem` (D31), texto citado na decisão 8; «conteúdo» vira local: «o listado no documento de design (GDD) ou documento equivalente» (D23.1, D25.1).
+- **Âncora aplicada:** `objetivo_de_aprendizagem` (D31), texto citado na decisão 8; «conteúdo» vira o local `conteúdo de aprendizagem`: «o listado no documento de design (GDD) ou documento equivalente» (D23.1, D25.1).
 - **Variante da etapa 1:** D19.1, D23.1, D25.1 — «conteúdo e objetivo de aprendizagem são os listados no documento de design (GDD) ou documento equivalente».
 - **O que muda:** para o objetivo, o mesmo que a decisão 8 (restrição a conceito, fato ou procedimento). Para «conteúdo», só a forma (plural → singular), sem mudança de sentido. Em D19.1 a definição de «conteúdo» some, sem efeito, porque a palavra não é usada fora dela. Em D25.1 «conteúdo» também aparece no sentido de parte do jogo («conteúdo opcional», «todo conteúdo é exigido pelo caminho da missão»), e o local cobre só o sentido de conteúdo de aprendizagem.
-- **Critérios afetados:** D19.1, D23.1, D25.1. Lista de aceitas: `clausulas` D19.1, D23.1 e D25.1 (`decisao: 9`).
+- **Extensão (b4, revisão de conteúdo):** o local se chamava `conteúdo`, mas D23.1 e D25.1 também usam «conteúdo» no sentido de parte do jogo («conteúdo opcional», «todo conteúdo é exigido pelo caminho da missão», «o conteúdo exibido depois da escolha»), e a chave parecia definir também esses usos. A chave passou a `conteúdo de aprendizagem`, com o texto sem mudança. Em D23.1, «situação sobre o conteúdo» e «narrativa que não trata do conteúdo» continuam no sentido de conteúdo de aprendizagem, que agora o nome do local indica; em D25.1 nenhum trecho usa a palavra nesse sentido, e o local poderia sair.
+- **Critérios afetados:** D19.1, D23.1, D25.1. Lista de aceitas: `clausulas` D19.1, D23.1 e D25.1 (`decisao: 9`); a troca de nome tem par `remocoes`/`adicoes` (`tipo: equivalente`) em D23.1 e D25.1.
 - **Proposta:** aceitar âncora. Ver também o candidato `conteúdo` na seção 5. Adotar variante seria restaurar o local composto da etapa 1 nos três critérios.
 
 ### Decisão 10 — `sessao_de_jogo`: texto novo do glossário
 
 - **Âncora aplicada:** `sessao_de_jogo` (âncora nominal D36, mas o texto é novo) — «o período contínuo entre o jogador iniciar o jogo, ou carregar um estado salvo, e encerrá-lo (fechar o jogo ou voltar ao menu inicial)».
 - **Variante da etapa 1:** nenhuma; D36.1 usava o termo sem definir, no local `estado organizado`: «… persiste quando o jogo o mantém guardado depois de o jogador sair da tela ou do momento em que operou, até o fim da sessão de jogo ou até o jogador desfazê-lo».
-- **O que muda:** o glossário fixa onde a sessão termina. Voltar ao menu inicial encerra a sessão, então um jogo que descarta o estado organizado ao voltar ao menu atende à persistência; quem lesse «sessão» como «até fechar o jogo» exigiria mais. Carregar um estado salvo inicia nova sessão.
+- **O que muda:** o glossário fixa onde a sessão termina. Voltar ao menu inicial encerra a sessão, então um jogo que descarta o estado organizado ao voltar ao menu atende à persistência de D36.1 (o estado precisa durar só «até o fim da sessão de jogo»); quem lesse «sessão» como «até fechar o jogo» daria nao_atendido ou parcial ao mesmo jogo. Carregar um estado salvo inicia nova sessão. É uma adição que muda o grau, por isso tem decisão própria.
 - **Critérios afetados:** D36.1 (único critério com o gatilho «sessão de jogo»). D06, D07, D10, D13, D14, D15, D18, D22, D26 e D27 usam «sessão» sozinha, que não é gatilho e não muda. Lista de aceitas: `adicoes` D36.1 `sessao_de_jogo` (`decisao: 10`).
 - **Proposta:** aceitar âncora. Nova redação, se o estado deve sobreviver à volta ao menu: «… e encerrá-lo fechando o jogo; voltar ao menu inicial não encerra a sessão».
 
@@ -113,13 +116,29 @@ Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml`
 - **Critérios afetados:** D12.1. Lista de aceitas: `clausulas` D12.1 (`decisao: 11`).
 - **Proposta:** aceitar âncora (já era a redação do enunciado do critério).
 
-### Decisão 12 — escalas: «nos termos do enunciado» ou «nos termos das definições»?
+### Decisão 12 — escalas: «nos termos do enunciado» passa a «nos termos do enunciado e das definições» (aplicada)
 
-- **Âncora aplicada:** mantido o texto da etapa 1, «nos termos do enunciado», em 91 ocorrências nas escalas de 30 arquivos (D01, D09–D13, D15, D18–D40).
-- **Variante:** «nos termos das definições», que só D29 usa (já na etapa 1, em dois procedimentos).
-- **O que muda:** nada no texto. As definições saíram do enunciado para o bloco **Definições** do critério, mas os limiares e as condições de cada estado continuam no enunciado, então o ponteiro ainda é válido. A troca global não foi feita para o catálogo não ficar inconsistente entre os três lotes, e exigiria uma entrada `campos` de/para por escala na lista de aceitas.
-- **Critérios afetados:** as escalas dos 30 arquivos listados. Sem entrada na lista de aceitas.
-- **Proposta:** aceitar âncora (manter «nos termos do enunciado»). Nova redação possível: «nos termos do enunciado e das definições», em todo o catálogo de uma vez.
+- **Aplicado:** em todo campo de texto de todo critério, a expressão exata «nos termos do enunciado» foi trocada por «nos termos do enunciado e das definições»: 95 ocorrências em 91 campos de 30 arquivos (D01, D09–D13, D15, D18–D40), 94 nas escalas e 1 em D32.1 `codigo.indicadores[3]`. Nenhum enunciado tinha a expressão.
+- **Por quê:** na etapa 1 as definições ficavam no enunciado; agora ficam no bloco **Definições** do critério, e o ponteiro ficaria solto. Em ao menos 13 pontos ele nomeia um termo que não está mais no enunciado, por exemplo D15.1 escalas parcial e não atendido, D24.1 e D25.1 escala não atendido, D32.1 `codigo.indicadores[3]`, D36.1 escala parcial e as três escalas de D37.1 e de D38.1. O plano (item 3) pede que escalas e evidências remetam às definições.
+- **Variante:** «nos termos das definições», que D29 já usava em dois procedimentos na etapa 1; não foi adotada sozinha porque os limiares e as condições de cada estado continuam no enunciado.
+- **Critérios afetados:** os 91 campos acima. Lista de aceitas: uma entrada na lista `frases` (substituição global aplicada ao texto da etapa 1 antes da comparação, `decisao: 12`), no lugar de 91 entradas `campos`.
+- **Reverter:** trocar a expressão de volta em `catalog/D*.yaml` e retirar a entrada `frases`.
+
+### Decisão 13 — `documentacao_equivalente` × regra de D30: telas do jogo como documento equivalente
+
+- **Âncora aplicada:** `documentacao_equivalente` (glossário) — «o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (…); material de divulgação ou de loja não conta».
+- **Variante:** D30.1 `video.procedimento` e a regra de desempate de `documentacao.procedimento` e `video.procedimento` — «sem GDD, a tela de abertura, a tela de créditos ou a tela Sobre do jogo gravado é o documento equivalente» (texto da etapa 1, sem mudança).
+- **O que muda:** a tela de abertura, de créditos ou Sobre não é documento de projeto, então, lendo só o glossário, um jogo sem GDD cairia em «ausência de GDD ou documento equivalente» (escala não atendido); pela regra de D30 as telas valem e o vídeo pode chegar a atendido ou parcial. Dois avaliadores podiam graduar o mesmo jogo de modo diferente. O texto do critério não mudou; foi acrescentado a D30.1 o local `documento equivalente neste critério`: «sem GDD, a tela de abertura, a tela de créditos ou a tela Sobre do jogo conta como documento equivalente para este critério», que deixa a exceção no bloco **Definições** ao lado da chave do glossário.
+- **Critérios afetados:** D30.1. Lista de aceitas: `adicoes` D30.1 (`decisao: 13`).
+- **Proposta:** manter a exceção como regra do critério (o local acrescentado), porque só D30 a usa. Alternativa: acrescentar ao texto do glossário uma cláusula de exceções («salvo quando o critério diz que outra fonte conta como documento equivalente») e retirar o local.
+
+### Decisão 14 — `missao` acrescentada a critérios que não definiam o termo
+
+- **Âncora aplicada:** `missao` (D28), texto citado na decisão 2, que traz «o jogo sem divisão em missões conta como uma única missão».
+- **Variante da etapa 1:** nenhuma redação; estes critérios usavam «missão» sem definição, no sentido corrente, e a chave entrou porque o texto usa o gatilho ou por cascata de `desafio` («cada missão ou minijogo») e de `cenario_jogavel`.
+- **O que muda:** (i) o jogo sem divisão em missões passa a contar como uma missão, de modo que os critérios que avaliam cada missão passam a valer para o jogo inteiro: em D01.1, um jogo sem missões precisa apresentar uma situação-problema para o jogo como um todo (antes, o avaliador podia considerar que não havia unidade a avaliar); em D05.1, o caminho obrigatório desse jogo é a sequência de objetivos exigidos para concluí-lo; em D03.2, o jogo é uma unidade que o jogador inicia por ação própria. (ii) Fase, capítulo ou nível com objetivo e condição de conclusão próprios passam a contar como missão: nos critérios que pedem algo de cada missão (D01.1, D03.2 e, por `desafio`, D19.1) há mais unidades avaliadas, e o grau pode baixar quando uma fase não cumpre o que o critério pede; nos que pedem ao menos uma ou contam as missões disponíveis (D03.1, D20.1, D21.1, D24.1), o grau pode subir.
+- **Critérios afetados:** D01.1, D02.1, D03.1, D03.2, D03.3, D04.1, D05.1, D17.1, D18.1, D19.1, D20.1, D21.1, D22.1, D22.2, D23.1, D24.1, D25.1, D26.1, D36.1, D39.1, D40.1. Fica de fora D29.1, que já dizia na etapa 1 que «o jogo sem divisão em missões conta como uma única missão». Lista de aceitas: as 21 entradas `adicoes` com `chave: missao` (`decisao: 14`).
+- **Proposta:** aceitar âncora: é o sentido que D28, D30, D31 e D33–D35 já usavam explicitamente, e impede que um jogo sem missões escape dos critérios que contam por missão. Adotar variante seria declarar `missão` em `termos_comuns` nesses critérios, o que deixaria `desafio` («cada missão ou minijogo») remetendo a um termo em sentido corrente, como na decisão 4.
 
 ## 2. Normalizações aplicadas sem decisão (redação equivalente)
 
@@ -147,19 +166,19 @@ Variantes que dizem o mesmo que a âncora com outras palavras. Na lista de aceit
 O critério passou a listar a chave do glossário porque o texto usa o gatilho, e a etapa 1 não definia o termo ali. Na lista de aceitas, `adicoes` (com `decisao` quando o item é uma decisão da seção 1).
 
 - `documentacao_equivalente`: 37 critérios (decisão 7).
-- `missao`: D01.1, D02.1, D03.1, D03.2, D03.3, D04.1, D05.1, D17.1, D18.1, D19.1, D20.1, D21.1, D22.1, D22.2, D23.1, D24.1, D25.1, D26.1, D29.1, D36.1, D39.1, D40.1. Quase sempre por cascata do texto de `desafio` ou de `cenario_jogavel`; em D29.1 o critério já dizia «o jogo sem divisão em missões conta como uma única missão», e o glossário acrescenta «unidade do jogo… (fase, capítulo ou nível…)». Em D36.1 e D40.1, «missão ou desafio» fica redundante, com o mesmo sentido. Efeito geral: fase, capítulo ou nível com objetivo e conclusão próprios contam como missão, e o jogo sem divisão conta como uma missão.
+- `missao`: D01.1, D02.1, D03.1, D03.2, D03.3, D04.1, D05.1, D17.1, D18.1, D19.1, D20.1, D21.1, D22.1, D22.2, D23.1, D24.1, D25.1, D26.1, D29.1, D36.1, D39.1, D40.1 (todos menos D29.1 na decisão 14). Quase sempre por cascata do texto de `desafio` ou de `cenario_jogavel`; em D29.1 o critério já dizia «o jogo sem divisão em missões conta como uma única missão», e o glossário acrescenta «unidade do jogo… (fase, capítulo ou nível…)». Em D36.1 e D40.1, «missão ou desafio» fica redundante, com o mesmo sentido. Efeito geral: fase, capítulo ou nível com objetivo e conclusão próprios contam como missão, e o jogo sem divisão conta como uma missão.
 - `minijogo`: 24 critérios (decisão 4).
 - `desafio`: D01.1 («concluir o desafio»), D02.1 («o desafio da segunda missão»), D04.1 («resolver um desafio ligado a ele»), D18.1, D23.1, D25.1, D26.1, D36.1, D40.1. Todos no sentido de unidade, e não no corrente.
 - `cenario_jogavel`: D05.1 («cenários jogáveis» já era o termo, sem definição no texto); D04.1 (decisão 5).
 - `caminho_obrigatorio`: D04.1 (cascata, decisão 5), D39.1 (cascata do texto de `cenario_jogavel`).
-- `objetivo_de_aprendizagem`: D02.1, D04.1, D11.1, D29.1, D36.1. Efeito: «só essa lista define os objetivos avaliados». Em D19.1, D22.1, D23.1 e D25.1 o termo substitui variante (decisões 8 e 9).
+- `objetivo_de_aprendizagem`: D02.1, D04.1, D11.1, D29.1, D36.1. Efeito: «só essa lista define os objetivos avaliados», e o objetivo fica restrito a conceito, fato ou procedimento (decisão 8 para D04.1, D11.1 e D36.1). Em D19.1, D22.1, D23.1 e D25.1 o termo substitui variante (decisões 8 e 9).
 - `sessao_de_jogo`: D36.1 (decisão 10).
 
 Reorganização de definições locais (sem mudança de sentido; cada caso tem par `remocoes`/`adicoes` na lista de aceitas quando a cláusula passou a abrir outro local):
 
 - notas de escopo tiradas de dentro de um termo para o local `escopo`: D18, D30, D31, D32, D33, D34, D36, D37, D38, D40;
-- regras de critério tiradas de dentro de um termo para um local próprio: D09.1 `precedência`, D10.1 `sequência de diálogo sem espera`, D12.1 `persiste`, D15.1 `relação com D06.1`, D19.1 `um elemento por função`, D30.1 `quantidade de elementos`, D31.1 `confirmação pelo vídeo`, D33.1/D34.1 `regra de desempenho ou de ação`;
-- termos desmembrados ou renomeados: D15.1 `ferramentas distintas`; D19.1 `funções psicológicas superiores avaliadas` e `memória`; D21.1 `simulação substitui a ação do jogador`; D23.1 `situação trata de um objetivo de aprendizagem`; D33.1 `desafio personalizado por desempenho`; D34.1 `desafio personalizado pelas ações do jogador`; D35.1 `disponibilização a outro jogador`.
+- regras de critério tiradas de dentro de um termo para um local próprio: D09.1 `opção avaliada como certa ou errada` (antes `precedência`), D10.1 `sequência de diálogo sem espera`, D12.1 `persiste`, D15.1 `relação com D06.1`, D19.1 `um elemento por função`, D30.1 `correspondência da premissa ao referente real` (antes `quantidade de elementos`; é um complemento da regra de correspondência do local `referente real`), D31.1 `confirmação pelo vídeo`, D33.1/D34.1 `regra de desempenho ou de ação`;
+- termos desmembrados ou renomeados: D15.1 `ferramentas distintas`; D23.1/D25.1 `conteúdo de aprendizagem` (antes `conteúdo`, decisão 9); D19.1 `funções psicológicas superiores avaliadas` e `memória`; D21.1 `simulação substitui a ação do jogador`; D23.1 `situação trata de um objetivo de aprendizagem`; D33.1 `desafio personalizado por desempenho`; D34.1 `desafio personalizado pelas ações do jogador`; D35.1 `disponibilização a outro jogador`.
 
 ## 4. Termos usados no sentido corrente (`termos_comuns`)
 
@@ -184,7 +203,7 @@ Não migrados nesta PR. Os de texto idêntico podem entrar sem decisão; os de t
 
 - **`jogador`** (texto idêntico): D13.1, D26.1, D27.1 — «uma pessoa que joga, e personagem não jogável não conta». Candidato forte.
 - **`parâmetro do desafio`** e **`regra de desempenho ou de ação`** (texto idêntico): D33.1, D34.1.
-- **`conteúdo`** (texto idêntico, vem da decisão 9): D23.1, D25.1 — «o listado no documento de design (GDD) ou documento equivalente». Em D25.1 a palavra também tem o sentido de parte do jogo; decidir se o termo deve existir.
+- **`conteúdo de aprendizagem`** (texto idêntico, vem da decisão 9): D23.1, D25.1 — «o listado no documento de design (GDD) ou documento equivalente». Em D23.1 e D25.1 «conteúdo» sozinho também tem o sentido de parte do jogo, por isso a chave local não se chama mais `conteúdo`; decidir se o termo deve existir (em D25.1 ele não é usado).
 - **`narrativa`** (texto idêntico): D23.1, D28.1 — «a sequência de eventos, cenas, personagens e diálogos que o jogo apresenta ao jogador».
 - **`referente real`** (cláusula comum): D30.1 e D31.1 compartilham «uma situação, prática, profissão, fenômeno ou projeto que existe ou ocorre fora do jogo e que o GDD ou documento equivalente identifica por nome ou descrição específica»; D30 acrescenta exemplos e exclusões. Proposta dos lotes: glossário com a cláusula comum mais os exemplos e exclusões de D30, e a correspondência premissa–referente como local de D30.
 - **`informação`** (texto diferente): D11.1 e D36.1; D36 acrescenta «coletado pelo jogador ou fornecido pelo jogo». Um termo único precisaria da forma ampla de D36, com D11 restrito pelo local `coletar`.
@@ -201,4 +220,4 @@ Não migrados nesta PR. Os de texto idêntico podem entrar sem decisão; os de t
 - Três linhas do `docs/catalogo.md` renderizado passam de 1.500 caracteres. São textos da etapa 1, não tocados pela migração: D10.1, procedimento de vídeo (2.160 caracteres, com a «Limitação conhecida» e a «Regra de desempate»; na etapa 1 o campo tinha 3.521); D31.1, **Justificativa do nível** (1.665); D31.1, procedimento de vídeo (1.506).
 - Glosas «isto é» de termos locais foram mantidas onde já estavam fora dos blocos de definição na etapa 1 (D18, D20, D21, D22, D23, D26, D29, D31, D33, D34, D38, D39). A de D38.1 no enunciado («têm forma escrita, isto é, texto na tela e não apenas áudio») resume o local `forma escrita` e poderia sair com uma entrada `campos` com `remover`; não foi feito.
 - Em D25.1, a oração do local `conteúdo opcional` «trata de um objetivo de aprendizagem, isto é, cita ou descreve conceito, fato ou procedimento listado…» foi mantida: define «tratar de», e não o objetivo de aprendizagem.
-- Relatórios dos lotes, com o detalhe de cada critério: `.superpowers/sdd/definicoes-lote-a.md` (D01–D13), `definicoes-lote-b.md` (D14–D27), `definicoes-lote-c.md` (D28–D40). Correspondência dos ids dos lotes com os números deste documento: c1 → 1, a2 → 2, a3 e b3 → 3, a5 → 5, a1 → 6, b1 → 7, b2 → 8, b4 → 9, a4 → 11; as decisões 4, 7 (parte global), 10 e 12 não tinham id nos lotes.
+- Relatórios dos lotes, com o detalhe de cada critério: `.superpowers/sdd/definicoes-lote-a.md` (D01–D13), `definicoes-lote-b.md` (D14–D27), `definicoes-lote-c.md` (D28–D40). Correspondência dos ids dos lotes com os números deste documento: c1 → 1, a2 → 2, a3 e b3 → 3, a5 → 5, a1 → 6, b1 → 7, b2 → 8, b4 → 9, a4 → 11; as decisões 4, 7 (parte global), 10 e 12 não tinham id nos lotes; 13 e 14 vieram da revisão de conteúdo posterior aos lotes.

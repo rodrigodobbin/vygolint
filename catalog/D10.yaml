@@ -31,9 +31,9 @@ criterios:
           - "o comprimento integral de cada trecho passivo registrado é de no máximo 120 segundos"
           - "cada trecho pulado teve o comprimento integral determinado ou foi registrado como não determinado"
     escala:
-      atendido: "Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado"
-      parcial: "Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado"
-      nao_atendido: "Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado"
+      atendido: "Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
+      parcial: "Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
+      nao_atendido: "Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

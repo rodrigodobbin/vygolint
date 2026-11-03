@@ -33,9 +33,9 @@ criterios:
           - "cada item registrado tem texto na tela que contém as ações, nomes e números do áudio do mesmo item"
           - "os itens registrados sem texto na tela foram anotados, conferindo antes no código ou no GDD se há legenda ativável (indica o estado parcial quando ao menos um item tem forma escrita)"
     escala:
-      atendido: "Existe ao menos um item avaliado e todos os itens avaliados têm forma escrita, nos termos do enunciado"
-      parcial: "Ao menos um item avaliado tem forma escrita, nos termos do enunciado, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado)"
-      nao_atendido: "Nenhum item avaliado tem forma escrita, nos termos do enunciado, ou não existe item avaliado"
+      atendido: "Existe ao menos um item avaliado e todos os itens avaliados têm forma escrita, nos termos do enunciado e das definições"
+      parcial: "Ao menos um item avaliado tem forma escrita, nos termos do enunciado e das definições, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado e das definições)"
+      nao_atendido: "Nenhum item avaliado tem forma escrita, nos termos do enunciado e das definições, ou não existe item avaliado"
     depende_de: []
     definicoes:
       glossario: [missao, documentacao_equivalente]

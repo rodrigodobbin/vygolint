@@ -27,9 +27,9 @@ criterios:
           - "para cada desafio registrado, foram anotados os elementos que atendem ao teste de cada função, com timestamp"
           - "cada desafio registrado tem elementos diferentes para ao menos duas funções, nos termos da definição"
     escala:
-      atendido: "Todos os desafios documentados ou gravados exigem ao menos duas funções psicológicas superiores, nos termos do enunciado"
-      parcial: "Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado, e ao menos outro exige menos de duas"
-      nao_atendido: "Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado"
+      atendido: "Todos os desafios documentados ou gravados exigem ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições"
+      parcial: "Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições, e ao menos outro exige menos de duas"
+      nao_atendido: "Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]

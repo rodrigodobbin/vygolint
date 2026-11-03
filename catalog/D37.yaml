@@ -33,9 +33,9 @@ criterios:
           - "em cada unidade registrada, o texto ou a fala exibido antes da primeira ação do objetivo declara o estado inicial e o objetivo"
           - "as unidades registradas cuja abertura não declara estado inicial e objetivo foram anotadas (indica o estado parcial quando ao menos uma unidade atende)"
     escala:
-      atendido: "Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado"
-      parcial: "Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado, e ao menos outra unidade avaliada não apresenta"
-      nao_atendido: "Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado, ou não existe unidade avaliada"
+      atendido: "Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições"
+      parcial: "Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, e ao menos outra unidade avaliada não apresenta"
+      nao_atendido: "Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, ou não existe unidade avaliada"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, situacao_problema, documentacao_equivalente]

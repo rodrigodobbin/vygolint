@@ -28,9 +28,9 @@ criterios:
           - "se o GDD descreve métrica registrada e nenhuma regra de parâmetro que a use, ou só regra que decide entre avançar e repetir, anotar (indica o estado parcial)"
       video: null
     escala:
-      atendido: "Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado"
-      parcial: "O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)"
-      nao_atendido: "O jogo não registra métrica de desempenho, nos termos do enunciado (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)"
+      atendido: "Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado e das definições"
+      parcial: "O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)"
+      nao_atendido: "O jogo não registra métrica de desempenho, nos termos do enunciado e das definições (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

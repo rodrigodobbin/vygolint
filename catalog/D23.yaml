@@ -32,15 +32,15 @@ criterios:
           - "em ao menos uma situação registrada, as opções são ao menos duas, e depois da escolha o jogo não exibe sinal de certo ou errado nem muda pontuação, progresso ou conclusão do desafio"
           - "na mesma situação, o conteúdo exibido depois da escolha cita ou responde à posição escolhida"
     escala:
-      atendido: "A narrativa apresenta ao menos um dilema, nos termos do enunciado"
-      parcial: "A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)"
-      nao_atendido: "A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)"
+      atendido: "A narrativa apresenta ao menos um dilema, nos termos do enunciado e das definições"
+      parcial: "A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado e das definições (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)"
+      nao_atendido: "A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado e das definições (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]
       locais:
         "narrativa": "a sequência de eventos, cenas, personagens e diálogos que o jogo apresenta ao jogador"
-        "conteúdo": "o listado no documento de design (GDD) ou documento equivalente"
+        "conteúdo de aprendizagem": "o listado no documento de design (GDD) ou documento equivalente"
         "situação trata de um objetivo de aprendizagem": "quando o texto, a fala ou a cena da situação cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem"
         "posição": "uma opção ou resposta (escolhida ou digitada) do jogador, numa situação, que o jogo não avalia como certa ou errada, isto é, que não concede, retira nem condiciona pontuação, progresso ou conclusão do desafio conforme a opção ou resposta; alternativa que o jogo avalia como certa ou errada é múltipla escolha e não é posição"
         "consequência narrativa": "o evento, a fala de personagem ou a mudança no cenário ou na história, exibido depois da posição, que retoma ou depende da posição escolhida (no código ou no GDD, um ramo diferente para cada posição; no vídeo, conteúdo exibido que cita ou responde à posição escolhida)"

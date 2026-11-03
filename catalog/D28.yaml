@@ -28,9 +28,9 @@ criterios:
           - "cada abertura registrada contém ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida)"
           - "a resolução de cada dispositivo não aparece na abertura e aparece em trecho posterior, exibido depois de o jogador executar ao menos uma ação do objetivo da missão; se o vídeo termina antes da resolução, anotar resolução não observada, caso em que o dispositivo não é confirmado pelo vídeo"
     escala:
-      atendido: "A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado"
-      parcial: "Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado, e ao menos outra missão não tem"
-      nao_atendido: "Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)"
+      atendido: "A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado e das definições"
+      parcial: "Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições, e ao menos outra missão não tem"
+      nao_atendido: "Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)"
     depende_de: []
     definicoes:
       glossario: [missao, documentacao_equivalente]

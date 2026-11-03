@@ -32,9 +32,9 @@ criterios:
           - "ao fim de cada simulação registrada, foi anotado se conclusão, pontuação ou progresso do desafio mudam sem que o jogador tenha agido"
           - "depois de cada simulação registrada, foi anotado se o jogador passa a controlar o desafio"
     escala:
-      atendido: "Em ao menos um desafio existe uma simulação que não substitui a ação do jogador, nos termos do enunciado"
-      parcial: "Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado"
-      nao_atendido: "Não existe simulação, nos termos do enunciado, em nenhum desafio"
+      atendido: "Em ao menos um desafio existe uma simulação que não substitui a ação do jogador, nos termos do enunciado e das definições"
+      parcial: "Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado e das definições"
+      nao_atendido: "Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

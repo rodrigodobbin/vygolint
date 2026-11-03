@@ -34,9 +34,9 @@ criterios:
           - "o jogo exibe, na conclusão, um único êxito comum aos jogadores participantes"
           - "ao menos uma ação de um jogador habilita, libera, fornece ou muda um acesso, recurso, informação ou as ações que outro jogador participante pode ou precisa executar, com timestamp da ação e do efeito"
     escala:
-      atendido: "Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado"
-      parcial: "Existe missão ou tarefa com objetivo compartilhado, nos termos do enunciado, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)"
-      nao_atendido: "Nenhuma missão ou tarefa tem objetivo compartilhado, nos termos do enunciado (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)"
+      atendido: "Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado e das definições"
+      parcial: "Existe missão ou tarefa com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)"
+      nao_atendido: "Nenhuma missão ou tarefa tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)"
     depende_de:
       - [D13.1]
     definicoes:

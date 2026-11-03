@@ -34,13 +34,13 @@ criterios:
           - "em ao menos um ponto gravado, a interface oferece ao mesmo tempo o acesso a dois ou mais conteúdos que tratam de objetivos de aprendizagem diferentes"
           - "o vídeo confirma que um conteúdo é opcional quando mostra a missão em curso concluída sem que o jogador o tenha acessado, estando ele oferecido pela interface; a ausência dessa conclusão no vídeo não prova que o conteúdo seja exigido"
     escala:
-      atendido: "Existem ao menos dois conteúdos opcionais disponíveis ao mesmo tempo que tratam de objetivos de aprendizagem diferentes, nos termos do enunciado"
-      parcial: "Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)"
-      nao_atendido: "Não existe nenhum conteúdo opcional, nos termos do enunciado (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)"
+      atendido: "Existem ao menos dois conteúdos opcionais disponíveis ao mesmo tempo que tratam de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições"
+      parcial: "Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)"
+      nao_atendido: "Não existe nenhum conteúdo opcional, nos termos do enunciado e das definições (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, caminho_obrigatorio, documentacao_equivalente, objetivo_de_aprendizagem]
       locais:
-        "conteúdo": "o listado no documento de design (GDD) ou documento equivalente"
+        "conteúdo de aprendizagem": "o listado no documento de design (GDD) ou documento equivalente"
         "conteúdo opcional": "uma parte do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que trata de um objetivo de aprendizagem, isto é, cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem, e cujo acesso nenhum objetivo do caminho da missão em curso exige, de modo que o jogador conclui a missão sem acessá-lo"
         "conteúdos opcionais disponíveis ao mesmo tempo": "conteúdos opcionais que o jogador pode acessar em um mesmo estado do jogo, por ação própria (menu, interação ou deslocamento) e não por disparo automático; escolher a ordem de atividades obrigatórias é tratado em D03 e escolher entre recursos para o mesmo desafio é tratado em D24, e nenhum dos dois é escolha de conteúdo opcional"

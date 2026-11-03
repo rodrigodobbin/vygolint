@@ -27,6 +27,11 @@
 #     campo: video.indicadores[1]
 #     de: "…"
 #     para: "…"
+# frases:         # substituições globais (sem `criterio`): em todo campo de texto de todo critério,
+#                 # cada `de` do texto da etapa 1 (já sem os blocos de definição) vira `para` antes
+#                 # da comparação; `tipo`/`decisao` opcionais, como nas outras listas
+#   - de: "nos termos do enunciado"
+#     para: "nos termos do enunciado e das definições"
 clausulas:
 - criterio: D01.1
   de: isto é, uma situação com estado inicial, objetivo e mais de uma ação possível
@@ -177,6 +182,8 @@ adicoes:
   decisao: 7
 - criterio: D01.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D01.1
   chave: minijogo
   tipo: decisao
@@ -185,6 +192,8 @@ adicoes:
   chave: desafio
 - criterio: D02.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D02.1
   chave: minijogo
   tipo: decisao
@@ -195,24 +204,32 @@ adicoes:
   chave: objetivo_de_aprendizagem
 - criterio: D03.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D03.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D03.2
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D03.2
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D03.3
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D03.3
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D04.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D04.1
   chave: minijogo
   tipo: decisao
@@ -221,6 +238,8 @@ adicoes:
   chave: desafio
 - criterio: D04.1
   chave: objetivo_de_aprendizagem
+  tipo: decisao
+  decisao: 8
 - criterio: D04.1
   chave: cenario_jogavel
   tipo: decisao
@@ -231,6 +250,8 @@ adicoes:
   decisao: 5
 - criterio: D05.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D05.1
   chave: cenario_jogavel
 - criterio: D11.1
@@ -239,18 +260,25 @@ adicoes:
   decisao: 4
 - criterio: D11.1
   chave: objetivo_de_aprendizagem
+  tipo: decisao
+  decisao: 8
 - criterio: D09.1
-  clausula: precedência = se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)
+  clausula: opção avaliada como certa ou errada = se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)
+  tipo: equivalente
 - criterio: D10.1
   clausula: sequência de diálogo sem espera = sequência de diálogo em que o jogo não impõe nenhuma espera antes do avanço tem comprimento integral próximo de 0 e passa neste critério por construção, pois a validade dessa sequência é tratada por outras diretrizes (por exemplo, D03 e D04)
 - criterio: D17.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D17.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D18.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D18.1
   chave: minijogo
   tipo: decisao
@@ -259,36 +287,48 @@ adicoes:
   chave: desafio
 - criterio: D19.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D19.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D20.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D20.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D21.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D21.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D22.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D22.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D22.2
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D22.2
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D23.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D23.1
   chave: minijogo
   tipo: decisao
@@ -297,12 +337,16 @@ adicoes:
   chave: desafio
 - criterio: D24.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D24.1
   chave: minijogo
   tipo: decisao
   decisao: 4
 - criterio: D25.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D25.1
   chave: minijogo
   tipo: decisao
@@ -311,6 +355,8 @@ adicoes:
   chave: desafio
 - criterio: D26.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D26.1
   chave: minijogo
   tipo: decisao
@@ -349,6 +395,8 @@ adicoes:
   decisao: 4
 - criterio: D36.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D36.1
   chave: desafio
 - criterio: D36.1
@@ -357,12 +405,16 @@ adicoes:
   decisao: 4
 - criterio: D36.1
   chave: objetivo_de_aprendizagem
+  tipo: decisao
+  decisao: 8
 - criterio: D36.1
   chave: sessao_de_jogo
   tipo: decisao
   decisao: 10
 - criterio: D39.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D39.1
   chave: minijogo
   tipo: decisao
@@ -371,6 +423,8 @@ adicoes:
   chave: caminho_obrigatorio
 - criterio: D40.1
   chave: missao
+  tipo: decisao
+  decisao: 14
 - criterio: D40.1
   chave: desafio
 - criterio: D40.1
@@ -378,7 +432,8 @@ adicoes:
   tipo: decisao
   decisao: 4
 - criterio: D30.1
-  clausula: quantidade de elementos = um elemento é o mínimo que liga a premissa ao referente, e a diretriz não fixa quantidade maior
+  clausula: correspondência da premissa ao referente real = um elemento é o mínimo que liga a premissa ao referente, e a diretriz não fixa quantidade maior
+  tipo: equivalente
 - criterio: D30.1
   clausula: 'escopo = esta diretriz avalia só a premissa e o referente: a presença do conteúdo em situações do jogo é tratada em D31 e os objetos do cotidiano são tratados em D32'
 - criterio: D31.1
@@ -409,6 +464,16 @@ adicoes:
   clausula: 'escopo = este critério avalia só se o conteúdo fornecido existe por escrito: a produção de texto pelo jogador é tratada em D09'
 - criterio: D40.1
   clausula: 'escopo = este critério avalia a multimodalidade da resposta e a presença de informação sobre o erro: a orientação da próxima ação, que D17.1 exige, e a variação da mensagem conforme a ação ou o histórico do jogador, tratada em D18, não são avaliadas aqui'
+- criterio: D30.1
+  clausula: documento equivalente neste critério = sem GDD, a tela de abertura, a tela de créditos ou a tela Sobre do jogo conta como documento equivalente para este critério
+  tipo: decisao
+  decisao: 13
+- criterio: D23.1
+  clausula: conteúdo de aprendizagem = o listado no documento de design (GDD) ou documento equivalente
+  tipo: equivalente
+- criterio: D25.1
+  clausula: conteúdo de aprendizagem = o listado no documento de design (GDD) ou documento equivalente
+  tipo: equivalente
 remocoes:
 - criterio: D09.1
   clausula: 'precedência: se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)'
@@ -458,6 +523,12 @@ remocoes:
   clausula: 'este critério avalia só se o conteúdo fornecido existe por escrito: a produção de texto pelo jogador é tratada em D09'
 - criterio: D40.1
   clausula: 'este critério avalia a multimodalidade da resposta e a presença de informação sobre o erro: a orientação da próxima ação, que D17.1 exige, e a variação da mensagem conforme a ação ou o histórico do jogador, tratada em D18, não são avaliadas aqui'
+- criterio: D23.1
+  clausula: conteúdo = o listado no documento de design (GDD) ou documento equivalente
+  tipo: equivalente
+- criterio: D25.1
+  clausula: conteúdo = o listado no documento de design (GDD) ou documento equivalente
+  tipo: equivalente
 campos:
 - criterio: D01.1
   campo: enunciado
@@ -480,3 +551,8 @@ campos:
 - criterio: D14.1
   campo: codigo.procedimento
   remover: . Comentário é um texto digitado pelo jogador; outro jogador é um jogador com perfil ou conta diferente do autor; sessão posterior é uma sessão iniciada depois do término da sessão em que o comentário foi escrito
+frases:
+- de: nos termos do enunciado
+  para: nos termos do enunciado e das definições
+  tipo: decisao
+  decisao: 12

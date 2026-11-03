@@ -35,9 +35,9 @@ criterios:
           - "cada resposta registrada tem ao menos uma modalidade que comunica o que estava errado ou o que fazer em seguida, e não só sinal de falha"
           - "as respostas registradas com uma só modalidade, ou só com sinal de falha, foram anotadas (indica o estado parcial quando ao menos uma resposta atende aos dois itens anteriores)"
     escala:
-      atendido: "Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado"
-      parcial: "Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado, e ao menos outra resposta avaliada não atende a esses dois requisitos"
-      nao_atendido: "Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado, ou não existe resposta avaliada (inclui resposta só com sinal de falha)"
+      atendido: "Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado e das definições"
+      parcial: "Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, e ao menos outra resposta avaliada não atende a esses dois requisitos"
+      nao_atendido: "Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, ou não existe resposta avaliada (inclui resposta só com sinal de falha)"
     depende_de:
       - [D17.1]
     definicoes:

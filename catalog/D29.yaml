@@ -33,9 +33,9 @@ criterios:
           - "cada obtenção de recompensa, descoberta ou informação foi registrada com timestamp, cenário e o que foi obtido (mínimo 0 obtenções)"
           - "cada obtenção registrada foi classificada como incentivo de exploração, quando nenhum objetivo da missão em curso exigia o que foi obtido e o jogador estava fora do caminho obrigatório, ou como obtenção exigida pelo caminho obrigatório; a descoberta só é classificada como incentivo quando o conteúdo não existe no caminho obrigatório, e a informação só quando não é apenas a descrição do objeto ou da área visitados e se relaciona a objetivo de aprendizagem do GDD ou a missão do jogo; só as classificadas como incentivo confirmam o estado atendido para o cenário em que ocorrem, desde que haja missão em curso nele"
     escala:
-      atendido: "Existe ao menos um cenário jogável e todos os cenários jogáveis têm ao menos um incentivo de exploração, nos termos do enunciado"
-      parcial: "Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado, e ao menos outro cenário jogável não tem"
-      nao_atendido: "Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)"
+      atendido: "Existe ao menos um cenário jogável e todos os cenários jogáveis têm ao menos um incentivo de exploração, nos termos do enunciado e das definições"
+      parcial: "Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições, e ao menos outro cenário jogável não tem"
+      nao_atendido: "Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)"
     depende_de: []
     definicoes:
       glossario: [missao, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente, objetivo_de_aprendizagem]

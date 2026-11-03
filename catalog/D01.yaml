@@ -27,9 +27,9 @@ criterios:
           - "o jogador resolve a situação por ações que transformam o estado inicial, e não apenas escolhendo entre alternativas prontas"
           - "concluir o desafio não depende de repetir a mesma ação até o fim"
     escala:
-      atendido: "Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado, cuja resolução exige uma decisão do jogador"
-      parcial: "Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado"
-      nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado"
+      atendido: "Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado e das definições, cuja resolução exige uma decisão do jogador"
+      parcial: "Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado"
+      nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, situacao_problema, documentacao_equivalente]

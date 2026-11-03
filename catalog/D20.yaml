@@ -26,9 +26,9 @@ criterios:
           - "cada mecanismo de ajuda observado foi registrado com timestamp, forma de acionamento e informação exibida (mínimo 0 mecanismos)"
           - "para cada mecanismo registrado, foi anotado se o desafio segue em curso e o jogador ainda precisa decidir (pista) ou se o jogo exibe a resposta final ou executa a solução (entrega da solução completa)"
     escala:
-      atendido: "Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado"
-      parcial: "Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado"
-      nao_atendido: "Não existe mecanismo de ajuda, nos termos do enunciado, em nenhum desafio"
+      atendido: "Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado e das definições"
+      parcial: "Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado e das definições"
+      nao_atendido: "Não existe mecanismo de ajuda, nos termos do enunciado e das definições, em nenhum desafio"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio]

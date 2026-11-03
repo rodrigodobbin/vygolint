@@ -34,9 +34,9 @@ criterios:
           - "em ao menos um desafio registrado, a interface oferece dois ou mais recursos ao mesmo tempo e o jogador seleciona um deles"
           - "o vídeo confirma que dois recursos são alternativos válidos quando o mesmo desafio é concluído com recursos diferentes, na mesma gravação ou em gravações distintas; o desafio concluído com um só recurso confirma apenas que esse recurso é válido"
     escala:
-      atendido: "Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado"
-      parcial: "Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)"
-      nao_atendido: "Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)"
+      atendido: "Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado e das definições"
+      parcial: "Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado e das definições (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)"
+      nao_atendido: "Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado e das definições (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

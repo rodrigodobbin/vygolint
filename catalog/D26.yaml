@@ -33,9 +33,9 @@ criterios:
           - "em ao menos uma tela registrada, o resultado de ao menos um outro jogador identificado aparece junto do resultado do jogador gravado, ou os jogadores aparecem ordenados por resultado; quando o resultado é de equipe, o resultado de outra equipe identificada aparece junto do da equipe do jogador gravado, ou as equipes aparecem ordenadas por resultado"
           - "os nomes, apelidos ou números exibidos nessa tela correspondem a jogadores, e não a personagens não jogáveis; se o vídeo não permite verificar essa correspondência, a verificação fica a cargo do código ou do GDD e, sem eles, a tela não confirma o estado atendido"
     escala:
-      atendido: "Existe ao menos uma competição com comparação visível aos jogadores, nos termos do enunciado"
-      parcial: "Existe competição, nos termos do enunciado, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)"
-      nao_atendido: "O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)"
+      atendido: "Existe ao menos uma competição com comparação visível aos jogadores, nos termos do enunciado e das definições"
+      parcial: "Existe competição, nos termos do enunciado e das definições, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)"
+      nao_atendido: "O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

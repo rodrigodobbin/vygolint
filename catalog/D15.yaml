@@ -26,9 +26,9 @@ criterios:
           - "o GDD descreve ao menos duas ferramentas que diferem no meio ou na temporalidade"
       video: null
     escala:
-      atendido: "O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado"
-      parcial: "O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado"
-      nao_atendido: "O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado"
+      atendido: "O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado e das definições"
+      parcial: "O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições"
+      nao_atendido: "O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições"
     depende_de:
       - [D06.1, D07.1]
     definicoes:
