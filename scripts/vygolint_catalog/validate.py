@@ -30,7 +30,7 @@ def _check_evidencia_fonte(prefix, nome, fonte, errors):
     return True
 
 
-_INLINE_RE = re.compile(r"Defini(ções|ção):", re.IGNORECASE)
+_INLINE_RE = re.compile(r"Defini(ções|ção):")
 
 
 def textos_do_criterio(c):

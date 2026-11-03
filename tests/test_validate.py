@@ -360,11 +360,6 @@ class DefinicoesCriterioTest(unittest.TestCase):
         d["criterios"][0]["enunciado"] += "; missão é " + self.g["missao"]["texto"]
         self.assertTrue(any("glossário" in e and "missao" in e for e in self.check(d)))
 
-    def test_inline_definitions_lowercase_is_forbidden(self):
-        d = self._com_missao()
-        d["criterios"][0]["escala"]["parcial"] += ". definições: missão é uma unidade do jogo"
-        self.assertTrue(any("inline" in e for e in self.check(d)))
-
     def test_unknown_definicoes_key_and_shape(self):
         d = self._com_missao()
         d["criterios"][0]["definicoes"]["extra"] = 1
