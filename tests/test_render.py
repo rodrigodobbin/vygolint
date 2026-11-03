@@ -26,7 +26,7 @@ class RenderMarkdownTest(unittest.TestCase):
             "- Código: Localizar tratadores de erro",
             "- Documentação: não se aplica",
             "- Vídeo: Registrar timestamp",
-            "Indicadores: ao menos 3 ocorrências de erro; cada ocorrência mostra orientação",
+            "- Vídeo: Registrar timestamp de cada erro e classificar o feedback\n  - ao menos 3 ocorrências de erro\n  - cada ocorrência mostra orientação",
             "- Atendido: Todas as ocorrências",
             "- Parcial: Algumas ocorrências",
             "- Não atendido: Feedback só sinaliza",
@@ -34,6 +34,42 @@ class RenderMarkdownTest(unittest.TestCase):
         ):
             with self.subTest(trecho=trecho):
                 self.assertIn(trecho, out)
+
+    def test_definicoes_block_before_enunciado(self):
+        from helpers import REPO
+        from vygolint_catalog.validate import load_definicoes
+        g = load_definicoes(REPO / "catalog" / "definicoes.yaml")
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["definicoes"] = {
+            "glossario": ["missao"],
+            "locais": {"dispositivo": "um elemento presente na abertura"},
+            "termos_comuns": {"cenário": "sentido corrente"},
+        }
+        out = render_markdown([d], self.cats, g)
+        bloco = (
+            "**Definições.**\n\n"
+            "- *missão*: " + g["missao"]["texto"] + "\n"
+            "- *dispositivo*: um elemento presente na abertura\n"
+            "- *cenário* (sentido corrente): sentido corrente\n\n"
+            "**Enunciado.**"
+        )
+        self.assertIn(bloco, out)
+        self.assertLess(out.index("**Definições.**"), out.index("**Enunciado.**"))
+
+    def test_no_definicoes_block_when_absent(self):
+        out = render_markdown([diretriz_valida()], self.cats, {})
+        self.assertNotIn("**Definições.**", out)
+
+    def test_glossary_section(self):
+        from helpers import REPO
+        from vygolint_catalog.validate import load_definicoes
+        g = load_definicoes(REPO / "catalog" / "definicoes.yaml")
+        out = render_markdown([diretriz_valida()], self.cats, g)
+        self.assertIn("## Glossário", out)
+        self.assertIn("- **missão** (âncora D28; gatilhos: missão, missões): " + g["missao"]["texto"], out)
+        self.assertLess(out.index("## Glossário"), out.index("## Resumo"))
+        self.assertNotIn("## Glossário", render_markdown([diretriz_valida()], self.cats))
 
     def test_depende_de_rendering(self):
         d = diretriz_valida()

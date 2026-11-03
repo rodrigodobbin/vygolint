@@ -31,7 +31,32 @@ def _depende_de(c):
     return " e ".join("(" + " ou ".join(g) + ")" for g in c["depende_de"])
 
 
-def render_markdown(diretrizes, categorias):
+def _bloco_definicoes(c, glossario):
+    defs = c.get("definicoes") or {}
+    itens = []
+    for chave in defs.get("glossario") or []:
+        e = glossario[chave]
+        itens.append(f"- *{e['termo']}*: {e['texto']}")
+    for termo, texto in (defs.get("locais") or {}).items():
+        itens.append(f"- *{termo}*: {texto}")
+    for termo, just in (defs.get("termos_comuns") or {}).items():
+        itens.append(f"- *{termo}* (sentido corrente): {just}")
+    if not itens:
+        return []
+    return ["**Definições.**", ""] + itens + [""]
+
+
+def _secao_glossario(glossario):
+    if not glossario:
+        return []
+    linhas = ["## Glossário", "", "Definições compartilhadas, referenciadas pelos critérios em `definicoes.glossario`.", ""]
+    for e in glossario.values():
+        linhas.append(f"- **{e['termo']}** (âncora {e['ancora']}; gatilhos: {', '.join(e['gatilhos'])}): {e['texto']}")
+    return linhas + [""]
+
+
+def render_markdown(diretrizes, categorias, glossario=None):
+    glossario = glossario or {}
     linhas = [
         GENERATED_MD,
         "# Catálogo vygolint — diretrizes e critérios de conformidade",
@@ -42,6 +67,9 @@ def render_markdown(diretrizes, categorias):
         "",
         "> " + categorias["ressalva"].strip().replace("\n", " "),
         "",
+    ]
+    linhas += _secao_glossario(glossario)
+    linhas += [
         "## Resumo",
         "",
         "| ID | Categoria | Diretriz | Critérios |",
@@ -65,9 +93,9 @@ def render_markdown(diretrizes, categorias):
         ]
         for c in d["criterios"]:
             nj = c["nivel_justificativa"]
+            linhas += [f"#### {c['id']} — Nível {c['nivel']}", ""]
+            linhas += _bloco_definicoes(c, glossario)
             linhas += [
-                f"#### {c['id']} — Nível {c['nivel']}",
-                "",
                 f"**Enunciado.** {c['enunciado']}",
                 "",
                 f"**Justificativa do nível.** essencialidade {_EIXOS[nj['essencialidade']]}, "
@@ -80,9 +108,8 @@ def render_markdown(diretrizes, categorias):
                 if fonte is None:
                     linhas.append(f"- {nome}: não se aplica")
                 else:
-                    linhas.append(
-                        f"- {nome}: {fonte['procedimento']}. Indicadores: " + "; ".join(fonte["indicadores"])
-                    )
+                    linhas.append(f"- {nome}: {fonte['procedimento']}")
+                    linhas += [f"  - {ind}" for ind in fonte["indicadores"]]
             linhas += ["", "**Escala.**"]
             for chave, nome in _GRAUS:
                 linhas.append(f"- {nome}: {c['escala'][chave]}")
