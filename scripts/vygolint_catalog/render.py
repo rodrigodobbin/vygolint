@@ -6,6 +6,7 @@ GENERATED_MD = "<!-- ARQUIVO GERADO por scripts/build_catalog.py. Não edite à 
 GENERATED_TEX = "% ARQUIVO GERADO por scripts/build_catalog.py. Não edite à mão."
 
 _FONTES = (("codigo", "Código"), ("documentacao", "Documentação"), ("video", "Vídeo"))
+_EIXOS = {"alta": "alta", "media": "média", "baixa": "baixa"}
 _GRAUS = (("atendido", "Atendido"), ("parcial", "Parcial"), ("nao_atendido", "Não atendido"))
 
 
@@ -69,8 +70,8 @@ def render_markdown(diretrizes, categorias):
                 "",
                 f"**Enunciado.** {c['enunciado']}",
                 "",
-                f"**Justificativa do nível.** essencialidade {nj['essencialidade']}, "
-                f"viabilidade {nj['viabilidade']}. {nj['texto']}",
+                f"**Justificativa do nível.** essencialidade {_EIXOS[nj['essencialidade']]}, "
+                f"viabilidade {_EIXOS[nj['viabilidade']]}. {nj['texto']}",
                 "",
                 "**Evidência.**",
             ]

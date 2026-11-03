@@ -34,6 +34,16 @@ class ValidateDiretrizTest(unittest.TestCase):
         d["categoria"] = "magia"
         self.assertTrue(any("categoria" in e for e in self.check(d)))
 
+    def test_non_string_categoria_is_error_not_crash(self):
+        d = diretriz_valida()
+        d["categoria"] = ["x"]
+        self.assertTrue(any("categoria" in e for e in self.check(d)))
+
+    def test_unknown_evidencia_key(self):
+        d = diretriz_valida()
+        d["criterios"][0]["evidencia"]["audio"] = None
+        self.assertTrue(any("desconhecidas" in e for e in self.check(d)))
+
     def test_bad_modalidade(self):
         d = diretriz_valida()
         d["modalidade"] = "talvez"
@@ -60,7 +70,7 @@ class ValidateDiretrizTest(unittest.TestCase):
     def test_criterio_id_must_match_diretriz(self):
         d = diretriz_valida()
         d["criterios"][0]["id"] = "D18.1"
-        self.assertTrue(any("D18.1" in e for e in self.check(d)))
+        self.assertTrue(any("D18.1" in e and "não pertence" in e for e in self.check(d)))
 
     def test_criterio_bad_nivel(self):
         d = diretriz_valida()
@@ -161,7 +171,7 @@ class ValidateCatalogoTest(unittest.TestCase):
         a = diretriz_valida()
         a["criterios"][0]["nivel"] = "AAA"
         errors = validate_catalogo([a])
-        self.assertTrue(any("nivel" in e and "esperado A" in e for e in errors))
+        self.assertTrue(any("nivel" in e and "esperado A (" in e for e in errors))
 
     def test_pode_rule_applied_in_coherence_check(self):
         a = diretriz_valida()

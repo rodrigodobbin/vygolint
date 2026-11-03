@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import yaml
+
 from .render import render_latex, render_markdown
 from .validate import load_yaml, validate_catalogo, validate_diretriz
 
@@ -15,8 +17,13 @@ def build(catalog_dir, docs_dir):
     errors = []
     diretrizes = []
     for path in sorted(catalog_dir.glob("D*.yaml")):
-        d = load_yaml(path)
+        try:
+            d = load_yaml(path)
+        except yaml.YAMLError as exc:
+            errors.append(f"{path.name}: YAML inválido: {exc}")
+            continue
         errs = validate_diretriz(d, schema, categorias)
+        errs = [path.name + e[1:] if e.startswith("?:") else e for e in errs]
         if not errs and path.name != f"{d['id']}.yaml":
             errs.append(f"{path.name}: nome do arquivo não corresponde ao id {d['id']}")
         errors.extend(errs)

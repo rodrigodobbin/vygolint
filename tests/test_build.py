@@ -44,6 +44,20 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(errors)
         self.assertFalse(self.docs.exists())
 
+    def test_yaml_syntax_error_reports_filename_and_writes_nothing(self):
+        (self.catalog / "D17.yaml").write_text("id: D17\ncategoria: [unclosed\n", encoding="utf-8")
+        errors = build(self.catalog, self.docs)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("D17.yaml", errors[0])
+        self.assertFalse(self.docs.exists())
+
+    def test_non_map_file_reports_filename(self):
+        (self.catalog / "D17.yaml").write_text("- a\n- b\n", encoding="utf-8")
+        errors = build(self.catalog, self.docs)
+        self.assertTrue(errors)
+        self.assertTrue(all("D17.yaml" in e for e in errors))
+        self.assertFalse(self.docs.exists())
+
     def test_filename_must_match_id(self):
         self.write(diretriz_valida(), name="D18.yaml")
         errors = build(self.catalog, self.docs)

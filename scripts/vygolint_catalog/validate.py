@@ -41,7 +41,7 @@ def _validate_criterio(c, diretriz_id, schema, errors):
         if campo not in c:
             errors.append(f"{prefix}: campo obrigatório ausente: {campo}")
     if "id" in c:
-        if not isinstance(cid, str) or not re.match(cs["id_padrao"], cid):
+        if not isinstance(cid, str) or not re.fullmatch(cs["id_padrao"], cid):
             errors.append(f"{prefix}: id de critério fora do padrão")
         elif not cid.startswith(f"{diretriz_id}."):
             errors.append(f"{prefix}: id de critério não pertence à diretriz {diretriz_id}")
@@ -105,10 +105,10 @@ def validate_diretriz(d, schema, categorias):
     for campo in ds["obrigatorios"]:
         if campo not in d:
             errors.append(f"{prefix}: campo obrigatório ausente: {campo}")
-    if "id" in d and (not isinstance(did, str) or not re.match(ds["id_padrao"], did)):
+    if "id" in d and (not isinstance(did, str) or not re.fullmatch(ds["id_padrao"], did)):
         errors.append(f"{prefix}: id de diretriz fora do padrão Dnn")
     chaves = {c["chave"] for c in categorias["categorias"]}
-    if "categoria" in d and d["categoria"] not in chaves:
+    if "categoria" in d and not (isinstance(d["categoria"], str) and d["categoria"] in chaves):
         errors.append(f"{prefix}: categoria desconhecida: {d['categoria']!r}")
     if "diretriz" in d and not _is_text(d["diretriz"]):
         errors.append(f"{prefix}: texto da diretriz vazio")
