@@ -1,0 +1,33 @@
+id: D07
+categoria: interacao
+diretriz: "O jogador deve trocar informações com outros jogadores por meio de comunicação assíncrona"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D07.1
+    nivel: AA
+    enunciado: "O jogo persiste mensagens ou registros deixados por um jogador e os exibe a outros jogadores em sessões posteriores"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: media
+      texto: "Mesma base de D06: socialização entre pares. A forma assíncrona exige apenas persistência de dados e um ponto de leitura no jogo, viável sem sessão multijogador simultânea."
+    evidencia:
+      codigo:
+        procedimento: "Procurar persistência de mensagens, comentários ou registros de jogador e o ponto onde outros jogadores os leem"
+        indicadores:
+          - "escrita de mensagem associada a jogador e contexto"
+          - "leitura de mensagens de outros jogadores em sessão distinta"
+      documentacao:
+        procedimento: "Verificar no GDD mecânicas de mural, bilhetes, diário compartilhado ou similar"
+        indicadores:
+          - "mecânica descrita com autor, local e leitor da mensagem"
+      video:
+        procedimento: "Observar se o jogador encontra registros deixados por outro jogador ou deixa um registro"
+        indicadores:
+          - "registro de outro jogador visível na sessão"
+    escala:
+      atendido: "Jogador deixa e lê mensagens de outros jogadores em sessões distintas"
+      parcial: "Jogador só lê registros de outros, sem poder deixar os seus, ou o inverso"
+      nao_atendido: "Não há troca assíncrona entre jogadores"
+    depende_de: []

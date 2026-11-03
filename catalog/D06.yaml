@@ -1,0 +1,33 @@
+id: D06
+categoria: interacao
+diretriz: "O jogador deve trocar informações com outros jogadores por comunicação síncrona"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D06.1
+    nivel: AAA
+    enunciado: "Durante a sessão, o jogador envia e recebe mensagens de texto ou voz de outros jogadores em tempo real"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: baixa
+      texto: "Socialização entre pares é constitutiva do sociointeracionismo, mas a interação social também pode ocorrer de forma assíncrona (D07) ou fora do jogo (D22); por isso essencialidade média. Comunicação síncrona exige infraestrutura de rede e sessão multijogador, rara em jogos educacionais; viabilidade baixa."
+    evidencia:
+      codigo:
+        procedimento: "Procurar módulo de rede, chat ou voz e verificar se envia e recebe mensagens entre clientes durante a partida"
+        indicadores:
+          - "existe canal de mensagens entre jogadores conectados"
+          - "mensagens chegam sem exigir fim da sessão"
+      documentacao:
+        procedimento: "Verificar no GDD a seção de multijogador ou comunicação"
+        indicadores:
+          - "especificação de chat, voz ou mensagens em tempo real"
+      video:
+        procedimento: "Observar sessão com dois ou mais jogadores e registrar trocas de mensagens"
+        indicadores:
+          - "ao menos uma troca de mensagem com resposta na mesma sessão"
+    escala:
+      atendido: "Canal síncrono existe e o vídeo mostra troca de mensagens livres entre jogadores"
+      parcial: "Canal existe, mas limitado a mensagens prontas, emotes ou sinais sem conteúdo livre"
+      nao_atendido: "Não há comunicação entre jogadores durante a sessão"
+    depende_de: []

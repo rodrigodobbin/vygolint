@@ -1,0 +1,34 @@
+id: D16
+categoria: mediacao
+diretriz: "O jogo deve fornecer meios do jogador solicitar ajuda de outros jogadores"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D16.1
+    nivel: AA
+    enunciado: "Existe uma ação explícita de pedir ajuda que encaminha a solicitação do jogador a outro jogador"
+    nivel_justificativa:
+      essencialidade: media
+      viabilidade: media
+      texto: "Mediação por pares é a forma mais direta da zona de desenvolvimento proximal entre jogadores, mas a mediação também é oferecida pelo próprio jogo (D17 a D21). Exige um canal entre jogadores (D06 ou D07) e uma ação dedicada; viabilidade média."
+    evidencia:
+      codigo:
+        procedimento: "Localizar ação, botão ou comando de pedir ajuda e verificar para onde a solicitação é enviada"
+        indicadores:
+          - "ação de ajuda distinta do chat geral"
+          - "solicitação chega a outro jogador, não só ao sistema"
+      documentacao:
+        procedimento: "Verificar no GDD a mecânica de pedido de ajuda"
+        indicadores:
+          - "fluxo descrito: quem pede, quem recebe, o que acontece"
+      video:
+        procedimento: "Observar o jogador acionar o pedido de ajuda e o que ocorre em seguida"
+        indicadores:
+          - "pedido de ajuda enviado a outro jogador"
+    escala:
+      atendido: "Ação de pedir ajuda existe e chega a outro jogador"
+      parcial: "Ação existe, mas a resposta vem só do sistema ou de personagem não jogável"
+      nao_atendido: "Não há meio de pedir ajuda a outros jogadores"
+    depende_de:
+      - [D06.1, D07.1]

@@ -1,0 +1,34 @@
+id: D17
+categoria: mediacao
+diretriz: "O jogo deve exibir feedback construtivo para as ações do jogador"
+fonte: "Carvalho (2020), Quadro 3"
+modalidade: deve
+aplicabilidade: null
+criterios:
+  - id: D17.1
+    nivel: A
+    enunciado: "Toda ação incorreta do jogador recebe mensagem que indica o que fazer em seguida, e não apenas que errou"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: alta
+      texto: "Mediação é o núcleo da zona de desenvolvimento proximal: o jogo faz o papel do outro mais experiente. Feedback que só sinaliza acerto ou erro é reforço behaviorista, exatamente o que as diretrizes querem afastar. Implementação de baixo custo em qualquer motor de jogo."
+    evidencia:
+      codigo:
+        procedimento: "Localizar os tratadores de erro ou falha de missão e minijogo e listar o texto exibido em cada um"
+        indicadores:
+          - "mensagem contém orientação de próxima ação"
+          - "mensagem referencia o conteúdo ou objeto envolvido no erro"
+      documentacao:
+        procedimento: "Verificar no documento de design (GDD) a especificação de feedback por tipo de erro"
+        indicadores:
+          - "tabela ou lista de erros com a mensagem orientadora correspondente"
+      video:
+        procedimento: "Registrar o timestamp de cada erro cometido pelo jogador e classificar o feedback exibido"
+        indicadores:
+          - "ao menos 3 ocorrências de erro observadas"
+          - "cada ocorrência mostra orientação, não só sinal de erro"
+    escala:
+      atendido: "Todas as ocorrências de erro observadas recebem feedback que orienta a próxima ação"
+      parcial: "Algumas ocorrências orientam; outras só sinalizam erro ou não recebem feedback"
+      nao_atendido: "O feedback só sinaliza acerto ou erro, ou não existe"
+    depende_de: []
