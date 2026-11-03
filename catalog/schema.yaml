@@ -1,0 +1,13 @@
+# Esquema do catálogo vygolint. Lido por scripts/vygolint_catalog/validate.py.
+diretriz:
+  obrigatorios: [id, categoria, diretriz, fonte, modalidade, aplicabilidade, criterios]
+  id_padrao: '^D(0[1-9]|[1-3][0-9]|40)$'
+  modalidade: [deve, pode]
+criterio:
+  obrigatorios: [id, nivel, enunciado, nivel_justificativa, evidencia, escala, depende_de]
+  id_padrao: '^D(0[1-9]|[1-3][0-9]|40)\.[1-9]$'
+  nivel: [A, AA, AAA]
+  essencialidade: [alta, media, baixa]
+  viabilidade: [alta, media, baixa]
+  fontes_evidencia: [codigo, documentacao, video]
+  escala: [atendido, parcial, nao_atendido]

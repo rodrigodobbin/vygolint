@@ -1,0 +1,44 @@
+# Categorias usadas por Carvalho (2020) para organizar as 40 diretrizes.
+ressalva: >-
+  Carvalho (2020, seção 4.4) suprimiu as categorias na apresentação final das
+  diretrizes por considerar que rotular, classificar e ordenar requisitos pode
+  gerar a falsa impressão de que a teoria de Vigotski também pode ser
+  classificada assim. O vygolint usa as categorias apenas como instrumento de
+  organização e de relatório, não como taxonomia da teoria.
+categorias:
+  - chave: interacao
+    nome: Interação
+    descricao: Ação do jogador sobre objetos, mecanismos e outros jogadores; base da aprendizagem como atividade.
+  - chave: mediacao
+    nome: Mediação
+    descricao: Apoio que aproxima o jogador do que ainda não faz sozinho (zona de desenvolvimento proximal), por feedback, pistas, pares ou professor.
+  - chave: autonomia
+    nome: Autonomia
+    descricao: Decisões do jogador sobre recursos e conteúdos; jogador no centro do processo.
+  - chave: socializacao
+    nome: Socialização
+    descricao: Aproximação entre jogadores por competição ou colaboração.
+  - chave: ludico
+    nome: Lúdico
+    descricao: Curiosidade e motivação despertadas pela narrativa e pelos desafios.
+  - chave: realismo
+    nome: Realismo
+    descricao: Situações, contextos e objetos ligados ao mundo real e ao cotidiano do jogador.
+  - chave: personalizacao
+    nome: Personalização
+    descricao: Adaptação dos desafios ao desempenho e às ações do jogador; criação de desafios pelo jogador.
+  - chave: organizacao
+    nome: Organização
+    descricao: Organização de informações pelo jogador.
+  - chave: resolucao_de_problemas
+    nome: Resolução de problemas
+    descricao: Apresentação explícita da situação-problema.
+  - chave: linguagem
+    nome: Linguagem
+    descricao: Informação escrita fornecida ao jogador.
+  - chave: atencao
+    nome: Atenção
+    descricao: Percepção de detalhes exigida pelo mundo do jogo.
+  - chave: aprendizado
+    nome: Aprendizado
+    descricao: Aprendizagem a partir dos erros, com mensagens, sons e animações.
