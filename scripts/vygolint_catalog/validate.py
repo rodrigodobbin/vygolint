@@ -158,3 +158,47 @@ def validate_catalogo(diretrizes):
                     elif alvo not in vistos_c:
                         errors.append(f"{prefix}: depende_de aponta para critério inexistente: {alvo}")
     return errors
+
+
+_CHAVE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+
+
+def validate_definicoes(doc):
+    """Return a list of error strings for the glossary document (catalog/definicoes.yaml)."""
+    errors = []
+    if not isinstance(doc, dict) or not isinstance(doc.get("termos"), list):
+        return ["definicoes.yaml: documento deve ser mapa com lista `termos`"]
+    chaves = set()
+    gatilhos = {}
+    for i, e in enumerate(doc["termos"]):
+        prefix = f"definicoes.yaml/{e.get('chave') if isinstance(e, dict) else i}"
+        if not isinstance(e, dict):
+            errors.append(f"{prefix}: entrada deve ser mapa")
+            continue
+        for campo in ("chave", "termo", "gatilhos", "ancora", "texto"):
+            if campo not in e:
+                errors.append(f"{prefix}: campo obrigatório ausente: {campo}")
+        chave = e.get("chave")
+        if not isinstance(chave, str) or not _CHAVE_RE.fullmatch(chave):
+            errors.append(f"{prefix}: chave fora do padrão [a-z][a-z0-9_]*")
+        elif chave in chaves:
+            errors.append(f"{prefix}: chave duplicada: {chave}")
+        chaves.add(chave)
+        for campo in ("termo", "ancora", "texto"):
+            if campo in e and not _is_text(e[campo]):
+                errors.append(f"{prefix}: {campo} vazio")
+        gs = e.get("gatilhos")
+        if "gatilhos" in e and (not isinstance(gs, list) or not gs or not all(_is_text(g) for g in gs)):
+            errors.append(f"{prefix}: gatilhos deve ser lista não vazia de textos")
+        elif isinstance(gs, list):
+            for g in gs:
+                if g in gatilhos:
+                    errors.append(f"{prefix}: gatilho {g!r} já usado por {gatilhos[g]}")
+                gatilhos[g] = chave
+    return errors
+
+
+def load_definicoes(path):
+    """Load catalog/definicoes.yaml and return {chave: entrada}. Assumes validate_definicoes passed."""
+    doc = load_yaml(path)
+    return {e["chave"]: e for e in doc["termos"]}
