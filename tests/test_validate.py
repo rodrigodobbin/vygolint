@@ -275,6 +275,21 @@ class DefinicoesCriterioTest(unittest.TestCase):
         c["definicoes"] = {"termos_comuns": {"cenário": "x"}, "glossario": ["cenario_jogavel", "missao", "caminho_obrigatorio"]}
         self.assertTrue(any("termos_comuns" in e and "glossario" in e for e in self.check(d)))
 
+    def test_termos_comuns_is_case_insensitive(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["escala"]["parcial"] = "O GDD descreve o conteúdo em parte"
+        for chave in ("gdd", "GDD"):
+            c["definicoes"] = {"termos_comuns": {chave: "sigla corrente, não o documento do glossário"}}
+            self.assertEqual(self.check(d), [], chave)
+
+    def test_malformed_indicadores_reports_error_without_raising(self):
+        d = diretriz_valida()
+        d["criterios"][0]["evidencia"]["codigo"]["indicadores"] = 5
+        errors = self.check(d)
+        self.assertIsInstance(errors, list)
+        self.assertTrue(any("indicadores" in e for e in errors), errors)
+
     def test_inline_definitions_are_forbidden(self):
         d = self._com_missao()
         c = d["criterios"][0]

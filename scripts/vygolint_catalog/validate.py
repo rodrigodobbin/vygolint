@@ -44,9 +44,11 @@ def textos_do_criterio(c):
         if isinstance(fonte, dict):
             if _is_text(fonte.get("procedimento")):
                 out.append((f"{nome}.procedimento", fonte["procedimento"]))
-            for i, ind in enumerate(fonte.get("indicadores") or []):
-                if _is_text(ind):
-                    out.append((f"{nome}.indicadores[{i}]", ind))
+            indicadores = fonte.get("indicadores")
+            if isinstance(indicadores, list):
+                for i, ind in enumerate(indicadores):
+                    if _is_text(ind):
+                        out.append((f"{nome}.indicadores[{i}]", ind))
     esc = c.get("escala") if isinstance(c.get("escala"), dict) else {}
     for grau in ("atendido", "parcial", "nao_atendido"):
         if _is_text(esc.get(grau)):
@@ -82,7 +84,8 @@ def _validate_definicoes_criterio(c, prefix, schema, glossario, errors):
     if not isinstance(comuns, dict) or not all(_is_text(k) and _is_text(v) for k, v in comuns.items()):
         errors.append(f"{prefix}: definicoes.termos_comuns deve ser mapa gatilho -> justificativa não vazia")
         comuns = {}
-    gatilho_para_chave = {g: e["chave"] for e in glossario.values() for g in e["gatilhos"]}
+    comuns = {k.lower(): v for k, v in comuns.items()}
+    gatilho_para_chave = {g.lower(): e["chave"] for e in glossario.values() for g in e["gatilhos"]}
     for g in comuns:
         if g not in gatilho_para_chave:
             errors.append(f"{prefix}: definicoes.termos_comuns cita gatilho desconhecido: {g!r}")
@@ -106,7 +109,7 @@ def _validate_definicoes_criterio(c, prefix, schema, glossario, errors):
         )
         usados = [g for g in e["gatilhos"] if g.lower() in corpus]
         listado = e["chave"] in chaves
-        comum = any(g in comuns for g in e["gatilhos"])
+        comum = any(g.lower() in comuns for g in e["gatilhos"])
         if usados and not listado and not comum:
             errors.append(
                 f"{prefix}: texto usa \"{usados[0]}\" mas definicoes.glossario não lista \"{e['chave']}\""
