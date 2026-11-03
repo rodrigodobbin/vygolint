@@ -170,7 +170,8 @@ class MigrarCriterioTest(unittest.TestCase):
         self.assertEqual(defs["locais"], {"missão exige mais de um jogador": "quando a conclusão só é registrada depois de dois"})
         self.assertEqual(len(self.rel["sobras"]), 1)
         self.assertEqual([d[3] for d in self.rel["divergencias"]], ["missao"])
-        self.assertEqual(self.rel["manuais"], [])
+        # The only manual item is the report of the prefix-less chain cut from the enunciado.
+        self.assertEqual([m[3].split(":")[0] for m in self.rel["manuais"]], ["cadeia sem prefixo extraída do enunciado"])
 
     def test_clauses_after_local_term_stay_in_that_definition(self):
         self.c["enunciado"] = "O desafio exige detalhe; Definições: detalhe é um elemento visível; o desafio exige o detalhe quando não há outra via"
@@ -207,11 +208,45 @@ class MigrarCriterioTest(unittest.TestCase):
                                "poder acessar áreas é tratado em D05, e o acesso sem recompensa não conta; "
                                "conteúdo e objetivo de aprendizagem são os listados no GDD")
         self.c["escala"]["parcial"] = "Em cada missão ou minijogo há fim"
+        self.c["escala"]["atendido"] = "Todo desafio tem fim, e o desafio é cada missão ou minijogo"
         self.migrar()
         manuais = [(m[2], m[3]) for m in self.rel["manuais"]]
         self.assertEqual(sum(1 for onde, motivo in manuais if onde == "locais[incentivo]" and "escopo" in motivo), 1)
         self.assertTrue(any(onde == "locais[conteúdo e objetivo de aprendizagem]" and "objetivo_de_aprendizagem" in motivo for onde, motivo in manuais))
-        self.assertTrue(any(onde == "escala.parcial" and "`desafio`" in motivo for onde, motivo in manuais))
+        # Same rule as the lint: only "<termo|gatilho> é|são <texto>" repeats a glossary definition.
+        self.assertTrue(any(onde == "escala.atendido" and "`desafio`" in motivo for onde, motivo in manuais), manuais)
+        self.assertFalse(any(onde == "escala.parcial" and "`desafio`" in motivo for onde, motivo in manuais), manuais)
+
+    def test_criterion_rule_folded_into_local_definition_is_reported(self):
+        self.c["enunciado"] = "O jogo tem x e y; Definições: x é um objeto; precedência: a sobre b; y é outro"
+        self.c["escala"]["parcial"] = ("Alguma missão tem z. Definições: minijogo é " + self.glossario["minijogo"]["texto"]
+                                       + "; z é algo; a regra vale para este critério; w é uma função; cada função conta por um elemento")
+        defs = self.migrar()
+        self.assertEqual(defs["locais"]["x"], "um objeto; precedência: a sobre b")
+        regras = [(m[2], m[3], m[4]) for m in self.rel["manuais"] if "regra de critério" in m[3]]
+        self.assertEqual(regras, [
+            ("enunciado", "regra de critério dentro da definição local `x`", "precedência: a sobre b"),
+            ("escala.parcial", "regra de critério dentro da definição local `z`", "a regra vale para este critério"),
+            ("escala.parcial", "regra de critério dentro da definição local `w`", "cada função conta por um elemento"),
+        ])
+
+    def test_ordinary_continuation_clause_is_not_reported(self):
+        self.c["enunciado"] = "O jogo tem x e y; Definições: x é um objeto; o objeto é vermelho quando aceso; y é outro"
+        defs = self.migrar()
+        self.assertEqual(defs["locais"]["x"], "um objeto; o objeto é vermelho quando aceso")
+        self.assertEqual(self.rel["manuais"], [])
+
+    def test_prefixless_chain_cut_is_reported(self):
+        self.c["enunciado"] = "Existe x no jogo; x é um objeto qualquer que aparece na tela inicial e que o jogador pode tocar a qualquer momento da partida"
+        defs = self.migrar()
+        self.assertEqual(self.c["enunciado"], "Existe x no jogo")
+        self.assertIn("x", defs["locais"])
+        cadeias = [m for m in self.rel["manuais"] if m[3].startswith("cadeia sem prefixo")]
+        self.assertEqual(len(cadeias), 1)
+        self.assertEqual(cadeias[0][2], "enunciado")
+        self.assertEqual(cadeias[0][3], "cadeia sem prefixo extraída do enunciado: `x é um objeto qualquer que aparece na tela inicial e que o jogador pode tocar a…`")
+        md = relatorio_markdown(self.rel, self.glossario)
+        self.assertIn("- D17/D17.1 (enunciado): cadeia sem prefixo extraída do enunciado: `x é um objeto", md)
 
     def test_glossary_key_without_trigger_is_reported(self):
         self.c["enunciado"] = "O professor lê a documentação; Definições: documentação é o documento de design"

@@ -18,7 +18,7 @@ import yaml
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
-from vygolint_catalog.validate import load_definicoes, textos_do_criterio  # noqa: E402
+from vygolint_catalog.validate import _definicao_repetida_re, load_definicoes, textos_do_criterio  # noqa: E402
 
 # Termo como aparece no texto -> chaves do glossário.
 ALIASES = {
@@ -107,6 +107,12 @@ _ESCOPO_PREDICADO_RE = re.compile(r"^tratad[oa]s? em ")
 # Untermed conditional definition: '[artigo] <definiendum> quando <condição>'.
 _QUANDO_RE = re.compile(r"^(?:(?:o|a|os|as|um|uma) )?(?P<termo>[^;:(),]{1,80}?) (?P<resto>quando .+)$", re.S)
 _ESCOPO_RE = re.compile(r"(?:esta diretriz|este critério)\b", re.I)
+# A clause that continues a local definition but states a rule about the criterion, not about the term
+# ('precedência: …', '… conta para este critério …', '… (D33); … (D34)', 'cada função conta por …').
+_REGRA_CRITERIO_RE = re.compile(
+    r"precedência:|(?:neste|este|para este) critério|\bdiretriz(?:es)?\b|tratad[oa]s? (?:em|por)|\(D\d\d\)|\bcada \w+ conta\b",
+    re.I,
+)
 
 
 def _fim_do_bloco(texto, inicio):
@@ -269,7 +275,8 @@ def migrar_criterio(c, glossario, relatorio, did):
       sobras: (did, cid, campo, termo, [cláusulas], [chaves locais criadas])
       locais_divergentes: (did, cid, campo, termo, texto mantido, texto descartado)
       adicionadas: (did, cid, onde, chave, gatilho)
-      manuais: (did, cid, onde, motivo, trecho)
+      manuais: (did, cid, onde, motivo, trecho); also criterion rules folded into a local definition
+        and prefix-less chains cut from the enunciado
     """
     cid = c["id"]
     chaves, locais = [], {}
@@ -279,6 +286,10 @@ def migrar_criterio(c, glossario, relatorio, did):
         texto = "; ".join(partes)
         if not termo:
             relatorio["manuais"].append((did, cid, campo, "termo da definição local não identificado; chave provisória", partes[0]))
+        for cl in partes[1:]:
+            # Scope notes are reported by _prefixo_menos; report the other criterion rules here.
+            if _REGRA_CRITERIO_RE.search(cl) and not _nota_de_escopo(cl):
+                relatorio["manuais"].append((did, cid, campo, f"regra de critério dentro da definição local `{chave}`", cl))
         if chave in locais and locais[chave] != texto:
             relatorio["locais_divergentes"].append((did, cid, campo, chave, locais[chave], texto))
         locais.setdefault(chave, texto)
@@ -287,6 +298,10 @@ def migrar_criterio(c, glossario, relatorio, did):
     for campo, texto in textos_do_criterio(c):
         novo, blocos = extrair_blocos(texto, cadeia=campo == "enunciado")
         _set_campo(c, campo, novo)
+        if blocos and not _PREFIXO_RE.search(texto):
+            cadeia = blocos[0]
+            trecho = cadeia[:80].rstrip() + ("…" if len(cadeia) > 80 else "")
+            relatorio["manuais"].append((did, cid, campo, f"cadeia sem prefixo extraída do enunciado: `{trecho}`", ""))
         for corpo in blocos:
             for termo, cls in agrupar(clausulas(corpo)):
                 if termo not in ALIASES:
@@ -369,12 +384,18 @@ def _trecho(texto, inicio, fim):
     return ("…" if inicio > 0 else "") + texto[max(0, inicio) : fim] + ("…" if fim < len(texto) else "")
 
 
+def _nota_de_escopo(cl):
+    sem_parenteses = re.sub(r"\([^()]*\)", "", cl)
+    return bool(_ESCOPO_RE.match(cl) or re.search(r"\b(?:é|são) tratad[oa]s? em D\d\d", sem_parenteses))
+
+
 def _prefixo_menos(c, glossario, did, relatorio):
     """Definitions that need manual migration, searched in the migrated texts and in the local definitions.
 
     - a glossary term defined at the start of a clause ('…, e missão é uma atividade…', '; desafio é …');
     - a glossary term defined inline by 'isto é' ('situação-problema, isto é, uma situação…');
-    - a scope note ('esta diretriz…', 'tratado em D05') that ended up inside a local definition.
+    - a scope note ('esta diretriz…', 'tratado em D05') that ended up inside a local definition;
+    - a repeated glossary definition '<termo|gatilho> é|são <texto>' (the lint's own pattern).
     """
     cid = c["id"]
     termos = sorted(set(ALIASES) | {g for e in glossario.values() for g in e["gatilhos"]}, key=len, reverse=True)
@@ -392,16 +413,16 @@ def _prefixo_menos(c, glossario, did, relatorio):
             relatorio["manuais"].append(
                 (did, cid, onde, f"definição de «{m.group('t')}» por «isto é»", _trecho(texto, m.start("t"), m.end() + 120))
             )
+    repetidas = {e["chave"]: _definicao_repetida_re(e) for e in glossario.values()}
     for onde, texto in textos_do_criterio(c):
-        for e in glossario.values():
-            if e["texto"] in texto:
+        for k, rx in repetidas.items():
+            for m in rx.finditer(texto):
                 relatorio["manuais"].append(
-                    (did, cid, onde, f"texto do glossário de `{e['chave']}` aparece literalmente (o lint rejeita)", e["texto"])
+                    (did, cid, onde, f"definição do glossário de `{k}` repetida no texto (o lint rejeita)", m.group(0))
                 )
     for k, v in locais.items():
         for cl in clausulas(v):
-            sem_parenteses = re.sub(r"\([^()]*\)", "", cl)
-            if _ESCOPO_RE.match(cl) or re.search(r"\b(?:é|são) tratad[oa]s? em D\d\d", sem_parenteses):
+            if _nota_de_escopo(cl):
                 relatorio["manuais"].append((did, cid, f"locais[{k}]", "nota de escopo dentro da definição local", cl))
 
 
