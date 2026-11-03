@@ -54,17 +54,17 @@ clausulas:
   - missão = uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão
   - desafio = cada missão ou minijogo
   tipo: decisao
-  decisao: a2
+  decisao: 2
 - criterio: D12.1
   de: persiste = quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior
   para: persiste = quando permanece disponível ao jogador depois de concluída a ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior
   tipo: decisao
-  decisao: a4
+  decisao: 11
 - criterio: D13.1
   de: missão ou tarefa = uma unidade do jogo com objetivo e condição de conclusão próprios
   para: missão = uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão
   tipo: decisao
-  decisao: a3
+  decisao: 3
 - criterio: D14.1
   de: Comentário = um texto digitado pelo jogador
   para: comentário = um texto digitado pelo jogador
@@ -74,21 +74,21 @@ clausulas:
   de: conteúdo e objetivo de aprendizagem = os listados no documento de design (GDD) ou documento equivalente
   para: objetivo de aprendizagem = cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
   tipo: decisao
-  decisao: b4
+  decisao: 9
 - criterio: D23.1
   de: conteúdo e objetivo de aprendizagem = os listados no documento de design (GDD) ou documento equivalente
   para:
   - conteúdo = o listado no documento de design (GDD) ou documento equivalente
   - objetivo de aprendizagem = cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
   tipo: decisao
-  decisao: b4
+  decisao: 9
 - criterio: D25.1
   de: conteúdo e objetivo de aprendizagem = os listados no documento de design (GDD) ou documento equivalente
   para:
   - conteúdo = o listado no documento de design (GDD) ou documento equivalente
   - objetivo de aprendizagem = cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
   tipo: decisao
-  decisao: b4
+  decisao: 9
 - criterio: D22.1
   de: documentação = o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo
   para:
@@ -96,7 +96,7 @@ clausulas:
   - GDD ou documento equivalente = o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação)
   - material de divulgação ou de loja não conta
   tipo: decisao
-  decisao: b1
+  decisao: 7
 - criterio: D22.2
   de: documentação = o documento de design (GDD), o guia do professor, o plano de aula ou outro documento equivalente que acompanha o jogo
   para:
@@ -104,12 +104,12 @@ clausulas:
   - GDD ou documento equivalente = o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação)
   - material de divulgação ou de loja não conta
   tipo: decisao
-  decisao: b1
+  decisao: 7
 - criterio: D22.1
   de: objetivo de aprendizagem = o listado na documentação
   para: objetivo de aprendizagem = cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
   tipo: decisao
-  decisao: b2
+  decisao: 8
 - criterio: D25.1
   de: caminho da missão = a sequência de objetivos exigidos para completá-la
   para: caminho obrigatório = a sequência de objetivos exigidos para completar a missão em curso, e fora do caminho obrigatório é tudo o que nenhum desses objetivos exige
@@ -124,7 +124,7 @@ clausulas:
   de: missão ou tarefa = uma unidade do jogo com objetivo e condição de conclusão próprios
   para: missão = uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão
   tipo: decisao
-  decisao: b3
+  decisao: 3
 - de: missão = uma atividade com objetivo e condição de conclusão próprios, e o jogo sem divisão em missões conta como uma única missão
   para: missão = uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão
   tipo: equivalente
@@ -162,7 +162,7 @@ clausulas:
   de: desafio = uma unidade do jogo com objetivo e condição de conclusão próprios (missão, minijogo ou etapa com condição de conclusão própria), e o jogo sem divisão em missões conta como uma única missão
   para: desafio = cada missão ou minijogo
   tipo: decisao
-  decisao: c1
+  decisao: 1
 - criterio: D39.1
   de: cenário jogável = cada espaço do jogo (mapa, sala ou fase) em que o jogador executa ações e em que há uma missão em curso, e o cenário em que nenhuma missão está em curso (hub, sandbox) não é cenário jogável
   para:
@@ -173,16 +173,22 @@ clausulas:
 adicoes:
 - criterio: '*'
   chave: documentacao_equivalente
+  tipo: decisao
+  decisao: 7
 - criterio: D01.1
   chave: missao
 - criterio: D01.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D01.1
   chave: desafio
 - criterio: D02.1
   chave: missao
 - criterio: D02.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D02.1
   chave: desafio
 - criterio: D02.1
@@ -191,18 +197,26 @@ adicoes:
   chave: missao
 - criterio: D03.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D03.2
   chave: missao
 - criterio: D03.2
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D03.3
   chave: missao
 - criterio: D03.3
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D04.1
   chave: missao
 - criterio: D04.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D04.1
   chave: desafio
 - criterio: D04.1
@@ -210,17 +224,19 @@ adicoes:
 - criterio: D04.1
   chave: cenario_jogavel
   tipo: decisao
-  decisao: a5
+  decisao: 5
 - criterio: D04.1
   chave: caminho_obrigatorio
   tipo: decisao
-  decisao: a5
+  decisao: 5
 - criterio: D05.1
   chave: missao
 - criterio: D05.1
   chave: cenario_jogavel
 - criterio: D11.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D11.1
   chave: objetivo_de_aprendizagem
 - criterio: D09.1
@@ -231,52 +247,74 @@ adicoes:
   chave: missao
 - criterio: D17.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D18.1
   chave: missao
 - criterio: D18.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D18.1
   chave: desafio
 - criterio: D19.1
   chave: missao
 - criterio: D19.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D20.1
   chave: missao
 - criterio: D20.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D21.1
   chave: missao
 - criterio: D21.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D22.1
   chave: missao
 - criterio: D22.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D22.2
   chave: missao
 - criterio: D22.2
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D23.1
   chave: missao
 - criterio: D23.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D23.1
   chave: desafio
 - criterio: D24.1
   chave: missao
 - criterio: D24.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D25.1
   chave: missao
 - criterio: D25.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D25.1
   chave: desafio
 - criterio: D26.1
   chave: missao
 - criterio: D26.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D26.1
   chave: desafio
 - criterio: D15.1
@@ -299,24 +337,36 @@ adicoes:
   chave: objetivo_de_aprendizagem
 - criterio: D33.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D34.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D35.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D36.1
   chave: missao
 - criterio: D36.1
   chave: desafio
 - criterio: D36.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D36.1
   chave: objetivo_de_aprendizagem
 - criterio: D36.1
   chave: sessao_de_jogo
+  tipo: decisao
+  decisao: 10
 - criterio: D39.1
   chave: missao
 - criterio: D39.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D39.1
   chave: caminho_obrigatorio
 - criterio: D40.1
@@ -325,6 +375,8 @@ adicoes:
   chave: desafio
 - criterio: D40.1
   chave: minijogo
+  tipo: decisao
+  decisao: 4
 - criterio: D30.1
   clausula: quantidade de elementos = um elemento é o mínimo que liga a premissa ao referente, e a diretriz não fixa quantidade maior
 - criterio: D30.1
