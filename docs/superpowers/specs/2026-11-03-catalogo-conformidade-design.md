@@ -1,7 +1,7 @@
 # vygolint — Catálogo de conformidade sociointeracionista (etapa 1)
 
 Data: 2026-11-03
-Status: aprovado em brainstorming, aguardando plano de implementação
+Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada
 
 ## 1. Objetivo
 
@@ -99,7 +99,7 @@ Regras do esquema:
 - `depende_de` é uma lista de grupos; cada grupo é uma lista de ids de critérios existentes. Todos os grupos precisam ser satisfeitos; dentro de um grupo basta um critério atendido. `[[D06.1, D07.1]]` significa "D06.1 ou D07.1"; `[[D06.1], [D09.1]]` significa "D06.1 e D09.1". Lista vazia quando não há dependência.
 - Critério testável: dois avaliadores com as mesmas evidências chegam ao mesmo grau. Descritores da escala devem ser observáveis. Proibido descritor do tipo "o jogo é motivador".
 
-`categorias.yaml` lista as 12 categorias de Carvalho (interacao, mediacao, autonomia, socializacao, ludico, realismo, personalizacao, organizacao, resolucao_de_problemas, linguagem, atencao, aprendizado) com descrição curta, ancoragem teórica e a ressalva da seção 4.4 da dissertação: categorias são instrumento de organização, não taxonomia da teoria de Vigotski.
+`categorias.yaml` lista as 12 categorias de Carvalho (interacao, mediacao, autonomia, socializacao, ludico, realismo, personalizacao, organizacao, resolucao_de_problemas, linguagem, atencao, aprendizado) com descrição curta e a ressalva da seção 4.4 da dissertação: categorias são instrumento de organização, não taxonomia da teoria de Vigotski.
 
 ## 6. Regras de nível
 
@@ -141,17 +141,21 @@ Cada critério registra os dois eixos e um texto de justificativa ancorado em Vi
 
 **Relatório** (formato definido na etapa 2, mas o conteúdo é fixado aqui):
 
+- cláusula obrigatória
 - nível alcançado
-- cobertura por nível: contagem de atendido, parcial e não atendido para A, AA e AAA
+- cobertura por nível: contagem de atendido, parcial, não atendido (dos quais N não avaliados) e fora do contexto, para A, AA e AAA
 - cobertura por categoria: mesma contagem para cada uma das 12
 - bloqueios: critérios que impedem o próximo nível, com recomendação
 - parciais: o que falta para pleno
+- provas por critério
 
-**Dependências.** Critério cujo `depende_de` não está satisfeito recebe automaticamente não atendido, sem avaliação manual.
+**Dependências.** Critério cujo `depende_de` não está satisfeito recebe automaticamente não atendido, sem avaliação manual. Critério que depende de um critério não avaliado é registrado como não avaliado por dependência e conta como não atendido para fins de nível.
 
 **Evidência insuficiente.** Quando nenhuma fonte disponível permite avaliar um critério (por exemplo, só há vídeo e o vídeo não mostra o ponto avaliado), o relatório registra **não avaliado** com a razão; para fins de conformidade de nível, o critério conta como não atendido.
 
 **Sem "não se aplica" por ausência de recurso.** Jogo sem multiplayer não atende D6. Vigotski exige interação social e é isso que o catálogo mede. `aplicabilidade` serve só para dependência de contexto de uso (D22, sala de aula).
+
+**Aplicabilidade.** Critério cuja `aplicabilidade` não é satisfeita no contexto declarado da avaliação (ex.: D22 quando o jogo não é aplicado em sala de aula) é registrado como **fora do contexto**, fica fora das exigências de nível e é listado no relatório com a razão. O contexto de uso é declarado no início da avaliação.
 
 **Cláusula obrigatória.** Todo relatório e `docs/conformidade.md` abrem com: o resultado expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista. Isso responde à ressalva da seção 4.4 e das considerações finais da dissertação de origem.
 
@@ -165,7 +169,7 @@ Stack: Python 3 + PyYAML. Testes com `unittest`. `requirements.txt` com uma linh
 2. **Valida coerência de nível** pela tabela da seção 6 mais a regra "pode nunca é A". Divergência gera erro apontando arquivo e critério.
 3. **Gera** `docs/catalogo.md` (tabela resumo + seção por diretriz com critérios, evidências e escalas) e `docs/catalogo.tex` (`longtable` com o resumo). Ambos com cabeçalho "arquivo gerado, não edite". Saída determinística.
 
-Testes em `tests/`: fixtures válidas e inválidas; um teste por regra de validação; tabela de níveis coberta nas 9 combinações mais a regra "pode"; snapshot do gerador.
+Testes em `tests/`: fixtures válidas e inválidas; um teste por regra de validação; tabela de níveis coberta nas 9 combinações mais a regra "pode"; verificação de sincronia dos docs gerados no CI (git diff --exit-code).
 
 CI (GitHub Actions): roda testes, roda o build e `git diff --exit-code docs/`. Doc desatualizado quebra o build.
 

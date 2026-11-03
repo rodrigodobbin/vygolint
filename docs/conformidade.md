@@ -28,7 +28,8 @@ Definições:
   contextualização realista.
 - **Essencialidade baixa:** criação de conteúdo pelo jogador, personalização adaptativa,
   recursos complementares.
-- **Viabilidade alta:** implementável em qualquer jogo educacional com mecânicas comuns.
+- **Viabilidade alta:** implementável em qualquer jogo educacional com mecânicas comuns,
+  baixo custo.
 - **Viabilidade média:** exige sistema dedicado (persistência, comunicação assíncrona,
   perfil de desempenho).
 - **Viabilidade baixa:** exige infraestrutura rara (multijogador síncrono, editor de
@@ -56,6 +57,7 @@ Regras:
   grupo basta um critério atendido.
 - Não existe "não se aplica" por ausência de recurso. Jogo sem multijogador não atende D06.
   `aplicabilidade` só restringe por contexto de uso (D22).
+- Critério cuja `aplicabilidade` não é satisfeita no contexto declarado da avaliação (ex.: D22 quando o jogo não é aplicado em sala de aula) é registrado como **fora do contexto**, fica fora das exigências de nível e é listado no relatório com a razão. O contexto de uso é declarado no início da avaliação.
 - Quando nenhuma fonte disponível permite avaliar um critério (por exemplo, só há vídeo e o vídeo não mostra o ponto avaliado), o relatório registra **não avaliado** com a razão; para fins de conformidade de nível, o critério conta como não atendido.
 
 ## 3. Diretriz
@@ -72,14 +74,19 @@ Diretriz atendida no nível N quando todos os seus critérios de nível N ou inf
 | AAA | AA + todos os critérios AAA atendidos |
 | sem conformidade | qualquer critério A não atendido ou parcial |
 
+Critérios **fora do contexto** (seção 2) não entram nas exigências desta tabela.
+
 ## 5. Relatório
 
 Todo relatório contém, nesta ordem:
 
 1. a cláusula do início deste documento;
 2. o nível alcançado;
-3. cobertura por nível: contagem de atendido, parcial e não atendido para A, AA e AAA;
+3. cobertura por nível: contagem de atendido, parcial, não atendido (dos quais N não avaliados) e
+   fora do contexto, para A, AA e AAA;
 4. cobertura por categoria: mesma contagem para cada uma das 12 categorias;
 5. bloqueios: critérios que impedem o próximo nível, com recomendação;
 6. parciais: o que falta para pleno;
 7. provas por critério.
+
+Critério que depende de um critério não avaliado é registrado como não avaliado por dependência e conta como não atendido para fins de nível.
