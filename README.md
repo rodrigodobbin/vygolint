@@ -4,8 +4,29 @@ Catálogo de conformidade e plugin de avaliação de jogos educacionais digitais
 contra as 40 diretrizes sociointeracionistas de Carvalho (2020), com níveis
 A, AA e AAA no modelo das WCAG.
 
-Etapa 1 (em andamento): catálogo em `catalog/`, build em `scripts/`.
-Etapa 2 (futura): skills portáveis em `skills/`.
+Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolvimento
+de jogos educacionais digitais embasados na teoria sociointeracionista de Lev
+Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFABC, 2020.
+
+## O que há aqui
+
+| Caminho | Conteúdo |
+|---|---|
+| `catalog/D01.yaml` … `D40.yaml` | uma diretriz por arquivo: texto literal, critérios, níveis, evidências, escalas |
+| `catalog/schema.yaml` | esquema validado pelo build |
+| `catalog/categorias.yaml` | 12 categorias e a ressalva de Carvalho (2020) |
+| `docs/catalogo.md` | catálogo completo, gerado |
+| `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
+| `docs/conformidade.md` | regras de nível, grau, agregação e relatório |
+| `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
+| `skills/` | etapa 2: skills portáveis entre agentes de código |
+
+## Como funciona o nível
+
+Cada critério declara essencialidade teórica e viabilidade; o nível sai de uma
+tabela fixa (ver `docs/conformidade.md`). O build falha se o YAML declarar outro
+nível. O resultado de uma avaliação expressa conformidade com as diretrizes, não
+um rótulo de "jogo sociointeracionista".
 
 ## Desenvolvimento
 
@@ -16,4 +37,10 @@ PYTHONPATH=scripts python3 -m unittest discover -s tests -v
 python3 scripts/build_catalog.py
 ```
 
-Spec: `docs/superpowers/specs/2026-11-03-catalogo-conformidade-design.md`.
+`docs/catalogo.md` e `docs/catalogo.tex` nunca são editados à mão. O CI falha se
+estiverem desatualizados.
+
+## Documentos de projeto
+
+- Spec: `docs/superpowers/specs/2026-11-03-catalogo-conformidade-design.md`
+- Plano: `docs/superpowers/plans/2026-11-03-catalogo-conformidade.md`
