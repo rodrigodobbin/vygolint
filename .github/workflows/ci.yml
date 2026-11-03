@@ -1,0 +1,19 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Tests
+        run: PYTHONPATH=scripts python3 -m unittest discover -s tests -v
+      - name: Build catalog
+        run: python3 scripts/build_catalog.py
+      - name: Generated docs are up to date
+        run: git diff --exit-code -- docs/catalogo.md docs/catalogo.tex
