@@ -431,6 +431,75 @@ class VerifyTest(unittest.TestCase):
         self.assertEqual(comparar_criterio(antigo, novo, self.g, self.aceitas), [])
 
 
+    # --- review fixes ---
+
+    def _variante(self):
+        """Stage 1 uses a variant of the missão definition; the glossary key is accepted as an addition."""
+        self.antigo["enunciado"] = self.antigo["enunciado"].replace(self.g["missao"]["texto"], "uma atividade com objetivo próprio")
+        self.aceitas["adicoes"].append({"criterio": "*", "chave": "missao"})
+        return {"de": "missão = uma atividade com objetivo próprio", "para": normalizar_clausula("missão é " + self.g["missao"]["texto"]), "tipo": "equivalente"}
+
+    def test_malformed_clausula_entry_is_not_applied(self):
+        base = self._variante()
+        ruins = [{k: v for k, v in base.items() if k != "para"}]
+        ruins += [dict(base, para=p) for p in (None, "", [], [""], [None], 3)]
+        ruins += [dict(base, de=""), dict(base, de=None), dict(base, tipo="outro"), {k: v for k, v in base.items() if k != "tipo"},
+                  dict(base, tipo="decisao"), dict(base, tipo="decisao", decisao=None)]
+        for ruim in ruins:
+            self.aceitas["clausulas"] = [ruim]
+            diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+            self.assertTrue(any("missão = uma atividade com objetivo próprio" in d for d in diffs), (ruim, diffs))
+        self.aceitas["clausulas"] = [dict(base, tipo="decisao", decisao=3)]
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_every_escala_key_and_evidencia_source_is_compared(self):
+        self.antigo["escala"]["extra"] = "texto da etapa 1"
+        self.novo["escala"]["extra"] = "texto mudado"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("escala" in d and "texto mudado" in d for d in diffs), diffs)
+        self.novo["escala"]["extra"] = "texto da etapa 1"
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+        self.antigo["evidencia"]["quinta"] = {"procedimento": "proc", "indicadores": ["ind"]}
+        self.novo["evidencia"]["quinta"] = {"procedimento": "proc", "indicadores": ["ind mudado"]}
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("evidencia" in d and "ind mudado" in d for d in diffs), diffs)
+
+    def test_masked_fields_are_exactly_the_compared_text_fields(self):
+        # A text field still changes only through the text comparison, not as a structural change.
+        self.novo["evidencia"]["codigo"]["indicadores"][0] = "outro indicador"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("codigo.indicadores[0]" in d for d in diffs), diffs)
+        self.assertFalse(any("campo não textual" in d for d in diffs), diffs)
+
+    def test_duplicate_criterion_ids_are_reported(self):
+        from helpers import diretriz_valida
+        antigo, novo = diretriz_valida(), diretriz_valida()
+        antigo["criterios"] = [self.antigo]
+        mudado = copy.deepcopy(self.novo)
+        mudado["enunciado"] = "outro texto"
+        novo["criterios"] = [mudado, self.novo]
+        diffs = comparar_diretriz(antigo, novo, self.g, self.aceitas)
+        self.assertTrue(any("duplicado" in d and "D17.1" in d for d in diffs), diffs)
+        novo["criterios"] = [self.novo]
+        antigo["criterios"] = [self.antigo, copy.deepcopy(self.antigo)]
+        diffs = comparar_diretriz(antigo, novo, self.g, self.aceitas)
+        self.assertTrue(any("duplicado" in d and "D17.1" in d for d in diffs), diffs)
+
+    def test_pointer_glued_inside_a_word_is_not_stripped(self):
+        self.antigo["escala"]["atendido"] = "Todas orientam, classificadas nos termos das definiçõesabc"
+        self.novo["escala"]["atendido"] = "Todas orientam, classificadasabc"
+        self.assertTrue(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas))
+
+    def test_usadas_collects_the_entries_that_were_applied(self):
+        base = self._variante()
+        self.aceitas["clausulas"] = [base, {"de": "outra = coisa", "para": "x", "tipo": "equivalente"}]
+        self.aceitas["remocoes"].append({"criterio": "D17.1", "clausula": "nada = nada"})
+        usadas = set()
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas, usadas=usadas), [])
+        # adicoes[0] (from _variante) is not needed once the mapping applies, so it is not used either.
+        self.assertEqual(usadas, {"clausulas[0]"})
+
+
 class VerifyCliTest(unittest.TestCase):
     """End to end on a throwaway git repo: --base, --only, --catalog, --aceitas, exit code."""
 
@@ -477,8 +546,40 @@ class VerifyCliTest(unittest.TestCase):
         self.assertIn("0 diferença", out)
 
     def test_only_filters_files(self):
-        code, out = self.run_main("--only", "D99")
+        code, out = self.run_main("--only", "D17", "--aceitas", str(self.aceitas))
         self.assertEqual(code, 0, out)
+        code, out = self.run_main("--only", "D17,D99", "--aceitas", str(self.aceitas))
+        self.assertEqual(code, 1, out)
+        self.assertIn("D99", out)
+        self.assertIn("1 diferença", out)
+
+    def write_aceitas(self, **listas):
+        doc = yaml.safe_load(self.aceitas.read_text(encoding="utf-8"))
+        for k, v in listas.items():
+            doc[k] = doc.get(k, []) + v
+        self.aceitas.write_text(yaml.safe_dump(doc, allow_unicode=True), encoding="utf-8")
+
+    def test_malformed_entry_is_reported(self):
+        self.write_aceitas(clausulas=[{"de": "x = y", "para": None, "tipo": "equivalente"}],
+                           campos=[{"criterio": "D17.1", "campo": "*", "de": "a", "para": "b"}])
+        code, out = self.run_main("--aceitas", str(self.aceitas))
+        self.assertEqual(code, 1, out)
+        self.assertIn("aceitas: clausulas[1] sem 'para'", out)
+        self.assertIn("aceitas: campos[0]", out)
+
+    def test_unused_entries_are_reported(self):
+        self.write_aceitas(clausulas=[{"de": "outra = coisa", "para": "x", "tipo": "equivalente"}],
+                           adicoes=[{"criterio": "D17.1", "chave": "desafio"}],
+                           remocoes=[{"criterio": "D17.1", "clausula": "nada = nada"}],
+                           campos=[{"criterio": "D17.1", "campo": "enunciado", "de": "a", "para": "b"}])
+        code, out = self.run_main("--aceitas", str(self.aceitas))
+        self.assertEqual(code, 1, out)
+        self.assertIn("aceitas não usadas: clausulas[1] de=outra = coisa", out)
+        self.assertIn("aceitas não usadas: adicoes[0]", out)
+        self.assertIn("aceitas não usadas: remocoes[0]", out)
+        self.assertIn("aceitas não usadas: campos[0]", out)
+        self.assertNotIn("clausulas[0]", out)
+        self.assertIn("4 diferença", out)
 
     def test_file_missing_at_base_is_reported(self):
         (self.cat / "D18.yaml").write_text((self.cat / "D17.yaml").read_text(encoding="utf-8"), encoding="utf-8")
