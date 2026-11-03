@@ -149,6 +149,8 @@ Cada critério registra os dois eixos e um texto de justificativa ancorado em Vi
 
 **Dependências.** Critério cujo `depende_de` não está satisfeito recebe automaticamente não atendido, sem avaliação manual.
 
+**Evidência insuficiente.** Quando nenhuma fonte disponível permite avaliar um critério (por exemplo, só há vídeo e o vídeo não mostra o ponto avaliado), o relatório registra **não avaliado** com a razão; para fins de conformidade de nível, o critério conta como não atendido.
+
 **Sem "não se aplica" por ausência de recurso.** Jogo sem multiplayer não atende D6. Vigotski exige interação social e é isso que o catálogo mede. `aplicabilidade` serve só para dependência de contexto de uso (D22, sala de aula).
 
 **Cláusula obrigatória.** Todo relatório e `docs/conformidade.md` abrem com: o resultado expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista. Isso responde à ressalva da seção 4.4 e das considerações finais da dissertação de origem.
