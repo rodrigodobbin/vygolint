@@ -19,6 +19,7 @@ class BuildTest(unittest.TestCase):
         self.catalog.mkdir()
         shutil.copy(REPO / "catalog" / "schema.yaml", self.catalog)
         shutil.copy(REPO / "catalog" / "categorias.yaml", self.catalog)
+        shutil.copy(REPO / "catalog" / "definicoes.yaml", self.catalog)
 
     def tearDown(self):
         shutil.rmtree(self.tmp)
@@ -27,6 +28,29 @@ class BuildTest(unittest.TestCase):
         (self.catalog / (name or f"{d['id']}.yaml")).write_text(
             yaml.safe_dump(d, allow_unicode=True, sort_keys=False), encoding="utf-8"
         )
+
+    def test_missing_glossary_is_error(self):
+        (self.catalog / "definicoes.yaml").unlink()
+        self.write(diretriz_valida())
+        errors = build(self.catalog, self.docs)
+        self.assertTrue(any("definicoes.yaml" in e for e in errors))
+        self.assertFalse(self.docs.exists())
+
+    def test_invalid_glossary_is_error(self):
+        (self.catalog / "definicoes.yaml").write_text("termos: [{chave: x}]\n", encoding="utf-8")
+        self.write(diretriz_valida())
+        self.assertTrue(any("definicoes.yaml" in e for e in build(self.catalog, self.docs)))
+
+    def test_lint_runs_in_build(self):
+        d = diretriz_valida()
+        d["criterios"][0]["enunciado"] = "Em cada missão o feedback orienta"
+        self.write(d)
+        errors = build(self.catalog, self.docs)
+        self.assertTrue(any("missao" in e for e in errors), errors)
+        d["criterios"][0]["definicoes"] = {"glossario": ["missao"]}
+        self.write(d)
+        self.assertEqual(build(self.catalog, self.docs), [])
+        self.assertIn("**Definições.**", (self.docs / "catalogo.md").read_text(encoding="utf-8"))
 
     def test_valid_catalog_writes_both_docs(self):
         self.write(diretriz_valida())

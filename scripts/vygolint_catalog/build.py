@@ -5,7 +5,7 @@ from pathlib import Path
 import yaml
 
 from .render import render_latex, render_markdown
-from .validate import load_yaml, validate_catalogo, validate_diretriz
+from .validate import load_yaml, validate_catalogo, validate_definicoes, validate_diretriz
 
 
 def build(catalog_dir, docs_dir):
@@ -14,7 +14,17 @@ def build(catalog_dir, docs_dir):
     docs_dir = Path(docs_dir)
     schema = load_yaml(catalog_dir / "schema.yaml")
     categorias = load_yaml(catalog_dir / "categorias.yaml")
-    errors = []
+    glossario_path = catalog_dir / "definicoes.yaml"
+    if not glossario_path.exists():
+        return ["definicoes.yaml: arquivo ausente"]
+    try:
+        doc = load_yaml(glossario_path)
+    except yaml.YAMLError as exc:
+        return [f"definicoes.yaml: YAML inválido: {exc}"]
+    errors = validate_definicoes(doc)
+    if errors:
+        return errors
+    glossario = {e["chave"]: e for e in doc["termos"]}
     diretrizes = []
     for path in sorted(catalog_dir.glob("D*.yaml")):
         try:
@@ -22,7 +32,7 @@ def build(catalog_dir, docs_dir):
         except yaml.YAMLError as exc:
             errors.append(f"{path.name}: YAML inválido: {exc}")
             continue
-        errs = validate_diretriz(d, schema, categorias)
+        errs = validate_diretriz(d, schema, categorias, glossario)
         errs = [path.name + e[1:] if e.startswith("?:") else e for e in errs]
         if not errs and path.name != f"{d['id']}.yaml":
             errs.append(f"{path.name}: nome do arquivo não corresponde ao id {d['id']}")
@@ -35,7 +45,7 @@ def build(catalog_dir, docs_dir):
     if errors:
         return errors
     docs_dir.mkdir(parents=True, exist_ok=True)
-    (docs_dir / "catalogo.md").write_text(render_markdown(diretrizes, categorias), encoding="utf-8")
+    (docs_dir / "catalogo.md").write_text(render_markdown(diretrizes, categorias, glossario), encoding="utf-8")
     (docs_dir / "catalogo.tex").write_text(render_latex(diretrizes, categorias), encoding="utf-8")
     return []
 
