@@ -7,34 +7,34 @@ aplicabilidade: null
 criterios:
   - id: D13.1
     nivel: AAA
-    enunciado: "Existe ao menos uma missão ou tarefa que só se conclui quando cada um de dois ou mais jogadores diferentes realiza ao menos uma ação prevista para ela; jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios"
+    enunciado: "Existe ao menos uma missão ou tarefa que só se conclui quando cada um de dois ou mais jogadores diferentes realiza ao menos uma ação prevista para ela, na mesma sessão ou em sessões diferentes; jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes; a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
     nivel_justificativa:
       essencialidade: media
       viabilidade: baixa
-      texto: "Em Vigotski, a interação social é a origem das funções psicológicas superiores, e uma missão que só se conclui com a ação de mais de um jogador cria a situação em que a ZDP entre pares pode se formar. A essencialidade é média porque a interação também ocorre por comunicação entre jogadores (D06, D07) e fora do jogo. Exige multijogador, estado compartilhado entre jogadores e uma condição de conclusão que dependa de mais de uma pessoa, além de grupos reunidos no mesmo momento; viabilidade baixa."
+      texto: "Em Vigotski, a interação social é a origem das funções psicológicas superiores, e uma missão que só se conclui com a ação de mais de um jogador cria a situação em que a ZDP entre pares pode se formar. A essencialidade é média porque a interação também ocorre por comunicação entre jogadores (D06, D07) e fora do jogo. Exige multijogador, estado compartilhado entre jogadores e uma condição de conclusão que dependa de mais de uma pessoa, com identificação de cada jogador; viabilidade baixa."
     evidencia:
       codigo:
-        procedimento: "Localizar a condição de conclusão das missões e tarefas e verificar se ela lê ações ou contribuições de mais de um identificador de jogador. Jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes"
+        procedimento: "Localizar a condição de conclusão das missões e tarefas e verificar se ela lê ações ou contribuições de mais de um identificador de jogador. Definições: jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes; a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
         indicadores:
           - "existe missão ou tarefa cuja condição de conclusão verifica ações de dois ou mais identificadores de jogador diferentes"
           - "se a missão aceita dois ou mais jogadores mas a condição de conclusão verifica a ação de apenas um deles, anotar (indica o estado parcial)"
           - "a conclusão não é registrada se a ação prevista de algum desses jogadores não ocorreu"
-          - "existe sessão ou sala que aceita dois ou mais jogadores na mesma missão ou tarefa"
+          - "existe sessão, sala ou registro compartilhado que aceita dois ou mais jogadores diferentes na mesma missão ou tarefa"
       documentacao:
-        procedimento: "Verificar no GDD ou documento equivalente as missões e tarefas em grupo. Jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes"
+        procedimento: "Verificar no GDD ou documento equivalente as missões e tarefas em grupo. Definições: jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes; a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
         indicadores:
           - "o GDD descreve missão ou tarefa com ações previstas para dois ou mais jogadores"
           - "o GDD descreve que a missão ou tarefa só se conclui depois da ação prevista de cada um desses jogadores"
-          - "se o GDD descreve missão realizada em conjunto cuja conclusão depende da ação de apenas um dos jogadores, anotar (indica o estado parcial)"
+          - "se o GDD descreve missão ou tarefa que aceita dois ou mais jogadores mas cuja conclusão depende da ação de apenas um deles, anotar (indica o estado parcial)"
       video:
-        procedimento: "O vídeo só confirma a evidência de código ou documentação: ele não mostra que a conclusão exige mais de um jogador. Registrar sessão com dois ou mais jogadores na mesma missão ou tarefa, as ações de cada um e o momento da conclusão. Jogador é uma pessoa que joga, e personagem não jogável não conta; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes"
+        procedimento: "O vídeo só confirma a evidência de código ou documentação: ele não mostra que a conclusão exige mais de um jogador. Registrar missão ou tarefa em que dois ou mais jogadores diferentes atuam, na mesma gravação ou em gravações distintas, as ações de cada um e o momento da conclusão. Definições: jogador é uma pessoa que joga, e personagem não jogável não conta; missão ou tarefa é uma unidade do jogo com objetivo e condição de conclusão próprios; a missão exige mais de um jogador quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes; a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
         indicadores:
-          - "dois ou mais jogadores atuam na mesma missão ou tarefa na mesma sessão"
+          - "dois ou mais jogadores diferentes atuam na mesma missão ou tarefa, na mesma gravação ou em gravações distintas"
           - "a conclusão da missão ou tarefa é registrada depois da ação de cada um desses jogadores"
-          - "se a conclusão é registrada com a ação de apenas um dos jogadores presentes, anotar (indica o estado parcial)"
+          - "se a conclusão é registrada com a ação de apenas um dos jogadores que a missão aceita, anotar (indica o estado parcial)"
     escala:
-      atendido: "Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes"
-      parcial: "Existe missão ou tarefa que dois ou mais jogadores realizam juntos, mas o jogo registra a conclusão com a ação de apenas um deles"
-      nao_atendido: "Todas as missões e tarefas são realizadas por um único jogador"
+      atendido: "Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado"
+      parcial: "Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado, mas o jogo registra a conclusão com a ação de apenas um deles. Definição: a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
+      nao_atendido: "Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado. Definição: a missão aceita dois ou mais jogadores quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes"
     depende_de:
       - [D06.1, D07.1]

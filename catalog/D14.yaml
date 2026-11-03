@@ -22,7 +22,7 @@ criterios:
           - "se a leitura não filtra por local ou objeto e exibe os comentários numa lista geral, anotar (indica o estado parcial)"
       documentacao: null
       video:
-        procedimento: "O vídeo só confirma a evidência de código: a ausência do comentário no vídeo não prova que o jogo não o persiste. Exigir duas gravações: uma em que um jogador escreve o comentário em um local ou objeto e outra, de sessão posterior e com perfil diferente, em que o outro jogador alcança o mesmo local ou objeto. Comentário, outro jogador e sessão posterior têm o sentido do enunciado"
+        procedimento: "O vídeo só confirma a evidência de código: a ausência do comentário no vídeo não prova que o jogo não o persiste. Exigir duas gravações: uma em que um jogador escreve o comentário em um local ou objeto e outra, de sessão posterior e com perfil diferente, em que o outro jogador alcança o mesmo local ou objeto. Definições: comentário é um texto digitado pelo jogador; outro jogador é um jogador com perfil ou conta diferente do autor; sessão posterior é uma sessão iniciada depois do término da sessão em que o comentário foi escrito"
         indicadores:
           - "na primeira gravação, o jogador digita um comentário e o associa a um local ou objeto"
           - "na segunda gravação, de sessão posterior e com perfil diferente, o jogador alcança o mesmo local ou objeto e o comentário é exibido"

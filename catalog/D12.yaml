@@ -11,7 +11,7 @@ criterios:
     nivel_justificativa:
       essencialidade: baixa
       viabilidade: media
-      texto: "Construir é uma forma de atividade sobre objetos e instrumentos, e em Vigotski o sujeito externaliza o que compreende ao produzir algo com eles. A essencialidade é baixa porque a atividade do jogador pode se dar por outras vias, como resolver problemas (D01), explorar o cenário (D05) ou coletar informações (D11). Implementar combinação e persistência de objetos criados pelo jogador exige regras e estado adicionais; viabilidade média."
+      texto: "Em Vigotski, a atividade humana é mediada por instrumentos, e construir é agir sobre objetos com esses instrumentos para produzir um artefato que o sujeito pode examinar e usar depois (mediação por instrumentos). A essencialidade é baixa porque a atividade do jogador pode se dar por outras vias, como resolver problemas (D01), explorar o cenário (D05) ou coletar informações (D11). Implementar combinação e persistência de objetos criados pelo jogador exige regras e estado adicionais; viabilidade média."
     evidencia:
       codigo:
         procedimento: "Localizar a lógica de combinação, criação ou montagem de objetos e verificar se o resultado é registrado no estado do jogo. Elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
@@ -25,7 +25,7 @@ criterios:
           - "o GDD descreve quais elementos o jogador combina e qual artefato resulta da combinação"
           - "o GDD descreve onde o artefato permanece disponível depois de criado e em que condições deixa de existir"
       video:
-        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de construção no vídeo não prova que o jogo não a oferece. Registrar o momento em que o jogador combina elementos e verificar, em momentos posteriores da gravação, se o artefato resultante continua disponível. Elemento, artefato novo e persistência têm o sentido do enunciado"
+        procedimento: "O vídeo só confirma a evidência de código ou documentação: a ausência de construção no vídeo não prova que o jogo não a oferece. Registrar o momento em que o jogador combina elementos e verificar, em momentos posteriores da gravação, se o artefato resultante continua disponível. Definições: elemento é uma peça, item, bloco, valor ou outro objeto disponível ao jogador; artefato novo é um objeto, estrutura ou configuração inexistente no estado do jogo antes da combinação e identificável como unidade; persiste quando permanece disponível depois da ação de combinar e só deixa de existir se o jogador o remover ou o consumir em uso posterior"
         indicadores:
           - "ao menos um momento em que o jogador combina dois ou mais elementos e um objeto, estrutura ou configuração novo, identificável como unidade, passa a existir"
           - "em momento posterior da gravação, o artefato continua disponível ao jogador (no cenário, inventário ou lista)"
