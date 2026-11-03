@@ -1069,27 +1069,27 @@ Expected: `ImportError: cannot import name 'escape_latex'`
 
 - [ ] **Step 3: Implementar**
 
-Ao fim de `scripts/vygolint_catalog/render.py`:
+Ao fim de `scripts/vygolint_catalog/render.py` (e adicionar `import re` como primeira linha de código do módulo, abaixo da docstring):
 
 ```python
-_LATEX_ESCAPES = (
-    ("\\", r"\textbackslash{}"),
-    ("&", r"\&"),
-    ("%", r"\%"),
-    ("$", r"\$"),
-    ("#", r"\#"),
-    ("_", r"\_"),
-    ("{", r"\{"),
-    ("}", r"\}"),
-    ("~", r"\textasciitilde{}"),
-    ("^", r"\textasciicircum{}"),
-)
+_LATEX_MAP = {
+    "\\": r"\textbackslash{}",
+    "&": r"\&",
+    "%": r"\%",
+    "$": r"\$",
+    "#": r"\#",
+    "_": r"\_",
+    "{": r"\{",
+    "}": r"\}",
+    "~": r"\textasciitilde{}",
+    "^": r"\textasciicircum{}",
+}
+_LATEX_RE = re.compile("|".join(re.escape(k) for k in _LATEX_MAP))
 
 
 def escape_latex(text):
-    for raw, esc in _LATEX_ESCAPES:
-        text = text.replace(raw, esc)
-    return text
+    """Single-pass escape so replacements never re-escape each other."""
+    return _LATEX_RE.sub(lambda m: _LATEX_MAP[m.group()], text)
 
 
 def render_latex(diretrizes, categorias):
