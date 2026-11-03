@@ -11,22 +11,23 @@ criterios:
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
-      texto: "Em Vigotski, a interação com o meio é mediada por signos e instrumentos, e uma troca de mão dupla com o jogo faz do sistema um interlocutor, e não um painel de exibição. Se o jogo só emite informação, o jogador permanece receptor. Diálogos com escolhas e entrega de itens são mecânicas comuns e de baixo custo."
+      texto: "Em Vigotski, a interação com o meio é mediada por signos e instrumentos, e uma troca de mão dupla com o jogo faz do sistema um interlocutor, e não um painel de exibição. Se o jogo só emite informação, o jogador permanece receptor. Uma situação com troca de mão dupla já estabelece essa relação, e diálogos com escolhas e entrega de itens são mecânicas comuns e de baixo custo."
     evidencia:
       codigo:
-        procedimento: "Localizar diálogos, quadros de pergunta e mecanismos de entrega ou recebimento de itens e verificar se a resposta do jogador é registrada e muda o estado ou o conteúdo seguinte"
+        procedimento: "Localizar diálogos, quadros de pergunta e mecanismos de entrega ou recebimento de itens e verificar se a resposta do jogador é registrada e muda o estado ou o conteúdo seguinte; confirmar no código que duas entradas diferentes levam a saídas diferentes"
         indicadores:
           - "o mecanismo emite informação ao jogador"
           - "a entrada do jogador (escolha, resposta, item) é lida pelo mecanismo"
-          - "a entrada do jogador altera a próxima saída do mecanismo ou o estado do jogo"
+          - "a entrada do jogador altera a próxima saída do mecanismo ou o estado do jogo, com ao menos duas entradas possíveis levando a saídas diferentes"
       documentacao: null
       video:
-        procedimento: "Registrar cada troca entre o jogador e personagem ou mecanismo, anotando a informação recebida, a entrada do jogador e o que o jogo exibe depois"
+        procedimento: "Registrar uma troca entre o jogador e personagem ou mecanismo em duas tentativas (ou duas gravações) com entradas diferentes, anotando a informação recebida, a entrada do jogador e o que o jogo exibe depois em cada tentativa"
         indicadores:
-          - "ao menos uma troca completa observada (informação recebida, entrada do jogador, resposta do jogo)"
-          - "o que o jogo exibe depois difere conforme a entrada do jogador"
+          - "uma troca completa observada (informação recebida, entrada do jogador, resposta do jogo)"
+          - "a mesma troca repetida com outra entrada do jogador"
+          - "o que o jogo exibe depois difere entre as duas tentativas"
     escala:
-      atendido: "O jogo apresenta trocas de dois sentidos com mecanismos, e a entrada do jogador altera a resposta do jogo, em mais de uma situação"
-      parcial: "Há uma única situação de troca de dois sentidos, ou as trocas existem mas a entrada do jogador não altera a resposta do jogo"
+      atendido: "Em ao menos uma situação, o mecanismo entrega informação, recebe a entrada do jogador e altera o que o jogo exibe a seguir conforme essa entrada"
+      parcial: "Em ao menos uma situação, o mecanismo recebe a entrada do jogador, mas o que o jogo exibe a seguir é o mesmo para qualquer entrada"
       nao_atendido: "Os mecanismos apenas emitem informação ao jogador, sem receber entrada dele"
     depende_de: []

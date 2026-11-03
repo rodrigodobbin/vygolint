@@ -11,7 +11,7 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 |---|---|---|---|
 | D01 | Interação | Os desafios do jogo devem ser direcionados a resolução de problemas | D01.1 (A) |
 | D02 | Interação | Avaliar os conteúdos ensinados no jogo de forma a transcender o contexto que eles foram abordados, possibilitando a transposição dos conceitos para resolução de outras situações-problema | D02.1 (A) |
-| D03 | Interação | O desenvolvimento das atividades/missões/minijogos deve ser autorregulado pelo jogador | D03.1 (A), D03.2 (A) |
+| D03 | Interação | O desenvolvimento das atividades/missões/minijogos deve ser autorregulado pelo jogador | D03.1 (A), D03.2 (A), D03.3 (A) |
 | D04 | Interação | O jogador deve interagir com os objetos dos cenários | D04.1 (A) |
 | D05 | Interação | O jogador deve explorar livremente o cenário | D05.1 (A) |
 | D06 | Interação | O jogador deve trocar informações com outros jogadores por comunicação síncrona | D06.1 (AAA) |
@@ -33,16 +33,16 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 **Enunciado.** Cada missão ou minijogo apresenta uma situação-problema cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação
 
-**Justificativa do nível.** essencialidade alta, viabilidade alta. Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Desafios de repetição mecânica reduzem o jogo a treino de estímulo e resposta, o que Carvalho (2020) busca afastar. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional.
+**Justificativa do nível.** essencialidade alta, viabilidade alta. Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Em um desafio de repetição mecânica o jogador executa a mesma ação sem escolher entre alternativas, de modo que a atividade não exige operar com o conteúdo. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional.
 
 **Evidência.**
 - Código: não se aplica
-- Documentação: Listar no documento de design (GDD) cada missão e minijogo e identificar a situação-problema e as alternativas de decisão previstas. Indicadores: cada missão ou minijogo descreve uma situação-problema; há ao menos duas alternativas de resolução ou uma decisão a ser tomada pelo jogador
-- Vídeo: Registrar o início e o fim de cada missão ou minijogo observado e anotar qual decisão o jogador tomou para concluí-lo. Indicadores: ao menos 3 missões ou minijogos observados; em cada um, o jogador escolhe ou combina elementos para resolver a situação; concluir o desafio não depende de repetir a mesma ação até o fim
+- Documentação: Listar no documento de design (GDD) cada missão e minijogo e identificar a situação-problema e as alternativas de decisão previstas. Indicadores: cada missão ou minijogo descreve uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível; uma pergunta com alternativas de resposta, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema
+- Vídeo: Registrar o início e o fim de cada missão ou minijogo observado e anotar qual decisão o jogador tomou para concluí-lo. Indicadores: todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1); em cada um, o jogador escolhe ou combina elementos para resolver a situação; concluir o desafio não depende de repetir a mesma ação até o fim
 
 **Escala.**
 - Atendido: Todas as missões e minijogos observados ou documentados exigem uma decisão do jogador para serem resolvidos
-- Parcial: Parte das missões e minijogos exige decisão; os demais se resolvem repetindo uma ação
+- Parcial: Ao menos uma missão ou minijogo exige decisão do jogador, e ao menos outra se resolve repetindo uma ação
 - Não atendido: Nenhuma missão ou minijogo exige decisão do jogador além de repetir uma ação
 
 **Depende de.** —
@@ -56,19 +56,19 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D02.1 — Nível A
 
-**Enunciado.** Existe ao menos um desafio que exige aplicar um conceito já apresentado em um cenário ou situação diferente daquele em que o conceito foi introduzido
+**Enunciado.** Cada conceito listado como objetivo de aprendizagem no GDD (ou documento equivalente) é cobrado ao menos uma vez em uma missão ou cenário com estrutura de problema diferente daquela em que foi introduzido
 
-**Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski, conceitos científicos se consolidam quando o sujeito os generaliza e os usa de modo consciente em situações novas, e não quando os repete no contexto de origem. Avaliar apenas no cenário de introdução mede memorização do contexto, não domínio do conceito. Exige planejar variações de cenário para o mesmo conteúdo, o que aumenta o esforço de conteúdo e de design; viabilidade média.
+**Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski, conceitos científicos se consolidam quando o sujeito os generaliza e os usa de modo consciente em situações novas, e não quando os repete no contexto de origem. Avaliar apenas na situação de introdução mede memorização do contexto, não domínio do conceito. Exige planejar variações de situação para cada conteúdo, o que aumenta o esforço de conteúdo e de design; viabilidade média.
 
 **Evidência.**
 - Código: não se aplica
-- Documentação: Mapear no GDD, para cada conceito, o cenário de introdução e os cenários em que ele é cobrado em desafios. Indicadores: tabela ou lista associando conceito, cenário de introdução e cenário de avaliação; ao menos um conceito é cobrado em cenário distinto do de introdução
-- Vídeo: Registrar o cenário e o momento em que cada conceito é introduzido e o cenário em que o mesmo conceito é cobrado depois. Indicadores: ao menos um conceito aparece em dois cenários ou missões diferentes; o desafio do segundo cenário só se resolve aplicando o conceito apresentado no primeiro
+- Documentação: Extrair do GDD (ou documento equivalente) a lista de objetivos de aprendizagem e mapear, para cada conceito, a missão ou cenário de introdução e as missões ou cenários em que ele é cobrado. Se o documento não lista objetivos de aprendizagem, registrar a ausência e classificar o critério como nao_atendido. Considerar estrutura de problema diferente quando mudam o objetivo da missão ou o conjunto de objetos ou dados que o jogador manipula; mudar apenas o mapa ou a aparência do cenário não conta. Indicadores: tabela ou lista associando cada conceito do GDD, a missão ou cenário de introdução e a missão ou cenário de avaliação; para cada conceito, a missão de avaliação tem objetivo ou conjunto de objetos ou dados manipulados diferente do da missão de introdução
+- Vídeo: Para cada conceito listado no GDD, registrar a missão e o momento em que ele é introduzido e a missão em que o mesmo conceito é cobrado depois, comparando o objetivo e os objetos manipulados nas duas. Indicadores: o conceito aparece em duas missões ou cenários diferentes; o desafio da segunda missão só se resolve aplicando o conceito apresentado na primeira e tem objetivo ou objetos manipulados diferentes
 
 **Escala.**
-- Atendido: Todos os conceitos centrais do jogo são cobrados ao menos uma vez em cenário diferente do de introdução
-- Parcial: Ao menos um conceito é cobrado em cenário diferente do de introdução, mas outros conceitos centrais são cobrados só no cenário em que foram apresentados
-- Não atendido: Todos os conceitos são cobrados apenas no cenário em que foram introduzidos
+- Atendido: Todos os conceitos listados como objetivo de aprendizagem são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução
+- Parcial: Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado é cobrado só na situação em que foi apresentado
+- Não atendido: Nenhum conceito listado é cobrado fora da situação em que foi introduzido, ou o GDD não lista objetivos de aprendizagem
 
 **Depende de.** —
 
@@ -81,36 +81,54 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D03.1 — Nível A
 
-**Enunciado.** O jogador inicia cada atividade, missão ou minijogo por uma ação própria e o jogo não avança de uma para a próxima sem essa ação
+**Enunciado.** Em ao menos um ponto do jogo, o jogador pode escolher entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo e iniciar a escolhida
 
-**Justificativa do nível.** essencialidade alta, viabilidade alta. Atividade, em Vigotski, é conduzida pelo sujeito; a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz. Se o jogo conduz o jogador de uma etapa à seguinte, o controle permanece no sistema. Basta condicionar a transição a uma ação do jogador, o que não exige recurso técnico especial.
+**Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski, a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz, e decidir o que fazer a seguir é parte desse controle. Num jogo estritamente linear a ordem é decidida pelo sistema, e o jogador apenas executa a sequência. Oferecer atividades em paralelo exige estrutura de progressão não linear e conteúdo que não dependa de uma ordem fixa; viabilidade média.
 
 **Evidência.**
-- Código: Localizar as transições entre missões e minijogos e verificar o que as dispara. Indicadores: a transição é disparada por entrada do jogador (botão, escolha, interação); não há transição disparada apenas por temporizador ou por término automático da etapa anterior
+- Código: Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis. Indicadores: existe estado do jogo em que duas ou mais atividades estão desbloqueadas simultaneamente; a atividade iniciada é determinada por entrada do jogador (menu, mapa, interação), não por ordem fixa no código
 - Documentação: não se aplica
-- Vídeo: Registrar cada transição entre atividades e anotar se houve ação do jogador antes da mudança. Indicadores: ao menos 3 transições observadas; cada transição é precedida por ação do jogador
+- Vídeo: Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia. Indicadores: ao menos um ponto em que duas ou mais atividades aparecem disponíveis ao mesmo tempo (menu, mapa ou cenário); o jogador inicia uma delas e a outra permanece disponível ou é iniciada depois
 
 **Escala.**
-- Atendido: Todas as transições observadas ou identificadas no código dependem de ação do jogador
-- Parcial: Parte das transições depende de ação do jogador; outras ocorrem automaticamente
-- Não atendido: As atividades se sucedem automaticamente, sem ação do jogador
+- Atendido: Em ao menos um ponto, o jogador escolhe entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo
+- Parcial: O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem de elementos dentro de uma atividade (como objetos, perguntas ou etapas)
+- Não atendido: As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa
 
 **Depende de.** —
 
 #### D03.2 — Nível A
 
-**Enunciado.** O jogador conclui cada atividade em seu próprio ritmo: nenhuma atividade tem limite de tempo obrigatório para ser concluída, ou o limite pode ser desativado ou ampliado pelo jogador
+**Enunciado.** O jogador inicia cada atividade, missão ou minijogo por uma ação própria e o jogo não avança de uma para a próxima sem essa ação
 
-**Justificativa do nível.** essencialidade alta, viabilidade alta. Regular a própria atividade inclui decidir quando agir e quanto tempo dedicar a uma tarefa; cronômetro imposto desloca essa decisão para o sistema e pressiona o jogador a responder antes de elaborar. A zona de desenvolvimento proximal difere entre jogadores, então o ritmo também difere. Remover ou tornar opcional o limite de tempo é de baixo custo.
+**Justificativa do nível.** essencialidade alta, viabilidade alta. Atividade, em Vigotski, é conduzida pelo sujeito; a autorregulação inclui decidir o momento de passar de uma etapa à seguinte. Se o jogo encadeia as etapas sozinho, o controle da transição permanece no sistema. Basta condicionar a transição a uma ação do jogador, o que não exige recurso técnico especial.
+
+**Evidência.**
+- Código: Localizar as transições entre missões e minijogos e verificar o que as dispara. Indicadores: a transição é disparada por entrada do jogador (botão, escolha, interação); não há transição disparada apenas por temporizador ou por término automático da etapa anterior
+- Documentação: não se aplica
+- Vídeo: Registrar cada transição entre atividades e anotar se houve ação do jogador antes da mudança. Indicadores: todas as transições presentes no vídeo foram registradas (mínimo 1); cada transição é precedida por ação do jogador
+
+**Escala.**
+- Atendido: Todas as transições observadas ou identificadas no código dependem de ação do jogador
+- Parcial: Ao menos uma transição depende de ação do jogador e ao menos outra ocorre automaticamente
+- Não atendido: As atividades se sucedem automaticamente, sem ação do jogador
+
+**Depende de.** —
+
+#### D03.3 — Nível A
+
+**Enunciado.** Nenhuma atividade tem limite de tempo obrigatório para ser concluída, ou o limite pode ser desativado ou ampliado pelo jogador; limite obrigatório é um temporizador cujo esgotamento encerra ou reprova a atividade
+
+**Justificativa do nível.** essencialidade alta, viabilidade alta. Em Vigotski, a mediação precisa responder ao ritmo com que o aprendiz elabora a tarefa, e esse ritmo não é conhecido de antemão pelo jogo. Um temporizador obrigatório impõe a todos o mesmo ritmo e leva o jogador a responder antes de elaborar. Remover o limite ou torná-lo opcional é de baixo custo.
 
 **Evidência.**
 - Código: Procurar temporizadores associados a missões e minijogos e verificar o que ocorre quando o tempo se esgota e se há opção de desativá-los. Indicadores: existência de temporizador com consequência de falha ao esgotar; existência de configuração que desativa ou amplia o temporizador
 - Documentação: Verificar no GDD as regras de tempo de cada atividade. Indicadores: indicação de quais atividades têm limite de tempo; indicação de opção do jogador para alterar o limite
-- Vídeo: Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite. Indicadores: ao menos 3 atividades observadas; o jogador permanece na atividade sem ser interrompido por esgotamento de tempo
+- Vídeo: Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite. Indicadores: todas as atividades presentes no vídeo foram observadas (mínimo 1); o jogador permanece na atividade sem ser interrompido por esgotamento de tempo
 
 **Escala.**
 - Atendido: Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite
-- Parcial: Parte das atividades tem limite de tempo obrigatório; as demais não têm
+- Parcial: Ao menos uma atividade tem limite de tempo obrigatório e ao menos outra não tem
 - Não atendido: Todas as atividades têm limite de tempo obrigatório que o jogador não pode alterar
 
 **Depende de.** —
@@ -124,19 +142,19 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D04.1 — Nível A
 
-**Enunciado.** Ao menos um objeto de cada cenário responde à interação do jogador com mudança de estado ou com informação relacionada ao conteúdo do jogo
+**Enunciado.** Ao menos um objeto de cada cenário responde à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem listado no GDD (ou documento equivalente)
 
-**Justificativa do nível.** essencialidade alta, viabilidade alta. Para Vigotski o conhecimento é construído na atividade sobre objetos e instrumentos, e interagir com o ambiente é a forma pela qual o jogador exerce essa atividade. Um cenário apenas contemplativo reduz o jogador a espectador. Programar resposta a clique, toque ou colisão é recurso básico de qualquer motor de jogo.
+**Justificativa do nível.** essencialidade alta, viabilidade alta. Para Vigotski o conhecimento é construído na atividade sobre objetos e instrumentos, e interagir com o ambiente é a forma pela qual o jogador exerce essa atividade. Um cenário apenas contemplativo reduz o jogador a espectador, e um objeto que responde sem relação com o conteúdo mantém a interação fora da atividade de aprender. Programar resposta a clique, toque ou colisão é recurso básico de qualquer motor de jogo.
 
 **Evidência.**
-- Código: Listar os objetos de cada cenário que têm tratador de interação (clique, toque, colisão, uso de item) e o efeito de cada tratador. Indicadores: cada cenário tem ao menos um objeto com tratador de interação; o efeito do tratador é mudança de estado do objeto ou exibição de informação ligada ao conteúdo
+- Código: Listar os objetos de cada cenário que têm manipulador de evento (handler) de interação (clique, toque, colisão, uso de item) e o efeito de cada manipulador, e comparar o efeito com os objetivos de aprendizagem do GDD. Considerar que o efeito se relaciona a um objetivo quando a informação exibida ou o novo estado enuncia, exemplifica ou testa um conceito listado, ou é dado necessário para resolver um desafio ligado a ele. Indicadores: cada cenário tem ao menos um objeto com manipulador de evento de interação; o efeito do manipulador é mudança de estado ou exibição de informação que se relaciona a um objetivo de aprendizagem do GDD
 - Documentação: não se aplica
-- Vídeo: Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida. Indicadores: ao menos um objeto interagido por cenário; o objeto muda de estado ou exibe informação ligada ao conteúdo
+- Vídeo: Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD. Indicadores: ao menos um objeto interagido por cenário; o objeto muda de estado ou exibe informação que se relaciona a um objetivo de aprendizagem do GDD
 
 **Escala.**
-- Atendido: Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação ligada ao conteúdo
-- Parcial: Alguns cenários têm objeto interativo; outros não têm, ou o objeto responde sem relação com o conteúdo
-- Não atendido: Nenhum objeto dos cenários responde à interação do jogador
+- Atendido: Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD
+- Parcial: Ao menos um cenário tem objeto que responde nesse sentido e ao menos outro cenário não tem
+- Não atendido: Nenhum cenário tem objeto que responda à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD
 
 **Depende de.** —
 
@@ -149,19 +167,19 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 #### D05.1 — Nível A
 
-**Enunciado.** Em ao menos um cenário, o jogador alcança áreas ou objetos que não pertencem ao caminho da missão em curso, sem que o jogo o impeça ou o conduza de volta ao objetivo
+**Enunciado.** Em todos os cenários jogáveis, o jogador alcança áreas ou objetos que não pertencem ao caminho da missão em curso, sem que o jogo o impeça ou o conduza de volta ao objetivo; caminho da missão é a sequência de objetivos exigidos para completá-la
 
-**Justificativa do nível.** essencialidade alta, viabilidade media. A exploração é a atividade do jogador sobre o ambiente: é por ela que ele formula hipóteses e descobre relações, em vez de receber um percurso pronto. Um cenário reduzido ao caminho da missão converte a exploração em seguimento de instruções. Construir áreas além do caminho principal acrescenta trabalho de arte e de nível; viabilidade média.
+**Justificativa do nível.** essencialidade alta, viabilidade media. Em Vigotski o conhecimento se constrói na atividade do sujeito sobre o meio, e é o jogador quem decide o que investigar. Um cenário reduzido ao caminho da missão limita essa atividade ao que o jogo prescreve e converte a exploração em seguimento de instruções. Construir áreas além do caminho principal acrescenta trabalho de arte e de nível; viabilidade média.
 
 **Evidência.**
 - Código: não se aplica
-- Documentação: Verificar no GDD ou nos mapas de nível as áreas de cada cenário e se existem regiões fora do caminho da missão. Indicadores: mapa ou descrição que indica áreas fora do caminho da missão; ausência de regra que bloqueie o acesso a essas áreas durante a missão
-- Vídeo: Observar o jogador deixando o caminho da missão e registrar o que o jogo faz em seguida. Indicadores: o jogador visita ao menos uma área fora do caminho da missão; o jogo não interrompe, bloqueia nem reposiciona o jogador por causa disso
+- Documentação: Identificar no GDD ou nos mapas de nível, para cada cenário, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige. Indicadores: o GDD ou mapa descreve áreas ou objetos acessíveis fora do caminho da missão, isto é, que nenhum objetivo da missão exige; o GDD descreve o deslocamento do jogador até essas áreas durante a missão
+- Vídeo: Observar o jogador deixando o caminho da missão e registrar o que o jogo faz em seguida. Indicadores: o jogador visita ao menos uma área ou objeto fora do caminho da missão em cada cenário observado; o jogo não interrompe, bloqueia nem reposiciona o jogador por causa disso
 
 **Escala.**
-- Atendido: Todos os cenários jogáveis têm áreas fora do caminho da missão acessíveis sem bloqueio
-- Parcial: Ao menos um cenário tem áreas acessíveis fora do caminho da missão; os demais restringem o jogador ao caminho
-- Não atendido: Nenhum cenário permite alcançar áreas fora do caminho da missão em curso
+- Atendido: Todos os cenários jogáveis têm áreas ou objetos fora do caminho da missão acessíveis sem bloqueio
+- Parcial: Ao menos um cenário tem áreas ou objetos acessíveis fora do caminho da missão e ao menos outro cenário restringe o jogador ao caminho
+- Não atendido: Nenhum cenário permite alcançar áreas ou objetos fora do caminho da missão em curso
 
 **Depende de.** —
 
@@ -226,16 +244,16 @@ Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolviment
 
 **Enunciado.** Em ao menos uma situação do jogo, um personagem não jogável ou mecanismo entrega informação ao jogador e em seguida recebe dele uma resposta, escolha ou item que altera o que o jogo exibe a seguir
 
-**Justificativa do nível.** essencialidade alta, viabilidade alta. Em Vigotski, a interação com o meio é mediada por signos e instrumentos, e uma troca de mão dupla com o jogo faz do sistema um interlocutor, e não um painel de exibição. Se o jogo só emite informação, o jogador permanece receptor. Diálogos com escolhas e entrega de itens são mecânicas comuns e de baixo custo.
+**Justificativa do nível.** essencialidade alta, viabilidade alta. Em Vigotski, a interação com o meio é mediada por signos e instrumentos, e uma troca de mão dupla com o jogo faz do sistema um interlocutor, e não um painel de exibição. Se o jogo só emite informação, o jogador permanece receptor. Uma situação com troca de mão dupla já estabelece essa relação, e diálogos com escolhas e entrega de itens são mecânicas comuns e de baixo custo.
 
 **Evidência.**
-- Código: Localizar diálogos, quadros de pergunta e mecanismos de entrega ou recebimento de itens e verificar se a resposta do jogador é registrada e muda o estado ou o conteúdo seguinte. Indicadores: o mecanismo emite informação ao jogador; a entrada do jogador (escolha, resposta, item) é lida pelo mecanismo; a entrada do jogador altera a próxima saída do mecanismo ou o estado do jogo
+- Código: Localizar diálogos, quadros de pergunta e mecanismos de entrega ou recebimento de itens e verificar se a resposta do jogador é registrada e muda o estado ou o conteúdo seguinte; confirmar no código que duas entradas diferentes levam a saídas diferentes. Indicadores: o mecanismo emite informação ao jogador; a entrada do jogador (escolha, resposta, item) é lida pelo mecanismo; a entrada do jogador altera a próxima saída do mecanismo ou o estado do jogo, com ao menos duas entradas possíveis levando a saídas diferentes
 - Documentação: não se aplica
-- Vídeo: Registrar cada troca entre o jogador e personagem ou mecanismo, anotando a informação recebida, a entrada do jogador e o que o jogo exibe depois. Indicadores: ao menos uma troca completa observada (informação recebida, entrada do jogador, resposta do jogo); o que o jogo exibe depois difere conforme a entrada do jogador
+- Vídeo: Registrar uma troca entre o jogador e personagem ou mecanismo em duas tentativas (ou duas gravações) com entradas diferentes, anotando a informação recebida, a entrada do jogador e o que o jogo exibe depois em cada tentativa. Indicadores: uma troca completa observada (informação recebida, entrada do jogador, resposta do jogo); a mesma troca repetida com outra entrada do jogador; o que o jogo exibe depois difere entre as duas tentativas
 
 **Escala.**
-- Atendido: O jogo apresenta trocas de dois sentidos com mecanismos, e a entrada do jogador altera a resposta do jogo, em mais de uma situação
-- Parcial: Há uma única situação de troca de dois sentidos, ou as trocas existem mas a entrada do jogador não altera a resposta do jogo
+- Atendido: Em ao menos uma situação, o mecanismo entrega informação, recebe a entrada do jogador e altera o que o jogo exibe a seguir conforme essa entrada
+- Parcial: Em ao menos uma situação, o mecanismo recebe a entrada do jogador, mas o que o jogo exibe a seguir é o mesmo para qualquer entrada
 - Não atendido: Os mecanismos apenas emitem informação ao jogador, sem receber entrada dele
 
 **Depende de.** —

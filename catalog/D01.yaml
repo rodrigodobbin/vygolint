@@ -11,22 +11,22 @@ criterios:
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
-      texto: "Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Desafios de repetição mecânica reduzem o jogo a treino de estímulo e resposta, o que Carvalho (2020) busca afastar. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional."
+      texto: "Para Vigotski a aprendizagem nasce da atividade do sujeito sobre um problema, e o conhecimento é construído quando o jogador precisa operar com os conceitos, não quando os reproduz. Em um desafio de repetição mecânica o jogador executa a mesma ação sem escolher entre alternativas, de modo que a atividade não exige operar com o conteúdo. Estruturar desafios como situações-problema é uma decisão de projeto, sem custo técnico adicional."
     evidencia:
       codigo: null
       documentacao:
         procedimento: "Listar no documento de design (GDD) cada missão e minijogo e identificar a situação-problema e as alternativas de decisão previstas"
         indicadores:
-          - "cada missão ou minijogo descreve uma situação-problema"
-          - "há ao menos duas alternativas de resolução ou uma decisão a ser tomada pelo jogador"
+          - "cada missão ou minijogo descreve uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível"
+          - "uma pergunta com alternativas de resposta, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema"
       video:
         procedimento: "Registrar o início e o fim de cada missão ou minijogo observado e anotar qual decisão o jogador tomou para concluí-lo"
         indicadores:
-          - "ao menos 3 missões ou minijogos observados"
+          - "todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1)"
           - "em cada um, o jogador escolhe ou combina elementos para resolver a situação"
           - "concluir o desafio não depende de repetir a mesma ação até o fim"
     escala:
       atendido: "Todas as missões e minijogos observados ou documentados exigem uma decisão do jogador para serem resolvidos"
-      parcial: "Parte das missões e minijogos exige decisão; os demais se resolvem repetindo uma ação"
+      parcial: "Ao menos uma missão ou minijogo exige decisão do jogador, e ao menos outra se resolve repetindo uma ação"
       nao_atendido: "Nenhuma missão ou minijogo exige decisão do jogador além de repetir uma ação"
     depende_de: []

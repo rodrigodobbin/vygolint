@@ -7,11 +7,35 @@ aplicabilidade: null
 criterios:
   - id: D03.1
     nivel: A
+    enunciado: "Em ao menos um ponto do jogo, o jogador pode escolher entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo e iniciar a escolhida"
+    nivel_justificativa:
+      essencialidade: alta
+      viabilidade: media
+      texto: "Em Vigotski, a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz, e decidir o que fazer a seguir é parte desse controle. Num jogo estritamente linear a ordem é decidida pelo sistema, e o jogador apenas executa a sequência. Oferecer atividades em paralelo exige estrutura de progressão não linear e conteúdo que não dependa de uma ordem fixa; viabilidade média."
+    evidencia:
+      codigo:
+        procedimento: "Localizar a lógica de desbloqueio de missões e minijogos e verificar se há algum estado do jogo em que duas ou mais atividades estão desbloqueadas ao mesmo tempo e selecionáveis"
+        indicadores:
+          - "existe estado do jogo em que duas ou mais atividades estão desbloqueadas simultaneamente"
+          - "a atividade iniciada é determinada por entrada do jogador (menu, mapa, interação), não por ordem fixa no código"
+      documentacao: null
+      video:
+        procedimento: "Registrar os pontos em que o jogo oferece atividades e anotar quantas estão disponíveis e qual o jogador inicia"
+        indicadores:
+          - "ao menos um ponto em que duas ou mais atividades aparecem disponíveis ao mesmo tempo (menu, mapa ou cenário)"
+          - "o jogador inicia uma delas e a outra permanece disponível ou é iniciada depois"
+    escala:
+      atendido: "Em ao menos um ponto, o jogador escolhe entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo"
+      parcial: "O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem de elementos dentro de uma atividade (como objetos, perguntas ou etapas)"
+      nao_atendido: "As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa"
+    depende_de: []
+  - id: D03.2
+    nivel: A
     enunciado: "O jogador inicia cada atividade, missão ou minijogo por uma ação própria e o jogo não avança de uma para a próxima sem essa ação"
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
-      texto: "Atividade, em Vigotski, é conduzida pelo sujeito; a autorregulação é o movimento em que o controle da própria ação passa do outro para o aprendiz. Se o jogo conduz o jogador de uma etapa à seguinte, o controle permanece no sistema. Basta condicionar a transição a uma ação do jogador, o que não exige recurso técnico especial."
+      texto: "Atividade, em Vigotski, é conduzida pelo sujeito; a autorregulação inclui decidir o momento de passar de uma etapa à seguinte. Se o jogo encadeia as etapas sozinho, o controle da transição permanece no sistema. Basta condicionar a transição a uma ação do jogador, o que não exige recurso técnico especial."
     evidencia:
       codigo:
         procedimento: "Localizar as transições entre missões e minijogos e verificar o que as dispara"
@@ -22,20 +46,20 @@ criterios:
       video:
         procedimento: "Registrar cada transição entre atividades e anotar se houve ação do jogador antes da mudança"
         indicadores:
-          - "ao menos 3 transições observadas"
+          - "todas as transições presentes no vídeo foram registradas (mínimo 1)"
           - "cada transição é precedida por ação do jogador"
     escala:
       atendido: "Todas as transições observadas ou identificadas no código dependem de ação do jogador"
-      parcial: "Parte das transições depende de ação do jogador; outras ocorrem automaticamente"
+      parcial: "Ao menos uma transição depende de ação do jogador e ao menos outra ocorre automaticamente"
       nao_atendido: "As atividades se sucedem automaticamente, sem ação do jogador"
     depende_de: []
-  - id: D03.2
+  - id: D03.3
     nivel: A
-    enunciado: "O jogador conclui cada atividade em seu próprio ritmo: nenhuma atividade tem limite de tempo obrigatório para ser concluída, ou o limite pode ser desativado ou ampliado pelo jogador"
+    enunciado: "Nenhuma atividade tem limite de tempo obrigatório para ser concluída, ou o limite pode ser desativado ou ampliado pelo jogador; limite obrigatório é um temporizador cujo esgotamento encerra ou reprova a atividade"
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
-      texto: "Regular a própria atividade inclui decidir quando agir e quanto tempo dedicar a uma tarefa; cronômetro imposto desloca essa decisão para o sistema e pressiona o jogador a responder antes de elaborar. A zona de desenvolvimento proximal difere entre jogadores, então o ritmo também difere. Remover ou tornar opcional o limite de tempo é de baixo custo."
+      texto: "Em Vigotski, a mediação precisa responder ao ritmo com que o aprendiz elabora a tarefa, e esse ritmo não é conhecido de antemão pelo jogo. Um temporizador obrigatório impõe a todos o mesmo ritmo e leva o jogador a responder antes de elaborar. Remover o limite ou torná-lo opcional é de baixo custo."
     evidencia:
       codigo:
         procedimento: "Procurar temporizadores associados a missões e minijogos e verificar o que ocorre quando o tempo se esgota e se há opção de desativá-los"
@@ -50,10 +74,10 @@ criterios:
       video:
         procedimento: "Observar cada atividade registrando se há contador de tempo visível e se o jogador pode permanecer nela sem limite"
         indicadores:
-          - "ao menos 3 atividades observadas"
+          - "todas as atividades presentes no vídeo foram observadas (mínimo 1)"
           - "o jogador permanece na atividade sem ser interrompido por esgotamento de tempo"
     escala:
       atendido: "Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite"
-      parcial: "Parte das atividades tem limite de tempo obrigatório; as demais não têm"
+      parcial: "Ao menos uma atividade tem limite de tempo obrigatório e ao menos outra não tem"
       nao_atendido: "Todas as atividades têm limite de tempo obrigatório que o jogador não pode alterar"
     depende_de: []

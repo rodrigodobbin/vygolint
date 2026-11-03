@@ -7,25 +7,25 @@ aplicabilidade: null
 criterios:
   - id: D04.1
     nivel: A
-    enunciado: "Ao menos um objeto de cada cenário responde à interação do jogador com mudança de estado ou com informação relacionada ao conteúdo do jogo"
+    enunciado: "Ao menos um objeto de cada cenário responde à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem listado no GDD (ou documento equivalente)"
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
-      texto: "Para Vigotski o conhecimento é construído na atividade sobre objetos e instrumentos, e interagir com o ambiente é a forma pela qual o jogador exerce essa atividade. Um cenário apenas contemplativo reduz o jogador a espectador. Programar resposta a clique, toque ou colisão é recurso básico de qualquer motor de jogo."
+      texto: "Para Vigotski o conhecimento é construído na atividade sobre objetos e instrumentos, e interagir com o ambiente é a forma pela qual o jogador exerce essa atividade. Um cenário apenas contemplativo reduz o jogador a espectador, e um objeto que responde sem relação com o conteúdo mantém a interação fora da atividade de aprender. Programar resposta a clique, toque ou colisão é recurso básico de qualquer motor de jogo."
     evidencia:
       codigo:
-        procedimento: "Listar os objetos de cada cenário que têm tratador de interação (clique, toque, colisão, uso de item) e o efeito de cada tratador"
+        procedimento: "Listar os objetos de cada cenário que têm manipulador de evento (handler) de interação (clique, toque, colisão, uso de item) e o efeito de cada manipulador, e comparar o efeito com os objetivos de aprendizagem do GDD. Considerar que o efeito se relaciona a um objetivo quando a informação exibida ou o novo estado enuncia, exemplifica ou testa um conceito listado, ou é dado necessário para resolver um desafio ligado a ele"
         indicadores:
-          - "cada cenário tem ao menos um objeto com tratador de interação"
-          - "o efeito do tratador é mudança de estado do objeto ou exibição de informação ligada ao conteúdo"
+          - "cada cenário tem ao menos um objeto com manipulador de evento de interação"
+          - "o efeito do manipulador é mudança de estado ou exibição de informação que se relaciona a um objetivo de aprendizagem do GDD"
       documentacao: null
       video:
-        procedimento: "Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida"
+        procedimento: "Percorrer cada cenário observado registrando os objetos com os quais o jogador interage e a resposta obtida, e comparar a resposta com os objetivos de aprendizagem do GDD"
         indicadores:
           - "ao menos um objeto interagido por cenário"
-          - "o objeto muda de estado ou exibe informação ligada ao conteúdo"
+          - "o objeto muda de estado ou exibe informação que se relaciona a um objetivo de aprendizagem do GDD"
     escala:
-      atendido: "Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação ligada ao conteúdo"
-      parcial: "Alguns cenários têm objeto interativo; outros não têm, ou o objeto responde sem relação com o conteúdo"
-      nao_atendido: "Nenhum objeto dos cenários responde à interação do jogador"
+      atendido: "Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD"
+      parcial: "Ao menos um cenário tem objeto que responde nesse sentido e ao menos outro cenário não tem"
+      nao_atendido: "Nenhum cenário tem objeto que responda à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD"
     depende_de: []
