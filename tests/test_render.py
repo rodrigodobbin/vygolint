@@ -64,3 +64,34 @@ class RenderMarkdownTest(unittest.TestCase):
     def test_ressalva_present(self):
         out = render_markdown([diretriz_valida()], self.cats)
         self.assertIn("suprimiu as categorias", out)
+
+
+from vygolint_catalog.render import escape_latex, render_latex
+
+
+class RenderLatexTest(unittest.TestCase):
+    def test_escape(self):
+        self.assertEqual(escape_latex("a & b % c _ d # e"), r"a \& b \% c \_ d \# e")
+        self.assertEqual(escape_latex(r"x\y"), r"x\textbackslash{}y")
+        self.assertEqual(escape_latex("{a}"), r"\{a\}")
+
+    def test_longtable_structure(self):
+        out = render_latex([diretriz_valida()], categorias_validas())
+        self.assertTrue(out.startswith("% ARQUIVO GERADO por scripts/build_catalog.py. Não edite à mão."))
+        self.assertIn(r"\begin{longtable}", out)
+        self.assertIn(r"\label{tab:catalogo_vygolint}", out)
+        self.assertIn(r"\endfirsthead", out)
+        self.assertIn(r"\endhead", out)
+        self.assertIn(r"D17 & Mediação & O jogo deve exibir feedback construtivo para as ações do jogador & D17.1 (A) \\", out)
+        self.assertIn(r"\end{longtable}", out)
+
+    def test_rows_escaped_and_sorted(self):
+        a = diretriz_valida()
+        a["diretriz"] = "Texto com & e 100%"
+        b = diretriz_valida()
+        b["id"] = "D06"
+        b["categoria"] = "interacao"
+        b["criterios"][0]["id"] = "D06.1"
+        out = render_latex([a, b], categorias_validas())
+        self.assertIn(r"Texto com \& e 100\%", out)
+        self.assertLess(out.index("D06 &"), out.index("D17 &"))

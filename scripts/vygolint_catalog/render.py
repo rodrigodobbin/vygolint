@@ -1,5 +1,7 @@
 """Render validated catalog dicts to Markdown and LaTeX. Pure functions, no I/O."""
 
+import re
+
 GENERATED_MD = "<!-- ARQUIVO GERADO por scripts/build_catalog.py. Não edite à mão. -->"
 GENERATED_TEX = "% ARQUIVO GERADO por scripts/build_catalog.py. Não edite à mão."
 
@@ -85,3 +87,50 @@ def render_markdown(diretrizes, categorias):
                 linhas.append(f"- {nome}: {c['escala'][chave]}")
             linhas += ["", f"**Depende de.** {_depende_de(c)}", ""]
     return "\n".join(linhas).rstrip() + "\n"
+
+
+_LATEX_MAP = {
+    "\\": r"\textbackslash{}",
+    "&": r"\&",
+    "%": r"\%",
+    "$": r"\$",
+    "#": r"\#",
+    "_": r"\_",
+    "{": r"\{",
+    "}": r"\}",
+    "~": r"\textasciitilde{}",
+    "^": r"\textasciicircum{}",
+}
+_LATEX_RE = re.compile("|".join(re.escape(k) for k in _LATEX_MAP))
+
+
+def escape_latex(text):
+    """Single-pass escape so replacements never re-escape each other."""
+    return _LATEX_RE.sub(lambda m: _LATEX_MAP[m.group()], text)
+
+
+def render_latex(diretrizes, categorias):
+    cab = r"\textbf{ID} & \textbf{Categoria} & \textbf{Diretriz} & \textbf{Critérios} \\"
+    linhas = [
+        GENERATED_TEX,
+        r"\begin{longtable}{p{1.1cm}p{2.6cm}p{7.2cm}p{2.6cm}}",
+        r"\caption{Diretrizes de Carvalho (2020) e critérios de conformidade do vygolint}"
+        r"\label{tab:catalogo_vygolint}\\",
+        r"\hline",
+        cab,
+        r"\hline",
+        r"\endfirsthead",
+        r"\hline",
+        cab,
+        r"\hline",
+        r"\endhead",
+        r"\hline",
+        r"\endfoot",
+    ]
+    for d in _ordenadas(diretrizes):
+        linhas.append(
+            f"{d['id']} & {escape_latex(_nome_categoria(d['categoria'], categorias))} & "
+            f"{escape_latex(d['diretriz'])} & {escape_latex(_criterios_resumo(d))} \\\\"
+        )
+    linhas.append(r"\end{longtable}")
+    return "\n".join(linhas) + "\n"
