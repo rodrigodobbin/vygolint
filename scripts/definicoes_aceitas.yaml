@@ -1,0 +1,33 @@
+# Diferenças aceitas entre o texto da etapa 1 (git main) e o catálogo com glossário.
+# Lido por scripts/verify_definicoes.py (--aceitas). Cada item cita a decisão em
+# docs/superpowers/specs/2026-11-03-definicoes-divergencias.md quando tipo == decisao.
+#
+# Cláusulas na forma canônica impressa pelo verificador: "termo = corpo" quando a cláusula
+# abre uma definição, senão como escrita (espaços colapsados, sem ponto final).
+# `criterio` aceita um id (D28.1) ou "*" (qualquer critério); em `clausulas` é opcional ("*").
+#
+# clausulas:      # cláusula da etapa 1 -> cláusula(s) do novo formato
+#   - de: "missão = uma atividade com objetivo e condição de conclusão próprios"
+#     para: "missão = uma unidade do jogo com …"   # ou lista, quando o termo virou duas chaves
+#     tipo: equivalente                            # equivalente | decisao
+#     decisao: null                                # número da decisão no documento de divergências
+# adicoes:        # cláusulas que não existiam na etapa 1 (`chave` cobre todas as cláusulas da chave)
+#   - criterio: "*"
+#     chave: documentacao_equivalente
+#   - criterio: D29.1
+#     clausula: "…"
+# remocoes:       # cláusulas da etapa 1 sem correspondente
+#   - criterio: D28.1
+#     clausula: "dispositivo = um destes elementos …, conforme definidos no enunciado"
+# campos:         # edições fora das definições
+#   - criterio: D30.1
+#     campo: "*"                 # "*" = todos os campos do critério (só com remover)
+#     remover: ", e missão é uma atividade …"
+#   - criterio: D01.1
+#     campo: video.indicadores[1]
+#     de: "…"
+#     para: "…"
+clausulas: []
+adicoes: []
+remocoes: []
+campos: []

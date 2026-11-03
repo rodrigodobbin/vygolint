@@ -2,6 +2,7 @@ import copy
 import sys
 import unittest
 from collections import defaultdict
+from pathlib import Path
 
 import yaml
 
@@ -20,6 +21,7 @@ from migrate_definicoes import (  # noqa: E402
     normalizar_clausula,
     relatorio_markdown,
 )
+from verify_definicoes import _parser, comparar_criterio, comparar_diretriz, main as verify_main  # noqa: E402
 
 
 class GlossarioTest(unittest.TestCase):
@@ -227,3 +229,228 @@ class MigrarCriterioTest(unittest.TestCase):
         self.assertEqual(len(linhas), 1)
         self.assertIn("enunciado", linhas[0])
         self.assertIn("escala.parcial", linhas[0])
+
+
+class VerifyTest(unittest.TestCase):
+    def setUp(self):
+        from helpers import diretriz_valida
+        self.g = load_definicoes(REPO / "catalog" / "definicoes.yaml")
+        self.antigo = diretriz_valida()["criterios"][0]
+        self.antigo["enunciado"] = "A abertura de cada missão tem um dispositivo; Definições: missão é " + self.g["missao"]["texto"] + "; dispositivo é um elemento da abertura"
+        self.antigo["escala"]["parcial"] = "Uma missão tem, outra não. Definição: dispositivo é um elemento da abertura"
+        self.novo = diretriz_valida()["criterios"][0]
+        self.novo["enunciado"] = "A abertura de cada missão tem um dispositivo"
+        self.novo["escala"]["parcial"] = "Uma missão tem, outra não, nos termos das definições"
+        self.novo["definicoes"] = {"glossario": ["missao"], "locais": {"dispositivo": "um elemento da abertura"}}
+        self.aceitas = {"clausulas": [], "adicoes": [], "remocoes": [], "campos": []}
+
+    def test_equal_after_migration(self):
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_changed_field_text_is_reported(self):
+        self.novo["enunciado"] = "A abertura de cada missão tem dois dispositivos"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("enunciado" in d for d in diffs), diffs)
+        self.aceitas["campos"].append({"criterio": "D17.1", "campo": "enunciado", "de": "A abertura de cada missão tem um dispositivo", "para": "A abertura de cada missão tem dois dispositivos"})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_lost_definition_is_reported(self):
+        del self.novo["definicoes"]["locais"]
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("dispositivo" in d for d in diffs), diffs)
+        self.aceitas["remocoes"].append({"criterio": "D17.1", "clausula": "dispositivo = um elemento da abertura"})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_added_glossary_key_needs_adicao(self):
+        self.novo["definicoes"]["glossario"].append("desafio")
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("desafio" in d for d in diffs), diffs)
+        self.aceitas["adicoes"].append({"criterio": "*", "chave": "desafio"})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_variant_needs_clausula_mapping(self):
+        self.antigo["enunciado"] = self.antigo["enunciado"].replace(self.g["missao"]["texto"], "uma atividade com objetivo próprio")
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("missão = uma atividade" in d for d in diffs), diffs)
+        self.aceitas["clausulas"].append({"de": "missão = uma atividade com objetivo próprio", "para": normalizar_clausula("missão é " + self.g["missao"]["texto"]), "tipo": "decisao", "decisao": 1})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_remover_in_campos(self):
+        self.antigo["escala"]["atendido"] = "Todas orientam, e missão é uma atividade"
+        self.novo["escala"]["atendido"] = "Todas orientam"
+        self.aceitas["campos"].append({"criterio": "D17.1", "campo": "*", "remover": ", e missão é uma atividade"})
+        self.aceitas["clausulas"].append({"de": "missão = uma atividade", "para": normalizar_clausula("missão é " + self.g["missao"]["texto"]), "tipo": "decisao", "decisao": 1})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    # --- additions beyond the brief ---
+
+    def test_missing_or_null_definicoes_does_not_raise(self):
+        for valor in ("ausente", None, {}, {"glossario": None, "locais": None}):
+            novo = copy.deepcopy(self.novo)
+            if valor == "ausente":
+                del novo["definicoes"]
+            else:
+                novo["definicoes"] = valor
+            diffs = comparar_criterio(self.antigo, novo, self.g, self.aceitas)
+            self.assertTrue(any("missão = " in d for d in diffs), (valor, diffs))
+            self.assertTrue(any("dispositivo = " in d for d in diffs), (valor, diffs))
+
+    def test_unknown_glossary_key_is_reported_not_raised(self):
+        self.novo["definicoes"]["glossario"].append("inexistente")
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("inexistente" in d for d in diffs), diffs)
+        self.aceitas["adicoes"].append({"criterio": "*", "chave": "inexistente"})
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("inexistente" in d for d in diffs), diffs)
+
+    def test_adicao_by_key_covers_every_clause_of_the_key(self):
+        self.novo["definicoes"]["glossario"].append("cenario_jogavel")
+        self.assertEqual(len(clausulas(self.g["cenario_jogavel"]["texto"])), 2)
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertEqual(len(diffs), 2, diffs)
+        self.aceitas["adicoes"].append({"criterio": "D17.1", "chave": "cenario_jogavel"})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_aceitas_for_other_criterion_do_not_apply(self):
+        self.novo["definicoes"]["glossario"].append("desafio")
+        self.aceitas["adicoes"].append({"criterio": "D18.1", "chave": "desafio"})
+        self.assertTrue(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas))
+
+    def test_clausula_mapping_to_two_keys(self):
+        self.antigo["enunciado"] = "Cada missão ou desafio tem fim; Definições: missão ou desafio é uma atividade"
+        self.novo["enunciado"] = "Cada missão ou desafio tem fim"
+        self.novo["definicoes"]["glossario"] = ["missao", "minijogo", "desafio"]
+        self.aceitas["clausulas"].append({"de": "missão ou desafio = uma atividade", "para": [
+            normalizar_clausula("missão é " + self.g["missao"]["texto"]), normalizar_clausula("desafio é " + self.g["desafio"]["texto"])], "tipo": "decisao", "decisao": 2})
+        self.aceitas["adicoes"].append({"criterio": "*", "chave": "minijogo"})
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+
+    def test_remover_that_matches_nothing_is_reported(self):
+        self.aceitas["campos"].append({"criterio": "D17.1", "campo": "*", "remover": ", e missão é outra coisa"})
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("remover" in d for d in diffs), diffs)
+
+    def test_new_or_dropped_text_field_is_reported(self):
+        self.novo["evidencia"]["video"]["indicadores"].append("indicador novo")
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("video.indicadores[2]" in d for d in diffs), diffs)
+        self.novo["evidencia"]["video"]["indicadores"].pop()
+        self.novo["evidencia"]["video"]["indicadores"].pop()
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("video.indicadores[1]" in d for d in diffs), diffs)
+
+    def test_non_text_fields_must_not_change(self):
+        self.novo["nivel"] = "AA"
+        self.novo["nivel_justificativa"]["texto"] = "outro"
+        diffs = comparar_criterio(self.antigo, self.novo, self.g, self.aceitas)
+        self.assertTrue(any("nivel" in d and "AA" in d for d in diffs), diffs)
+        self.assertTrue(any("nivel_justificativa" in d for d in diffs), diffs)
+
+    def test_diretriz_level_fields_and_criteria_pairing(self):
+        from helpers import diretriz_valida
+        antigo, novo = diretriz_valida(), diretriz_valida()
+        antigo["criterios"][0] = self.antigo
+        novo["criterios"][0] = self.novo
+        self.assertEqual(comparar_diretriz(antigo, novo, self.g, self.aceitas), [])
+        novo["fonte"] = "outra"
+        novo["criterios"].append(dict(self.novo, id="D17.2"))
+        antigo["criterios"].append(dict(self.antigo, id="D17.3"))
+        diffs = comparar_diretriz(antigo, novo, self.g, self.aceitas)
+        self.assertTrue(any("fonte" in d for d in diffs), diffs)
+        self.assertTrue(any("D17.2" in d for d in diffs), diffs)
+        self.assertTrue(any("D17.3" in d for d in diffs), diffs)
+
+    def test_pointer_already_in_stage_1_text(self):
+        # D29 stage 1 already says "classificadas nos termos das definições" outside the block.
+        self.antigo["escala"]["atendido"] = "Todas orientam, classificadas nos termos das definições"
+        self.novo["escala"]["atendido"] = "Todas orientam, classificadas nos termos das definições"
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+        self.novo["escala"]["atendido"] = "Todas orientam, classificadas"
+        self.assertEqual(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas), [])
+        self.novo["escala"]["atendido"] = "Todas orientam"
+        self.assertTrue(comparar_criterio(self.antigo, self.novo, self.g, self.aceitas))
+
+    def test_comparator_agrees_with_migration_script(self):
+        """Whatever migrar_criterio produces must verify clean, up to glossary divergences and cascade keys."""
+        textos = {
+            "enunciado": ("O jogo tem incentivo e cenário; Definições: incentivo é uma recompensa visível; o incentivo persiste quando o jogador sai; "
+                          "cenário, neste critério, é o ambiente visual; a missão exige mais de um jogador quando a conclusão só é registrada depois de dois"),
+            "codigo.procedimento": "Verificar cada incentivo. Definições: incentivo é uma recompensa visível; o incentivo persiste quando o jogador sai. Regra de desempate: vale o código",
+            "escala.parcial": "Existe missão que aceita dois jogadores. Definição: a missão aceita dois jogadores quando o jogo permite",
+            "escala.atendido": "Cada missão tem fim. Definições: missão é " + self.g["missao"]["texto"] + "; a missão exige mais de um jogador quando há placar; jogador é uma pessoa que joga",
+        }
+        antigo = copy.deepcopy(self.antigo)
+        antigo["enunciado"] = textos["enunciado"]
+        antigo["evidencia"]["codigo"]["procedimento"] = textos["codigo.procedimento"]
+        antigo["escala"]["parcial"] = textos["escala.parcial"]
+        antigo["escala"]["atendido"] = textos["escala.atendido"]
+        novo = copy.deepcopy(antigo)
+        rel = defaultdict(list)
+        migrar_criterio(novo, self.g, rel, "D17")
+        self.assertIn("missão exige mais de um jogador", novo["definicoes"]["locais"])
+        self.assertIn("cenário", novo["definicoes"]["locais"])
+        self.assertEqual(rel["divergencias"], [])
+        diffs = comparar_criterio(antigo, novo, self.g, self.aceitas)
+        self.assertTrue(diffs and all("definição nova não aceita [glossario: " in d for d in diffs), diffs)
+        self.aceitas["adicoes"] = [{"criterio": "D17.1", "chave": a[3]} for a in rel["adicionadas"]]
+        self.assertEqual(comparar_criterio(antigo, novo, self.g, self.aceitas), [])
+
+
+class VerifyCliTest(unittest.TestCase):
+    """End to end on a throwaway git repo: --base, --only, --catalog, --aceitas, exit code."""
+
+    def setUp(self):
+        import shutil
+        import subprocess
+        import tempfile
+        from helpers import diretriz_valida
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.tmp)
+        cat = self.tmp / "catalog"
+        cat.mkdir()
+        shutil.copy(REPO / "catalog" / "definicoes.yaml", cat / "definicoes.yaml")
+        d = diretriz_valida()
+        d["criterios"][0]["enunciado"] = "Cada missão tem fim; Definições: missão é uma atividade"
+        (cat / "D17.yaml").write_text(emit_yaml(d), encoding="utf-8")
+        git = ["git", "-C", str(self.tmp), "-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false"]
+        subprocess.run(["git", "init", "-q", str(self.tmp)], check=True)
+        subprocess.run(git + ["add", "."], check=True)
+        subprocess.run(git + ["commit", "-q", "-m", "etapa 1"], check=True)
+        d["criterios"][0]["enunciado"] = "Cada missão tem fim"
+        d["criterios"][0]["definicoes"] = {"glossario": ["missao"]}
+        (cat / "D17.yaml").write_text(emit_yaml(d), encoding="utf-8")
+        self.cat = cat
+        self.aceitas = self.tmp / "aceitas.yaml"
+        self.aceitas.write_text(yaml.safe_dump({"clausulas": [{"de": "missão = uma atividade", "para": normalizar_clausula("missão é " + load_definicoes(cat / "definicoes.yaml")["missao"]["texto"]), "tipo": "decisao", "decisao": 1}]}, allow_unicode=True), encoding="utf-8")
+
+    def run_main(self, *args):
+        import contextlib
+        import io
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = verify_main(["--base", "HEAD", "--catalog", str(self.cat), *args])
+        return code, out.getvalue()
+
+    def test_aceitas_default_and_override(self):
+        self.assertEqual(Path(_parser().parse_args([]).aceitas), REPO / "scripts" / "definicoes_aceitas.yaml")
+        self.assertEqual(_parser().parse_args(["--aceitas", "x.yaml"]).aceitas, "x.yaml")
+        code, out = self.run_main()
+        self.assertEqual(code, 1, out)
+        self.assertIn("missão = uma atividade", out)
+        code, out = self.run_main("--aceitas", str(self.aceitas))
+        self.assertEqual(code, 0, out)
+        self.assertIn("0 diferença", out)
+
+    def test_only_filters_files(self):
+        code, out = self.run_main("--only", "D99")
+        self.assertEqual(code, 0, out)
+
+    def test_file_missing_at_base_is_reported(self):
+        (self.cat / "D18.yaml").write_text((self.cat / "D17.yaml").read_text(encoding="utf-8"), encoding="utf-8")
+        code, out = self.run_main("--only", "D18", "--aceitas", str(self.aceitas))
+        self.assertEqual(code, 1, out)
+        self.assertIn("D18", out)
+
+    def test_repo_aceitas_file_has_the_four_lists(self):
+        doc = yaml.safe_load((REPO / "scripts" / "definicoes_aceitas.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(set(doc), {"clausulas", "adicoes", "remocoes", "campos"})
