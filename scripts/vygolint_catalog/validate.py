@@ -127,7 +127,8 @@ def _validate_definicoes_criterio(c, prefix, schema, glossario, errors):
         if listado and not usados:
             errors.append(f"{prefix}: definicoes.glossario lista \"{e['chave']}\" mas nenhum gatilho aparece no texto")
     for g in comuns:
-        if g.lower() not in corpus_proprio:
+        # A trigger used only inside a local definition may also be declared common-sense.
+        if g.lower() not in corpus_base:
             errors.append(f"{prefix}: definicoes.termos_comuns lista {g!r} mas o termo não aparece no texto")
 
 

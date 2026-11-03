@@ -275,6 +275,18 @@ class DefinicoesCriterioTest(unittest.TestCase):
         c["definicoes"] = {"termos_comuns": {"cenário": "x"}, "glossario": ["cenario_jogavel", "missao", "caminho_obrigatorio"]}
         self.assertTrue(any("termos_comuns" in e and "glossario" in e for e in self.check(d)))
 
+    def test_termos_comuns_may_justify_trigger_that_appears_only_in_locais(self):
+        d = diretriz_valida()
+        c = d["criterios"][0]
+        c["definicoes"] = {
+            "locais": {"dispositivo": "uma pergunta que faz parte do desafio"},
+            "termos_comuns": {"desafio": "sentido corrente"},
+        }
+        self.assertEqual(self.check(d), [])
+        del c["definicoes"]["termos_comuns"]
+        errors = self.check(d)
+        self.assertTrue(any('"desafio"' in e and "definicoes.glossario" in e for e in errors), errors)
+
     def test_termos_comuns_is_case_insensitive(self):
         d = diretriz_valida()
         c = d["criterios"][0]
