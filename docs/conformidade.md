@@ -74,7 +74,7 @@ marcada como "sentido corrente" não carrega a definição do glossário.
 
 Todo critério traz, no catálogo, uma recomendação por via (`documentacao`, `design`,
 `codigo`): o que fazer para sair de não atendido ou parcial para atendido, nos termos dos
-seus indicadores. A via é `null` quando não leva o critério a atendido. O relatório
+seus indicadores. A via é `null` quando não contribui para levar o critério a atendido. O relatório
 reproduz o texto do catálogo e o contextualiza com os itens encontrados; não inventa
 recomendação nova. As vias são complementares: `design` muda o projeto e `documentacao`
 registra a mudança no GDD ou documento equivalente; o relatório apresenta as vias não nulas
