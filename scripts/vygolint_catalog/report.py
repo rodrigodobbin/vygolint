@@ -129,3 +129,120 @@ def validate_avaliacao(av, catalog):
                 f"{cid}: grau {grau} diverge do esperado pelas fontes ({esperado}); escreva justificativa_conflito"
             )
     return errors
+
+
+_VIAS = ("documentacao", "design", "codigo")
+
+
+def vias_para(fontes_ctx, recomendacao):
+    """Pick the recommendation vias for the evidence available (conformidade.md section 5)."""
+    if "codigo" in fontes_ctx:
+        escolhidas = ["codigo"]
+    else:
+        escolhidas = ["design"]
+        if "documentacao" in fontes_ctx:
+            escolhidas.insert(0, "documentacao")
+        if "video" in fontes_ctx:
+            escolhidas.append("codigo")
+    uteis = [v for v in _VIAS if v in escolhidas and recomendacao.get(v)]
+    if not uteis:
+        uteis = [v for v in _VIAS if recomendacao.get(v)]
+    return [(v, recomendacao[v]) for v in uteis]
+
+
+def _contagem_vazia():
+    return {"atendido": 0, "parcial": 0, "nao_atendido": 0, "nao_avaliado": 0, "fora_do_contexto": 0}
+
+
+def _contar(contagem, grau):
+    if grau == "nao_avaliado":
+        contagem["nao_atendido"] += 1
+        contagem["nao_avaliado"] += 1
+    else:
+        contagem[grau] += 1
+
+
+def _resolver_dependencias(declarados, catalog):
+    """Return {id: (grau_efetivo, nota)} after applying depende_de (fixed point; cycles are a catalog error)."""
+    efetivo = {cid: (g, None) for cid, g in declarados.items()}
+    for _ in range(len(efetivo) + 1):
+        mudou = False
+        for cid, item in catalog["criterios"].items():
+            grau_decl = declarados[cid]
+            if grau_decl == "fora_do_contexto":
+                continue
+            novo = (grau_decl, None)
+            for grupo in item["criterio"]["depende_de"]:
+                estados = [efetivo[alvo][0] for alvo in grupo]
+                if "atendido" in estados:
+                    continue
+                alvos = " ou ".join(grupo)
+                if "nao_avaliado" in estados and all(e in ("nao_avaliado", "parcial", "nao_atendido") for e in estados):
+                    if novo[0] != "nao_atendido":
+                        novo = ("nao_avaliado", f"não avaliado por dependência de critério não avaliado ({alvos})")
+                else:
+                    novo = ("nao_atendido", f"não atendido por dependência não satisfeita ({alvos})")
+            if efetivo[cid] != novo:
+                efetivo[cid] = novo
+                mudou = True
+        if not mudou:
+            return efetivo
+    raise ValueError("depende_de com ciclo no catálogo")
+
+
+def aggregate(av, catalog):
+    """Apply conformidade.md to a validated evaluation. Returns the result dict used by the renderers."""
+    fontes_ctx = list(av["contexto"]["fontes"])
+    declarados = {cid: av["criterios"][cid]["grau"] for cid in catalog["criterios"]}
+    efetivo = _resolver_dependencias(declarados, catalog)
+    criterios = {}
+    for cid, item in catalog["criterios"].items():
+        grau, nota = efetivo[cid]
+        criterios[cid] = {
+            "nivel": item["criterio"]["nivel"],
+            "categoria": item["diretriz"]["categoria"],
+            "grau_declarado": declarados[cid],
+            "grau": grau,
+            "nota": nota,
+        }
+    nivel = "sem_conformidade"
+    for n in NIVEIS:
+        pendentes = [c for c in criterios.values() if c["nivel"] == n and c["grau"] not in ("atendido", "fora_do_contexto")]
+        if pendentes:
+            break
+        nivel = n
+    cobertura_nivel = {n: _contagem_vazia() for n in NIVEIS}
+    chaves_cat = [c["chave"] for c in catalog["categorias"]["categorias"]]
+    cobertura_categoria = {k: _contagem_vazia() for k in chaves_cat}
+    for c in criterios.values():
+        _contar(cobertura_nivel[c["nivel"]], c["grau"])
+        _contar(cobertura_categoria[c["categoria"]], c["grau"])
+    proximo = {"sem_conformidade": "A", "A": "AA", "AA": "AAA", "AAA": None}[nivel]
+    bloqueios = []
+    parciais = []
+    for cid in sorted(criterios):
+        c = criterios[cid]
+        crit = catalog["criterios"][cid]["criterio"]
+        if c["grau"] == "fora_do_contexto":
+            continue
+        por_dependencia = c["nota"] is not None and c["grau_declarado"] != c["grau"]
+        vias = [] if por_dependencia else vias_para(fontes_ctx, crit["recomendacao"])
+        if proximo and c["nivel"] == proximo and c["grau"] != "atendido":
+            bloqueios.append({
+                "id": cid, "nivel": c["nivel"], "grau": c["grau"], "nota": c["nota"],
+                "enunciado": crit["enunciado"], "vias": vias,
+            })
+        if c["grau"] == "parcial":
+            parciais.append({
+                "id": cid, "nivel": c["nivel"], "enunciado": crit["enunciado"],
+                "escala_parcial": crit["escala"]["parcial"], "escala_atendido": crit["escala"]["atendido"],
+                "vias": vias,
+            })
+    return {
+        "criterios": criterios,
+        "nivel": nivel,
+        "cobertura_nivel": cobertura_nivel,
+        "cobertura_categoria": cobertura_categoria,
+        "bloqueios": bloqueios,
+        "parciais": parciais,
+    }
