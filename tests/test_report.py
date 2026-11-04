@@ -12,6 +12,7 @@ from vygolint_catalog.report import (
     CLAUSULA, aggregate, build_report, grau_esperado, render_relatorio, render_resultado,
     validate_avaliacao, vias_para,
 )
+from vygolint_catalog.html import build_data, render_relatorio_html
 
 
 class GrauEsperadoTest(unittest.TestCase):
@@ -392,11 +393,63 @@ class BuildReportTest(unittest.TestCase):
         import shutil
         shutil.rmtree(self.tmp)
 
-    def test_writes_both_files(self):
+    def test_writes_all_files(self):
         p = _escrever(avaliacao_valida(), self.tmp)
         self.assertEqual(build_report(p, REPO / "catalog", self.tmp), [])
         self.assertTrue((self.tmp / "relatorio.md").exists())
+        self.assertTrue((self.tmp / "relatorio.html").exists())
         self.assertTrue((self.tmp / "resultado.yaml").exists())
+
+    def test_html_report(self):
+        import json
+        import re
+
+        cat = catalogo_real()
+        av = yaml.safe_load((REPO / "docs" / "exemplo" / "avaliacao.yaml").read_text(encoding="utf-8"))
+        res = aggregate(av, cat)
+        html = render_relatorio_html(res, av, cat)
+        self.assertIn(CLAUSULA, html)
+        self.assertIn("ARQUIVO GERADO", html)
+        self.assertNotIn("/*__DATA__*/", html)
+        blob = re.search(r"const DATA = (\{.*?\});\n", html, re.S).group(1)
+        data = json.loads(blob)
+        self.assertEqual(data, build_data(res, av, cat))
+        self.assertEqual(data["nivel"], res["nivel"])
+        self.assertEqual(len(data["criterios"]), len(cat["criterios"]))
+        self.assertEqual([c["id"] for c in data["criterios"]], sorted(cat["criterios"]))
+        por_id = {c["id"]: c for c in data["criterios"]}
+        for cid, c in res["criterios"].items():
+            self.assertEqual(por_id[cid]["grau"], c["grau"])
+            self.assertEqual(por_id[cid]["nota"], c["nota"])
+        self.assertEqual(data["bloqueios"], [b["id"] for b in res["bloqueios"]])
+        self.assertEqual(data["parciais"], [p["id"] for p in res["parciais"]])
+        for c in data["criterios"]:
+            if c["nota"] and c["grau_declarado"] != c["grau"]:
+                self.assertEqual(c["vias"], [])
+        self.assertEqual(data["clausula"], CLAUSULA)
+
+    def test_html_destravas(self):
+        cat = catalogo_real()
+        av = avaliacao_valida(fontes=("video",))
+        for cid in ("D06.1", "D22.1"):
+            av["criterios"].pop(cid, None)
+        av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "sem gravação com dois jogadores"}
+        av["contexto"]["sala_de_aula"] = False
+        av["criterios"]["D22.1"] = {"grau": "fora_do_contexto", "razao": "sem sala de aula"}
+        for cid, e in av["criterios"].items():
+            if cid not in ("D06.1", "D22.1") and e.get("fontes"):
+                e["fontes"] = {"video": {"grau": e["grau"], "provas": ["gameplay/s.mp4 00:00:01 — x"]}} if cat["criterios"][cid]["criterio"]["evidencia"].get("video") else None
+                if e["fontes"] is None:
+                    av["criterios"][cid] = {"grau": "nao_avaliado", "razao": "critério não aceita vídeo"}
+        self.assertEqual(validate_avaliacao(av, cat), [])
+        data = build_data(aggregate(av, cat), av, cat)
+        grupos = {d["entregar"]: d["criterios"] for d in data["destravas"]}
+        codigo = [k for k in grupos if "código" in k]
+        self.assertTrue(codigo)
+        self.assertIn("D06.1", grupos[codigo[0]])
+        sala = [k for k in grupos if "sala de aula" in k]
+        self.assertTrue(sala)
+        self.assertEqual(grupos[sala[0]], ["D22.1"])
 
     def test_missing_file_is_reported(self):
         errors = build_report(self.tmp / "nao-existe.yaml", REPO / "catalog", self.tmp)

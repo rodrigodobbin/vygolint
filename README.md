@@ -20,7 +20,7 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
 | `docs/conformidade.md` | regras de nível, grau, agregação e relatório |
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
-| `scripts/vygolint_report.py` | valida `avaliacao.yaml` e gera `relatorio.md` e `resultado.yaml` |
+| `scripts/vygolint_report.py` | valida `avaliacao.yaml` e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml` |
 | `skills/` | quatro skills portáveis: `using-vygolint`, `vygolint-avaliar`, `vygolint-criterio`, `vygolint-video` |
 | `docs/exemplo/` | avaliação de exemplo e relatório gerado |
 | `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.kimi-plugin/`, `.opencode/`, `.pi/`, `.agents/`, `gemini-extension.json` | manifestos por harness |
@@ -104,7 +104,7 @@ Para desenvolvimento local: `pi -e /caminho/para/vygolint`.
 1. Instale o vygolint no seu agente (seção anterior).
 2. Abra o agente na pasta do jogo.
 3. Peça: "Avalie este jogo com o vygolint", informando onde estão o código, a documentação e os vídeos de gameplay e se o jogo é aplicado em sala de aula.
-4. Receba `vygolint-out/avaliacao.yaml` (julgamento do agente, com provas), `relatorio.md` e `resultado.yaml` (gerados por `scripts/vygolint_report.py`).
+4. Receba `vygolint-out/avaliacao.yaml` (julgamento do agente, com provas), `relatorio.md`, `relatorio.html` e `resultado.yaml` (gerados por `scripts/vygolint_report.py`). O `relatorio.html` abre em qualquer navegador e organiza o mesmo conteúdo em abas para professor, equipe de desenvolvimento e coordenação, com filtros por grau, nível e categoria.
 
 As skills exigem Python 3 com PyYAML disponível ao agente (para o script do relatório); ffmpeg é opcional (extração de quadros de vídeo).
 
