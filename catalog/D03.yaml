@@ -100,7 +100,7 @@ criterios:
     recomendacao:
       documentacao: "Registrar no GDD ou documento equivalente as regras de tempo de cada atividade, indicando quais têm limite de tempo. Registrar, para cada atividade com limite, a opção do jogador que o desativa ou amplia"
       design: "Retirar o limite de tempo obrigatório de cada atividade que o tem, ou prever uma opção do jogador que o desative ou amplie"
-      codigo: "Remover a consequência de falha de cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie"
+      codigo: "Remover o encerramento ou a reprovação disparados por cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, documentacao_equivalente]

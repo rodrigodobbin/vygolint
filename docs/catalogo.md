@@ -105,7 +105,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente, para cada missão e minijogo, a situação-problema com estado inicial, objetivo e ações possíveis. Registrar também a decisão do jogador que a resolução exige
-- Design: Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, com estado inicial a ser transformado pelas ações do jogador, objetivo e mais de uma ação disponível. Condicionar a conclusão a uma decisão do jogador entre essas ações
+- Design: Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, nos termos das definições. Condicionar a conclusão a uma decisão do jogador entre as ações disponíveis
 - Código: não se aplica
 
 **Depende de.** —
@@ -260,7 +260,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente as regras de tempo de cada atividade, indicando quais têm limite de tempo. Registrar, para cada atividade com limite, a opção do jogador que o desativa ou amplia
 - Design: Retirar o limite de tempo obrigatório de cada atividade que o tem, ou prever uma opção do jogador que o desative ou amplie
-- Código: Remover a consequência de falha de cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie
+- Código: Remover o encerramento ou a reprovação disparados por cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie
 
 **Depende de.** —
 
@@ -693,7 +693,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Não atendido: Nenhuma missão aceita dois ou mais jogadores, nos termos do enunciado e das definições
 
 **Recomendações.**
-- Documentação: Registrar no GDD ou documento equivalente a missão em grupo, com as ações previstas para cada um dos dois ou mais jogadores. Registrar que a missão só se conclui depois da ação prevista de cada um deles
+- Documentação: Registrar no GDD ou documento equivalente uma missão com ações previstas para dois ou mais jogadores diferentes, com a ação prevista para cada um deles. Registrar que essa missão só se conclui depois da ação prevista de cada um deles
 - Design: Definir ao menos uma missão com ações previstas para dois ou mais jogadores diferentes. Condicionar a conclusão dessa missão à ação prevista de cada um deles, na mesma sessão ou em sessões diferentes
 - Código: Criar sessão, sala ou registro compartilhado que aceite dois ou mais jogadores na mesma missão. Fazer a condição de conclusão verificar as ações de cada identificador de jogador previsto. Impedir o registro da conclusão enquanto a ação prevista de algum desses jogadores não ocorrer
 
@@ -965,7 +965,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente cada desafio e ao menos duas das funções psicológicas superiores (memória, atenção voluntária, planejamento, linguagem e formação de conceitos) que o desafio exige. Registrar, para cada uma dessas funções, o elemento do desafio que a exige (informação exibida e depois ocultada, estímulos simultâneos, ações dependentes, texto ou fala que define a ação, objetos ou exemplos a classificar), diferente do elemento de outra função do mesmo desafio
-- Design: Incluir, em cada desafio que exige menos de duas funções psicológicas superiores, elementos diferentes que exijam ao menos duas das funções: informação exibida e depois ocultada antes da ação que a usa (memória), estímulos simultâneos sem destaque entre os quais a ação correta exige escolher (atenção voluntária), ações dependentes entre si sem sequência ditada pelo jogo (planejamento), texto ou fala que define qual ação resolve o desafio (linguagem), objetos ou exemplos a classificar segundo um conceito dos objetivos de aprendizagem (formação de conceitos)
+- Design: Definir, em cada desafio que exige menos de duas funções psicológicas superiores, um elemento diferente para cada uma de ao menos duas das funções memória, atenção voluntária, planejamento, linguagem ou formação de conceitos, nos termos das definições, sem o qual o desafio não pode ser concluído
 - Código: não se aplica
 
 **Depende de.** —
@@ -1196,7 +1196,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente as situações da narrativa em que o jogador toma posição, cada uma com o objetivo de aprendizagem tratado. Registrar, em ao menos uma dessas situações, ao menos duas posições que o jogo não avalia como certas ou erradas e uma consequência narrativa diferente para cada posição
-- Design: Definir ao menos uma situação da narrativa que cite ou descreva um objetivo de aprendizagem e ofereça ao jogador ao menos duas opções. Definir que nenhuma dessas opções seja avaliada como certa ou errada, isto é, que a escolha não conceda, retire nem condicione pontuação, progresso ou conclusão do desafio. Definir, para cada opção, uma consequência narrativa diferente (evento, fala de personagem ou mudança na história) que retome a opção escolhida
+- Design: Definir ao menos uma situação da narrativa que cite ou descreva um objetivo de aprendizagem e ofereça ao jogador ao menos duas opções. Definir que nenhuma dessas opções seja avaliada como certa ou errada, de modo que cada uma seja uma posição, nos termos das definições. Definir, para cada opção, uma consequência narrativa diferente (evento, fala de personagem ou mudança na história) que retome a opção escolhida
 - Código: Acrescentar ou usar, em ao menos um ponto da narrativa que cite ou descreva um objetivo de aprendizagem, um menu de diálogo, escolha de história ou resposta aberta com ao menos duas opções. Remover dessa escolha qualquer efeito que conceda, retire ou condicione pontuação, progresso ou conclusão do desafio conforme a opção. Guardar em uma variável a opção escolhida pelo jogador. Acrescentar, para cada opção, um ramo ou evento que leia essa variável e exiba uma consequência narrativa diferente
 
 **Depende de.** —
@@ -1349,9 +1349,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Não atendido: O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)
 
 **Recomendações.**
-- Documentação: Registrar no GDD ou documento equivalente a regra que compara os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado. Registrar a tela que exibe ao jogador o resultado de ao menos um outro jogador ou equipe identificados junto do seu, ou a ordenação dos jogadores ou das equipes por resultado (comparação visível, nos termos das definições)
-- Design: Definir ao menos uma regra que compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado, e não o resultado do jogador com o resultado anterior dele mesmo nem com o de personagem não jogável. Definir uma tela que exiba ao jogador o resultado de ao menos um outro jogador ou equipe identificados junto do seu, ou a ordenação dos jogadores ou das equipes por resultado (comparação visível, nos termos das definições)
-- Código: Acrescentar, quando não existe, uma regra que guarde o resultado por identificador de jogador ou de equipe e compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes (ordenação, placar ou definição de vencedor). Acrescentar uma tela que leia esses resultados e exiba ao jogador o resultado de ao menos um outro jogador ou equipe identificados junto do seu, ou a ordenação dos jogadores ou das equipes por resultado (comparação visível, nos termos das definições)
+- Documentação: Registrar no GDD ou documento equivalente a regra que compara os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado. Registrar a tela que exibe ao jogador uma comparação visível, nos termos das definições
+- Design: Definir ao menos uma regra que compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado, e não o resultado do jogador com o resultado anterior dele mesmo nem com o de personagem não jogável. Definir uma tela que exiba ao jogador uma comparação visível, nos termos das definições
+- Código: Acrescentar, quando não existe, uma regra que guarde o resultado por identificador de jogador ou de equipe e compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes (ordenação, placar ou definição de vencedor). Acrescentar uma tela que leia esses resultados e exiba ao jogador uma comparação visível, nos termos das definições
 
 **Depende de.** —
 
@@ -1495,8 +1495,8 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente a lista de cenários jogáveis, com os cenários sem missão em curso anotados como excluídos. Registrar, para cada cenário jogável, ao menos um incentivo de exploração (recompensa, descoberta ou informação) que nenhum objetivo da missão exige. Registrar que cada um desses incentivos só é obtido fora do caminho obrigatório
-- Design: Definir ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Incluir, em cada cenário jogável, ao menos um incentivo de exploração fora do caminho obrigatório: uma recompensa (item, pontos, desbloqueio ou conquista), uma descoberta (cena, personagem, objeto interativo ou evento que não existe no caminho obrigatório) ou uma informação que não seja apenas a descrição do objeto ou da área visitados e que trate de conceito, fato ou procedimento listado entre os objetivos de aprendizagem ou de uma missão do jogo. Definir que nenhum objetivo nem condição de conclusão da missão exija obter esse incentivo e que o jogador que segue apenas o caminho obrigatório não o receba
-- Código: Acrescentar ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Acrescentar, em cada cenário jogável, fora do caminho obrigatório e obtido por ação do jogador, ao menos um incentivo de exploração: um item, pontos, desbloqueio ou conquista; uma cena, personagem, objeto interativo ou evento que não exista no caminho obrigatório; ou um texto, fala ou dado que não seja apenas a descrição do objeto ou da área visitados e que trate de conceito, fato ou procedimento listado entre os objetivos de aprendizagem ou de uma missão do jogo. Remover das condições de conclusão da missão a exigência de obter esse incentivo. Remover a concessão desse incentivo dos trechos do caminho obrigatório
+- Design: Definir ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Incluir, em cada cenário jogável sem incentivo de exploração, ao menos um incentivo de exploração, nos termos das definições, fora do caminho obrigatório. Definir que nenhum objetivo nem condição de conclusão da missão exija obter esse incentivo e que o jogador que segue apenas o caminho obrigatório não o receba
+- Código: Acrescentar ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Acrescentar, em cada cenário jogável sem incentivo de exploração, ao menos um incentivo de exploração, nos termos das definições, fora do caminho obrigatório e obtido por ação do jogador. Remover das condições de conclusão da missão a exigência de obter esse incentivo. Remover a concessão desse incentivo dos trechos do caminho obrigatório
 
 **Depende de.** —
 

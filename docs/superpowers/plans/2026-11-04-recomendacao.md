@@ -1,6 +1,6 @@
 # Campo `recomendacao` por critério — Plano de implementação
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Cada um dos 43 critérios do catálogo ganha um campo obrigatório `recomendacao` (mapa `documentacao`/`design`/`codigo`, texto ou `null`), validado pelo build, lintado contra o glossário e impresso em `docs/catalogo.md`.
 

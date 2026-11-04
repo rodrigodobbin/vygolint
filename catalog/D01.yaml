@@ -32,7 +32,7 @@ criterios:
       nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições"
     recomendacao:
       documentacao: "Registrar no GDD ou documento equivalente, para cada missão e minijogo, a situação-problema com estado inicial, objetivo e ações possíveis. Registrar também a decisão do jogador que a resolução exige"
-      design: "Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, com estado inicial a ser transformado pelas ações do jogador, objetivo e mais de uma ação disponível. Condicionar a conclusão a uma decisão do jogador entre essas ações"
+      design: "Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, nos termos das definições. Condicionar a conclusão a uma decisão do jogador entre as ações disponíveis"
       codigo: null
     depende_de: []
     definicoes:

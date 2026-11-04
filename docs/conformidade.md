@@ -76,7 +76,9 @@ Todo critério traz, no catálogo, uma recomendação por via (`documentacao`, `
 `codigo`): o que fazer para sair de não atendido ou parcial para atendido, nos termos dos
 seus indicadores. A via é `null` quando não leva o critério a atendido. O relatório
 reproduz o texto do catálogo e o contextualiza com os itens encontrados; não inventa
-recomendação nova.
+recomendação nova. As vias são complementares: `design` muda o projeto e `documentacao`
+registra a mudança no GDD ou documento equivalente; o relatório apresenta as vias não nulas
+que cabem à evidência disponível (seção 5).
 
 ## 3. Diretriz
 
@@ -105,7 +107,8 @@ Todo relatório contém, nesta ordem:
 4. cobertura por categoria: mesma contagem para cada uma das 12 categorias;
 5. bloqueios: critérios que impedem o próximo nível, cada um com a `recomendacao` do catálogo
    na via que cabe à evidência disponível (código avaliado: `codigo`; só documentação:
-   `documentacao` e `design`);
+   `documentacao` e `design`; só vídeo: `design` e `codigo`; via escolhida nula: as demais
+   vias não nulas);
 6. parciais: o que falta para pleno, com a `recomendacao` do critério contextualizada pelos
    itens que a avaliação encontrou fora do estado atendido;
 7. provas por critério.

@@ -37,7 +37,7 @@ criterios:
       parcial: "Existe missão que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles"
       nao_atendido: "Nenhuma missão aceita dois ou mais jogadores, nos termos do enunciado e das definições"
     recomendacao:
-      documentacao: "Registrar no GDD ou documento equivalente a missão em grupo, com as ações previstas para cada um dos dois ou mais jogadores. Registrar que a missão só se conclui depois da ação prevista de cada um deles"
+      documentacao: "Registrar no GDD ou documento equivalente uma missão com ações previstas para dois ou mais jogadores diferentes, com a ação prevista para cada um deles. Registrar que essa missão só se conclui depois da ação prevista de cada um deles"
       design: "Definir ao menos uma missão com ações previstas para dois ou mais jogadores diferentes. Condicionar a conclusão dessa missão à ação prevista de cada um deles, na mesma sessão ou em sessões diferentes"
       codigo: "Criar sessão, sala ou registro compartilhado que aceite dois ou mais jogadores na mesma missão. Fazer a condição de conclusão verificar as ações de cada identificador de jogador previsto. Impedir o registro da conclusão enquanto a ação prevista de algum desses jogadores não ocorrer"
     depende_de:

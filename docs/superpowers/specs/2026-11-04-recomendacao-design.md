@@ -16,7 +16,7 @@ Fora do escopo: a skill que lê o campo; qualquer mudança em enunciado, evidên
 | Estrutura | um texto por via (`documentacao`, `design`, `codigo`) | sub-estrutura por estado (`parcial`, `nao_atendido`) dentro de cada via | nos 43 critérios, `parcial` é "alguns itens cumprem, outros não" e `nao_atendido` é "nenhum cumpre"; a ação é a mesma, muda só o conjunto de itens, que a skill contextualiza na avaliação |
 | Obrigatoriedade | obrigatório desde já | opcional até completar | sem estado intermediário no catálogo; a PR só fecha com os 43 escritos |
 | Lint do glossário | `textos_do_criterio` passa a incluir `recomendacao.<via>` | lista separada de campos só para a recomendação | as três regras do glossário (gatilho exige chave, definição inline proibida, definição repetida proibida) valem igual para a recomendação, sem código novo |
-| Sentido das vias | `documentacao` = registrar no GDD ou documento equivalente o que o jogo já faz ou passa a fazer (gera a evidência documental); `design` = mudar regra, conteúdo ou estrutura do jogo no projeto; `codigo` = mudar a implementação | uma via por fonte de evidência (código, documentação, vídeo) | vídeo é fonte de evidência, não via de mudança; a recomendação diz o que mudar, não onde observar |
+| Sentido das vias | `documentacao` = registrar no GDD ou documento equivalente o que o jogo já faz ou passa a fazer (gera a evidência documental); `design` = mudar regra, conteúdo ou estrutura do jogo no projeto; `codigo` = mudar a implementação | uma via por fonte de evidência (código, documentação, vídeo) | vídeo é fonte de evidência, não via de mudança; a recomendação diz o que mudar, não onde observar; as vias são complementares, não alternativas |
 | Tabela LaTeX | inalterada | acrescentar coluna | a tabela é resumo; a recomendação vive no catálogo completo |
 
 ## 3. Esquema
@@ -49,7 +49,7 @@ Exemplo em um critério:
 Regras do esquema (acrescentadas à seção 5 da spec do catálogo):
 
 - `recomendacao` é obrigatório em todo critério. É um mapa com exatamente as chaves `documentacao`, `design` e `codigo`; chave ausente ou desconhecida é erro.
-- Cada chave é texto não vazio ou `null`. `null` significa que aquela via não leva o critério a `atendido` (ex.: D22.1 só se atende por documentação). Ao menos uma chave não nula.
+- Cada chave é texto não vazio ou `null`. `null` significa que aquela via não contribui para levar o critério a `atendido` (ex.: D01.1 não tem via `codigo`, porque a mudança é na estrutura das missões). As vias são complementares, não caminhos independentes: `design` muda o projeto e `documentacao` registra o resultado no GDD ou documento equivalente; em critério cuja evidência vem só da documentação (D22.1, D31.1, D32.1) ou cujo `atendido` exige vídeo (D06.1), seguir uma via só não produz a evidência, e o relatório apresenta as vias não nulas juntas. Ao menos uma chave não nula.
 - O texto de cada via diz o que fazer para sair de `nao_atendido` ou `parcial` para `atendido`, em termos dos indicadores e da escala do próprio critério. Não cria exigência que o enunciado não faz, não cita jogo específico e não distingue os dois estados: a skill contextualiza com os itens que a avaliação encontrou.
 - Lint do glossário: `recomendacao.<via>` é campo de texto do critério. Gatilho do glossário usado na recomendação exige a chave em `definicoes.glossario` (ou justificativa em `termos_comuns`); `Definição:`/`Definições:` e repetição do texto do glossário são erro, como nos demais campos.
 
@@ -81,7 +81,7 @@ Regras de autoria para recomendações (acrescentadas a `.superpowers/sdd/author
 21. Uma frase por ação. Mais de uma ação na mesma via: frases separadas por ponto, na ordem em que seriam feitas.
 22. Sem adjetivos de valor ("bom", "adequado", "claro") e sem advérbios de intensidade.
 23. Sem citar jogo, produto ou motor específico; sem citar Expedição Antártica.
-24. `null` só quando a via não leva o critério a `atendido`. Se o critério tem `evidencia.codigo: null`, `codigo` da recomendação costuma ser `null`, mas não é regra: a via pode existir (ex.: mudar o código gera o comportamento que o vídeo mostra).
+24. `null` só quando a via não contribui para levar o critério a `atendido`. Se o critério tem `evidencia.codigo: null`, `codigo` da recomendação costuma ser `null`, mas não é regra: a via pode existir (ex.: mudar o código gera o comportamento que o vídeo mostra). `design` pode depender de `documentacao` para gerar a evidência; isso não torna `design` nula.
 
 Lotes de escrita, cada um validado pelo build e revisado por subagente contra as regras 1 a 24:
 
