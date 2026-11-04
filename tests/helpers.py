@@ -74,3 +74,31 @@ def catalogo_real():
     cat, errors = load_catalog(REPO / "catalog")
     assert not errors, errors
     return cat
+
+
+def avaliacao_valida(fontes=("codigo", "documentacao", "video")):
+    """Every criterion atendido, one proof per source the criterion accepts and the context has."""
+    cat = catalogo_real()
+    fontes = list(fontes)
+    criterios = {}
+    for cid, item in cat["criterios"].items():
+        c = item["criterio"]
+        usadas = {}
+        for f in fontes:
+            if c["evidencia"].get(f) is not None:
+                usadas[f] = {"grau": "atendido", "provas": [f"{f} — prova de {cid}"]}
+        if usadas:
+            criterios[cid] = {"grau": "atendido", "fontes": usadas}
+        else:
+            criterios[cid] = {"grau": "nao_avaliado", "razao": f"nenhuma fonte disponível avalia {cid}"}
+    return {
+        "jogo": "Jogo de teste",
+        "contexto": {
+            "sala_de_aula": True,
+            "fontes": fontes,
+            "artefatos": {f: [f"./{f}"] for f in fontes},
+        },
+        "avaliador": "teste",
+        "data": "2026-11-04",
+        "criterios": criterios,
+    }
