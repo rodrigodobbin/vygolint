@@ -1,7 +1,7 @@
 # vygolint — Catálogo de conformidade sociointeracionista (etapa 1)
 
 Data: 2026-11-03
-Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada; glossário de definições (2026-11-03)
+Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada; glossário de definições (2026-11-03); campo recomendacao (2026-11-04)
 
 ## 1. Objetivo
 
@@ -88,6 +88,10 @@ criterios:
       atendido: "Todas as ocorrências observadas orientam o jogador"
       parcial: "Algumas ocorrências orientam, outras só sinalizam erro"
       nao_atendido: "Feedback só sinaliza acerto/erro ou inexiste"
+    recomendacao:              # obrigatório; o que fazer para chegar a atendido, por via; null quando a via não serve
+      documentacao: "Registrar no GDD ou documento equivalente a tabela de ações incorretas previstas com a mensagem exibida em cada uma e a próxima ação que ela indica"
+      design: "Definir, para cada ação incorreta prevista, a próxima ação que a mensagem indica ao jogador"
+      codigo: "Trocar, em cada manipulador de erro, a mensagem que só sinaliza o erro por uma que indica a próxima ação"
     depende_de: []             # lista de grupos; ex.: [[D06.1, D07.1]] = D06.1 ou D07.1
     definicoes:                # opcional; obrigatório quando o texto usa um gatilho do glossário
       glossario: [missao]      # chaves de catalog/definicoes.yaml, impressas uma vez por critério
@@ -104,9 +108,10 @@ Regras do esquema:
 - `categoria` precisa existir em `categorias.yaml`.
 - Pelo menos uma fonte de evidência não nula por critério.
 - `depende_de` é uma lista de grupos; cada grupo é uma lista de ids de critérios existentes. Todos os grupos precisam ser satisfeitos; dentro de um grupo basta um critério atendido. `[[D06.1, D07.1]]` significa "D06.1 ou D07.1"; `[[D06.1], [D09.1]]` significa "D06.1 e D09.1". Lista vazia quando não há dependência.
+- `recomendacao` é obrigatório: mapa com exatamente as chaves `documentacao`, `design` e `codigo`, cada uma texto não vazio ou `null`, ao menos uma não nula. Cada texto diz o que fazer para sair de `nao_atendido` ou `parcial` para `atendido`, em termos dos indicadores e da escala do critério, sem distinguir os dois estados e sem criar exigência nova. `documentacao` = registrar no GDD ou documento equivalente o que o jogo faz; `design` = mudar regra, conteúdo ou estrutura do jogo no projeto; `codigo` = mudar a implementação. `null` só quando a via não leva o critério a `atendido`. Regras de autoria: `docs/superpowers/specs/2026-11-04-recomendacao-design.md`, seção 6.
 - Definição compartilhada existe uma vez, em `catalog/definicoes.yaml` (`chave`, `termo`, `gatilhos`, `ancora`, `texto`). O texto de um critério (enunciado, procedimentos, indicadores, escala) não repete definições. É erro de build o campo conter `Definição:`/`Definições:` (sem distinguir maiúsculas) ou repetir uma definição do glossário na forma `<termo ou gatilho> é|são <texto do glossário>` (sem distinguir maiúsculas nem espaçamento); o texto do glossário solto, no meio de uma frase comum, é permitido.
-- Lint: se o texto de um critério contém um gatilho de um termo do glossário, `definicoes.glossario` precisa listar a chave (ou `termos_comuns` precisa justificar o uso no sentido corrente). Chave listada sem gatilho no texto também é erro. `termos_comuns` não pode citar gatilho de chave listada em `glossario` nem gatilho ausente do texto (enunciado, evidências, escala e locais). O texto das definições listadas conta como texto do critério (uma definição que cita "missão" exige `missao`).
-- O renderizador imprime `**Definições.**` uma vez por critério, antes do enunciado, e uma seção `## Glossário` no início de `docs/catalogo.md` (antes de `## Resumo`).
+- Lint: se o texto de um critério contém um gatilho de um termo do glossário, `definicoes.glossario` precisa listar a chave (ou `termos_comuns` precisa justificar o uso no sentido corrente). Chave listada sem gatilho no texto também é erro. `termos_comuns` não pode citar gatilho de chave listada em `glossario` nem gatilho ausente do texto (enunciado, evidências, escala e locais). O texto das definições listadas conta como texto do critério (uma definição que cita "missão" exige `missao`). O lint cobre também as três vias de `recomendacao`.
+- O renderizador imprime `**Definições.**` uma vez por critério, antes do enunciado, e uma seção `## Glossário` no início de `docs/catalogo.md` (antes de `## Resumo`), e um bloco `**Recomendações.**` (uma linha por via, "não se aplica" quando `null`) depois da escala e antes de `**Depende de.**`.
 - Divergências de redação encontradas na migração e decisões respondidas: `docs/superpowers/specs/2026-11-03-definicoes-divergencias.md`.
 - Critério testável: dois avaliadores com as mesmas evidências chegam ao mesmo grau. Descritores da escala devem ser observáveis. Proibido descritor do tipo "o jogo é motivador".
 
@@ -156,8 +161,8 @@ Cada critério registra os dois eixos e um texto de justificativa ancorado em Vi
 - nível alcançado
 - cobertura por nível: contagem de atendido, parcial, não atendido (dos quais N não avaliados) e fora do contexto, para A, AA e AAA
 - cobertura por categoria: mesma contagem para cada uma das 12
-- bloqueios: critérios que impedem o próximo nível, com recomendação
-- parciais: o que falta para pleno
+- bloqueios: critérios que impedem o próximo nível, com a `recomendacao` do critério na via que cabe à evidência disponível (código avaliado: `codigo`; só documentação: `documentacao` e `design`)
+- parciais: o que falta para pleno, com a `recomendacao` do critério contextualizada pelos itens que a avaliação encontrou fora do estado atendido
 - provas por critério
 
 **Dependências.** Critério cujo `depende_de` não está satisfeito recebe automaticamente não atendido, sem avaliação manual. Critério que depende de um critério não avaliado é registrado como não avaliado por dependência e conta como não atendido para fins de nível.

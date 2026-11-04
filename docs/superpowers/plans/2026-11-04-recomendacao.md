@@ -1,6 +1,6 @@
 # Campo `recomendacao` por critério — Plano de implementação
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Cada um dos 43 critérios do catálogo ganha um campo obrigatório `recomendacao` (mapa `documentacao`/`design`/`codigo`, texto ou `null`), validado pelo build, lintado contra o glossário e impresso em `docs/catalogo.md`.
 
@@ -55,7 +55,7 @@ README.md
 **Interfaces:**
 - Produces: `schema["criterio"]["recomendacao"]["vias"] == ["documentacao", "design", "codigo"]`; `textos_do_criterio(c)` devolve, além dos campos atuais, `("recomendacao.documentacao", texto)`, `("recomendacao.design", texto)`, `("recomendacao.codigo", texto)` para cada via com texto; `validate_diretriz` devolve erros com prefixo `Dnn/Dnn.k` para campo malformado.
 
-- [ ] **Step 1: Fixture com `recomendacao`**
+- [x] **Step 1: Fixture com `recomendacao`**
 
 Em `tests/helpers.py`, dentro de `_DIRETRIZ["criterios"][0]`, entre `"escala"` e `"depende_de"`:
 
@@ -69,7 +69,7 @@ Em `tests/helpers.py`, dentro de `_DIRETRIZ["criterios"][0]`, entre `"escala"` e
 
 (Não usar "GDD" nem "documento equivalente" na fixture: são gatilhos do glossário e a fixture não lista `definicoes`.)
 
-- [ ] **Step 2: Testes que falham**
+- [x] **Step 2: Testes que falham**
 
 Acrescentar ao fim de `tests/test_validate.py`:
 
@@ -147,12 +147,12 @@ class RecomendacaoTest(unittest.TestCase):
         self.assertTrue(any("recomendacao.codigo" in e and "Definição" in e for e in self.check(d)))
 ```
 
-- [ ] **Step 3: Rodar e ver falhar**
+- [x] **Step 3: Rodar e ver falhar**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v 2>&1 | tail -20`
 Expected: `RecomendacaoTest` falha (`KeyError: 'recomendacao'` em `test_schema_lists_vias`; "campo desconhecido: recomendacao" nos demais, porque a fixture agora traz o campo e o esquema não o conhece).
 
-- [ ] **Step 4: Esquema**
+- [x] **Step 4: Esquema**
 
 `catalog/schema.yaml`, bloco `criterio`, passa a ser:
 
@@ -174,7 +174,7 @@ criterio:
     campos_lint: [enunciado, evidencia.*.procedimento, evidencia.*.indicadores, escala.*, recomendacao.*]
 ```
 
-- [ ] **Step 5: `textos_do_criterio`**
+- [x] **Step 5: `textos_do_criterio`**
 
 Em `scripts/vygolint_catalog/validate.py`, acrescentar antes do `return out` de `textos_do_criterio`:
 
@@ -187,7 +187,7 @@ Em `scripts/vygolint_catalog/validate.py`, acrescentar antes do `return out` de 
 
 Atualizar a docstring: `"""Return [(campo, texto)] for every text field the lint covers (enunciado, evidencia, escala, recomendacao; not nivel_justificativa)."""`
 
-- [ ] **Step 6: Validação do campo**
+- [x] **Step 6: Validação do campo**
 
 Em `_validate_criterio`, depois do bloco de `escala` e antes do bloco de `depende_de`:
 
@@ -217,17 +217,17 @@ Em `_validate_criterio`, depois do bloco de `escala` e antes do bloco de `depend
                 errors.append(f"{prefix}: recomendacao precisa de ao menos uma via não nula")
 ```
 
-- [ ] **Step 7: Rodar e ver passar**
+- [x] **Step 7: Rodar e ver passar**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v 2>&1 | tail -5`
 Expected: `Ran 90 tests` … `OK` (80 existentes + 10 novos).
 
-- [ ] **Step 8: Build do catálogo real continua verde**
+- [x] **Step 8: Build do catálogo real continua verde**
 
 Run: `python3 scripts/build_catalog.py && git diff --stat -- docs/`
 Expected: `OK: 40 diretrizes, 43 critérios` e nenhum diff em `docs/` (o campo é opcional e nenhum critério o tem ainda).
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add catalog/schema.yaml scripts/vygolint_catalog/validate.py tests/helpers.py tests/test_validate.py
@@ -246,7 +246,7 @@ git commit -m "feat(schema): recomendacao field per criterion, validated and lin
 - Consumes: `c["recomendacao"]` como validado na Task 1 (mapa com as três vias; pode estar ausente enquanto o campo é opcional).
 - Produces: em `docs/catalogo.md`, por critério, o bloco abaixo entre `**Escala.**` e `**Depende de.**`.
 
-- [ ] **Step 1: Testes que falham**
+- [x] **Step 1: Testes que falham**
 
 Acrescentar à classe `RenderMarkdownTest` em `tests/test_render.py`:
 
@@ -277,12 +277,12 @@ Acrescentar à classe `RenderMarkdownTest` em `tests/test_render.py`:
         self.assertIn("- Não atendido: Feedback só sinaliza acerto/erro ou inexiste\n\n**Depende de.** —", out)
 ```
 
-- [ ] **Step 2: Rodar e ver falhar**
+- [x] **Step 2: Rodar e ver falhar**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_render.py -v 2>&1 | tail -8`
 Expected: os dois primeiros testes novos falham (`AssertionError`); o terceiro passa.
 
-- [ ] **Step 3: Implementação**
+- [x] **Step 3: Implementação**
 
 Em `scripts/vygolint_catalog/render.py`, depois de `_GRAUS`:
 
@@ -317,17 +317,17 @@ por:
             linhas += ["", f"**Depende de.** {_depende_de(c)}", ""]
 ```
 
-- [ ] **Step 4: Rodar e ver passar**
+- [x] **Step 4: Rodar e ver passar**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v 2>&1 | tail -5`
 Expected: `Ran 93 tests` … `OK`.
 
-- [ ] **Step 5: Build e diff**
+- [x] **Step 5: Build e diff**
 
 Run: `python3 scripts/build_catalog.py && git diff --stat -- docs/`
 Expected: `OK: 40 diretrizes, 43 critérios`; nenhum diff (nenhum critério tem o campo ainda).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add scripts/vygolint_catalog/render.py tests/test_render.py
@@ -359,11 +359,11 @@ Regras de forma:
 
 **Procedimento de cada lote:**
 
-- [ ] **Step 1:** Para cada critério do lote, acrescentar `recomendacao` com as três vias (texto ou `null`).
-- [ ] **Step 2:** Run: `python3 scripts/build_catalog.py`. Expected: `OK: 40 diretrizes, 43 critérios`. Erros de lint do glossário apontam `Dnn/Dnn.k: texto usa "<gatilho>" mas definicoes.glossario não lista "<chave>"`: acrescentar a chave ou reescrever sem o gatilho.
-- [ ] **Step 3:** Ler a seção de cada critério do lote em `docs/catalogo.md` e checar: bloco `**Recomendações.**` presente, três linhas, cada frase começa com verbo no infinitivo, nenhuma frase cria exigência fora do enunciado.
-- [ ] **Step 4:** Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests 2>&1 | tail -3` e `git diff --stat -- docs/catalogo.tex`. Expected: `OK`; `catalogo.tex` sem diff (só `catalogo.md` muda).
-- [ ] **Step 5:** Commit: `git add catalog/ docs/catalogo.md && git commit -m "feat(catalog): recomendacao for <categorias> (<faixa>)" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"`
+- [x] **Step 1:** Para cada critério do lote, acrescentar `recomendacao` com as três vias (texto ou `null`).
+- [x] **Step 2:** Run: `python3 scripts/build_catalog.py`. Expected: `OK: 40 diretrizes, 43 critérios`. Erros de lint do glossário apontam `Dnn/Dnn.k: texto usa "<gatilho>" mas definicoes.glossario não lista "<chave>"`: acrescentar a chave ou reescrever sem o gatilho.
+- [x] **Step 3:** Ler a seção de cada critério do lote em `docs/catalogo.md` e checar: bloco `**Recomendações.**` presente, três linhas, cada frase começa com verbo no infinitivo, nenhuma frase cria exigência fora do enunciado.
+- [x] **Step 4:** Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests 2>&1 | tail -3` e `git diff --stat -- docs/catalogo.tex`. Expected: `OK`; `catalogo.tex` sem diff (só `catalogo.md` muda).
+- [x] **Step 5:** Commit: `git add catalog/ docs/catalogo.md && git commit -m "feat(catalog): recomendacao for <categorias> (<faixa>)" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"`
 
 **Exemplo de referência (D17.1, lote B), já no formato final:**
 
@@ -376,9 +376,9 @@ Regras de forma:
 
 (D17.1 precisa listar `documentacao_equivalente` em `definicoes.glossario` se ainda não lista.)
 
-#### Task 3: Lote A — Interação (D01 a D15, 15 critérios)
+#### Task 3: Lote A — Interação (D01 a D15, 17 critérios)
 
-- [ ] **Step 0 (só nesta task):** Acrescentar as regras 19 a 24 acima ao fim de `.superpowers/sdd/authoring-rules.md`, numeradas, precedidas da linha `Regras para o campo recomendacao (2026-11-04):`. Arquivo não versionado; nada a commitar.
+- [x] **Step 0 (só nesta task):** Acrescentar as regras 19 a 24 acima ao fim de `.superpowers/sdd/authoring-rules.md`, numeradas, precedidas da linha `Regras para o campo recomendacao (2026-11-04):`. Arquivo não versionado; nada a commitar.
 - Steps 1 a 5 do procedimento. Mensagem de commit: `feat(catalog): recomendacao for interacao (D01-D15)`.
 
 #### Task 4: Lote B — Mediação (D16 a D23, 9 critérios: D16.1 a D21.1, D22.1, D22.2, D23.1)
@@ -390,7 +390,7 @@ Regras de forma:
 
 - Steps 1 a 5. Mensagem: `feat(catalog): recomendacao for autonomia, socializacao, ludico (D24-D29)`.
 
-#### Task 6: Lote D — Realismo, personalização, organização, resolução de problemas, linguagem, atenção, aprendizado (D30 a D40, 13 critérios)
+#### Task 6: Lote D — Realismo, personalização, organização, resolução de problemas, linguagem, atenção, aprendizado (D30 a D40, 11 critérios)
 
 - Steps 1 a 5. Mensagem: `feat(catalog): recomendacao for realismo to aprendizado (D30-D40)`.
 
@@ -402,7 +402,7 @@ Regras de forma:
 - Modify: `catalog/schema.yaml`
 - Test: `tests/test_validate.py`, `tests/test_render.py`
 
-- [ ] **Step 1: Teste que falha**
+- [x] **Step 1: Teste que falha**
 
 Acrescentar a `RecomendacaoTest` em `tests/test_validate.py`:
 
@@ -415,12 +415,12 @@ Acrescentar a `RecomendacaoTest` em `tests/test_validate.py`:
         self.assertNotIn("recomendacao", self.schema["criterio"].get("opcionais", []))
 ```
 
-- [ ] **Step 2: Rodar e ver falhar**
+- [x] **Step 2: Rodar e ver falhar**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -p test_validate.py -v 2>&1 | tail -6`
 Expected: `test_field_is_required` FAIL.
 
-- [ ] **Step 3: Esquema**
+- [x] **Step 3: Esquema**
 
 Em `catalog/schema.yaml`:
 
@@ -432,16 +432,16 @@ Em `catalog/schema.yaml`:
 
 (remover o comentário "passa a obrigatorios quando…").
 
-- [ ] **Step 4: Render sem o campo deixa de ser caso válido**
+- [x] **Step 4: Render sem o campo deixa de ser caso válido**
 
 Em `tests/test_render.py`, apagar `test_no_recomendacoes_block_when_field_absent` (o campo é obrigatório; o render ainda tolera ausência por defesa, mas o caso não é mais contrato). Em `render.py`, manter `_bloco_recomendacoes` como está.
 
-- [ ] **Step 5: Rodar tudo**
+- [x] **Step 5: Rodar tudo**
 
 Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v 2>&1 | tail -4 && python3 scripts/build_catalog.py && git diff --exit-code -- docs/catalogo.md docs/catalogo.tex && grep -c '^\*\*Recomendações\.\*\*$' docs/catalogo.md`
 Expected: `Ran 93 tests … OK`; `OK: 40 diretrizes, 43 critérios`; nenhum diff; `43`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add catalog/schema.yaml tests/test_validate.py tests/test_render.py
@@ -457,7 +457,7 @@ git commit -m "feat(schema): recomendacao is required in every criterion" -m "Co
 - Modify: `docs/conformidade.md` (seção 5)
 - Modify: `README.md`
 
-- [ ] **Step 1: Spec do catálogo, seção 5**
+- [x] **Step 1: Spec do catálogo, seção 5**
 
 No exemplo YAML, entre o bloco `escala:` e `depende_de: []`, inserir:
 
@@ -478,7 +478,7 @@ No item "Lint:", acrescentar ao final: `O lint cobre também as três vias de `r
 
 No item "O renderizador imprime…", acrescentar: `e um bloco `**Recomendações.**` (uma linha por via, "não se aplica" quando `null`) depois da escala e antes de `**Depende de.**`.`
 
-- [ ] **Step 2: Spec do catálogo, seção 7**
+- [x] **Step 2: Spec do catálogo, seção 7**
 
 Trocar as duas linhas da lista "Relatório":
 
@@ -496,7 +496,7 @@ por:
 
 Atualizar a linha `Status:` no topo: acrescentar `; campo recomendacao (2026-11-04)`.
 
-- [ ] **Step 3: `docs/conformidade.md`, seção 5**
+- [x] **Step 3: `docs/conformidade.md`, seção 5**
 
 Trocar os itens 5 e 6 por:
 
@@ -520,7 +520,7 @@ reproduz o texto do catálogo e o contextualiza com os itens encontrados; não i
 recomendação nova.
 ```
 
-- [ ] **Step 4: README**
+- [x] **Step 4: README**
 
 Na tabela "O que há aqui", linha de `catalog/D01.yaml … D40.yaml`, trocar o conteúdo por: `uma diretriz por arquivo: texto literal, critérios, níveis, evidências, escalas, recomendações por via (documentação, design, código)`.
 
@@ -533,11 +533,11 @@ Na lista "Documentos de projeto", acrescentar:
 - Plano do campo `recomendacao`: `docs/superpowers/plans/2026-11-04-recomendacao.md`
 ```
 
-- [ ] **Step 5: Spec desta feature**
+- [x] **Step 5: Spec desta feature**
 
 Em `docs/superpowers/specs/2026-11-04-recomendacao-design.md`, linha `Status:`, trocar por `Status: implementado (2026-11-04)`.
 
-- [ ] **Step 6: Verificar e commitar**
+- [x] **Step 6: Verificar e commitar**
 
 Run: `python3 scripts/build_catalog.py && git diff --exit-code -- docs/catalogo.md docs/catalogo.tex`
 Expected: OK e sem diff.
@@ -551,8 +551,8 @@ git commit -m "docs: recomendacao field in spec, conformidade rules and README" 
 
 ### Task 9: Verificação final e PR
 
-- [ ] **Step 1:** Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v 2>&1 | tail -4 && python3 scripts/build_catalog.py && git diff --exit-code -- docs/catalogo.md docs/catalogo.tex && git status --short`
+- [x] **Step 1:** Run: `PYTHONPATH=scripts python3 -m unittest discover -s tests -v 2>&1 | tail -4 && python3 scripts/build_catalog.py && git diff --exit-code -- docs/catalogo.md docs/catalogo.tex && git status --short`
 Expected: `OK`; `OK: 40 diretrizes, 43 critérios`; sem diff; árvore limpa.
-- [ ] **Step 2:** Run: `grep -c '^\*\*Recomendações\.\*\*$' docs/catalogo.md` → `43`. Run: `grep -n 'Expedição\|Antártica' catalog/*.yaml` → nada.
-- [ ] **Step 3:** `git push -u origin recomendacao` e `gh pr create --base main --title "Per-criterion recomendacao field" --body-file <corpo>`; corpo em português com: o que muda (esquema, lint, render, 43 recomendações, docs), como validar (comandos), e a cláusula de Carvalho (o resultado expressa conformidade com as diretrizes, não rotula o jogo). Terminar com `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
-- [ ] **Step 4:** Esperar CI verde (`gh pr checks --watch`).
+- [x] **Step 2:** Run: `grep -c '^\*\*Recomendações\.\*\*$' docs/catalogo.md` → `43`. Run: `grep -n 'Expedição\|Antártica' catalog/*.yaml` → nada.
+- [x] **Step 3:** `git push -u origin recomendacao` e `gh pr create --base main --title "Per-criterion recomendacao field" --body-file <corpo>`; corpo em português com: o que muda (esquema, lint, render, 43 recomendações, docs), como validar (comandos), e a cláusula de Carvalho (o resultado expressa conformidade com as diretrizes, não rotula o jogo). Terminar com `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
+- [x] **Step 4:** Esperar CI verde (`gh pr checks --watch`).

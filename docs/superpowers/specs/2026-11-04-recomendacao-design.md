@@ -1,7 +1,7 @@
 # vygolint — Campo `recomendacao` por critério
 
 Data: 2026-11-04
-Status: aprovado; implementação no branch `recomendacao`
+Status: implementado (2026-11-04)
 
 ## 1. Objetivo
 
@@ -87,10 +87,10 @@ Lotes de escrita, cada um validado pelo build e revisado por subagente contra as
 
 | Lote | Diretrizes | Critérios |
 |---|---|---|
-| A | D01 a D15 (interação) | 15 |
+| A | D01 a D15 (interação) | 17 |
 | B | D16 a D23 (mediação) | 9 |
 | C | D24 a D29 (autonomia, socialização, lúdico) | 6 |
-| D | D30 a D40 (realismo, personalização, organização, resolução de problemas, linguagem, atenção, aprendizado) | 13 |
+| D | D30 a D40 (realismo, personalização, organização, resolução de problemas, linguagem, atenção, aprendizado) | 11 |
 
 ## 7. Documentação
 
