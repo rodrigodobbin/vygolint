@@ -72,6 +72,8 @@ The using-vygolint skill content is included below and is already loaded for thi
 ${body}
 
 ${piToolMapping()}
+
+VYGOLINT_ROOT=${packageRoot}
 </EXTREMELY_IMPORTANT>`;
 		return cachedBootstrap;
 	} catch {
@@ -90,7 +92,7 @@ function piToolMapping(): string {
 
 Pi has native skills but does not expose Claude Code's \`Skill\` tool. When a vygolint instruction says to invoke a skill, use Pi's native skill system instead: load the relevant \`SKILL.md\` with \`read\` when the skill applies, or let a human invoke \`/skill:name\` explicitly.
 
-Pi's built-in coding tools are lowercase: \`read\`, \`write\`, \`edit\`, \`bash\`, \`grep\`, \`find\`, and \`ls\`. Use those for the corresponding actions: read a file, create or edit files, run shell commands, search file contents, find files by name, and list directories.`;
+Pi's built-in coding tools are lowercase: \`read\`, \`write\`, \`edit\`, and \`bash\`; \`grep\`, \`find\`, and \`ls\` are optional and may not be enabled (use \`bash\` when they are not). Use those for the corresponding actions: read a file or an image, create or edit files, run shell commands, search file contents, find files by name, and list directories.`;
 }
 
 function messageContainsBootstrap(message: unknown): boolean {

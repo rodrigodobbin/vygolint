@@ -28,6 +28,15 @@ class LoadCatalogTest(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_missing_schema_is_error(self):
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            cat, errors = load_catalog(tmp)
+            self.assertIsNone(cat)
+            self.assertTrue(any("schema.yaml" in e for e in errors), errors)
+        finally:
+            shutil.rmtree(tmp)
+
     def test_invalid_criterion_is_error(self):
         tmp = Path(tempfile.mkdtemp())
         try:

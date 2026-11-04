@@ -14,6 +14,9 @@ def load_catalog(catalog_dir):
                "criterios": {criterio_id: {"diretriz": d, "criterio": c}}}
     """
     catalog_dir = Path(catalog_dir)
+    for nome in ("schema.yaml", "categorias.yaml"):
+        if not (catalog_dir / nome).exists():
+            return None, [f"{nome}: arquivo ausente"]
     schema = load_yaml(catalog_dir / "schema.yaml")
     categorias = load_yaml(catalog_dir / "categorias.yaml")
     glossario_path = catalog_dir / "definicoes.yaml"

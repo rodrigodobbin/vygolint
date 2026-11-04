@@ -49,7 +49,7 @@ const normalizePath = (p, homeDir) => {
 // Module-level cache for bootstrap content.
 // The SKILL.md file does not change during a session, so reading + parsing it
 // once eliminates redundant fs.existsSync + fs.readFileSync + regex work on
-// every agent step.  See #1202 for the full analysis.
+// every agent step.
 let _bootstrapCache = undefined; // undefined = not yet loaded, null = file missing
 
 export const VygolintPlugin = async ({ client, directory }) => {
@@ -79,6 +79,7 @@ When skills request actions, substitute OpenCode equivalents:
 - Create or edit files → \`apply_patch\`
 - Run shell commands → \`bash\`
 - Search files → \`grep\`, \`glob\`
+- Read images (video frames) → \`read\`
 - Invoke a skill → OpenCode's native \`skill\` tool
 
 Use OpenCode's native \`skill\` tool to list and load skills.`;
@@ -91,6 +92,8 @@ You have vygolint.
 ${content}
 
 ${toolMapping}
+
+VYGOLINT_ROOT=${path.resolve(__dirname, '../..')}
 </EXTREMELY_IMPORTANT>`;
 
     return _bootstrapCache;

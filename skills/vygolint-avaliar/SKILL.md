@@ -64,7 +64,7 @@ criterios:
 2. Para cada diretriz de D01 a D40, em ordem:
    1. Leia `${VYGOLINT_ROOT}/catalog/Dnn.yaml` inteiro.
    2. Leia o bloco **Definições** de cada critério em `${VYGOLINT_ROOT}/docs/catalogo.md` (seção `#### Dnn.k`), onde o texto do glossário já vem impresso.
-   3. Se a diretriz tem `aplicabilidade` não nula e o contexto não a satisfaz (hoje só D22, quando `sala_de_aula: false`), grave `grau: fora_do_contexto` com `razao` e passe à próxima.
+   3. Se a diretriz tem `aplicabilidade` não nula e o contexto não a satisfaz (hoje só D22, quando `sala_de_aula: false`), grave, em cada critério da diretriz, `grau: fora_do_contexto` com `razao` e passe à próxima diretriz.
    4. Para cada critério, aplique a skill `vygolint-criterio` e obtenha a entrada.
    5. Acrescente as entradas da diretriz ao fim de `<pasta>/avaliacao.yaml`, sob `criterios:`.
    6. Confira que o arquivo continua YAML válido: `python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" <pasta>/avaliacao.yaml`.
@@ -72,7 +72,7 @@ criterios:
 4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao`.
 5. Não grave `recomendacao`, nível nem nota de dependência: o script os tira do catálogo. `depende_de` também é do script.
 
-Entrada completa de um critério (formato de `docs/conformidade.md`, seção 6, e o exemplo em `docs/exemplo/avaliacao.yaml`):
+Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade.md`, seção 6, e o exemplo em `${VYGOLINT_ROOT}/docs/exemplo/avaliacao.yaml`):
 
 ```yaml
   D01.1:
@@ -125,7 +125,7 @@ Leia `<pasta>/relatorio.md` e confira:
 - [ ] `avaliacao.yaml` tem 43 entradas, uma por critério do catálogo.
 - [ ] Toda prova aponta um lugar verificável e o lugar existe.
 - [ ] Todo `nao_avaliado` e `fora_do_contexto` tem `razao` que diz qual fonte faltou ou qual contexto não vale.
-- [ ] Cada bloqueio e cada parcial traz ao menos uma via de recomendação (o script escolhe as vias pela evidência disponível; não recalcule).
+- [ ] Cada bloqueio traz ao menos uma via de recomendação ou uma nota de dependência; cada parcial traz ao menos uma via (o script escolhe as vias pela evidência disponível; não recalcule).
 - [ ] Nenhum texto seu (provas, observações, razões, mensagem de entrega) rotula o jogo como sociointeracionista, behaviorista ou outro rótulo teórico.
 
 Entregue ao usuário:

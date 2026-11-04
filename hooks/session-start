@@ -24,7 +24,8 @@ escape_for_json() {
 }
 
 using_vygolint_escaped=$(escape_for_json "$using_vygolint_content")
-session_context="<EXTREMELY_IMPORTANT>\nYou have vygolint.\n\n**Below is the full content of your 'vygolint:using-vygolint' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_vygolint_escaped}\n</EXTREMELY_IMPORTANT>"
+plugin_root_escaped=$(escape_for_json "$PLUGIN_ROOT")
+session_context="<EXTREMELY_IMPORTANT>\nYou have vygolint.\n\n**Below is the full content of your 'vygolint:using-vygolint' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_vygolint_escaped}\n\nVYGOLINT_ROOT=${plugin_root_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context (snake_case).

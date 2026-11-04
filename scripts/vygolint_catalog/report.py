@@ -46,6 +46,10 @@ def _validate_cabecalho(av, errors):
     artefatos = ctx.get("artefatos")
     if not isinstance(artefatos, dict) or any(k not in FONTES for k in artefatos):
         errors.append("avaliacao: contexto.artefatos deve ser mapa fonte -> lista de caminhos")
+    else:
+        for fonte, valor in artefatos.items():
+            if not isinstance(valor, list) or not all(_is_text(v) for v in valor):
+                errors.append(f"avaliacao: contexto.artefatos.{fonte} deve ser lista de caminhos ou textos")
     if not _is_text(av.get("avaliador")):
         errors.append("avaliacao: avaliador ausente ou vazio")
     if not _DATA_RE.fullmatch(str(av.get("data", ""))):
@@ -80,7 +84,7 @@ def _validate_fontes(cid, entrada, criterio, fontes_ctx, errors):
             errors.append(f"{cid}: fonte {nome} precisa de provas (lista não vazia de textos)")
             continue
         if "observacao" in f and f["observacao"] is not None and not _is_text(f["observacao"]):
-            errors.append(f"{cid}: fonte {nome} com observacao vazia")
+            errors.append(f"{cid}: fonte {nome}: observacao deve ser texto não vazio")
         validas[nome] = f
     return validas
 
@@ -112,8 +116,11 @@ def validate_avaliacao(av, catalog):
         if grau not in GRAUS:
             errors.append(f"{cid}: grau inválido: {grau!r}")
             continue
-        if grau in ("nao_avaliado", "fora_do_contexto") and not _is_text(entrada.get("razao")):
-            errors.append(f"{cid}: razao obrigatória para grau {grau}")
+        if grau in ("nao_avaliado", "fora_do_contexto"):
+            if not _is_text(entrada.get("razao")):
+                errors.append(f"{cid}: razao obrigatória para grau {grau}")
+            if "fontes" in entrada and entrada["fontes"] is not None and entrada["fontes"] != {}:
+                errors.append(f"{cid}: fontes não se aplicam ao grau {grau}; use razao")
         if grau == "fora_do_contexto":
             if item["diretriz"].get("aplicabilidade") is None:
                 errors.append(f"{cid}: fora_do_contexto só vale para diretriz com aplicabilidade")
@@ -399,7 +406,7 @@ def build_report(avaliacao_path, catalog_dir, out_dir):
         av = load_avaliacao(avaliacao_path)
     except OSError as exc:
         return [f"{avaliacao_path.name}: não foi possível ler o arquivo: {exc}"]
-    except yaml.YAMLError as exc:
+    except (yaml.YAMLError, ValueError) as exc:
         return [f"{avaliacao_path.name}: YAML inválido: {exc}"]
     errors = validate_avaliacao(av, catalog)
     if errors:

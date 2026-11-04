@@ -13,10 +13,16 @@ O vygolint avalia um jogo educacional digital contra 43 critérios derivados das
 
 `${VYGOLINT_ROOT}` é a pasta que contém `skills/`, `catalog/` e `scripts/`.
 
-1. Em Claude Code, use `${CLAUDE_PLUGIN_ROOT}`.
-2. Em outros harnesses, use a pasta pai de `skills/` do SKILL.md que você está lendo.
-3. Confirme com `ls "${VYGOLINT_ROOT}/catalog/D01.yaml"`.
-4. Em todo comando, substitua `${VYGOLINT_ROOT}` pelo caminho absoluto da raiz (ou prefixe o comando com `VYGOLINT_ROOT=/caminho/absoluto`); o shell não guarda variáveis entre comandos.
+Descubra a raiz nesta ordem; se um passo não der caminho, use o seguinte:
+
+1. A linha `VYGOLINT_ROOT=…` injetada no início da sessão.
+2. Em Claude Code, `${CLAUDE_PLUGIN_ROOT}`, se não estiver vazia.
+3. A pasta pai de `skills/` do SKILL.md que você carregou.
+
+Depois:
+
+1. Confirme com `ls "${VYGOLINT_ROOT}/catalog/D01.yaml"`.
+2. Em todo comando, substitua `${VYGOLINT_ROOT}` pelo caminho absoluto da raiz (ou prefixe o comando com `VYGOLINT_ROOT=/caminho/absoluto`); o shell não guarda variáveis entre comandos.
 
 ## Qual skill usar
 
@@ -28,7 +34,7 @@ O vygolint avalia um jogo educacional digital contra 43 critérios derivados das
 
 ## Onde está cada coisa
 
-- Catálogo: `${VYGOLINT_ROOT}/catalog/D01.yaml` … `D40.yaml`; glossário em `catalog/definicoes.yaml`; categorias em `catalog/categorias.yaml`; versão legível em `docs/catalogo.md`.
+- Catálogo: `${VYGOLINT_ROOT}/catalog/D01.yaml` … `D40.yaml`; glossário em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`; categorias em `${VYGOLINT_ROOT}/catalog/categorias.yaml`; versão legível em `${VYGOLINT_ROOT}/docs/catalogo.md`.
 - Regras de grau, nível, agregação e relatório: `${VYGOLINT_ROOT}/docs/conformidade.md`.
 - Relatório: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML).
 

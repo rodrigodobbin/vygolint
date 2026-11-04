@@ -136,3 +136,5 @@ chave sem gatilho, definição repetida) estão na seção 5 do spec. O lint cob
 - Plano do glossário: `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`
 - Spec do campo `recomendacao`: `docs/superpowers/specs/2026-11-04-recomendacao-design.md`
 - Plano do campo `recomendacao`: `docs/superpowers/plans/2026-11-04-recomendacao.md`
+- Spec da etapa 2 (skills, relatório, manifestos): `docs/superpowers/specs/2026-11-04-skills-design.md`
+- Plano da etapa 2: `docs/superpowers/plans/2026-11-04-skills.md`

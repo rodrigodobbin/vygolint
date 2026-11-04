@@ -111,7 +111,8 @@ Todo relatório contém, nesta ordem:
 5. bloqueios: critérios que impedem o próximo nível, cada um com a `recomendacao` do catálogo
    na via que cabe à evidência disponível (código avaliado: `codigo`; só documentação:
    `documentacao` e `design`; só vídeo: `design` e `codigo`; documentação e vídeo: as três;
-   via escolhida nula: as demais não nulas);
+   via escolhida nula: as demais não nulas); bloqueio causado por dependência não satisfeita
+   cita o critério de que depende, sem recomendação própria;
 6. parciais: o que falta para pleno, com a `recomendacao` do critério contextualizada pelos
    itens que a avaliação encontrou fora do estado atendido;
 7. provas por critério.
@@ -126,6 +127,6 @@ Critério que depende de um critério não avaliado é registrado como não aval
 - `contexto.sala_de_aula` (true/false: decide a aplicabilidade de D22), `contexto.fontes` (subconjunto de `codigo`, `documentacao`, `video`), `contexto.artefatos` (fonte → lista de caminhos);
 - `criterios`: uma entrada por critério do catálogo (os 43), com `grau` (`atendido`, `parcial`, `nao_atendido`, `nao_avaliado`, `fora_do_contexto`), `fontes` (por fonte usada: `grau`, `provas`, `observacao` opcional), `razao` (obrigatória para `nao_avaliado` e `fora_do_contexto`) e `justificativa_conflito` (obrigatória quando `grau` difere do grau esperado pelas fontes).
 
-Grau esperado pelas fontes: o pior entre as fontes usadas, ignorando a documentação quando há vídeo (vídeo prevalece sobre documentação). Fonte só pode ser usada se existe na `evidencia` do critério e em `contexto.fontes`. Prova: `arquivo:linha — trecho`, `documento p. N — trecho` ou `vídeo hh:mm:ss — observação`.
+Grau esperado pelas fontes: o pior entre as fontes usadas, ignorando a documentação quando há vídeo (vídeo prevalece sobre documentação). Fonte só pode ser usada se existe na `evidencia` do critério e em `contexto.fontes`. Prova: `arquivo:linha — trecho`, `documento p. N — trecho` ou `arquivo hh:mm:ss[-hh:mm:ss] — observação` (vídeo). `fontes` só existe em entradas com grau `atendido`, `parcial` ou `nao_atendido`; `nao_avaliado` e `fora_do_contexto` levam só `razao`.
 
 `scripts/vygolint_report.py <pasta>/avaliacao.yaml` valida o arquivo contra o catálogo, aplica as seções 2 a 4 e escreve `relatorio.md` (seção 5) e `resultado.yaml` (grau efetivo e grau declarado por critério, nível alcançado), que serve à comparação com avaliação humana. Exemplo em `docs/exemplo/`.

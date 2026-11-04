@@ -130,6 +130,35 @@ class ValidateAvaliacaoTest(unittest.TestCase):
         av["criterios"]["D17.1"]["grau"] = "parcial"  # worse than sources, also needs justification
         self.assertTrue(any("D17.1" in e and "justificativa_conflito" in e for e in self.check(av)))
 
+    def test_fontes_not_allowed_on_ungraded_entries(self):
+        av = avaliacao_valida()
+        av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "x", "fontes": "x"}
+        self.assertTrue(any("D06.1" in e and "fontes não se aplicam" in e for e in self.check(av)))
+        av = avaliacao_valida()
+        av["contexto"]["sala_de_aula"] = False
+        av["criterios"]["D22.1"] = {
+            "grau": "fora_do_contexto", "razao": "x",
+            "fontes": {"documentacao": {"grau": "atendido", "provas": ["x"]}},
+        }
+        self.assertTrue(any("D22.1" in e and "fontes não se aplicam" in e for e in self.check(av)))
+        for vazio in ({}, None):
+            av = avaliacao_valida()
+            av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "x", "fontes": vazio}
+            self.assertEqual(self.check(av), [])
+
+    def test_artefatos_values_must_be_lists_of_texts(self):
+        av = avaliacao_valida()
+        av["contexto"]["artefatos"]["codigo"] = "src"
+        self.assertTrue(any("artefatos" in e for e in self.check(av)))
+        av = avaliacao_valida()
+        av["contexto"]["artefatos"]["codigo"] = ["src", ""]
+        self.assertTrue(any("artefatos" in e for e in self.check(av)))
+
+    def test_observacao_must_be_text(self):
+        av = avaliacao_valida()
+        av["criterios"]["D17.1"]["fontes"]["codigo"]["observacao"] = 5
+        self.assertTrue(any("D17.1" in e and "observacao deve ser texto não vazio" in e for e in self.check(av)))
+
 
 
 class ViasParaTest(unittest.TestCase):
@@ -336,7 +365,7 @@ class RenderTest(unittest.TestCase):
         self.assertIn("### D22.1 — fora do contexto", md)
         self.assertIn("o jogo não é aplicado em sala de aula", md)
         self.assertIn("### D06.1 — não avaliado", md)
-        self.assertIn("- Vídeo (parcial):\n  - video — prova de D01.1\n  - Observação: missão 2 resolvida", md)
+        self.assertIn("- Vídeo (parcial):\n  - gameplay/sessao1.mp4 00:00:00 — observação que satisfaz D01.1\n  - Observação: missão 2 resolvida", md)
 
     def test_resultado_yaml(self):
         av = self._exemplo()
@@ -389,6 +418,14 @@ class BuildReportTest(unittest.TestCase):
         errors = build_report(p, REPO / "catalog", self.tmp)
         self.assertEqual(len(errors), 1)
         self.assertIn("avaliacao.yaml", errors[0])
+
+    def test_invalid_date_reports_filename(self):
+        p = self.tmp / "avaliacao.yaml"
+        p.write_text("jogo: x\ndata: 2026-02-30\n", encoding="utf-8")
+        errors = build_report(p, REPO / "catalog", self.tmp)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("avaliacao.yaml", errors[0])
+        self.assertEqual([x.name for x in self.tmp.iterdir()], ["avaliacao.yaml"])
 
     def test_cli(self):
         p = _escrever(avaliacao_valida(), self.tmp)

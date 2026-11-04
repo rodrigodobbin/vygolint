@@ -1,7 +1,7 @@
 # vygolint — Etapa 2: skills, relatório e manifestos por harness
 
 Data: 2026-11-04
-Status: implementado (2026-11-04)
+Status: implementado (2026-11-04); PR pendente
 
 ## 1. Objetivo
 
@@ -54,17 +54,18 @@ vygolint/
   package.json                     # type module; pi.extensions e pi.skills
   tests/
     test_report.py, test_manifests.py, test_skills.py
-    fixtures/avaliacao_valida.yaml
+    helpers.py                     # helpers.avaliacao_valida(): fixture programática sobre o catálogo real
   docs/
     conformidade.md                # + seção 6: formato de avaliacao.yaml e de resultado.yaml
-    README.<harness>.md            # instalação por harness quando o README principal não basta
 ```
+
+A instalação por harness fica no `README.md`.
 
 `vygolint_catalog/build.py` continua gerando `docs/catalogo.md`; `catalog.py` extrai dele a parte "carregar e validar" para que `report.py` leia o catálogo sem escrever docs.
 
 ## 4. Skills
 
-Todas em português, frontmatter `name` e `description` (a descrição começa com "Use when…" em inglês curto seguido do português, como o superpowers faz para o trigger funcionar em qualquer harness). Caminhos relativos à raiz do plugin: nas skills, `${VYGOLINT_ROOT}` significa a pasta que contém `skills/`; a skill explica como descobri-la (pasta pai de `skills/` do próprio SKILL.md; em Claude Code, `${CLAUDE_PLUGIN_ROOT}`).
+Todas em português, frontmatter `name` e `description` (descrição em inglês curto (gatilho) e corpo em português, como o superpowers faz para o trigger funcionar em qualquer harness). Caminhos relativos à raiz do plugin: nas skills, `${VYGOLINT_ROOT}` significa a pasta que contém `skills/`; a skill explica como descobri-la (pasta pai de `skills/` do próprio SKILL.md; em Claude Code, `${CLAUDE_PLUGIN_ROOT}`).
 
 ### 4.1 `using-vygolint`
 
@@ -197,7 +198,7 @@ README: seção "Instalação" por harness (comandos copiados do superpowers com
 
 ## 8. Testes
 
-- `tests/test_report.py`: fixture `tests/fixtures/avaliacao_valida.yaml` cobrindo os 43 critérios com o catálogo real; um teste por regra de validação da seção 5.1; agregação: dependência não satisfeita, dependência de não avaliado, fora do contexto fora das contagens, nível por cada degrau, coberturas, bloqueios com a via certa em cada um dos quatro casos de fontes, parciais, determinismo (duas execuções, bytes iguais), `resultado.yaml` com grau efetivo e declarado.
+- `tests/test_report.py`: fixture `helpers.avaliacao_valida()` (fixture programática sobre o catálogo real) cobrindo os 43 critérios com o catálogo real; um teste por regra de validação da seção 5.1; agregação: dependência não satisfeita, dependência de não avaliado, fora do contexto fora das contagens, nível por cada degrau, coberturas, bloqueios com a via certa em cada um dos quatro casos de fontes, parciais, determinismo (duas execuções, bytes iguais), `resultado.yaml` com grau efetivo e declarado.
 - `tests/test_manifests.py`: todo JSON parseia; versões iguais entre manifestos e `package.json`; `skills` aponta para pasta existente; hook referenciado existe e é executável.
 - `tests/test_skills.py`: todo `skills/*/SKILL.md` tem frontmatter com `name` igual ao nome da pasta e `description` não vazia; `using-vygolint` contém a cláusula literal; `vygolint-avaliar` cita `vygolint_report.py`.
 - CLI: `tests/test_report.py` roda `scripts/vygolint_report.py` em subprocesso: código 0 com fixture válida, 1 com inválida, nada escrito no erro.
@@ -213,7 +214,7 @@ README: seção "Instalação" por harness (comandos copiados do superpowers com
 ## 10. Pronto quando
 
 - As quatro skills existem e passam `tests/test_skills.py`.
-- `scripts/vygolint_report.py tests/fixtures/avaliacao_valida.yaml --out <tmp>` gera `relatorio.md` com as 7 seções e `resultado.yaml` com 43 entradas.
+- `scripts/vygolint_report.py` sobre a avaliação de `helpers.avaliacao_valida()` (fixture programática sobre o catálogo real), com `--out <tmp>`, gera `relatorio.md` com as 7 seções e `resultado.yaml` com 43 entradas.
 - Manifestos de todos os harnesses da seção 3, mesma versão, testados.
 - `python3 scripts/build_catalog.py` continua imprimindo `OK: 40 diretrizes, 43 critérios`; todos os testes verdes; CI verde.
 - README com instalação por harness e uso; `docs/conformidade.md` seção 6.

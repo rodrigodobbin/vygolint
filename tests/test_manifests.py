@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import unittest
 
 from helpers import REPO
@@ -72,3 +73,16 @@ class ManifestsTest(unittest.TestCase):
         for rel in (".opencode/plugins/vygolint.js", ".pi/extensions/vygolint.ts", "hooks/session-start"):
             with self.subTest(rel=rel):
                 self.assertIn("using-vygolint", (REPO / rel).read_text(encoding="utf-8"))
+
+    def test_session_start_injects_plugin_root(self):
+        env = {k: v for k, v in os.environ.items() if k not in ("CLAUDE_PLUGIN_ROOT", "CURSOR_PLUGIN_ROOT", "COPILOT_CLI")}
+        out = subprocess.run(
+            ["bash", "hooks/run-hook.cmd", "session-start"], cwd=REPO, env=env, capture_output=True, text=True, check=True
+        )
+        contexto = json.loads(out.stdout)["additionalContext"]
+        self.assertIn(f"VYGOLINT_ROOT={REPO}", contexto)
+
+    def test_bootstrap_sources_inject_plugin_root(self):
+        for rel in (".opencode/plugins/vygolint.js", ".pi/extensions/vygolint.ts", "hooks/session-start"):
+            with self.subTest(rel=rel):
+                self.assertIn("VYGOLINT_ROOT=", (REPO / rel).read_text(encoding="utf-8"))
