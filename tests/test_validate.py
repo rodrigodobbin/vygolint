@@ -211,6 +211,23 @@ class ValidateCatalogoTest(unittest.TestCase):
         errors = validate_catalogo([a])
         self.assertTrue(any("si mesmo" in e for e in errors))
 
+    def test_depende_de_cycle_between_guidelines(self):
+        a = diretriz_valida()
+        b = _segunda_diretriz()
+        a["criterios"][0]["depende_de"] = [["D06.1"]]
+        b["criterios"][0]["depende_de"] = [["D17.1"]]
+        errors = validate_catalogo([a, b])
+        ciclos = [e for e in errors if "ciclo" in e]
+        self.assertEqual(len(ciclos), 1)
+        self.assertIn("D17.1", ciclos[0])
+        self.assertIn("D06.1", ciclos[0])
+
+    def test_self_reference_is_not_reported_as_cycle(self):
+        a = diretriz_valida()
+        a["criterios"][0]["depende_de"] = [["D17.1"]]
+        errors = validate_catalogo([a])
+        self.assertFalse(any("ciclo" in e for e in errors))
+
     def test_depende_de_resolves_across_files(self):
         a = diretriz_valida()
         a["criterios"][0]["depende_de"] = [["D06.1"]]

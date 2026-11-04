@@ -46,6 +46,13 @@ class ValidateAvaliacaoTest(unittest.TestCase):
         self.assertEqual(self.check(avaliacao_valida()), [])
         self.assertEqual(self.check(avaliacao_valida(fontes=("documentacao",))), [])
 
+    def test_non_list_fontes_does_not_raise(self):
+        for valor in (5, True):
+            av = avaliacao_valida()
+            av["contexto"]["fontes"] = valor
+            errors = self.check(av)
+            self.assertTrue(any("contexto.fontes" in e for e in errors))
+
     def test_header_fields(self):
         av = avaliacao_valida()
         del av["jogo"]
@@ -58,7 +65,7 @@ class ValidateAvaliacaoTest(unittest.TestCase):
         self.assertTrue(any("fontes" in e and "audio" in e for e in self.check(av)))
         av = avaliacao_valida()
         av["contexto"]["fontes"] = []
-        self.assertTrue(any("fontes" in e for e in self.check(av)))
+        self.assertTrue(any("contexto.fontes deve ser lista" in e for e in self.check(av)))
         av = avaliacao_valida()
         av["data"] = "ontem"
         self.assertTrue(any("data" in e for e in self.check(av)))
@@ -122,7 +129,6 @@ class ValidateAvaliacaoTest(unittest.TestCase):
         av = avaliacao_valida()
         av["criterios"]["D17.1"]["grau"] = "parcial"  # worse than sources, also needs justification
         self.assertTrue(any("D17.1" in e and "justificativa_conflito" in e for e in self.check(av)))
-
 
 
 
@@ -249,6 +255,32 @@ class AggregateTest(unittest.TestCase):
         self.assertIn("D06.1", por_id["D16.1"]["nota"])
         self.assertTrue(por_id["D07.1"]["vias"])
 
+    def _set(self, av, cid, grau):
+        av["criterios"][cid]["grau"] = grau
+        for f in av["criterios"][cid]["fontes"].values():
+            f["grau"] = grau
+
+    def test_nota_accumulates_all_failing_groups(self):
+        cat = copy.deepcopy(self.cat)
+        crit = cat["criterios"]["D13.1"]["criterio"]
+        crit["depende_de"] = [["D06.1", "D07.1"], ["D17.1"]]
+        dc = next(c for d in cat["diretrizes"] for c in d["criterios"] if c["id"] == "D13.1")
+        self.assertIs(dc, crit)
+        av = avaliacao_valida()
+        for cid in ("D06.1", "D07.1", "D17.1"):
+            self._set(av, cid, "nao_atendido")
+        nota = aggregate(av, cat)["criterios"]["D13.1"]["nota"]
+        self.assertIn("D06.1 ou D07.1", nota)
+        self.assertIn("D17.1", nota)
+
+    def test_mixed_group_with_nao_avaliado_is_nao_avaliado(self):
+        av = avaliacao_valida()
+        av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "sem evidência"}
+        self._set(av, "D07.1", "nao_atendido")
+        c = self.agg(av)["criterios"]["D13.1"]
+        self.assertEqual(c["grau"], "nao_avaliado")
+        self.assertIn("não avaliado por dependência", c["nota"])
+
     def test_bloqueios_empty_at_aaa_and_sorted(self):
         av = avaliacao_valida()
         self.assertEqual(self.agg(av)["bloqueios"], [])
@@ -336,6 +368,12 @@ class BuildReportTest(unittest.TestCase):
         self.assertEqual(build_report(p, REPO / "catalog", self.tmp), [])
         self.assertTrue((self.tmp / "relatorio.md").exists())
         self.assertTrue((self.tmp / "resultado.yaml").exists())
+
+    def test_missing_file_is_reported(self):
+        errors = build_report(self.tmp / "nao-existe.yaml", REPO / "catalog", self.tmp)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("nao-existe.yaml", errors[0])
+        self.assertEqual(list(self.tmp.iterdir()), [])
 
     def test_invalid_writes_nothing(self):
         av = avaliacao_valida()

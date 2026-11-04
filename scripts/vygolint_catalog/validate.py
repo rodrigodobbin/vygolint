@@ -292,6 +292,38 @@ def validate_catalogo(diretrizes):
                         errors.append(f"{prefix}: depende_de aponta para si mesmo")
                     elif alvo not in vistos_c:
                         errors.append(f"{prefix}: depende_de aponta para critério inexistente: {alvo}")
+    errors.extend(_ciclos_depende_de(diretrizes))
+    return errors
+
+
+def _ciclos_depende_de(diretrizes):
+    """DFS over criterion -> depende_de targets; one error per cycle (self loops are flagged elsewhere)."""
+    ids = {c["id"] for d in diretrizes for c in d["criterios"]}
+    grafo = {}
+    for d in diretrizes:
+        for c in d["criterios"]:
+            grafo[c["id"]] = [a for grupo in c["depende_de"] for a in grupo if a != c["id"] and a in ids]
+    errors = []
+    estado = {}  # 1 = on stack, 2 = done
+    em_ciclo = set()
+
+    def visitar(no, pilha):
+        estado[no] = 1
+        pilha.append(no)
+        for alvo in grafo[no]:
+            if estado.get(alvo) == 1:
+                caminho = pilha[pilha.index(alvo):] + [alvo]
+                if not em_ciclo.intersection(caminho):
+                    errors.append(f"{alvo}: depende_de com ciclo: {' -> '.join(caminho)}")
+                em_ciclo.update(caminho)
+            elif alvo not in estado:
+                visitar(alvo, pilha)
+        pilha.pop()
+        estado[no] = 2
+
+    for no in grafo:
+        if no not in estado:
+            visitar(no, [])
     return errors
 
 

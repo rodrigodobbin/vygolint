@@ -42,7 +42,7 @@ def _validate_cabecalho(av, errors):
     fontes = ctx.get("fontes")
     if not isinstance(fontes, list) or not fontes or any(f not in FONTES for f in fontes):
         errors.append(f"avaliacao: contexto.fontes deve ser lista não vazia dentro de {list(FONTES)} (recebido {fontes!r})")
-        fontes = [f for f in (fontes or []) if f in FONTES]
+        fontes = [f for f in fontes if f in FONTES] if isinstance(fontes, list) else []
     artefatos = ctx.get("artefatos")
     if not isinstance(artefatos, dict) or any(k not in FONTES for k in artefatos):
         errors.append("avaliacao: contexto.artefatos deve ser mapa fonte -> lista de caminhos")
@@ -163,7 +163,7 @@ def _contar(contagem, grau):
 
 
 def _resolver_dependencias(declarados, catalog):
-    """Return {id: (grau_efetivo, nota)} after applying depende_de (fixed point; cycles are a catalog error)."""
+    """Return {id: (grau_efetivo, nota)} after applying depende_de. Cycles are rejected by validate_catalogo; the iteration bound is a safety net."""
     efetivo = {cid: (g, None) for cid, g in declarados.items()}
     for _ in range(len(efetivo) + 1):
         mudou = False
@@ -172,16 +172,21 @@ def _resolver_dependencias(declarados, catalog):
             if grau_decl == "fora_do_contexto":
                 continue
             novo = (grau_decl, None)
+            falhas_nao_atendido = []
+            falhas_nao_avaliado = []
             for grupo in item["criterio"]["depende_de"]:
                 estados = [efetivo[alvo][0] for alvo in grupo]
                 if "atendido" in estados:
                     continue
                 alvos = " ou ".join(grupo)
                 if "nao_avaliado" in estados and all(e in ("nao_avaliado", "parcial", "nao_atendido") for e in estados):
-                    if novo[0] != "nao_atendido":
-                        novo = ("nao_avaliado", f"não avaliado por dependência de critério não avaliado ({alvos})")
+                    falhas_nao_avaliado.append(alvos)
                 else:
-                    novo = ("nao_atendido", f"não atendido por dependência não satisfeita ({alvos})")
+                    falhas_nao_atendido.append(alvos)
+            if falhas_nao_atendido:
+                novo = ("nao_atendido", f"não atendido por dependência não satisfeita ({'; '.join(falhas_nao_atendido)})")
+            elif falhas_nao_avaliado:
+                novo = ("nao_avaliado", f"não avaliado por dependência de critério não avaliado ({'; '.join(falhas_nao_avaliado)})")
             if efetivo[cid] != novo:
                 efetivo[cid] = novo
                 mudou = True
@@ -392,6 +397,8 @@ def build_report(avaliacao_path, catalog_dir, out_dir):
         return errors
     try:
         av = load_avaliacao(avaliacao_path)
+    except OSError as exc:
+        return [f"{avaliacao_path.name}: não foi possível ler o arquivo: {exc}"]
     except yaml.YAMLError as exc:
         return [f"{avaliacao_path.name}: YAML inválido: {exc}"]
     errors = validate_avaliacao(av, catalog)
