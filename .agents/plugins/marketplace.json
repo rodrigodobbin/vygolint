@@ -1,0 +1,12 @@
+{
+  "name": "vygolint",
+  "interface": { "displayName": "vygolint" },
+  "plugins": [
+    {
+      "name": "vygolint",
+      "source": { "source": "url", "url": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools"
+    }
+  ]
+}

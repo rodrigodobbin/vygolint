@@ -1,0 +1,12 @@
+{
+  "name": "vygolint",
+  "version": "0.2.0",
+  "description": "vygolint skills and runtime bootstrap for coding agents",
+  "type": "module",
+  "main": ".opencode/plugins/vygolint.js",
+  "keywords": ["pi-package", "skills", "educational-games", "vygotsky", "conformance"],
+  "pi": {
+    "extensions": ["./.pi/extensions/vygolint.ts"],
+    "skills": ["./skills"]
+  }
+}
