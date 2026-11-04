@@ -393,3 +393,76 @@ class DefinicoesCriterioTest(unittest.TestCase):
         c["definicoes"] = {"glossario": ["caminho_obrigatorio", "missao"]}
         errors = self.check(d)
         self.assertTrue(any("glossário" in e and "caminho_obrigatorio" in e for e in errors), errors)
+
+
+class RecomendacaoTest(unittest.TestCase):
+    def setUp(self):
+        self.schema = schema_valido()
+        self.categorias = categorias_validas()
+        self.g = _glossario()
+
+    def check(self, d):
+        return validate_diretriz(d, self.schema, self.categorias, self.g)
+
+    def test_schema_lists_vias(self):
+        self.assertEqual(self.schema["criterio"]["recomendacao"]["vias"], ["documentacao", "design", "codigo"])
+        self.assertIn("recomendacao.*", self.schema["criterio"]["definicoes"]["campos_lint"])
+
+    def test_valid_fixture_passes(self):
+        self.assertEqual(self.check(diretriz_valida()), [])
+
+    def test_must_be_map(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"] = "texto"
+        self.assertTrue(any("D17.1" in e and "recomendacao deve ser mapa" in e for e in self.check(d)))
+
+    def test_each_via_required_null_allowed(self):
+        d = diretriz_valida()
+        del d["criterios"][0]["recomendacao"]["design"]
+        self.assertTrue(any("recomendacao.design ausente" in e for e in self.check(d)))
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["design"] = None
+        self.assertEqual(self.check(d), [])
+
+    def test_via_must_be_text_or_null(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["codigo"] = ""
+        self.assertTrue(any("recomendacao.codigo" in e and "texto não vazio ou null" in e for e in self.check(d)))
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["codigo"] = ["x"]
+        self.assertTrue(any("recomendacao.codigo" in e for e in self.check(d)))
+
+    def test_unknown_via(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["video"] = "x"
+        self.assertTrue(any("recomendacao" in e and "desconhecidas" in e and "video" in e for e in self.check(d)))
+
+    def test_at_least_one_via(self):
+        d = diretriz_valida()
+        for via in ("documentacao", "design", "codigo"):
+            d["criterios"][0]["recomendacao"][via] = None
+        self.assertTrue(any("recomendacao precisa de ao menos uma via não nula" in e for e in self.check(d)))
+
+    def test_textos_do_criterio_includes_vias_in_order(self):
+        from vygolint_catalog.validate import textos_do_criterio
+        c = diretriz_valida()["criterios"][0]
+        c["recomendacao"]["design"] = None
+        campos = [campo for campo, _ in textos_do_criterio(c)]
+        self.assertEqual(
+            [x for x in campos if x.startswith("recomendacao.")],
+            ["recomendacao.documentacao", "recomendacao.codigo"],
+        )
+        self.assertLess(campos.index("escala.nao_atendido"), campos.index("recomendacao.documentacao"))
+
+    def test_gatilho_in_recomendacao_requires_key(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["design"] = "Acrescentar a cada missão uma mensagem orientadora"
+        errors = self.check(d)
+        self.assertTrue(any('"missão"' in e and "missao" in e for e in errors), errors)
+        d["criterios"][0]["definicoes"] = {"glossario": ["missao"]}
+        self.assertEqual(self.check(d), [])
+
+    def test_inline_definition_in_recomendacao_is_error(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["codigo"] += ". Definição: manipulador é a função chamada no erro"
+        self.assertTrue(any("recomendacao.codigo" in e and "Definição" in e for e in self.check(d)))

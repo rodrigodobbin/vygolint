@@ -11,8 +11,10 @@ criterio:
   viabilidade: [alta, media, baixa]
   fontes_evidencia: [codigo, documentacao, video]
   escala: [atendido, parcial, nao_atendido]
-  opcionais: [definicoes]
+  opcionais: [definicoes, recomendacao]   # recomendacao passa a obrigatorios quando os 43 critérios o tiverem (plano, Task 8)
+  recomendacao:
+    vias: [documentacao, design, codigo]   # cada via: texto não vazio ou null; ao menos uma não nula
   definicoes:
     chaves: [glossario, locais, termos_comuns]   # glossario: lista de chaves de definicoes.yaml; locais: {termo: texto}; termos_comuns: {gatilho: justificativa}
     # campos_lint: documentation only (the validator hardcodes the fields in textos_do_criterio)
-    campos_lint: [enunciado, evidencia.*.procedimento, evidencia.*.indicadores, escala.*]
+    campos_lint: [enunciado, evidencia.*.procedimento, evidencia.*.indicadores, escala.*, recomendacao.*]
