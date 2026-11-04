@@ -1,6 +1,6 @@
 # Definições compartilhadas — divergências encontradas e decisões respondidas
 
-Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml` (plano `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`). As 14 decisões foram respondidas pelo autor em 2026-11-04 e as respostas estão aplicadas no catálogo: os textos âncora indicados em cada item são finais, com as novas redações das decisões 2, 3 e 6, a retirada do local sem uso de D25.1 (decisão 9) e a decisão 12 mantida. A lista legível por máquina está em `scripts/definicoes_aceitas.yaml`: cada entrada com `tipo: decisao` traz em `decisao` o número do item abaixo.
+Data: 2026-11-03. Origem: migração do catálogo para `catalog/definicoes.yaml` (plano `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`). As 14 decisões foram respondidas pelo autor em 2026-11-04 e as respostas estão aplicadas no catálogo: os textos âncora indicados em cada item são finais, com as novas redações das decisões 2, 3 e 6, a retirada do local sem uso de D25.1 (decisão 9) e a decisão 12 mantida. A lista legível por máquina (`scripts/definicoes_aceitas.yaml`, lida por `scripts/verify_definicoes.py`) e o script de migração foram removidos de `main` depois do merge do PR #1; a última versão está no commit 3e8dea2. Cada entrada com `tipo: decisao` trazia em `decisao` o número do item abaixo.
 
 "Etapa 1" é o texto do catálogo em `main`, antes da migração. Cada decisão pode ser respondida com uma de três opções:
 

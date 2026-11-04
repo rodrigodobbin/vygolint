@@ -20,7 +20,6 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
 | `docs/conformidade.md` | regras de nível, grau, agregação e relatório |
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
-| `scripts/migrate_definicoes.py`, `scripts/verify_definicoes.py`, `scripts/definicoes_aceitas.yaml` | ferramental de migração pontual para o glossário; pode ser removido após o PR |
 | `skills/` | etapa 2: skills portáveis entre agentes de código (vazio por ora) |
 
 ## Como funciona o nível
