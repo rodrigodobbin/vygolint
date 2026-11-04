@@ -36,6 +36,10 @@ criterios:
       atendido: "Ao menos um objeto interativo do jogo é item do cotidiano do público-alvo descrito no GDD ou documento equivalente, nos termos do enunciado e das definições"
       parcial: "O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado e das definições, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)"
       nao_atendido: "O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado e das definições (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente o público-alvo (faixa etária, série ou perfil) e os itens do cotidiano do público-alvo, citados pelo nome, ou os objetos de um local da rotina atribuído ao público-alvo (casa, escola, bairro, transporte). Registrar ao menos um objeto do jogo que é item do cotidiano do público-alvo, com a ação que o jogador executa sobre esse objeto e a resposta do jogo"
+      design: "Incluir no jogo ao menos um item do cotidiano do público-alvo, nos termos das definições, ou usar um que já aparece só como elemento visual. Definir ao menos uma ação do jogador sobre esse item (pegar, usar, abrir, mover, combinar ou selecionar) e a resposta do jogo a essa ação, com mudança de estado ou mensagem"
+      codigo: "Acrescentar ou usar um objeto do jogo com o nome e a função de um item do cotidiano do público-alvo citado no GDD ou documento equivalente. Acrescentar a esse objeto um manipulador de evento (handler) de ação do jogador (pegar, usar, abrir, mover, combinar ou selecionar) que responda com mudança de estado ou mensagem"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

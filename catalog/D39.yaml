@@ -38,6 +38,10 @@ criterios:
       atendido: "Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado e das definições"
       parcial: "Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado e das definições, mas todo detalhe exigido é sinalizado explicitamente"
       nao_atendido: "Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado e das definições (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente ao menos um desafio cuja conclusão depende de um detalhe do cenário jogável, com o detalhe identificado. Registrar que esse detalhe é deixado para o jogador perceber, sem marcador, destaque, instrução, dica ou fala que o aponte. Registrar que a informação desse detalhe não é fornecida por outro meio"
+      design: "Definir, em ao menos um desafio, uma condição de conclusão que dependa do valor ou da presença de um detalhe do cenário jogável, nos termos das definições. Definir que esse detalhe não tenha marcador, destaque nem instrução, dica ou fala que informe onde o detalhe está ou qual valor ler desse detalhe. Definir que o jogo não forneça a informação desse detalhe por texto, fala, dica ou item"
+      codigo: "Acrescentar ou usar, em ao menos um desafio, uma condição de conclusão que leia o valor, a presença ou a interação com um elemento do cenário jogável. Remover desse elemento o componente, ícone, contorno, brilho, partícula ou animação que o assinale antes da ação do jogador. Remover os textos, dicas e falas que citem esse elemento informando onde o elemento está ou qual valor ler desse elemento. Remover o texto, a fala, a dica ou o item que forneça por outro meio a informação que esse elemento contém"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente]

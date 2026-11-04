@@ -36,6 +36,10 @@ criterios:
       atendido: "Existe ao menos um item avaliado e todos os itens avaliados têm forma escrita, nos termos do enunciado e das definições"
       parcial: "Ao menos um item avaliado tem forma escrita, nos termos do enunciado e das definições, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado e das definições)"
       nao_atendido: "Nenhum item avaliado tem forma escrita, nos termos do enunciado e das definições, ou não existe item avaliado"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a instrução de cada missão, os diálogos com NPC e as descrições de objetos interativos. Registrar que cada um desses itens é fornecido com texto na tela que contém as ações, nomes e números do áudio do mesmo item, quando há áudio"
+      design: "Incluir, em cada missão sem instrução de missão, uma instrução em forma escrita, nos termos das definições. Incluir forma escrita em cada instrução de missão, diálogo com NPC e descrição de objeto interativo fornecidos só em áudio. Incluir no texto na tela de cada item as ações, nomes e números que o áudio do mesmo item informa e o texto omite"
+      codigo: "Acrescentar, em cada missão sem instrução, um campo de texto, caixa de diálogo ou painel que exiba a instrução da missão. Acrescentar texto na tela (caixa de diálogo, legenda ou painel) a cada instrução de missão, diálogo com NPC e descrição de objeto interativo que só toca áudio. Trocar o texto de cada item que omite ações, nomes ou números do áudio do mesmo item por um texto que os contenha"
     depende_de: []
     definicoes:
       glossario: [missao, documentacao_equivalente]

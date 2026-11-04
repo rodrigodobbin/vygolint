@@ -31,6 +31,10 @@ criterios:
       atendido: "O GDD ou documento equivalente nomeia um referente real para a premissa do jogo, indica ao menos um elemento da premissa que corresponde a esse referente e cita a fonte do referente, nos termos do enunciado e das definições"
       parcial: "O GDD nomeia um referente real para a premissa e indica ao menos um elemento da premissa que corresponde a esse referente, nos termos do enunciado e das definições, mas não cita a fonte do referente"
       nao_atendido: "O GDD não nomeia referente real para a premissa, ou nomeia mas não indica elemento da premissa que corresponda a ele, nos termos do enunciado e das definições (inclui premissa fictícia, lugar real só como pano de fundo, descrição genérica do referente e ausência de GDD ou documento equivalente)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a premissa do jogo (papel do jogador, local, tarefa e problema a resolver) e o referente real dessa premissa, por nome ou descrição específica. Registrar ao menos um elemento da premissa descrito como o mesmo elemento do referente real. Registrar a fonte do referente real, identificada por autoria ou endereço"
+      design: "Definir para a premissa do jogo um referente real, nos termos das definições. Definir ao menos um elemento da premissa (papel do jogador, local, tarefa ou problema a resolver) como o mesmo elemento do referente real. Incluir na tela de abertura, de créditos ou Sobre o nome ou a descrição do referente real, o elemento da premissa apresentado como o mesmo elemento do referente e a fonte do referente, identificada por autoria ou endereço"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, documentacao_equivalente]
