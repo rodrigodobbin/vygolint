@@ -36,6 +36,10 @@ criterios:
       atendido: "Existe ao menos um ponto de feedback avaliado e todos os pontos de feedback avaliados exibem feedback individualizado, nos termos do enunciado e das definições"
       parcial: "Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado e das definições"
       nao_atendido: "Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, ou não existe ponto de feedback avaliado"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente, para cada ponto de feedback, as mensagens previstas e a ação específica ou o histórico que seleciona cada uma. Registrar, em cada ponto de feedback, ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, cujas mensagens previstas diferem em informação que cita ou descreve o que o jogador fez"
+      design: "Definir ao menos uma mensagem, em texto ou fala, que o jogo exiba em resposta a uma ação do jogador. Definir, em cada ponto de feedback, mensagens diferentes para ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, que difiram em informação que cita ou descreve o que o jogador fez"
+      codigo: "Acrescentar ao menos um manipulador de evento (handler) que exiba, em texto ou fala, mensagem de feedback em resposta a uma ação do jogador. Fazer cada ponto de feedback escolher ou montar a mensagem a partir da ação específica (valor escolhido, objeto, resposta) ou do histórico (contadores de tentativas ou de erros, registro de ações anteriores), e não por sorteio nem apenas pelo resultado. Acrescentar, em cada ponto de feedback, ao menos dois ramos, ou um texto que insira o dado da ação, que produzam para o mesmo resultado mensagens que diferem em informação que cita ou descreve o que o jogador fez"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

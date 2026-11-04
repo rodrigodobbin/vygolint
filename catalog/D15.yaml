@@ -29,6 +29,10 @@ criterios:
       atendido: "O jogo oferece duas ou mais ferramentas de comunicação entre jogadores distintas, nos termos do enunciado e das definições"
       parcial: "O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições"
       nao_atendido: "O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente cada ferramenta de comunicação entre jogadores, com seu meio (texto, voz ou sinais predefinidos) e sua temporalidade (tempo real ou sessão posterior)"
+      design: "Prever ao menos duas ferramentas de comunicação entre jogadores que difiram no meio ou na temporalidade"
+      codigo: "Implementar ao menos dois módulos que enviem conteúdo de um jogador a outro e difiram no meio (texto, voz ou sinais predefinidos) ou na temporalidade (tempo real ou sessão posterior)"
     depende_de:
       - [D06.1, D07.1]
     definicoes:

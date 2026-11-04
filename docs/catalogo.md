@@ -103,6 +103,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado
 - Não atendido: Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada missão e minijogo, a situação-problema com estado inicial, objetivo e ações possíveis. Registrar também a decisão do jogador que a resolução exige
+- Design: Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, nos termos das definições. Condicionar a conclusão a uma decisão do jogador entre as ações disponíveis
+- Código: não se aplica
+
 **Depende de.** —
 
 ### D02 — Avaliar os conteúdos ensinados no jogo de forma a transcender o contexto que eles foram abordados, possibilitando a transposição dos conceitos para resolução de outras situações-problema
@@ -141,6 +146,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado não é cobrado fora da situação em que foi apresentado (inclui o conceito que não é cobrado em nenhuma missão ou cenário)
 - Não atendido: Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem
 
+**Recomendações.**
+- Documentação: Listar no GDD ou documento equivalente os objetivos de aprendizagem. Registrar, para cada conceito listado, a missão ou cenário de introdução e a missão ou cenário de avaliação, com o objetivo e os objetos ou dados manipulados em cada uma
+- Design: Incluir, para cada conceito listado como objetivo de aprendizagem que não é cobrado fora da situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução
+- Código: não se aplica
+
 **Depende de.** —
 
 ### D03 — O desenvolvimento das atividades/missões/minijogos deve ser autorregulado pelo jogador
@@ -178,6 +188,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem das ações dentro de uma atividade (como objetos, perguntas ou etapas)
 - Não atendido: As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa
 
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Definir ao menos um ponto do jogo em que duas ou mais atividades, missões ou minijogos fiquem disponíveis ao mesmo tempo e o jogador escolha qual iniciar
+- Código: Alterar a lógica de desbloqueio para que exista um estado do jogo com duas ou mais atividades desbloqueadas ao mesmo tempo. Determinar a atividade iniciada pela entrada do jogador (menu, mapa ou interação), e não por ordem fixa no código
+
 **Depende de.** —
 
 #### D03.2 — Nível A
@@ -204,6 +219,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Todas as transições observadas ou identificadas no código dependem de ação do jogador
 - Parcial: Ao menos uma transição depende de ação do jogador e ao menos outra ocorre automaticamente
 - Não atendido: As atividades se sucedem automaticamente, sem ação do jogador
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Prever, ao fim de cada atividade, missão ou minijogo, uma ação do jogador que dispare a passagem para a seguinte
+- Código: Substituir cada transição disparada por temporizador ou por término automático da etapa anterior por uma transição disparada por entrada do jogador (botão, escolha ou interação)
 
 **Depende de.** —
 
@@ -236,6 +256,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite
 - Parcial: Ao menos uma atividade tem limite de tempo obrigatório e ao menos outra não tem
 - Não atendido: Todas as atividades têm limite de tempo obrigatório que o jogador não pode alterar
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente as regras de tempo de cada atividade, indicando quais têm limite de tempo. Registrar, para cada atividade com limite, a opção do jogador que o desativa ou amplia
+- Design: Retirar o limite de tempo obrigatório de cada atividade que o tem, ou prever uma opção do jogador que o desative ou amplie
+- Código: Remover o encerramento ou a reprovação disparados por cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie
 
 **Depende de.** —
 
@@ -276,6 +301,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um cenário tem objeto que responde nesse sentido e ao menos outro cenário não tem
 - Não atendido: Nenhum cenário tem objeto que responda à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD
 
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Definir, para cada cenário, ao menos um objeto que responda à interação do jogador com mudança de estado ou informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele
+- Código: Acrescentar, em cada cenário, ao menos um objeto com manipulador de evento (handler) de interação (clique, toque, colisão ou uso de item). Fazer o manipulador mudar o estado do objeto ou exibir informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele
+
 **Depende de.** —
 
 ### D05 — O jogador deve explorar livremente o cenário
@@ -315,6 +345,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um cenário tem áreas ou objetos acessíveis fora do caminho da missão e ao menos outro cenário restringe o jogador ao caminho
 - Não atendido: Nenhum cenário permite alcançar áreas ou objetos fora do caminho da missão em curso
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada cenário jogável, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige. Descrever o deslocamento do jogador até essas áreas durante a missão. Registrar que essas áreas ou objetos são acessíveis em qualquer estado da missão e que o jogador sai do caminho e volta a ele sem ser interrompido nem reposicionado
+- Design: Incluir, em cada cenário jogável que restringe o jogador ao caminho da missão, áreas ou objetos que nenhum objetivo da missão exige. Permitir o acesso a essas áreas ou objetos em qualquer estado da missão, sem interromper nem reposicionar o jogador
+- Código: Ativar o acesso ou a interação das áreas ou objetos fora do caminho da missão. Remover as verificações do estado da missão que bloqueiam esse acesso. Remover a lógica que interrompe o jogador ou o reposiciona no caminho da missão quando ele se afasta dele
+
 **Depende de.** —
 
 ### D06 — O jogador deve trocar informações com outros jogadores por comunicação síncrona
@@ -347,6 +382,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Canal síncrono existe e o vídeo mostra troca de mensagens livres entre jogadores
 - Parcial: Canal existe, mas limitado a mensagens prontas, emotes ou sinais sem conteúdo livre
 - Não atendido: Não há comunicação entre jogadores durante a sessão
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente o canal de chat, voz ou mensagens em tempo real entre jogadores e o conteúdo livre que ele transmite
+- Design: Prever uma sessão com dois ou mais jogadores e um canal em que eles troquem mensagens de texto ou voz em tempo real. Permitir no canal mensagens de conteúdo livre, e não apenas mensagens prontas, emotes ou sinais
+- Código: Implementar um canal de mensagens de texto ou voz entre clientes conectados que entregue as mensagens durante a partida. Aceitar no canal conteúdo digitado ou falado pelo jogador, e não apenas mensagens prontas, emotes ou sinais
 
 **Depende de.** —
 
@@ -381,6 +421,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Jogador só lê registros de outros, sem poder deixar os seus, ou o inverso
 - Não atendido: Não há troca assíncrona entre jogadores
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a mecânica de troca assíncrona (mural, bilhetes, diário compartilhado ou similar), com o autor, o local e o leitor da mensagem
+- Design: Prever uma mecânica em que o jogador deixe mensagens ou registros e leia os deixados por outros jogadores em sessões posteriores
+- Código: Gravar de forma persistente a mensagem do jogador, associada ao jogador e ao contexto em que foi deixada. Ler e exibir, em sessão distinta, as mensagens gravadas por outros jogadores
+
 **Depende de.** —
 
 ### D08 — O jogador deve trocar informações com os mecanismos do jogo
@@ -411,6 +456,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos uma situação, o mecanismo entrega informação, recebe a entrada do jogador e altera o que o jogo exibe a seguir conforme essa entrada
 - Parcial: Em ao menos uma situação, o mecanismo recebe a entrada do jogador, mas o que o jogo exibe a seguir é o mesmo para qualquer entrada
 - Não atendido: Os mecanismos apenas emitem informação ao jogador, sem receber entrada dele
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Definir ao menos uma situação em que um personagem não jogável ou mecanismo entregue informação ao jogador e receba dele uma resposta, escolha ou item. Prever, para essa situação, duas ou mais entradas possíveis do jogador que levem a saídas diferentes do jogo
+- Código: Ler no diálogo ou mecanismo a entrada do jogador (escolha, resposta ou item). Fazer a próxima saída do mecanismo ou o estado do jogo depender dessa entrada, com ao menos duas entradas levando a saídas diferentes
 
 **Depende de.** —
 
@@ -450,6 +500,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos um ponto do jogo, o jogador digita texto livre, nos termos do enunciado e das definições, e o jogo recebe esse texto
 - Parcial: O jogador compõe mensagens por seleção, nos termos do enunciado e das definições, sem digitar texto livre em nenhum ponto do jogo
 - Não atendido: O jogador não digita texto livre nem compõe mensagem por seleção em nenhum ponto do jogo; só lê, escolhe alternativas de múltipla escolha (incluindo opções avaliadas como certas ou erradas, mesmo exibidas como mensagem do jogador), escolhe opções não textuais ou age sobre objetos
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Prever ao menos um ponto do jogo em que o jogador digite texto livre, como em chat, resposta aberta, anotação ou nome de item
+- Código: Acrescentar um campo de entrada de texto ou teclado na tela que aceite qualquer sequência de caracteres, sem lista fechada de opções. Ler o texto digitado em um manipulador de evento (handler) ou função que o exiba, guarde, envie ou avalie
 
 **Depende de.** —
 
@@ -492,6 +547,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
 - Parcial: Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
 - Não atendido: Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado e das definições
+
+**Recomendações.**
+- Documentação: Descrever no GDD ou documento equivalente cada cena, animação, vídeo ou sequência de texto em que o jogador não tem ação que altere o estado do jogo. Declarar o comprimento integral de cada um desses trechos, inclusive dos que podem ser pulados
+- Design: Encurtar para no máximo 120 segundos cada trecho passivo com comprimento integral maior que esse limite, ou dividi-lo com ações do jogador que alterem o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos
+- Código: Reduzir a duração da linha do tempo, clipe ou animação, ou a soma das esperas mínimas antes de cada avanço de texto, de cada trecho passivo com comprimento integral maior que 120 segundos. Acrescentar, nos trechos que não forem reduzidos, manipuladores de entrada que ofereçam ao jogador ação que altere o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos
 
 **Depende de.** —
 
@@ -539,6 +599,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições
 - Não atendido: O jogador não coleta nenhuma informação, nos termos do enunciado e das definições: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente o que o jogador coleta, como o jogo o guarda e a qual objetivo de aprendizagem cada informação é relativa. Registrar a missão ou desafio posterior que exige a posse, o valor ou o conteúdo da informação coletada
+- Design: Definir ao menos uma informação relativa a um objetivo de aprendizagem que o jogador obtenha por ação própria e que o jogo guarde em inventário, diário, caderno ou painel. Incluir, em missão ou desafio posterior à coleta, uma condição que exija a posse, o valor ou o conteúdo dessa informação
+- Código: Fazer uma ação do jogador adicionar a informação a uma estrutura persistente (inventário, diário, caderno ou painel). Marcar o item guardado com o objetivo de aprendizagem a que se relaciona (campo, identificador ou etiqueta). Acrescentar a uma condição de missão ou desafio posterior à coleta a verificação da posse, do valor ou do conteúdo dessa informação
+
 **Depende de.** —
 
 ### D12 — O jogo deve fornecer mecanismos para o jogador construir coisas
@@ -578,6 +643,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo, nos termos do enunciado e das definições, que persiste no jogo
 - Parcial: O jogador combina dois ou mais elementos por ação própria, mas o resultado não permanece disponível depois da ação de combinar (por exemplo, a combinação é apenas avaliada como correta ou incorreta e descartada)
 - Não atendido: O jogador não combina elementos para obter resultado novo; as ações disponíveis só manipulam elementos já existentes no jogo
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente quais elementos o jogador combina e qual artefato resulta de cada combinação. Registrar onde o artefato permanece disponível depois de criado e em que condições deixa de existir
+- Design: Definir ao menos uma combinação de dois ou mais elementos, feita por ação do jogador, que produza um artefato novo. Manter esse artefato disponível ao jogador depois da combinação, até que ele o remova ou o consuma
+- Código: Instanciar, na ação de combinar, o objeto, estrutura ou configuração resultante como unidade. Adicionar o artefato ao estado do jogo (cenário, inventário ou lista) sem destruí-lo ao fim da ação. Removê-lo só por ação do jogador ou por consumo em uso posterior
 
 **Depende de.** —
 
@@ -622,6 +692,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe missão que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles
 - Não atendido: Nenhuma missão aceita dois ou mais jogadores, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente uma missão com ações previstas para dois ou mais jogadores diferentes, com a ação prevista para cada um deles. Registrar que essa missão só se conclui depois da ação prevista de cada um deles
+- Design: Definir ao menos uma missão com ações previstas para dois ou mais jogadores diferentes. Condicionar a conclusão dessa missão à ação prevista de cada um deles, na mesma sessão ou em sessões diferentes
+- Código: Criar sessão, sala ou registro compartilhado que aceite dois ou mais jogadores na mesma missão. Fazer a condição de conclusão verificar as ações de cada identificador de jogador previsto. Impedir o registro da conclusão enquanto a ação prevista de algum desses jogadores não ocorrer
+
 **Depende de.** (D06.1 ou D07.1)
 
 ### D14 — O jogador deve conseguir inserir comentários no jogo que ficarão disponíveis para outros jogadores
@@ -659,6 +734,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Comentário escrito por um jogador, associado a um local ou objeto, é exibido a outro jogador em sessão posterior, quando este alcança esse local ou objeto
 - Parcial: Comentário escrito por um jogador é exibido a outros jogadores em sessão posterior, mas não está associado a local ou objeto do jogo (por exemplo, aparece numa lista geral)
 - Não atendido: Nenhum comentário escrito por um jogador é exibido a outros jogadores em sessão posterior
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Prever que o jogador escreva comentários associados a um local ou objeto do jogo. Definir que o jogo exiba esses comentários a outro jogador, em sessão posterior, quando este alcança esse local ou objeto
+- Código: Acrescentar um campo de entrada de texto associado ao local ou objeto. Gravar o texto digitado junto com o identificador do local ou objeto e o identificador do autor. Guardar o comentário fora do estado da sessão (arquivo, banco de dados ou servidor). Ler e exibir, quando o jogador alcança o local ou objeto, os comentários associados a ele cujo autor tem perfil diferente do jogador atual
 
 **Depende de.** —
 
@@ -699,6 +779,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogo oferece uma única ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições
 - Não atendido: O jogo não oferece ferramenta de comunicação entre jogadores, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente cada ferramenta de comunicação entre jogadores, com seu meio (texto, voz ou sinais predefinidos) e sua temporalidade (tempo real ou sessão posterior)
+- Design: Prever ao menos duas ferramentas de comunicação entre jogadores que difiram no meio ou na temporalidade
+- Código: Implementar ao menos dois módulos que enviem conteúdo de um jogador a outro e difiram no meio (texto, voz ou sinais predefinidos) ou na temporalidade (tempo real ou sessão posterior)
+
 **Depende de.** (D06.1 ou D07.1)
 
 ### D16 — O jogo deve fornecer meios do jogador solicitar ajuda de outros jogadores
@@ -731,6 +816,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Ação de pedir ajuda existe e chega a outro jogador
 - Parcial: Ação existe, mas a resposta vem só do sistema ou de personagem não jogável
 - Não atendido: Não há meio de pedir ajuda a outros jogadores
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a ação de pedir ajuda, com quem pede, quem recebe e o que acontece depois do pedido. Registrar que a solicitação chega a outro jogador, e não só ao sistema ou a personagem não jogável
+- Design: Definir uma ação de pedir ajuda, distinta do chat geral, que encaminhe a solicitação do jogador a outro jogador, e não só ao sistema ou a personagem não jogável
+- Código: Acrescentar uma ação, botão ou comando de pedir ajuda distinto do chat geral. Fazer o manipulador de evento (handler) dessa ação enviar a solicitação a outro jogador, e não só ao sistema ou a personagem não jogável
 
 **Depende de.** (D06.1 ou D07.1)
 
@@ -767,6 +857,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Todas as ocorrências de erro observadas recebem feedback que orienta a próxima ação
 - Parcial: Algumas ocorrências orientam; outras só sinalizam erro ou não recebem feedback
 - Não atendido: O feedback só sinaliza acerto ou erro, ou não existe
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a tabela de ações incorretas previstas com a mensagem exibida em cada uma e a próxima ação que essa mensagem indica
+- Design: Definir, para cada ação incorreta prevista, a próxima ação que a mensagem indica ao jogador
+- Código: Trocar, em cada manipulador de erro, a mensagem que só sinaliza o erro por uma que indica a próxima ação. Acrescentar, em cada manipulador de erro que não exibe mensagem, uma mensagem que indica a próxima ação
 
 **Depende de.** —
 
@@ -816,6 +911,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado e das definições
 - Não atendido: Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, ou não existe ponto de feedback avaliado
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada ponto de feedback, as mensagens previstas e a ação específica ou o histórico que seleciona cada uma. Registrar, em cada ponto de feedback, ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, cujas mensagens previstas diferem em informação que cita ou descreve o que o jogador fez
+- Design: Definir ao menos uma mensagem, em texto ou fala, que o jogo exiba em resposta a uma ação do jogador. Definir, em cada ponto de feedback, mensagens diferentes para ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, que difiram em informação que cita ou descreve o que o jogador fez
+- Código: Acrescentar ao menos um manipulador de evento (handler) que exiba, em texto ou fala, mensagem de feedback em resposta a uma ação do jogador. Fazer cada ponto de feedback escolher ou montar a mensagem a partir da ação específica (valor escolhido, objeto, resposta) ou do histórico (contadores de tentativas ou de erros, registro de ações anteriores), e não por sorteio nem apenas pelo resultado. Acrescentar, em cada ponto de feedback, ao menos dois ramos, ou um texto que insira o dado da ação, que produzam para o mesmo resultado mensagens que diferem em informação que cita ou descreve o que o jogador fez
+
 **Depende de.** —
 
 ### D19 — Os desafios devem proporcionar o desenvolvimento de competências no uso das ferramentas mentais
@@ -863,6 +963,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições, e ao menos outro exige menos de duas
 - Não atendido: Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente cada desafio e ao menos duas das funções psicológicas superiores (memória, atenção voluntária, planejamento, linguagem e formação de conceitos) que o desafio exige. Registrar, para cada uma dessas funções, o elemento do desafio que a exige (informação exibida e depois ocultada, estímulos simultâneos, ações dependentes, texto ou fala que define a ação, objetos ou exemplos a classificar), diferente do elemento de outra função do mesmo desafio
+- Design: Definir, em cada desafio que exige menos de duas funções psicológicas superiores, um elemento diferente para cada uma de ao menos duas das funções memória, atenção voluntária, planejamento, linguagem ou formação de conceitos, nos termos das definições, sem o qual o desafio não pode ser concluído
+- Código: não se aplica
+
 **Depende de.** —
 
 ### D20 — O jogo pode fornecer pista para o jogador resolver problemas
@@ -901,6 +1006,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado e das definições
 - Parcial: Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado e das definições
 - Não atendido: Não existe mecanismo de ajuda, nos termos do enunciado e das definições, em nenhum desafio
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Definir, em ao menos um desafio, um mecanismo de ajuda (botão ou comando de dica, personagem ou objeto que só oferece ajuda, ou disparo automático por número de tentativas ou por tempo sem progresso) que exiba informação sobre como resolver o desafio. Definir essa informação de modo que, depois de exibida, concluir o desafio ainda exija decisão do jogador, sem exibir a resposta final, reduzir as opções a uma só nem executar a solução
+- Código: Acrescentar, em ao menos um desafio, um botão ou comando de dica, ou um disparo automático por contador de tentativas ou por temporizador de inatividade, que exiba informação sobre como resolver o desafio. Limitar a informação exibida por esse mecanismo de modo que concluir o desafio ainda exija decisão do jogador, sem exibir o valor guardado como gabarito, destacar a única opção restante nem acionar as ações finais
 
 **Depende de.** —
 
@@ -946,6 +1056,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado e das definições
 - Não atendido: Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar que, ao fim de ao menos uma simulação, o jogo não registra a conclusão do desafio e o jogador pode jogar o desafio depois
+- Design: Definir, em ao menos um desafio, uma simulação em que o próprio jogo (personagem, animação ou repetição gravada) executa ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Definir que, ao fim dessa simulação, o jogo não registre conclusão, pontuação ou progresso do desafio e que o jogador possa jogar o desafio em seguida
+- Código: Acrescentar, em ao menos um desafio, uma rotina de demonstração que execute, chamando as mesmas funções que as ações do jogador executam, ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração
+
 **Depende de.** —
 
 ### D22 — O jogo, quando aplicado em sala de aula, cria oportunidades para o professor atuar como mediador / facilitador
@@ -985,6 +1100,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado e das definições, e ao menos outro desafio não tem
 - Não atendido: Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada desafio, ao menos um momento de mediação com o ponto da sessão, a intervenção do professor prevista nesse ponto e o objetivo de aprendizagem que essa intervenção trabalha, escolhido da lista de objetivos de aprendizagem do documento
+- Design: Definir, para cada desafio, ao menos um ponto da sessão em sala de aula (ao falhar no desafio, ao concluí-lo ou em pausa indicada) em que o professor intervém. Definir, para cada um desses pontos, a intervenção do professor (perguntar, explicar, orientar ou discutir o resultado) e o objetivo de aprendizagem que essa intervenção trabalha
+- Código: não se aplica
+
 **Depende de.** —
 
 #### D22.2 — Nível AAA
@@ -1019,6 +1139,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado e das definições
 - Parcial: O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado e das definições
 - Não atendido: O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado e das definições
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente o recurso de acompanhamento do professor, quem o acessa e como é acessado. Registrar os campos do recurso, indicando que são por jogador ou por grupo e que incluem o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)
+- Design: Definir uma tela, painel ou relatório destinado ao professor que mostre, por jogador ou por grupo, e não apenas em agregados da turma, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)
+- Código: Acrescentar uma tela, rota, função ou exportação com acesso restrito ao professor (perfil de professor, senha ou modo docente). Gravar, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio). Exibir ou exportar nesse recurso esses dados por jogador ou por grupo, e não apenas agregados da turma
 
 **Depende de.** —
 
@@ -1069,6 +1194,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado e das definições (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)
 - Não atendido: A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado e das definições (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente as situações da narrativa em que o jogador toma posição, cada uma com o objetivo de aprendizagem tratado. Registrar, em ao menos uma dessas situações, ao menos duas posições que o jogo não avalia como certas ou erradas e uma consequência narrativa diferente para cada posição
+- Design: Definir ao menos uma situação da narrativa que cite ou descreva um objetivo de aprendizagem e ofereça ao jogador ao menos duas opções. Definir que nenhuma dessas opções seja avaliada como certa ou errada, de modo que cada uma seja uma posição, nos termos das definições. Definir, para cada opção, uma consequência narrativa diferente (evento, fala de personagem ou mudança na história) que retome a opção escolhida
+- Código: Acrescentar ou usar, em ao menos um ponto da narrativa que cite ou descreva um objetivo de aprendizagem, um menu de diálogo, escolha de história ou resposta aberta com ao menos duas opções. Remover dessa escolha qualquer efeito que conceda, retire ou condicione pontuação, progresso ou conclusão do desafio conforme a opção. Guardar em uma variável a opção escolhida pelo jogador. Acrescentar, para cada opção, um ramo ou evento que leia essa variável e exiba uma consequência narrativa diferente
+
 **Depende de.** —
 
 ### D24 — O jogador decide quais recursos utilizar
@@ -1114,6 +1244,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado e das definições
 - Parcial: Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado e das definições (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)
 - Não atendido: Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado e das definições (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de desafios com os recursos que o jogador pode selecionar em cada um. Registrar, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo, que cada um desses recursos permite concluir o desafio sem os demais e que o jogador seleciona o recurso
+- Design: Definir, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo que levem, cada um sozinho, à mesma condição de conclusão do desafio, sem exigir o uso dos demais. Definir que o jogador selecione o recurso nesse desafio por ação explícita (menu, inventário, atalho ou interação), e não que o jogo o imponha
+- Código: Acrescentar, em ao menos um desafio, recursos selecionáveis até que dois ou mais estejam disponíveis no mesmo estado do desafio. Alterar a condição de conclusão desse desafio para que seja satisfeita por cada um desses recursos sozinho, sem exigir o uso dos demais. Determinar o recurso usado nesse desafio pela entrada do jogador (menu, inventário, atalho ou interação), e não por seleção automática do jogo
 
 **Depende de.** —
 
@@ -1162,6 +1297,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)
 - Não atendido: Não existe nenhum conteúdo opcional, nos termos do enunciado e das definições (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de objetivos de aprendizagem e as partes do jogo que o caminho da missão não exige, cada uma com o objetivo de aprendizagem que trata. Registrar ao menos dois desses conteúdos opcionais, de objetivos de aprendizagem diferentes, acessíveis ao mesmo tempo por ação do jogador. Registrar que a missão se conclui sem acessar esses conteúdos opcionais
+- Design: Incluir conteúdos opcionais (missão secundária, minijogo, texto, glossário, objeto ou área) até que existam ao menos dois que tratem de objetivos de aprendizagem diferentes, sem que nenhum objetivo do caminho da missão exija o acesso a eles. Definir um mesmo estado do jogo em que o jogador acesse esses dois conteúdos opcionais por ação própria (menu, interação ou deslocamento), e não por disparo automático
+- Código: Acrescentar, fora do caminho da missão, as partes do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que faltarem para que existam ao menos dois conteúdos opcionais que tratem de objetivos de aprendizagem diferentes. Remover das condições de conclusão da missão em curso a leitura do acesso a esses conteúdos opcionais. Alterar as condições de liberação desses conteúdos opcionais para que fiquem acessíveis em um mesmo estado do jogo por ação do jogador (menu, interação ou deslocamento), e não por disparo automático
+
 **Depende de.** —
 
 ### D26 — O jogo deve aproximar os jogadores pela competição
@@ -1208,6 +1348,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe competição, nos termos do enunciado e das definições, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)
 - Não atendido: O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a regra que compara os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado. Registrar a tela que exibe ao jogador uma comparação visível, nos termos das definições
+- Design: Definir ao menos uma regra que compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado, e não o resultado do jogador com o resultado anterior dele mesmo nem com o de personagem não jogável. Definir uma tela que exiba ao jogador uma comparação visível, nos termos das definições
+- Código: Acrescentar, quando não existe, uma regra que guarde o resultado por identificador de jogador ou de equipe e compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes (ordenação, placar ou definição de vencedor). Acrescentar uma tela que leia esses resultados e exiba ao jogador uma comparação visível, nos termos das definições
+
 **Depende de.** —
 
 ### D27 — O jogo deve aproximar os jogadores pela colaboração
@@ -1252,6 +1397,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe missão com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
 - Não atendido: Nenhuma missão tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente uma missão com ações previstas para dois ou mais jogadores, com o objetivo e as ações previstas para cada um deles. Registrar que essa missão só se conclui depois da ação prevista de cada um desses jogadores e que o êxito é um só, comum aos jogadores participantes. Registrar, para ao menos uma ação de um jogador, o acesso, recurso, informação ou ação que essa ação habilita, libera, fornece ou muda para outro jogador participante
+- Design: Definir ao menos uma missão com ações previstas para dois ou mais jogadores diferentes, cuja conclusão só ocorre depois da ação prevista de cada um deles. Definir para essa missão um único êxito comum aos jogadores participantes, e não um êxito separado por jogador. Definir, nessa missão, ao menos uma ação de um jogador que habilite, libere, forneça ou mude, para outro jogador participante, um acesso, um recurso, uma informação ou as ações que esse outro jogador pode ou precisa executar (por exemplo, entregar um item, abrir uma passagem ou papéis com ações complementares), e não apenas reduza a quantidade restante de um total comum
+- Código: Criar um registro compartilhado (sessão, sala ou estado comum) que aceite dois ou mais identificadores de jogador na mesma missão. Fazer a condição de conclusão dessa missão verificar a ação prevista de cada identificador de jogador participante. Gravar o êxito dessa missão em um único registro comum aos jogadores participantes, e não em um registro por jogador. Acrescentar, nessa missão, ao menos uma ação de um jogador que escreva recurso, informação, acesso ou papel que as condições ou as ações de outro jogador participante leiam para habilitar, liberar ou mudar o que esse outro jogador pode fazer, e não apenas reduza um contador compartilhado
+
 **Depende de.** (D13.1)
 
 ### D28 — A proposta de narrativa deve despertar a curiosidade
@@ -1293,6 +1443,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado e das definições
 - Parcial: Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições, e ao menos outra missão não tem
 - Não atendido: Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada missão, o texto ou a descrição da abertura, com ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida). Registrar, para cada dispositivo, o texto ou a descrição da resolução e o ponto da missão em que a resolução é exibida, depois de o jogador executar ao menos uma ação do objetivo da missão
+- Design: Incluir na abertura de cada missão ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida) que a própria abertura não resolva. Definir, para cada dispositivo, a resolução (resposta, desfecho ou revelação) em trecho da narrativa exibido depois de o jogador executar ao menos uma ação do objetivo da missão, e nunca na abertura
+- Código: não se aplica
 
 **Depende de.** —
 
@@ -1338,6 +1493,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições, e ao menos outro cenário jogável não tem
 - Não atendido: Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de cenários jogáveis, com os cenários sem missão em curso anotados como excluídos. Registrar, para cada cenário jogável, ao menos um incentivo de exploração (recompensa, descoberta ou informação) que nenhum objetivo da missão exige. Registrar que cada um desses incentivos só é obtido fora do caminho obrigatório
+- Design: Definir ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Incluir, em cada cenário jogável sem incentivo de exploração, ao menos um incentivo de exploração, nos termos das definições, fora do caminho obrigatório. Definir que nenhum objetivo nem condição de conclusão da missão exija obter esse incentivo e que o jogador que segue apenas o caminho obrigatório não o receba
+- Código: Acrescentar ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Acrescentar, em cada cenário jogável sem incentivo de exploração, ao menos um incentivo de exploração, nos termos das definições, fora do caminho obrigatório e obtido por ação do jogador. Remover das condições de conclusão da missão a exigência de obter esse incentivo. Remover a concessão desse incentivo dos trechos do caminho obrigatório
+
 **Depende de.** —
 
 ### D30 — O jogo deve colocar o jogador em uma situação realística
@@ -1381,6 +1541,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: O GDD ou documento equivalente nomeia um referente real para a premissa do jogo, indica ao menos um elemento da premissa que corresponde a esse referente e cita a fonte do referente, nos termos do enunciado e das definições
 - Parcial: O GDD nomeia um referente real para a premissa e indica ao menos um elemento da premissa que corresponde a esse referente, nos termos do enunciado e das definições, mas não cita a fonte do referente
 - Não atendido: O GDD não nomeia referente real para a premissa, ou nomeia mas não indica elemento da premissa que corresponda a ele, nos termos do enunciado e das definições (inclui premissa fictícia, lugar real só como pano de fundo, descrição genérica do referente e ausência de GDD ou documento equivalente)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a premissa do jogo (papel do jogador, local, tarefa e problema a resolver) e o referente real dessa premissa, por nome ou descrição específica. Registrar ao menos um elemento da premissa descrito como o mesmo elemento do referente real. Registrar a fonte do referente real, identificada por autoria ou endereço
+- Design: Definir para a premissa do jogo um referente real, nos termos das definições. Definir ao menos um elemento da premissa (papel do jogador, local, tarefa ou problema a resolver) como o mesmo elemento do referente real. Incluir na tela de abertura, de créditos ou Sobre o nome ou a descrição do referente real, o elemento da premissa apresentado como o mesmo elemento do referente e a fonte do referente, identificada por autoria ou endereço
+- Código: não se aplica
 
 **Depende de.** —
 
@@ -1431,6 +1596,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um objetivo de aprendizagem listado é apresentado em ao menos uma situação real do jogo, nos termos do enunciado e das definições, e ao menos outro objetivo listado não é
 - Não atendido: Nenhum objetivo de aprendizagem é apresentado em situação real do jogo, nos termos do enunciado e das definições (inclui conteúdo só em glossário, menu de ajuda, tela de texto, pergunta de quiz que só pede nome ou definição ou situação fictícia, e GDD ou documento equivalente sem lista de objetivos de aprendizagem). Sem código nem GDD que descrevam onde os objetivos aparecem, e sem confirmação de todo objetivo listado pelo vídeo, o resultado é não confirmado e, por falta de evidência, o grau padrão é não atendido
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de objetivos de aprendizagem, com ao menos um objetivo. Registrar, para cada objetivo de aprendizagem listado, ao menos uma missão, evento ou diálogo em que o objetivo é apresentado e o elemento dessa situação (personagem, objeto, ação ou problema) a que se liga. Registrar, para cada uma dessas situações, a situação, prática ou fenômeno real fora do jogo a que corresponde, identificado por nome ou descrição específica, ou que essa missão, evento ou diálogo reproduz o referente real da premissa do jogo
+- Design: Definir ao menos um objetivo de aprendizagem a ser listado no GDD ou documento equivalente. Incluir cada objetivo de aprendizagem listado no GDD ou documento equivalente em ao menos uma missão, evento ou diálogo que corresponda a uma situação, prática ou fenômeno real fora do jogo ou que reproduza o referente real da premissa do jogo. Ligar, em cada uma dessas situações, o objetivo de aprendizagem a um personagem, objeto, ação ou problema da própria situação, nos termos das definições
+- Código: Acrescentar ou usar, em diálogos, scripts de missão, eventos ou bancos de perguntas, para cada objetivo de aprendizagem listado no GDD ou documento equivalente, ao menos uma ocorrência dentro de uma missão, evento ou diálogo que o GDD ou documento equivalente descreve como situação real. Ligar cada uma dessas ocorrências a um personagem, objeto, ação ou problema da própria situação, e não a verbete de glossário ou de enciclopédia, menu de ajuda, tela de texto sem situação ou pergunta de quiz que só pede nome ou definição
+
 **Depende de.** —
 
 ### D32 — O jogo deve ter objetos do cotidiano com os quais o jogador pode se familiarizar
@@ -1476,6 +1646,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogo representa ao menos um item do cotidiano do público-alvo, nos termos do enunciado e das definições, mas nenhum desses itens é objeto interativo (aparecem só como elemento visual do cenário)
 - Não atendido: O jogo não representa item do cotidiano do público-alvo, nos termos do enunciado e das definições (inclui objetos só fantásticos ou de interface, objetos de ambiente especializado não atribuído à rotina do público-alvo e GDD ou documento equivalente sem descrição do público-alvo)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente o público-alvo (faixa etária, série ou perfil) e os itens do cotidiano do público-alvo, citados pelo nome, ou os objetos de um local da rotina atribuído ao público-alvo (casa, escola, bairro, transporte). Registrar ao menos um objeto do jogo que é item do cotidiano do público-alvo, com a ação que o jogador executa sobre esse objeto e a resposta do jogo
+- Design: Incluir no jogo ao menos um item do cotidiano do público-alvo, nos termos das definições, ou usar um que já aparece só como elemento visual. Definir ao menos uma ação do jogador sobre esse item (pegar, usar, abrir, mover, combinar ou selecionar) e a resposta do jogo a essa ação, com mudança de estado ou mensagem
+- Código: Acrescentar ou usar um objeto do jogo com o nome e a função de um item do cotidiano do público-alvo citado no GDD ou documento equivalente. Acrescentar a esse objeto um manipulador de evento (handler) de ação do jogador (pegar, usar, abrir, mover, combinar ou selecionar) que responda com mudança de estado ou mensagem
+
 **Depende de.** —
 
 ### D33 — Os desafios devem ser personalizados de acordo com o desempenho do jogador
@@ -1520,6 +1695,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado e das definições
 - Parcial: O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)
 - Não atendido: O jogo não registra métrica de desempenho, nos termos do enunciado e das definições (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente as métricas de desempenho que o jogo registra. Registrar, em ao menos um desafio, o parâmetro do desafio posterior definido a partir de uma métrica de desempenho e a regra que o define, com ao menos dois valores do parâmetro para dois valores da métrica
+- Design: Definir ou usar ao menos uma métrica de desempenho que o jogo registre (pontuação, acertos, erros, tempo ou tentativas). Definir, em ao menos um desafio, uma regra que atribua a um parâmetro do desafio posterior, nos termos das definições, valores diferentes para ao menos dois valores dessa métrica, e não apenas a decisão entre avançar para o próximo desafio e repetir o mesmo desafio
+- Código: Acrescentar ou usar o cálculo de uma métrica de desempenho do jogador (pontuação, acertos, erros, tempo ou tentativas) e uma variável que a guarde. Acrescentar, na função que define um parâmetro do desafio posterior, nos termos das definições, uma regra que leia essa métrica e atribua ao parâmetro ao menos dois valores diferentes para dois valores da métrica, e não apenas exiba pontuação, relatório ou feedback nem decida só entre avançar para o próximo desafio e repetir o mesmo desafio
 
 **Depende de.** —
 
@@ -1568,6 +1748,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogo guarda ao menos uma ação anterior do jogador, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui ação que só altera o enredo, a aparência ou o texto de feedback e ação que só decide entre avançar para o próximo desafio e repetir o mesmo desafio)
 - Não atendido: O jogo não guarda ação anterior do jogador, nos termos do enunciado e das definições (inclui jogo que não guarda escolhas nem ações do jogador, e jogo que guarda só métrica de desempenho ou só a seleção direta do desafio ou do nível). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente as escolhas e ações do jogador que o jogo guarda. Registrar, em ao menos um desafio, o parâmetro do desafio posterior definido a partir de uma ação anterior do jogador e a regra que o define, com ao menos dois valores do parâmetro para dois valores da ação
+- Design: Definir ou usar ao menos uma ação anterior do jogador que o jogo guarde (escolha de diálogo, objeto ou personagem escolhido, caminho seguido ou forma de resolver uma situação). Definir, em ao menos um desafio, uma regra que atribua a um parâmetro do desafio posterior, nos termos das definições, valores diferentes para ao menos dois valores dessa ação, e não apenas mudança de enredo, aparência ou texto de feedback nem a decisão entre avançar para o próximo desafio e repetir o mesmo desafio
+- Código: Acrescentar ou usar uma variável, marcador de estado ou histórico que guarde uma ação anterior do jogador (escolha de diálogo, objeto ou personagem escolhido, caminho seguido ou forma de resolver uma situação). Acrescentar, na função que define um parâmetro do desafio posterior, nos termos das definições, uma regra que leia esse valor guardado e atribua ao parâmetro ao menos dois valores diferentes para dois valores da ação, e não apenas altere enredo, aparência ou texto de feedback nem decida só entre avançar para o próximo desafio e repetir o mesmo desafio
+
 **Depende de.** —
 
 ### D35 — O jogo deve permitir que o jogador crie desafios para outros jogadores
@@ -1611,6 +1796,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Existe uma mecânica em que o jogador cria um desafio e o jogo o disponibiliza a outro jogador para que o jogue, nos termos do enunciado e das definições
 - Parcial: O jogador cria um desafio, nos termos do enunciado e das definições, mas o jogo não o disponibiliza a outro jogador (só o autor o joga, ou outra pessoa o joga na mesma instalação e sob a mesma identidade de jogador do autor, sem que o desafio fique guardado sob outra identidade de jogador)
 - Não atendido: O jogador não cria desafio, nos termos do enunciado e das definições (inclui construção de objetos sem condição de conclusão e escolha ou configuração de desafios prontos). Por falta de evidência (sem código, GDD nem confirmação no vídeo), o grau padrão é não atendido
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a mecânica de criação de desafio, com o elemento de conteúdo e a condição de conclusão que o jogador define. Registrar como o desafio criado chega a outro jogador, com o armazenamento compartilhado entre jogadores e a ação que abre o desafio criado, e que o outro jogador joga esse desafio
+- Design: Definir uma mecânica em que o jogador crie um desafio, nos termos das definições, com ao menos um elemento de conteúdo e a condição de conclusão definidos pelo jogador. Definir que o jogo guarde o desafio criado em armazenamento compartilhado entre jogadores (servidor, arquivo ou código de compartilhamento). Definir uma ação do jogo (lista, convite, importação ou código) pela qual outro jogador, nos termos das definições, abra e jogue o desafio criado
+- Código: Acrescentar ou usar um editor ou lógica de criação em que o jogador defina ao menos um elemento de conteúdo e a condição de conclusão de um desafio e que guarde o resultado como desafio jogável. Acrescentar a gravação do desafio criado em armazenamento compartilhado entre jogadores (servidor, arquivo ou código de compartilhamento). Acrescentar uma lógica que liste, importe ou abra o desafio criado para um jogador com identidade de jogador diferente da do autor e o execute como desafio jogável
 
 **Depende de.** (D07.1)
 
@@ -1664,6 +1854,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: O jogador executa ao menos uma operação de organização e o estado organizado persiste, mas nenhuma consulta posterior existe, nos termos do enunciado e das definições
 - Não atendido: O jogador não executa nenhuma operação de organização, ou o estado organizado não persiste, nos termos do enunciado e das definições (inclui inventário, diário ou lista preenchidos automaticamente pelo jogo e anotação em texto livre sem estrutura escolhida)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente ao menos uma operação de organização, com a informação relativa a objetivo de aprendizagem listado que o jogador organiza e a categoria, o grupo, a posição, a ordem ou o rótulo que o jogador escolhe entre ao menos duas possibilidades. Registrar que o estado organizado fica guardado depois de o jogador sair da tela ou do momento da operação. Registrar a tela, o painel, a missão ou o desafio que exibe ou lê o estado organizado depois da operação
+- Design: Definir ao menos uma operação de organização, nos termos das definições, sobre informação relativa a um objetivo de aprendizagem listado no GDD ou documento equivalente, com escolha do jogador entre ao menos duas possibilidades, e não preenchimento automático nem texto livre. Definir que o estado organizado fique guardado depois de o jogador sair da tela ou do momento da operação. Incluir uma tela, painel, missão ou desafio que exiba ou leia o estado organizado depois da operação
+- Código: Acrescentar ou usar uma ação do jogador que grave, para ao menos uma informação relativa a objetivo de aprendizagem do GDD ou documento equivalente ou marcada no código com esse objetivo, a categoria, o grupo, a posição, a ordem ou o rótulo escolhido pelo jogador entre ao menos duas possibilidades. Trocar a estrutura que guarda esse dado, quando descartada ao fechar a tela, por estado global ou dado de salvamento. Acrescentar ou usar uma tela, painel ou leitura em missão ou desafio que exiba ou leia o estado organizado depois da operação
+
 **Depende de.** —
 
 ### D37 — O jogo, suas missões e mini jogos devem apresentar a situação-problema ao jogador de maneira explícita
@@ -1710,6 +1905,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições
 - Parcial: Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, e ao menos outra unidade avaliada não apresenta
 - Não atendido: Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, ou não existe unidade avaliada
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de missões e minijogos. Registrar, para cada missão e minijogo, o texto ou a fala de abertura e que essa abertura declara o estado inicial e o objetivo antes da primeira ação do objetivo
+- Design: Incluir, em cada missão e minijogo sem abertura ou cuja abertura não declara o estado inicial e o objetivo, um texto ou fala de abertura que declare o estado inicial e o objetivo, nos termos das definições. Definir que essa abertura seja exibida antes de o jogador poder executar a primeira ação do objetivo
+- Código: Acrescentar ou usar, em cada missão e minijogo, um script de abertura, caixa de diálogo de início ou painel de missão que exiba em texto, legenda ou fala transcrita o estado inicial e o objetivo, e não só título, instrução de controles ou cena sem texto nem fala. Acrescentar uma condição que impeça a primeira ação do objetivo antes de essa abertura ser exibida
 
 **Depende de.** —
 
@@ -1761,6 +1961,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um item avaliado tem forma escrita, nos termos do enunciado e das definições, e ao menos outro item avaliado não tem (item sem forma escrita, nos termos do enunciado e das definições)
 - Não atendido: Nenhum item avaliado tem forma escrita, nos termos do enunciado e das definições, ou não existe item avaliado
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a instrução de cada missão, os diálogos com NPC e as descrições de objetos interativos. Registrar que cada um desses itens é fornecido com texto na tela que contém as ações, nomes e números do áudio do mesmo item, quando há áudio
+- Design: Incluir, em cada missão sem instrução de missão, uma instrução em forma escrita, nos termos das definições. Incluir forma escrita em cada instrução de missão, diálogo com NPC e descrição de objeto interativo fornecidos só em áudio. Incluir no texto na tela de cada item as ações, nomes e números que o áudio do mesmo item informa e o texto omite
+- Código: Acrescentar, em cada missão sem instrução, um campo de texto, caixa de diálogo ou painel que exiba a instrução da missão. Acrescentar texto na tela (caixa de diálogo, legenda ou painel) a cada instrução de missão, diálogo com NPC e descrição de objeto interativo que só toca áudio. Trocar o texto de cada item que omite ações, nomes ou números do áudio do mesmo item por um texto que os contenha
+
 **Depende de.** —
 
 ### D39 — O mundo do jogo deve exigir do jogador a percepção de detalhes
@@ -1807,6 +2012,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Existe ao menos um desafio que exige um detalhe do cenário jogável não sinalizado explicitamente, nos termos do enunciado e das definições
 - Parcial: Existe ao menos um desafio que exige um detalhe do cenário jogável, nos termos do enunciado e das definições, mas todo detalhe exigido é sinalizado explicitamente
 - Não atendido: Nenhum desafio exige um detalhe do cenário jogável, nos termos do enunciado e das definições (inclui desafio resolvido sem notar elemento do cenário e desafio cuja informação o jogo fornece também por texto, fala, dica ou item)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente ao menos um desafio cuja conclusão depende de um detalhe do cenário jogável, com o detalhe identificado. Registrar que esse detalhe é deixado para o jogador perceber, sem marcador, destaque, instrução, dica ou fala que o aponte. Registrar que a informação desse detalhe não é fornecida por outro meio
+- Design: Definir, em ao menos um desafio, uma condição de conclusão que dependa do valor ou da presença de um detalhe do cenário jogável, nos termos das definições. Definir que esse detalhe não tenha marcador, destaque nem instrução, dica ou fala que informe onde o detalhe está ou qual valor ler desse detalhe. Definir que o jogo não forneça a informação desse detalhe por texto, fala, dica ou item
+- Código: Acrescentar ou usar, em ao menos um desafio, uma condição de conclusão que leia o valor, a presença ou a interação com um elemento do cenário jogável. Remover o marcador (ícone, seta, ponto em mapa ou bússola) e o contorno, brilho, mudança de cor, partícula ou animação que assinalem esse elemento sem que o jogador aponte o cursor para o elemento ou o toque. Remover os textos, dicas e falas que citem esse elemento informando onde o elemento está ou qual valor ler desse elemento. Remover o texto, a fala, a dica ou o item que forneça por outro meio a informação que esse elemento contém
 
 **Depende de.** —
 
@@ -1860,5 +2070,10 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado e das definições
 - Parcial: Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, e ao menos outra resposta avaliada não atende a esses dois requisitos
 - Não atendido: Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, ou não existe resposta avaliada (inclui resposta só com sinal de falha)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente os tipos de erro e, em cada um, a resposta em ao menos duas modalidades (texto, som, animação). Registrar, em cada tipo de erro, a modalidade que comunica o que estava errado ou o que fazer em seguida
+- Design: Definir ao menos um tipo de erro do jogador com resposta do jogo. Definir, para cada tipo de erro, uma resposta com ao menos duas modalidades (texto, som, animação). Incluir em cada resposta, em ao menos uma das modalidades usadas, informação sobre o erro, nos termos das definições, e não só sinal de falha
+- Código: Acrescentar ou usar ao menos um ramo de erro com manipulador de evento (handler) que responda a uma ação avaliada como incorreta. Acrescentar, em cada ramo de erro de missão, minijogo e interação, a modalidade que falta para que a resposta use ao menos duas (texto exibido, som ou fala tocados, animação disparada pelo erro). Acrescentar ou usar, em cada ramo de erro, ao menos uma modalidade que comunique o que estava errado ou o que fazer em seguida, e não só sinal de falha. Acrescentar a transcrição de cada fala usada para comunicar essa informação
 
 **Depende de.** (D17.1)

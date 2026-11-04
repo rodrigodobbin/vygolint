@@ -101,6 +101,24 @@ class RenderMarkdownTest(unittest.TestCase):
         out = render_markdown([diretriz_valida()], self.cats)
         self.assertIn("suprimiu as categorias", out)
 
+    def test_recomendacoes_block_between_escala_and_depende_de(self):
+        out = render_markdown([diretriz_valida()], self.cats)
+        bloco = (
+            "- Não atendido: Feedback só sinaliza acerto/erro ou inexiste\n\n"
+            "**Recomendações.**\n"
+            "- Documentação: Registrar no documento de design a tabela de erros com a mensagem exibida em cada um e a próxima ação que ela indica\n"
+            "- Design: Definir, para cada ação incorreta prevista, a próxima ação que a mensagem indica ao jogador\n"
+            "- Código: Trocar, em cada manipulador de erro, a mensagem que só sinaliza o erro por uma que indica a próxima ação\n\n"
+            "**Depende de.** —"
+        )
+        self.assertIn(bloco, out)
+
+    def test_recomendacao_null_via_renders_nao_se_aplica(self):
+        d = diretriz_valida()
+        d["criterios"][0]["recomendacao"]["codigo"] = None
+        out = render_markdown([d], self.cats)
+        self.assertIn("- Código: não se aplica\n\n**Depende de.**", out)
+
 
 from vygolint_catalog.render import escape_latex, render_latex
 

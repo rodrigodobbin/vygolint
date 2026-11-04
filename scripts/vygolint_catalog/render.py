@@ -8,6 +8,7 @@ GENERATED_TEX = "% ARQUIVO GERADO por scripts/build_catalog.py. Não edite à m�
 _FONTES = (("codigo", "Código"), ("documentacao", "Documentação"), ("video", "Vídeo"))
 _EIXOS = {"alta": "alta", "media": "média", "baixa": "baixa"}
 _GRAUS = (("atendido", "Atendido"), ("parcial", "Parcial"), ("nao_atendido", "Não atendido"))
+_VIAS = (("documentacao", "Documentação"), ("design", "Design"), ("codigo", "Código"))
 
 
 def _nome_categoria(chave, categorias):
@@ -29,6 +30,17 @@ def _depende_de(c):
     if not c["depende_de"]:
         return "—"
     return " e ".join("(" + " ou ".join(g) + ")" for g in c["depende_de"])
+
+
+def _bloco_recomendacoes(c):
+    rec = c.get("recomendacao")
+    if not rec:
+        return []
+    linhas = ["", "**Recomendações.**"]
+    for chave, nome in _VIAS:
+        texto = rec.get(chave)
+        linhas.append(f"- {nome}: {texto if texto else 'não se aplica'}")
+    return linhas
 
 
 def _bloco_definicoes(c, glossario):
@@ -113,6 +125,7 @@ def render_markdown(diretrizes, categorias, glossario=None):
             linhas += ["", "**Escala.**"]
             for chave, nome in _GRAUS:
                 linhas.append(f"- {nome}: {c['escala'][chave]}")
+            linhas += _bloco_recomendacoes(c)
             linhas += ["", f"**Depende de.** {_depende_de(c)}", ""]
     return "\n".join(linhas).rstrip() + "\n"
 

@@ -30,6 +30,10 @@ criterios:
       atendido: "Todos os desafios documentados ou gravados exigem ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições"
       parcial: "Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições, e ao menos outro exige menos de duas"
       nao_atendido: "Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente cada desafio e ao menos duas das funções psicológicas superiores (memória, atenção voluntária, planejamento, linguagem e formação de conceitos) que o desafio exige. Registrar, para cada uma dessas funções, o elemento do desafio que a exige (informação exibida e depois ocultada, estímulos simultâneos, ações dependentes, texto ou fala que define a ação, objetos ou exemplos a classificar), diferente do elemento de outra função do mesmo desafio"
+      design: "Definir, em cada desafio que exige menos de duas funções psicológicas superiores, um elemento diferente para cada uma de ao menos duas das funções memória, atenção voluntária, planejamento, linguagem ou formação de conceitos, nos termos das definições, sem o qual o desafio não pode ser concluído"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]

@@ -25,6 +25,10 @@ criterios:
       atendido: "Todos os desafios descritos na documentação têm ao menos um momento de mediação, nos termos do enunciado e das definições"
       parcial: "Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado e das definições, e ao menos outro desafio não tem"
       nao_atendido: "Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente, para cada desafio, ao menos um momento de mediação com o ponto da sessão, a intervenção do professor prevista nesse ponto e o objetivo de aprendizagem que essa intervenção trabalha, escolhido da lista de objetivos de aprendizagem do documento"
+      design: "Definir, para cada desafio, ao menos um ponto da sessão em sala de aula (ao falhar no desafio, ao concluí-lo ou em pausa indicada) em que o professor intervém. Definir, para cada um desses pontos, a intervenção do professor (perguntar, explicar, orientar ou discutir o resultado) e o objetivo de aprendizagem que essa intervenção trabalha"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]
@@ -57,6 +61,10 @@ criterios:
       atendido: "O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado e das definições"
       parcial: "O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado e das definições"
       nao_atendido: "O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente o recurso de acompanhamento do professor, quem o acessa e como é acessado. Registrar os campos do recurso, indicando que são por jogador ou por grupo e que incluem o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)"
+      design: "Definir uma tela, painel ou relatório destinado ao professor que mostre, por jogador ou por grupo, e não apenas em agregados da turma, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)"
+      codigo: "Acrescentar uma tela, rota, função ou exportação com acesso restrito ao professor (perfil de professor, senha ou modo docente). Gravar, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio). Exibir ou exportar nesse recurso esses dados por jogador ou por grupo, e não apenas agregados da turma"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

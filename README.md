@@ -12,7 +12,7 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 
 | Caminho | Conteúdo |
 |---|---|
-| `catalog/D01.yaml` … `D40.yaml` | uma diretriz por arquivo: texto literal, critérios, níveis, evidências, escalas |
+| `catalog/D01.yaml` … `D40.yaml` | uma diretriz por arquivo: texto literal, critérios, níveis, evidências, escalas, recomendações por via (documentação, design, código) |
 | `catalog/schema.yaml` | esquema validado pelo build |
 | `catalog/definicoes.yaml` | glossário: definições compartilhadas pelos critérios, impressas uma vez por critério |
 | `catalog/categorias.yaml` | 12 categorias e a ressalva de Carvalho (2020) |
@@ -40,7 +40,7 @@ python3 scripts/build_catalog.py
 
 `docs/catalogo.md` e `docs/catalogo.tex` nunca são editados à mão. O CI falha se
 estiverem desatualizados. As regras de lint de `definicoes` (gatilho sem chave,
-chave sem gatilho, definição repetida) estão na seção 5 do spec.
+chave sem gatilho, definição repetida) estão na seção 5 do spec. O lint cobre também o campo `recomendacao` (três vias, ao menos uma não nula; ver `docs/superpowers/specs/2026-11-04-recomendacao-design.md`).
 
 ## Documentos de projeto
 
@@ -48,3 +48,5 @@ chave sem gatilho, definição repetida) estão na seção 5 do spec.
 - Plano: `docs/superpowers/plans/2026-11-03-catalogo-conformidade.md`
 - Divergências de definições: `docs/superpowers/specs/2026-11-03-definicoes-divergencias.md`
 - Plano do glossário: `docs/superpowers/plans/2026-11-03-definicoes-glossario.md`
+- Spec do campo `recomendacao`: `docs/superpowers/specs/2026-11-04-recomendacao-design.md`
+- Plano do campo `recomendacao`: `docs/superpowers/plans/2026-11-04-recomendacao.md`

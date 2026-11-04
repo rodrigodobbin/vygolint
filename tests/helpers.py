@@ -49,6 +49,11 @@ _DIRETRIZ = {
                 "parcial": "Algumas ocorrências orientam, outras só sinalizam erro",
                 "nao_atendido": "Feedback só sinaliza acerto/erro ou inexiste",
             },
+            "recomendacao": {
+                "documentacao": "Registrar no documento de design a tabela de erros com a mensagem exibida em cada um e a próxima ação que ela indica",
+                "design": "Definir, para cada ação incorreta prevista, a próxima ação que a mensagem indica ao jogador",
+                "codigo": "Trocar, em cada manipulador de erro, a mensagem que só sinaliza o erro por uma que indica a próxima ação",
+            },
             "depende_de": [],
         }
     ],

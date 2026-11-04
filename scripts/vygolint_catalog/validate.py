@@ -34,7 +34,7 @@ _INLINE_RE = re.compile(r"Defini(ções|ção):")
 
 
 def textos_do_criterio(c):
-    """Return [(campo, texto)] for every text field the lint covers (not nivel_justificativa)."""
+    """Return [(campo, texto)] for every text field the lint covers (enunciado, evidencia, escala, recomendacao; not nivel_justificativa)."""
     out = []
     if _is_text(c.get("enunciado")):
         out.append(("enunciado", c["enunciado"]))
@@ -53,6 +53,10 @@ def textos_do_criterio(c):
     for grau in ("atendido", "parcial", "nao_atendido"):
         if _is_text(esc.get(grau)):
             out.append((f"escala.{grau}", esc[grau]))
+    rec = c.get("recomendacao") if isinstance(c.get("recomendacao"), dict) else {}
+    for via in ("documentacao", "design", "codigo"):
+        if _is_text(rec.get(via)):
+            out.append((f"recomendacao.{via}", rec[via]))
     return out
 
 
@@ -191,6 +195,29 @@ def _validate_criterio(c, diretriz_id, schema, errors, glossario=None):
             for grau in cs["escala"]:
                 if not _is_text(esc.get(grau)):
                     errors.append(f"{prefix}: escala.{grau} ausente ou vazio")
+    rec = c.get("recomendacao")
+    if "recomendacao" in c:
+        if not isinstance(rec, dict):
+            errors.append(f"{prefix}: recomendacao deve ser mapa")
+        else:
+            vias = cs["recomendacao"]["vias"]
+            presentes = 0
+            for via in vias:
+                if via not in rec:
+                    errors.append(f"{prefix}: recomendacao.{via} ausente (use null se a via não leva a atendido)")
+                    continue
+                valor = rec[via]
+                if valor is None:
+                    continue
+                if not _is_text(valor):
+                    errors.append(f"{prefix}: recomendacao.{via} deve ser texto não vazio ou null")
+                    continue
+                presentes += 1
+            extras = set(rec) - set(vias)
+            if extras:
+                errors.append(f"{prefix}: recomendacao com chaves desconhecidas: {sorted(extras)}")
+            if presentes == 0 and not extras:
+                errors.append(f"{prefix}: recomendacao precisa de ao menos uma via não nula")
     dep = c.get("depende_de")
     if "depende_de" in c:
         ok = isinstance(dep, list) and all(

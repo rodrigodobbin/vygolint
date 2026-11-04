@@ -36,6 +36,10 @@ criterios:
       atendido: "Existe ao menos uma unidade avaliada e todas as unidades avaliadas apresentam a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições"
       parcial: "Ao menos uma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, e ao menos outra unidade avaliada não apresenta"
       nao_atendido: "Nenhuma unidade avaliada apresenta a situação-problema na abertura, em texto ou fala, nos termos do enunciado e das definições, ou não existe unidade avaliada"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a lista de missões e minijogos. Registrar, para cada missão e minijogo, o texto ou a fala de abertura e que essa abertura declara o estado inicial e o objetivo antes da primeira ação do objetivo"
+      design: "Incluir, em cada missão e minijogo sem abertura ou cuja abertura não declara o estado inicial e o objetivo, um texto ou fala de abertura que declare o estado inicial e o objetivo, nos termos das definições. Definir que essa abertura seja exibida antes de o jogador poder executar a primeira ação do objetivo"
+      codigo: "Acrescentar ou usar, em cada missão e minijogo, um script de abertura, caixa de diálogo de início ou painel de missão que exiba em texto, legenda ou fala transcrita o estado inicial e o objetivo, e não só título, instrução de controles ou cena sem texto nem fala. Acrescentar uma condição que impeça a primeira ação do objetivo antes de essa abertura ser exibida"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, situacao_problema, documentacao_equivalente]

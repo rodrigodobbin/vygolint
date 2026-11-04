@@ -28,6 +28,10 @@ criterios:
       atendido: "Todos os cenários têm ao menos um objeto que responde à interação com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD"
       parcial: "Ao menos um cenário tem objeto que responde nesse sentido e ao menos outro cenário não tem"
       nao_atendido: "Nenhum cenário tem objeto que responda à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD"
+    recomendacao:
+      documentacao: null
+      design: "Definir, para cada cenário, ao menos um objeto que responda à interação do jogador com mudança de estado ou informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele"
+      codigo: "Acrescentar, em cada cenário, ao menos um objeto com manipulador de evento (handler) de interação (clique, toque, colisão ou uso de item). Fazer o manipulador mudar o estado do objeto ou exibir informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente, objetivo_de_aprendizagem]

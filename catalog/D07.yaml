@@ -30,6 +30,10 @@ criterios:
       atendido: "Jogador deixa e lê mensagens de outros jogadores em sessões distintas"
       parcial: "Jogador só lê registros de outros, sem poder deixar os seus, ou o inverso"
       nao_atendido: "Não há troca assíncrona entre jogadores"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a mecânica de troca assíncrona (mural, bilhetes, diário compartilhado ou similar), com o autor, o local e o leitor da mensagem"
+      design: "Prever uma mecânica em que o jogador deixe mensagens ou registros e leia os deixados por outros jogadores em sessões posteriores"
+      codigo: "Gravar de forma persistente a mensagem do jogador, associada ao jogador e ao contexto em que foi deixada. Ler e exibir, em sessão distinta, as mensagens gravadas por outros jogadores"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

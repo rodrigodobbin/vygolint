@@ -70,6 +70,16 @@ as usa; as específicas de um critério ficam em `definicoes.locais`. O avaliado
 a definição impressa no critério, igual para código, documentação e vídeo. Uma palavra
 marcada como "sentido corrente" não carrega a definição do glossário.
 
+## 2b. Recomendações
+
+Todo critério traz, no catálogo, uma recomendação por via (`documentacao`, `design`,
+`codigo`): o que fazer para sair de não atendido ou parcial para atendido, nos termos dos
+seus indicadores. A via é `null` quando não contribui para levar o critério a atendido. O relatório
+reproduz o texto do catálogo e o contextualiza com os itens encontrados; não inventa
+recomendação nova. As vias são complementares: `design` muda o projeto e `documentacao`
+registra a mudança no GDD ou documento equivalente; o relatório apresenta as vias não nulas
+que cabem à evidência disponível (seção 5).
+
 ## 3. Diretriz
 
 Diretriz atendida no nível N quando todos os seus critérios de nível N ou inferior estão
@@ -95,8 +105,12 @@ Todo relatório contém, nesta ordem:
 3. cobertura por nível: contagem de atendido, parcial, não atendido (dos quais N não avaliados) e
    fora do contexto, para A, AA e AAA;
 4. cobertura por categoria: mesma contagem para cada uma das 12 categorias;
-5. bloqueios: critérios que impedem o próximo nível, com recomendação;
-6. parciais: o que falta para pleno;
+5. bloqueios: critérios que impedem o próximo nível, cada um com a `recomendacao` do catálogo
+   na via que cabe à evidência disponível (código avaliado: `codigo`; só documentação:
+   `documentacao` e `design`; só vídeo: `design` e `codigo`; via escolhida nula: as demais
+   vias não nulas);
+6. parciais: o que falta para pleno, com a `recomendacao` do critério contextualizada pelos
+   itens que a avaliação encontrou fora do estado atendido;
 7. provas por critério.
 
 Critério que depende de um critério não avaliado é registrado como não avaliado por dependência e conta como não atendido para fins de nível.

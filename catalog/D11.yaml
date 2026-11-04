@@ -36,6 +36,10 @@ criterios:
       atendido: "O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, e ao menos uma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições"
       parcial: "O jogador coleta ao menos uma informação, nos termos do enunciado e das definições, mas nenhuma informação coletada é usada depois em missão ou desafio, nos termos do enunciado e das definições"
       nao_atendido: "O jogador não coleta nenhuma informação, nos termos do enunciado e das definições: nada é obtido por ação própria e guardado pelo jogo, ou o que é guardado não é relativo a objetivo de aprendizagem"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente o que o jogador coleta, como o jogo o guarda e a qual objetivo de aprendizagem cada informação é relativa. Registrar a missão ou desafio posterior que exige a posse, o valor ou o conteúdo da informação coletada"
+      design: "Definir ao menos uma informação relativa a um objetivo de aprendizagem que o jogador obtenha por ação própria e que o jogo guarde em inventário, diário, caderno ou painel. Incluir, em missão ou desafio posterior à coleta, uma condição que exija a posse, o valor ou o conteúdo dessa informação"
+      codigo: "Fazer uma ação do jogador adicionar a informação a uma estrutura persistente (inventário, diário, caderno ou painel). Marcar o item guardado com o objetivo de aprendizagem a que se relaciona (campo, identificador ou etiqueta). Acrescentar a uma condição de missão ou desafio posterior à coleta a verificação da posse, do valor ou do conteúdo dessa informação"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]

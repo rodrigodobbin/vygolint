@@ -34,6 +34,10 @@ criterios:
       atendido: "Nenhum trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
       parcial: "Um único trecho passivo das partes avaliadas tem comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
       nao_atendido: "Dois ou mais trechos passivos das partes avaliadas têm, cada um, comprimento integral maior que 120 segundos, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Descrever no GDD ou documento equivalente cada cena, animação, vídeo ou sequência de texto em que o jogador não tem ação que altere o estado do jogo. Declarar o comprimento integral de cada um desses trechos, inclusive dos que podem ser pulados"
+      design: "Encurtar para no máximo 120 segundos cada trecho passivo com comprimento integral maior que esse limite, ou dividi-lo com ações do jogador que alterem o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos"
+      codigo: "Reduzir a duração da linha do tempo, clipe ou animação, ou a soma das esperas mínimas antes de cada avanço de texto, de cada trecho passivo com comprimento integral maior que 120 segundos. Acrescentar, nos trechos que não forem reduzidos, manipuladores de entrada que ofereçam ao jogador ação que altere o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

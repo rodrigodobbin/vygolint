@@ -30,6 +30,10 @@ criterios:
       atendido: "Em ao menos um ponto, o jogador escolhe entre duas ou mais atividades, missões ou minijogos disponíveis ao mesmo tempo"
       parcial: "O jogador não escolhe entre atividades, missões ou minijogos, mas escolhe a ordem das ações dentro de uma atividade (como objetos, perguntas ou etapas)"
       nao_atendido: "As atividades, missões e minijogos se sucedem numa única ordem definida pelo jogo, e dentro de cada uma a ordem das ações também é fixa"
+    recomendacao:
+      documentacao: null
+      design: "Definir ao menos um ponto do jogo em que duas ou mais atividades, missões ou minijogos fiquem disponíveis ao mesmo tempo e o jogador escolha qual iniciar"
+      codigo: "Alterar a lógica de desbloqueio para que exista um estado do jogo com duas ou mais atividades desbloqueadas ao mesmo tempo. Determinar a atividade iniciada pela entrada do jogador (menu, mapa ou interação), e não por ordem fixa no código"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo]
@@ -58,6 +62,10 @@ criterios:
       atendido: "Todas as transições observadas ou identificadas no código dependem de ação do jogador"
       parcial: "Ao menos uma transição depende de ação do jogador e ao menos outra ocorre automaticamente"
       nao_atendido: "As atividades se sucedem automaticamente, sem ação do jogador"
+    recomendacao:
+      documentacao: null
+      design: "Prever, ao fim de cada atividade, missão ou minijogo, uma ação do jogador que dispare a passagem para a seguinte"
+      codigo: "Substituir cada transição disparada por temporizador ou por término automático da etapa anterior por uma transição disparada por entrada do jogador (botão, escolha ou interação)"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo]
@@ -89,6 +97,10 @@ criterios:
       atendido: "Nenhuma atividade tem limite de tempo obrigatório, ou o jogador pode desativar ou ampliar o limite"
       parcial: "Ao menos uma atividade tem limite de tempo obrigatório e ao menos outra não tem"
       nao_atendido: "Todas as atividades têm limite de tempo obrigatório que o jogador não pode alterar"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente as regras de tempo de cada atividade, indicando quais têm limite de tempo. Registrar, para cada atividade com limite, a opção do jogador que o desativa ou amplia"
+      design: "Retirar o limite de tempo obrigatório de cada atividade que o tem, ou prever uma opção do jogador que o desative ou amplie"
+      codigo: "Remover o encerramento ou a reprovação disparados por cada temporizador de atividade, ou acrescentar uma configuração do jogador que o desative ou amplie"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, documentacao_equivalente]

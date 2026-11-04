@@ -31,6 +31,10 @@ criterios:
       atendido: "Em ao menos um desafio, ao menos um parâmetro do desafio posterior é definido por regra que lê uma métrica de desempenho registrada do jogador e produz valores diferentes conforme a métrica, nos termos do enunciado e das definições"
       parcial: "O jogo registra ao menos uma métrica de desempenho, nos termos do enunciado e das definições, mas nenhum parâmetro de desafio posterior é definido por regra que a leia (inclui métrica usada só para exibir pontuação, relatório ou mensagem de feedback e métrica usada só para decidir entre avançar para o próximo desafio e repetir o mesmo desafio)"
       nao_atendido: "O jogo não registra métrica de desempenho, nos termos do enunciado e das definições (inclui jogo que não guarda pontuação, acertos, erros, tempo nem tentativas)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente as métricas de desempenho que o jogo registra. Registrar, em ao menos um desafio, o parâmetro do desafio posterior definido a partir de uma métrica de desempenho e a regra que o define, com ao menos dois valores do parâmetro para dois valores da métrica"
+      design: "Definir ou usar ao menos uma métrica de desempenho que o jogo registre (pontuação, acertos, erros, tempo ou tentativas). Definir, em ao menos um desafio, uma regra que atribua a um parâmetro do desafio posterior, nos termos das definições, valores diferentes para ao menos dois valores dessa métrica, e não apenas a decisão entre avançar para o próximo desafio e repetir o mesmo desafio"
+      codigo: "Acrescentar ou usar o cálculo de uma métrica de desempenho do jogador (pontuação, acertos, erros, tempo ou tentativas) e uma variável que a guarde. Acrescentar, na função que define um parâmetro do desafio posterior, nos termos das definições, uma regra que leia essa métrica e atribua ao parâmetro ao menos dois valores diferentes para dois valores da métrica, e não apenas exiba pontuação, relatório ou feedback nem decida só entre avançar para o próximo desafio e repetir o mesmo desafio"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

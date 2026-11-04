@@ -30,6 +30,10 @@ criterios:
       atendido: "Ação de pedir ajuda existe e chega a outro jogador"
       parcial: "Ação existe, mas a resposta vem só do sistema ou de personagem não jogável"
       nao_atendido: "Não há meio de pedir ajuda a outros jogadores"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a ação de pedir ajuda, com quem pede, quem recebe e o que acontece depois do pedido. Registrar que a solicitação chega a outro jogador, e não só ao sistema ou a personagem não jogável"
+      design: "Definir uma ação de pedir ajuda, distinta do chat geral, que encaminhe a solicitação do jogador a outro jogador, e não só ao sistema ou a personagem não jogável"
+      codigo: "Acrescentar uma ação, botão ou comando de pedir ajuda distinto do chat geral. Fazer o manipulador de evento (handler) dessa ação enviar a solicitação a outro jogador, e não só ao sistema ou a personagem não jogável"
     depende_de:
       - [D06.1, D07.1]
     definicoes:

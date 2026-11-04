@@ -38,6 +38,10 @@ criterios:
       atendido: "Existe ao menos uma resposta avaliada a erro do jogador e todas as respostas avaliadas usam ao menos duas modalidades e carregam informação sobre o erro, nos termos do enunciado e das definições"
       parcial: "Ao menos uma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, e ao menos outra resposta avaliada não atende a esses dois requisitos"
       nao_atendido: "Nenhuma resposta avaliada usa ao menos duas modalidades e carrega informação sobre o erro, nos termos do enunciado e das definições, ou não existe resposta avaliada (inclui resposta só com sinal de falha)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente os tipos de erro e, em cada um, a resposta em ao menos duas modalidades (texto, som, animação). Registrar, em cada tipo de erro, a modalidade que comunica o que estava errado ou o que fazer em seguida"
+      design: "Definir ao menos um tipo de erro do jogador com resposta do jogo. Definir, para cada tipo de erro, uma resposta com ao menos duas modalidades (texto, som, animação). Incluir em cada resposta, em ao menos uma das modalidades usadas, informação sobre o erro, nos termos das definições, e não só sinal de falha"
+      codigo: "Acrescentar ou usar ao menos um ramo de erro com manipulador de evento (handler) que responda a uma ação avaliada como incorreta. Acrescentar, em cada ramo de erro de missão, minijogo e interação, a modalidade que falta para que a resposta use ao menos duas (texto exibido, som ou fala tocados, animação disparada pelo erro). Acrescentar ou usar, em cada ramo de erro, ao menos uma modalidade que comunique o que estava errado ou o que fazer em seguida, e não só sinal de falha. Acrescentar a transcrição de cada fala usada para comunicar essa informação"
     depende_de:
       - [D17.1]
     definicoes:
