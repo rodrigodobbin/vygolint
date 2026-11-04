@@ -1245,6 +1245,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado e das definições (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)
 - Não atendido: Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado e das definições (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de desafios com os recursos que o jogador pode selecionar em cada um. Registrar, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo, que cada um desses recursos permite concluir o desafio sem os demais e que o jogador seleciona o recurso
+- Design: Definir, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo que levem, cada um sozinho, à mesma condição de conclusão do desafio, sem exigir o uso dos demais. Definir que o jogador selecione o recurso nesse desafio por ação explícita (menu, inventário, atalho ou interação), e não que o jogo o imponha
+- Código: Acrescentar, em ao menos um desafio, recursos selecionáveis até que dois ou mais estejam disponíveis no mesmo estado do desafio. Alterar a condição de conclusão desse desafio para que seja satisfeita por cada um desses recursos sozinho, sem exigir o uso dos demais. Determinar o recurso usado nesse desafio pela entrada do jogador (menu, inventário, atalho ou interação), e não por seleção automática do jogo
+
 **Depende de.** —
 
 ### D25 — O jogador decide, com base em seus interesses e motivações, qual conteúdo explorar
@@ -1292,6 +1297,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe ao menos um conteúdo opcional, mas não existem dois conteúdos opcionais disponíveis ao mesmo tempo que tratem de objetivos de aprendizagem diferentes, nos termos do enunciado e das definições (inclui um só conteúdo opcional, conteúdos opcionais que tratam de um único objetivo de aprendizagem e conteúdos opcionais de objetivos diferentes que nunca estão disponíveis ao mesmo tempo)
 - Não atendido: Não existe nenhum conteúdo opcional, nos termos do enunciado e das definições (inclui o jogo em que todo conteúdo é exigido pelo caminho da missão e o jogo em que as partes não exigidas pelo caminho não tratam de nenhum objetivo de aprendizagem listado)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de objetivos de aprendizagem e as partes do jogo que o caminho da missão não exige, cada uma com o objetivo de aprendizagem que trata. Registrar ao menos dois desses conteúdos opcionais, de objetivos de aprendizagem diferentes, acessíveis ao mesmo tempo por ação do jogador. Registrar que a missão se conclui sem acessar esses conteúdos opcionais
+- Design: Incluir conteúdos opcionais (missão secundária, minijogo, texto, glossário, objeto ou área) até que existam ao menos dois que tratem de objetivos de aprendizagem diferentes, sem que nenhum objetivo do caminho da missão exija o acesso a eles. Definir um mesmo estado do jogo em que o jogador acesse esses dois conteúdos opcionais por ação própria (menu, interação ou deslocamento), e não por disparo automático
+- Código: Acrescentar, fora do caminho da missão, as partes do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que faltarem para que existam ao menos dois conteúdos opcionais que tratem de objetivos de aprendizagem diferentes. Remover das condições de conclusão da missão em curso a leitura do acesso a esses conteúdos opcionais. Alterar as condições de liberação desses conteúdos opcionais para que fiquem acessíveis em um mesmo estado do jogo por ação do jogador (menu, interação ou deslocamento), e não por disparo automático
+
 **Depende de.** —
 
 ### D26 — O jogo deve aproximar os jogadores pela competição
@@ -1338,6 +1348,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe competição, nos termos do enunciado e das definições, mas nenhuma tela do jogo exibe a comparação ao jogador (o jogo compara os resultados de dois ou mais jogadores diferentes sem exibir a comparação)
 - Não atendido: O jogo não compara os resultados de dois ou mais jogadores diferentes, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que o resultado é comparado apenas com o anterior do próprio jogador ou com personagem não jogável)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a regra que compara os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado. Registrar a tela que exibe ao jogador o resultado de ao menos um outro jogador identificado junto do resultado desse jogador, ou a ordenação dos jogadores por resultado, ou, quando o resultado é de equipe, o resultado de ao menos uma outra equipe identificada junto do da equipe do jogador, ou a ordenação das equipes por resultado
+- Design: Definir ao menos uma regra que compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes, para determinar qual tem o melhor resultado, e não apenas com o resultado anterior do próprio jogador ou com o de personagem não jogável. Definir uma tela que exiba ao jogador o resultado de ao menos um outro jogador identificado (nome, apelido ou número) junto do resultado desse jogador, ou a ordenação dos jogadores por resultado, ou, quando o resultado é de equipe, o resultado de ao menos uma outra equipe identificada junto do da equipe do jogador, ou a ordenação das equipes por resultado
+- Código: Acrescentar uma regra que guarde o resultado por identificador de jogador ou de equipe e compare os resultados de dois ou mais jogadores diferentes, ou de suas equipes (ordenação, placar ou definição de vencedor). Acrescentar uma tela que leia esses resultados e exiba ao jogador o resultado de ao menos um outro jogador identificado (nome, apelido ou número) junto do resultado desse jogador, ou a ordenação dos jogadores por resultado, ou, quando o resultado é de equipe, o resultado de ao menos uma outra equipe identificada junto do da equipe do jogador, ou a ordenação das equipes por resultado
+
 **Depende de.** —
 
 ### D27 — O jogo deve aproximar os jogadores pela colaboração
@@ -1382,6 +1397,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe missão com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
 - Não atendido: Nenhuma missão tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a missão em grupo, com o objetivo e as ações previstas para cada um dos dois ou mais jogadores. Registrar que essa missão só se conclui depois da ação prevista de cada um desses jogadores e que o êxito é um só, comum aos jogadores participantes. Registrar, para ao menos uma ação de um jogador, o acesso, recurso, informação ou ação que essa ação habilita, libera, fornece ou muda para outro jogador participante
+- Design: Definir ao menos uma missão com ações previstas para dois ou mais jogadores diferentes, cuja conclusão só ocorre depois da ação prevista de cada um deles. Definir para essa missão um único êxito comum aos jogadores participantes, e não um êxito separado por jogador. Definir, nessa missão, ao menos uma ação de um jogador que habilite, libere, forneça ou mude, para outro jogador participante, um acesso, um recurso, uma informação ou as ações que esse outro jogador pode ou precisa executar (por exemplo, entregar um item, abrir uma passagem ou papéis com ações complementares), e não apenas reduza a quantidade restante de um total comum
+- Código: Criar um registro compartilhado (sessão, sala ou estado comum) que aceite dois ou mais identificadores de jogador na mesma missão. Fazer a condição de conclusão dessa missão verificar a ação prevista de cada identificador de jogador participante. Gravar o êxito dessa missão em um único registro comum aos jogadores participantes, e não em um registro por jogador. Acrescentar, nessa missão, ao menos uma ação de um jogador que escreva recurso, informação, acesso ou papel que as condições ou as ações de outro jogador participante leiam para habilitar, liberar ou mudar o que esse outro jogador pode fazer, e não apenas reduza um contador compartilhado
+
 **Depende de.** (D13.1)
 
 ### D28 — A proposta de narrativa deve despertar a curiosidade
@@ -1423,6 +1443,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado e das definições
 - Parcial: Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições, e ao menos outra missão não tem
 - Não atendido: Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada missão, o texto ou a descrição da abertura, com ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida). Registrar, para cada dispositivo, o texto ou a descrição da resolução e o ponto da missão em que a resolução é exibida, depois de o jogador executar ao menos uma ação do objetivo da missão
+- Design: Incluir na abertura de cada missão ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida) que a própria abertura não resolva. Definir, para cada dispositivo, a resolução (resposta, desfecho ou revelação) em trecho da narrativa exibido depois de o jogador executar ao menos uma ação do objetivo da missão, e nunca na abertura
+- Código: não se aplica
 
 **Depende de.** —
 
@@ -1467,6 +1492,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Existe ao menos um cenário jogável e todos os cenários jogáveis têm ao menos um incentivo de exploração, nos termos do enunciado e das definições
 - Parcial: Ao menos um cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições, e ao menos outro cenário jogável não tem
 - Não atendido: Nenhum cenário jogável tem incentivo de exploração, nos termos do enunciado e das definições (inclui cenário em que o acesso fora do caminho obrigatório não rende recompensa, descoberta nem informação, e jogo sem nenhum cenário em que haja missão em curso)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a lista de cenários jogáveis, com os cenários sem missão em curso anotados como excluídos. Registrar, para cada cenário jogável, os objetivos que compõem o caminho obrigatório e ao menos um incentivo de exploração (recompensa, descoberta ou informação) que nenhum objetivo da missão exige. Registrar que cada um desses incentivos só é obtido fora do caminho obrigatório
+- Design: Definir ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Incluir, em cada cenário jogável, ao menos um incentivo de exploração fora do caminho obrigatório: uma recompensa (item, pontos, desbloqueio ou conquista), uma descoberta (cena, personagem, objeto interativo ou evento que não existe no caminho obrigatório) ou uma informação que não seja apenas a descrição do objeto ou da área visitados e que cite um objetivo de aprendizagem ou trate de uma missão do jogo. Definir que nenhum objetivo nem condição de conclusão da missão exija obter esse incentivo e que o jogador que segue apenas o caminho obrigatório não o receba
+- Código: Acrescentar ao menos um cenário em que haja missão em curso, quando o jogo não tem nenhum. Acrescentar, em cada cenário jogável, fora do caminho obrigatório e obtido por ação do jogador, ao menos um incentivo de exploração: um item, pontos, desbloqueio ou conquista; uma cena, personagem, objeto interativo ou evento que não exista no caminho obrigatório; ou um texto, fala ou dado que não seja apenas a descrição do objeto ou da área visitados e que cite um objetivo de aprendizagem ou trate de uma missão do jogo. Remover das condições de conclusão da missão a exigência de obter esse incentivo. Remover a concessão desse incentivo dos pontos do caminho obrigatório
 
 **Depende de.** —
 

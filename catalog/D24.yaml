@@ -37,6 +37,10 @@ criterios:
       atendido: "Em ao menos um desafio o jogador escolhe qual usar entre dois ou mais recursos alternativos válidos disponíveis ao mesmo tempo, nos termos do enunciado e das definições"
       parcial: "Existe ao menos um desafio com dois ou mais recursos disponíveis ao mesmo tempo, mas em nenhum desses desafios dois recursos alternativos válidos levam à conclusão isoladamente, nos termos do enunciado e das definições (inclui o desafio em que apenas um dos recursos conclui o desafio e o desafio em que nenhum recurso o conclui sozinho e a conclusão exige a combinação de recursos)"
       nao_atendido: "Em nenhum desafio o jogador escolhe entre dois ou mais recursos disponíveis ao mesmo tempo, nos termos do enunciado e das definições (inclui desafio com recurso único e desafio em que o jogo impõe o recurso)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente a lista de desafios com os recursos que o jogador pode selecionar em cada um. Registrar, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo, que cada um desses recursos permite concluir o desafio sem os demais e que o jogador seleciona o recurso"
+      design: "Definir, em ao menos um desafio, dois ou mais recursos disponíveis ao mesmo tempo que levem, cada um sozinho, à mesma condição de conclusão do desafio, sem exigir o uso dos demais. Definir que o jogador selecione o recurso nesse desafio por ação explícita (menu, inventário, atalho ou interação), e não que o jogo o imponha"
+      codigo: "Acrescentar, em ao menos um desafio, recursos selecionáveis até que dois ou mais estejam disponíveis no mesmo estado do desafio. Alterar a condição de conclusão desse desafio para que seja satisfeita por cada um desses recursos sozinho, sem exigir o uso dos demais. Determinar o recurso usado nesse desafio pela entrada do jogador (menu, inventário, atalho ou interação), e não por seleção automática do jogo"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

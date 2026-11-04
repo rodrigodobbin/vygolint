@@ -31,6 +31,10 @@ criterios:
       atendido: "A abertura de cada missão apresenta ao menos um dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo da missão, nos termos do enunciado e das definições"
       parcial: "Ao menos uma missão tem abertura com dispositivo cuja resolução só é exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições, e ao menos outra missão não tem"
       nao_atendido: "Nenhuma missão tem abertura com dispositivo cuja resolução só seja exibida depois de o jogador executar ao menos uma ação do objetivo, nos termos do enunciado e das definições (inclui abertura sem pergunta, evento sem desfecho ou informação retida, e dispositivo resolvido na própria abertura)"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente, para cada missão, o texto ou a descrição da abertura, com ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida). Registrar, para cada dispositivo, o texto ou a descrição da resolução e o ponto da missão em que a resolução é exibida, depois de o jogador executar ao menos uma ação do objetivo da missão"
+      design: "Incluir na abertura de cada missão ao menos um dispositivo (pergunta explícita, evento sem desfecho ou informação retida) que a própria abertura não resolva. Definir, para cada dispositivo, a resolução (resposta, desfecho ou revelação) em trecho da narrativa exibido depois de o jogador executar ao menos uma ação do objetivo da missão, e nunca na abertura"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, documentacao_equivalente]
