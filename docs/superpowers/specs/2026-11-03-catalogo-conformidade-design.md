@@ -1,7 +1,7 @@
 # vygolint — Catálogo de conformidade sociointeracionista (etapa 1)
 
 Data: 2026-11-03
-Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada; glossário de definições (2026-11-03); campo recomendacao (2026-11-04)
+Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada; glossário de definições (2026-11-03); campo recomendacao (2026-11-04); etapa 2 (2026-11-04)
 
 ## 1. Objetivo
 
@@ -19,7 +19,7 @@ Entrega:
 - `scripts/build_catalog.py`, `tests/`, CI
 - `README.md`
 
-Fora do escopo da etapa 1: skills, agentes, manifestos de harness, parser de vídeo, relatório automático. A pasta `skills/` nasce vazia só para fixar o layout.
+Fora do escopo da etapa 1: skills, agentes, manifestos de harness, parser de vídeo, relatório automático (entregues na etapa 2, spec de 2026-11-04). A pasta `skills/` nasce vazia só para fixar o layout.
 
 ## 3. Decisões tomadas
 
@@ -155,7 +155,7 @@ Cada critério registra os dois eixos e um texto de justificativa ancorado em Vi
 | AAA | AA + todos os critérios AAA atendidos |
 | sem conformidade | qualquer critério A não atendido ou parcial |
 
-**Relatório** (formato definido na etapa 2, mas o conteúdo é fixado aqui):
+**Relatório** (gerado por `scripts/vygolint_report.py`; formato em `docs/superpowers/specs/2026-11-04-skills-design.md`):
 
 - cláusula obrigatória
 - nível alcançado

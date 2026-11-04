@@ -1,7 +1,7 @@
 # vygolint — Etapa 2: skills, relatório e manifestos por harness
 
 Data: 2026-11-04
-Status: aprovado; implementação no branch `skills`
+Status: implementado (2026-11-04)
 
 ## 1. Objetivo
 
