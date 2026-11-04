@@ -471,9 +471,14 @@ adicoes:
 - criterio: D23.1
   clausula: conteúdo de aprendizagem = o listado no documento de design (GDD) ou documento equivalente
   tipo: equivalente
-- criterio: D25.1
-  clausula: conteúdo de aprendizagem = o listado no documento de design (GDD) ou documento equivalente
-  tipo: equivalente
+- criterio: D11.1
+  clausula: uso posterior = um trecho de missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação
+  tipo: decisao
+  decisao: 2
+- criterio: D27.1
+  clausula: objetivo compartilhado = o objetivo de uma missão cuja conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes, na mesma sessão ou em sessões diferentes, e cujo êxito (cumprimento da condição de conclusão) é um só, comum a todos os jogadores participantes, e não um êxito separado por jogador, de modo que pontuações ou recompensas individuais não desfazem o objetivo compartilhado quando o êxito é um só
+  tipo: decisao
+  decisao: 3
 remocoes:
 - criterio: D09.1
   clausula: 'precedência: se o jogo avalia a opção escolhida como certa ou errada, ela é múltipla escolha, mesmo quando o texto também é exibido ou enviado como mensagem do jogador (por exemplo, montagem de frase por palavras com correção e opção de diálogo avaliada como certa ou errada)'
@@ -528,7 +533,16 @@ remocoes:
   tipo: equivalente
 - criterio: D25.1
   clausula: conteúdo = o listado no documento de design (GDD) ou documento equivalente
-  tipo: equivalente
+  tipo: decisao
+  decisao: 9
+- criterio: D11.1
+  clausula: uso posterior = uma missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação
+  tipo: decisao
+  decisao: 2
+- criterio: D27.1
+  clausula: objetivo compartilhado = o objetivo de uma missão ou tarefa cuja conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes, na mesma sessão ou em sessões diferentes, e cujo êxito (cumprimento da condição de conclusão) é um só, comum a todos os jogadores participantes, e não um êxito separado por jogador, de modo que pontuações ou recompensas individuais não desfazem o objetivo compartilhado quando o êxito é um só
+  tipo: decisao
+  decisao: 3
 campos:
 - criterio: D01.1
   campo: enunciado
@@ -551,8 +565,26 @@ campos:
 - criterio: D14.1
   campo: codigo.procedimento
   remover: . Comentário é um texto digitado pelo jogador; outro jogador é um jogador com perfil ou conta diferente do autor; sessão posterior é uma sessão iniciada depois do término da sessão em que o comentário foi escrito
+- criterio: D01.1
+  campo: video.indicadores[1]
+  de: 'cada um apresenta uma situação-problema: estado inicial visível, objetivo e mais de uma ação disponível ao jogador'
+  para: cada um apresenta uma situação-problema, com estado inicial visível, objetivo e mais de uma ação disponível ao jogador
+  tipo: decisao
+  decisao: 6
 frases:
 - de: nos termos do enunciado
   para: nos termos do enunciado e das definições
   tipo: decisao
   decisao: 12
+- de: missão ou tarefa
+  para: missão
+  tipo: decisao
+  decisao: 3
+- de: missões ou tarefas
+  para: missões
+  tipo: decisao
+  decisao: 3
+- de: missões e tarefas
+  para: missões
+  tipo: decisao
+  decisao: 3

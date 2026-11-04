@@ -23,7 +23,7 @@ criterios:
         procedimento: "Registrar o início e o fim de cada missão ou minijogo observado, anotar o estado inicial, o objetivo e as ações disponíveis ao jogador e anotar qual decisão ele tomou para concluí-lo"
         indicadores:
           - "todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1)"
-          - "cada um apresenta uma situação-problema: estado inicial visível, objetivo e mais de uma ação disponível ao jogador"
+          - "cada um apresenta uma situação-problema, com estado inicial visível, objetivo e mais de uma ação disponível ao jogador"
           - "o jogador resolve a situação por ações que transformam o estado inicial, e não apenas escolhendo entre alternativas prontas"
           - "concluir o desafio não depende de repetir a mesma ação até o fim"
     escala:

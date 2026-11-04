@@ -42,4 +42,4 @@ criterios:
       locais:
         "informação": "um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem listado no GDD ou documento equivalente; é relativo a um objetivo quando o GDD ou documento equivalente, ou a marcação do item no código (campo, identificador ou etiqueta de objetivo), o associa a esse objetivo"
         "coletar": "obter a informação por ação própria de modo que o jogo a guarde (inventário, diário, caderno ou painel) para consulta ou uso posterior"
-        "uso posterior": "uma missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação"
+        "uso posterior": "um trecho de missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação"

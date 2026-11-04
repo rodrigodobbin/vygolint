@@ -94,7 +94,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
   - a resolução descrita exige uma decisão do jogador e não se reduz a repetir uma mesma ação nem a escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador
 - Vídeo: Registrar o início e o fim de cada missão ou minijogo observado, anotar o estado inicial, o objetivo e as ações disponíveis ao jogador e anotar qual decisão ele tomou para concluí-lo
   - todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1)
-  - cada um apresenta uma situação-problema: estado inicial visível, objetivo e mais de uma ação disponível ao jogador
+  - cada um apresenta uma situação-problema, com estado inicial visível, objetivo e mais de uma ação disponível ao jogador
   - o jogador resolve a situação por ações que transformam o estado inicial, e não apenas escolhendo entre alternativas prontas
   - concluir o desafio não depende de repetir a mesma ação até o fim
 
@@ -513,7 +513,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *objetivo de aprendizagem*: cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
 - *informação*: um item, dado, texto, imagem ou medida relativo a ao menos um objetivo de aprendizagem listado no GDD ou documento equivalente; é relativo a um objetivo quando o GDD ou documento equivalente, ou a marcação do item no código (campo, identificador ou etiqueta de objetivo), o associa a esse objetivo
 - *coletar*: obter a informação por ação própria de modo que o jogo a guarde (inventário, diário, caderno ou painel) para consulta ou uso posterior
-- *uso posterior*: uma missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação
+- *uso posterior*: um trecho de missão ou desafio posterior ao momento da coleta que só pode ser resolvido ou avançado com a posse, o valor ou o conteúdo dessa informação
 
 **Enunciado.** O jogador coleta ao menos uma informação e ao menos uma informação coletada é usada depois em missão ou desafio
 
@@ -598,29 +598,29 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *missão exige mais de um jogador*: quando a conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes
 - *missão aceita dois ou mais jogadores*: quando o jogo permite que dois ou mais jogadores diferentes atuem nela, na mesma sessão ou em sessões diferentes
 
-**Enunciado.** Existe ao menos uma missão ou tarefa que só se conclui quando cada um de dois ou mais jogadores diferentes realiza ao menos uma ação prevista para ela, na mesma sessão ou em sessões diferentes
+**Enunciado.** Existe ao menos uma missão que só se conclui quando cada um de dois ou mais jogadores diferentes realiza ao menos uma ação prevista para ela, na mesma sessão ou em sessões diferentes
 
 **Justificativa do nível.** essencialidade média, viabilidade baixa. Em Vigotski, a interação social é a origem das funções psicológicas superiores, e uma missão que só se conclui com a ação de mais de um jogador cria a situação em que a ZDP entre pares pode se formar. A essencialidade é média porque a interação também ocorre por comunicação entre jogadores (D06, D07) e fora do jogo. Exige multijogador, estado compartilhado entre jogadores e uma condição de conclusão que dependa de mais de uma pessoa, com identificação de cada jogador; viabilidade baixa.
 
 **Evidência.**
-- Código: Localizar a condição de conclusão das missões e tarefas e verificar se ela lê ações ou contribuições de mais de um identificador de jogador
-  - existe missão ou tarefa cuja condição de conclusão verifica ações de dois ou mais identificadores de jogador diferentes
+- Código: Localizar a condição de conclusão das missões e verificar se ela lê ações ou contribuições de mais de um identificador de jogador
+  - existe missão cuja condição de conclusão verifica ações de dois ou mais identificadores de jogador diferentes
   - se a missão aceita dois ou mais jogadores mas a condição de conclusão verifica a ação de apenas um deles, anotar (indica o estado parcial)
   - a conclusão não é registrada se a ação prevista de algum desses jogadores não ocorreu
-  - existe sessão, sala ou registro compartilhado que aceita dois ou mais jogadores diferentes na mesma missão ou tarefa
-- Documentação: Verificar no GDD ou documento equivalente as missões e tarefas em grupo
-  - o GDD descreve missão ou tarefa com ações previstas para dois ou mais jogadores
-  - o GDD descreve que a missão ou tarefa só se conclui depois da ação prevista de cada um desses jogadores
-  - se o GDD descreve missão ou tarefa que aceita dois ou mais jogadores mas cuja conclusão depende da ação de apenas um deles, anotar (indica o estado parcial)
-- Vídeo: O vídeo só confirma a evidência de código ou documentação: ele não mostra que a conclusão exige mais de um jogador. Registrar missão ou tarefa em que dois ou mais jogadores diferentes atuam, na mesma gravação ou em gravações distintas, as ações de cada um e o momento da conclusão
-  - dois ou mais jogadores diferentes atuam na mesma missão ou tarefa, na mesma gravação ou em gravações distintas
-  - a conclusão da missão ou tarefa é registrada depois da ação de cada um desses jogadores
+  - existe sessão, sala ou registro compartilhado que aceita dois ou mais jogadores diferentes na mesma missão
+- Documentação: Verificar no GDD ou documento equivalente as missões em grupo
+  - o GDD descreve missão com ações previstas para dois ou mais jogadores
+  - o GDD descreve que a missão só se conclui depois da ação prevista de cada um desses jogadores
+  - se o GDD descreve missão que aceita dois ou mais jogadores mas cuja conclusão depende da ação de apenas um deles, anotar (indica o estado parcial)
+- Vídeo: O vídeo só confirma a evidência de código ou documentação: ele não mostra que a conclusão exige mais de um jogador. Registrar missão em que dois ou mais jogadores diferentes atuam, na mesma gravação ou em gravações distintas, as ações de cada um e o momento da conclusão
+  - dois ou mais jogadores diferentes atuam na mesma missão, na mesma gravação ou em gravações distintas
+  - a conclusão da missão é registrada depois da ação de cada um desses jogadores
   - se a conclusão é registrada com a ação de apenas um dos jogadores que a missão aceita, anotar (indica o estado parcial)
 
 **Escala.**
-- Atendido: Existe ao menos uma missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado e das definições
-- Parcial: Existe missão ou tarefa que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles
-- Não atendido: Nenhuma missão ou tarefa aceita dois ou mais jogadores, nos termos do enunciado e das definições
+- Atendido: Existe ao menos uma missão que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes, nos termos do enunciado e das definições
+- Parcial: Existe missão que aceita dois ou mais jogadores, nos termos do enunciado e das definições, mas o jogo registra a conclusão com a ação de apenas um deles
+- Não atendido: Nenhuma missão aceita dois ou mais jogadores, nos termos do enunciado e das definições
 
 **Depende de.** (D06.1 ou D07.1)
 
@@ -1134,7 +1134,6 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *caminho obrigatório (caminho da missão)*: a sequência de objetivos exigidos para completar a missão em curso, e fora do caminho obrigatório é tudo o que nenhum desses objetivos exige
 - *GDD ou documento equivalente*: o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - *objetivo de aprendizagem*: cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados
-- *conteúdo de aprendizagem*: o listado no documento de design (GDD) ou documento equivalente
 - *conteúdo opcional*: uma parte do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que trata de um objetivo de aprendizagem, isto é, cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem, e cujo acesso nenhum objetivo do caminho da missão em curso exige, de modo que o jogador conclui a missão sem acessá-lo
 - *conteúdos opcionais disponíveis ao mesmo tempo*: conteúdos opcionais que o jogador pode acessar em um mesmo estado do jogo, por ação própria (menu, interação ou deslocamento) e não por disparo automático; escolher a ordem de atividades obrigatórias é tratado em D03 e escolher entre recursos para o mesmo desafio é tratado em D24, e nenhum dos dois é escolha de conteúdo opcional
 
@@ -1225,33 +1224,33 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - *missão*: uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão
 - *GDD ou documento equivalente*: o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta
 - *jogador*: uma pessoa que joga, e personagem não jogável não conta
-- *objetivo compartilhado*: o objetivo de uma missão ou tarefa cuja conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes, na mesma sessão ou em sessões diferentes, e cujo êxito (cumprimento da condição de conclusão) é um só, comum a todos os jogadores participantes, e não um êxito separado por jogador, de modo que pontuações ou recompensas individuais não desfazem o objetivo compartilhado quando o êxito é um só
+- *objetivo compartilhado*: o objetivo de uma missão cuja conclusão só é registrada depois da ação prevista de cada um de ao menos dois jogadores diferentes, na mesma sessão ou em sessões diferentes, e cujo êxito (cumprimento da condição de conclusão) é um só, comum a todos os jogadores participantes, e não um êxito separado por jogador, de modo que pontuações ou recompensas individuais não desfazem o objetivo compartilhado quando o êxito é um só
 - *ações interdependentes*: aquelas em que a ação de ao menos um jogador participante habilita, libera, fornece ou muda, para outro jogador participante, um acesso, um recurso, uma informação ou as ações que ele pode ou precisa executar para alcançar o objetivo (por exemplo, entregar um item, abrir uma passagem, fornecer uma informação, papéis com ações complementares, em que a ação de um é condição da ação do outro); reduzir a quantidade restante de um total comum, de modo que cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, não é interdependência
 
-**Enunciado.** Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes
+**Enunciado.** Existe ao menos uma missão com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes
 
 **Justificativa do nível.** essencialidade média, viabilidade baixa. Em Vigotski a zona de desenvolvimento proximal pode ser constituída entre pares: um jogador medeia a ação do outro ao fornecer-lhe informação, recurso ou passagem, o que só ocorre quando a ação de um habilita, libera, fornece ou muda o que o outro pode fazer. D13.1 garante que a conclusão exige a ação de mais de um jogador; D27 acrescenta o objetivo compartilhado e a interdependência das ações, sem os quais a colaboração se reduz à soma de contribuições individuais. O critério restringe a interdependência à possibilidade ou ao tipo de ação do par, e não à quantidade restante de um total comum, porque reduzir esse total não medeia a ação do outro; e exige êxito único porque o sucesso de um depender do outro é o que torna o objetivo compartilhado, sem que pontuações individuais o desfaçam. A essencialidade é média porque a mediação entre pares também ocorre por comunicação (D06, D07) e por ajuda (D16). Exige multijogador com estado compartilhado e papéis ou recursos distintos entre jogadores; viabilidade baixa.
 
 **Evidência.**
-- Código: Localizar a condição de conclusão das missões e tarefas com mais de um jogador e verificar se o êxito é um só para o grupo (variável ou registro único) ou separado por identificador de jogador, e se a ação de um jogador escreve recurso, informação, acesso ou papel que as condições ou ações de outro jogador leem para habilitar, liberar ou mudar o que ele pode fazer (e não apenas reduz um contador compartilhado). Regra de desempate: se as fontes divergirem sobre uma missão ou tarefa, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão ou tarefa conta como sem código para essa missão ou tarefa, e GDD que não descreve uma missão ou tarefa conta como sem GDD para essa missão ou tarefa
-  - existe missão ou tarefa cuja conclusão só é registrada depois da ação prevista de cada um de dois ou mais identificadores de jogador diferentes
-  - nessa missão ou tarefa, o êxito é um só registro comum aos jogadores participantes, e não um registro por jogador; pontuações ou recompensas individuais não alteram essa verificação
-  - nessa missão ou tarefa, ao menos uma ação de um jogador escreve recurso, informação, acesso ou papel que as condições ou as ações de outro jogador participante leem para habilitar, liberar ou mudar o que ele pode fazer, e não apenas reduz um contador compartilhado (indica o estado atendido)
+- Código: Localizar a condição de conclusão das missões com mais de um jogador e verificar se o êxito é um só para o grupo (variável ou registro único) ou separado por identificador de jogador, e se a ação de um jogador escreve recurso, informação, acesso ou papel que as condições ou ações de outro jogador leem para habilitar, liberar ou mudar o que ele pode fazer (e não apenas reduz um contador compartilhado). Regra de desempate: se as fontes divergirem sobre uma missão, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão conta como sem código para essa missão, e GDD que não descreve uma missão conta como sem GDD para essa missão
+  - existe missão cuja conclusão só é registrada depois da ação prevista de cada um de dois ou mais identificadores de jogador diferentes
+  - nessa missão, o êxito é um só registro comum aos jogadores participantes, e não um registro por jogador; pontuações ou recompensas individuais não alteram essa verificação
+  - nessa missão, ao menos uma ação de um jogador escreve recurso, informação, acesso ou papel que as condições ou as ações de outro jogador participante leem para habilitar, liberar ou mudar o que ele pode fazer, e não apenas reduz um contador compartilhado (indica o estado atendido)
   - se o objetivo é compartilhado mas nenhuma ação de um jogador habilita, libera, fornece ou muda o que outro pode ou precisa fazer, anotar (indica o estado parcial; inclui contribuições somadas a um total comum)
-- Documentação: Verificar no GDD ou documento equivalente as missões e tarefas em grupo: o objetivo, o êxito e o que a ação de cada jogador habilita, libera, fornece ou muda para os demais. Regra de desempate: se as fontes divergirem sobre uma missão ou tarefa, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão ou tarefa conta como sem código para essa missão ou tarefa, e GDD que não descreve uma missão ou tarefa conta como sem GDD para essa missão ou tarefa
-  - o GDD descreve missão ou tarefa que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes
+- Documentação: Verificar no GDD ou documento equivalente as missões em grupo: o objetivo, o êxito e o que a ação de cada jogador habilita, libera, fornece ou muda para os demais. Regra de desempate: se as fontes divergirem sobre uma missão, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão conta como sem código para essa missão, e GDD que não descreve uma missão conta como sem GDD para essa missão
+  - o GDD descreve missão que só se conclui depois da ação prevista de cada um de dois ou mais jogadores diferentes
   - o GDD descreve um único êxito comum aos jogadores participantes (pontuações ou recompensas individuais não alteram essa verificação)
   - o GDD descreve ao menos uma ação de um jogador que habilita, libera, fornece ou muda um acesso, recurso, informação ou as ações que outro jogador participante pode ou precisa executar (indica o estado atendido)
   - se o GDD descreve objetivo compartilhado mas nenhuma ação que habilite, libere, forneça ou mude o que outro jogador pode ou precisa fazer, anotar (indica o estado parcial; inclui contribuições somadas a um total comum)
-- Vídeo: O vídeo só confirma a evidência de código ou do GDD: não mostra que a conclusão exige mais de um jogador, e a ausência de colaboração no vídeo não prova que o jogo não a oferece. Registrar missão ou tarefa em que dois ou mais jogadores diferentes atuam, na mesma gravação ou em gravações distintas, as ações de cada um, o efeito de cada ação sobre o que os demais podem ou precisam fazer e o êxito exibido na conclusão. Regra de desempate: se as fontes divergirem sobre uma missão ou tarefa, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão ou tarefa conta como sem código para essa missão ou tarefa, e GDD que não descreve uma missão ou tarefa conta como sem GDD para essa missão ou tarefa
-  - dois ou mais jogadores diferentes atuam na mesma missão ou tarefa, na mesma gravação ou em gravações distintas (mínimo 0 missões ou tarefas)
+- Vídeo: O vídeo só confirma a evidência de código ou do GDD: não mostra que a conclusão exige mais de um jogador, e a ausência de colaboração no vídeo não prova que o jogo não a oferece. Registrar missão em que dois ou mais jogadores diferentes atuam, na mesma gravação ou em gravações distintas, as ações de cada um, o efeito de cada ação sobre o que os demais podem ou precisam fazer e o êxito exibido na conclusão. Regra de desempate: se as fontes divergirem sobre uma missão, vale o código; sem código, o GDD; sem ambos, o vídeo; código que existe mas não traz dado sobre uma missão conta como sem código para essa missão, e GDD que não descreve uma missão conta como sem GDD para essa missão
+  - dois ou mais jogadores diferentes atuam na mesma missão, na mesma gravação ou em gravações distintas (mínimo 0 missões)
   - o jogo exibe, na conclusão, um único êxito comum aos jogadores participantes
   - ao menos uma ação de um jogador habilita, libera, fornece ou muda um acesso, recurso, informação ou as ações que outro jogador participante pode ou precisa executar, com timestamp da ação e do efeito
 
 **Escala.**
-- Atendido: Existe ao menos uma missão ou tarefa com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado e das definições
-- Parcial: Existe missão ou tarefa com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
-- Não atendido: Nenhuma missão ou tarefa tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
+- Atendido: Existe ao menos uma missão com objetivo compartilhado cujas ações dos jogadores participantes são interdependentes, nos termos do enunciado e das definições
+- Parcial: Existe missão com objetivo compartilhado, nos termos do enunciado e das definições, mas as ações dos jogadores participantes não são interdependentes (cada jogador contribui sem que sua ação habilite, libere, forneça ou mude o que o outro pode ou precisa fazer, o que inclui contribuições somadas a um total comum)
+- Não atendido: Nenhuma missão tem objetivo compartilhado, nos termos do enunciado e das definições (inclui jogo de um só jogador e jogo em que cada jogador tem um êxito separado)
 
 **Depende de.** (D13.1)
 

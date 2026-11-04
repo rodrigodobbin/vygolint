@@ -41,6 +41,5 @@ criterios:
     definicoes:
       glossario: [missao, minijogo, desafio, caminho_obrigatorio, documentacao_equivalente, objetivo_de_aprendizagem]
       locais:
-        "conteúdo de aprendizagem": "o listado no documento de design (GDD) ou documento equivalente"
         "conteúdo opcional": "uma parte do jogo (missão secundária, minijogo, texto, glossário, objeto ou área) que trata de um objetivo de aprendizagem, isto é, cita ou descreve conceito, fato ou procedimento listado entre os objetivos de aprendizagem, e cujo acesso nenhum objetivo do caminho da missão em curso exige, de modo que o jogador conclui a missão sem acessá-lo"
         "conteúdos opcionais disponíveis ao mesmo tempo": "conteúdos opcionais que o jogador pode acessar em um mesmo estado do jogo, por ação própria (menu, interação ou deslocamento) e não por disparo automático; escolher a ordem de atividades obrigatórias é tratado em D03 e escolher entre recursos para o mesmo desafio é tratado em D24, e nenhum dos dois é escolha de conteúdo opcional"
