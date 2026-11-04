@@ -66,3 +66,11 @@ def diretriz_valida():
 
 def glossario_valido():
     return yaml.safe_load((REPO / "catalog" / "definicoes.yaml").read_text(encoding="utf-8"))
+
+
+def catalogo_real():
+    from vygolint_catalog.catalog import load_catalog
+
+    cat, errors = load_catalog(REPO / "catalog")
+    assert not errors, errors
+    return cat

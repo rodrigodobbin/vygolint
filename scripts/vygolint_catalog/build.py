@@ -2,51 +2,22 @@
 
 from pathlib import Path
 
-import yaml
-
+from .catalog import load_catalog
 from .render import render_latex, render_markdown
-from .validate import load_yaml, validate_catalogo, validate_definicoes, validate_diretriz
+from .validate import load_yaml
 
 
 def build(catalog_dir, docs_dir):
     """Return a list of errors. On success (empty list) writes catalogo.md and catalogo.tex."""
-    catalog_dir = Path(catalog_dir)
     docs_dir = Path(docs_dir)
-    schema = load_yaml(catalog_dir / "schema.yaml")
-    categorias = load_yaml(catalog_dir / "categorias.yaml")
-    glossario_path = catalog_dir / "definicoes.yaml"
-    if not glossario_path.exists():
-        return ["definicoes.yaml: arquivo ausente"]
-    try:
-        doc = load_yaml(glossario_path)
-    except yaml.YAMLError as exc:
-        return [f"definicoes.yaml: YAML inválido: {exc}"]
-    errors = validate_definicoes(doc)
-    if errors:
-        return errors
-    glossario = {e["chave"]: e for e in doc["termos"]}
-    diretrizes = []
-    for path in sorted(catalog_dir.glob("D*.yaml")):
-        try:
-            d = load_yaml(path)
-        except yaml.YAMLError as exc:
-            errors.append(f"{path.name}: YAML inválido: {exc}")
-            continue
-        errs = validate_diretriz(d, schema, categorias, glossario)
-        errs = [path.name + e[1:] if e.startswith("?:") else e for e in errs]
-        if not errs and path.name != f"{d['id']}.yaml":
-            errs.append(f"{path.name}: nome do arquivo não corresponde ao id {d['id']}")
-        errors.extend(errs)
-        if not errs:
-            diretrizes.append(d)
-    if errors:
-        return errors
-    errors = validate_catalogo(diretrizes)
+    catalog, errors = load_catalog(catalog_dir)
     if errors:
         return errors
     docs_dir.mkdir(parents=True, exist_ok=True)
-    (docs_dir / "catalogo.md").write_text(render_markdown(diretrizes, categorias, glossario), encoding="utf-8")
-    (docs_dir / "catalogo.tex").write_text(render_latex(diretrizes, categorias), encoding="utf-8")
+    (docs_dir / "catalogo.md").write_text(
+        render_markdown(catalog["diretrizes"], catalog["categorias"], catalog["glossario"]), encoding="utf-8"
+    )
+    (docs_dir / "catalogo.tex").write_text(render_latex(catalog["diretrizes"], catalog["categorias"]), encoding="utf-8")
     return []
 
 
