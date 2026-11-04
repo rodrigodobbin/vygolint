@@ -16,6 +16,7 @@ O vygolint avalia um jogo educacional digital contra 43 critérios derivados das
 1. Em Claude Code, use `${CLAUDE_PLUGIN_ROOT}`.
 2. Em outros harnesses, use a pasta pai de `skills/` do SKILL.md que você está lendo.
 3. Confirme com `ls "${VYGOLINT_ROOT}/catalog/D01.yaml"`.
+4. Em todo comando, substitua `${VYGOLINT_ROOT}` pelo caminho absoluto da raiz (ou prefixe o comando com `VYGOLINT_ROOT=/caminho/absoluto`); o shell não guarda variáveis entre comandos.
 
 ## Qual skill usar
 
@@ -29,7 +30,7 @@ O vygolint avalia um jogo educacional digital contra 43 critérios derivados das
 
 - Catálogo: `${VYGOLINT_ROOT}/catalog/D01.yaml` … `D40.yaml`; glossário em `catalog/definicoes.yaml`; categorias em `catalog/categorias.yaml`; versão legível em `docs/catalogo.md`.
 - Regras de grau, nível, agregação e relatório: `${VYGOLINT_ROOT}/docs/conformidade.md`.
-- Relatório: `python3 ${VYGOLINT_ROOT}/scripts/vygolint_report.py <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML).
+- Relatório: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML).
 
 ## Regras fixas
 

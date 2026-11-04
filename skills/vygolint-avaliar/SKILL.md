@@ -41,7 +41,7 @@ criterios:
 ```
 
 6. Em `fontes` e `artefatos`, deixe só as chaves das fontes disponíveis.
-7. Em `avaliador`, escreva o harness, o modelo e a versão do vygolint (campo `version` de `${VYGOLINT_ROOT}/package.json`, quando existir).
+7. Em `avaliador`, escreva o harness, o modelo e a versão do vygolint (campo `version` de `${VYGOLINT_ROOT}/package.json`; se `package.json` não existir ou não tiver `version`, escreva `versão desconhecida`).
 8. Em `data`, escreva a data de hoje no formato AAAA-MM-DD, entre aspas.
 
 ## Passo 2 — Inventário
@@ -60,7 +60,7 @@ criterios:
 
 ## Passo 3 — Critérios
 
-1. Liste os critérios do catálogo: `grep -h "^  - id:" ${VYGOLINT_ROOT}/catalog/D*.yaml` (devem ser 43).
+1. Liste os critérios do catálogo: `grep -h "^  - id:" "${VYGOLINT_ROOT}"/catalog/D*.yaml` (devem ser 43).
 2. Para cada diretriz de D01 a D40, em ordem:
    1. Leia `${VYGOLINT_ROOT}/catalog/Dnn.yaml` inteiro.
    2. Leia o bloco **Definições** de cada critério em `${VYGOLINT_ROOT}/docs/catalogo.md` (seção `#### Dnn.k`), onde o texto do glossário já vem impresso.
@@ -72,7 +72,7 @@ criterios:
 4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao`.
 5. Não grave `recomendacao`, nível nem nota de dependência: o script os tira do catálogo. `depende_de` também é do script.
 
-Entrada completa de um critério (formato de `docs/conformidade.md`, seção 6):
+Entrada completa de um critério (formato de `docs/conformidade.md`, seção 6, e o exemplo em `docs/exemplo/avaliacao.yaml`):
 
 ```yaml
   D01.1:
@@ -97,7 +97,7 @@ Entrada completa de um critério (formato de `docs/conformidade.md`, seção 6):
 
 ## Passo 4 — Relatório
 
-1. Rode: `python3 ${VYGOLINT_ROOT}/scripts/vygolint_report.py <pasta>/avaliacao.yaml`
+1. Rode: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml`
 2. Saída esperada: `OK: nível ... -> <pasta>/relatorio.md, <pasta>/resultado.yaml`.
 3. Se aparecer `ModuleNotFoundError: No module named 'yaml'`, peça ao usuário para instalar o PyYAML (`python3 -m pip install pyyaml`) e rode de novo.
 4. Se o script sair com código 1, ele lista um erro por linha e não gera nada. Corrija `avaliacao.yaml` e rode de novo até sair `OK`:
@@ -113,6 +113,7 @@ Entrada completa de um critério (formato de `docs/conformidade.md`, seção 6):
 | `Dnn.k: razao obrigatória para grau ...` | Escreva a `razao`. |
 | `Dnn.k: fora_do_contexto ...` | Use `fora_do_contexto` só em D22 com `sala_de_aula: false`; nos outros casos, gradue o critério. |
 | `avaliacao: ...` | Corrija o cabeçalho (passo 1). |
+| qualquer outra mensagem `Dnn.k: …` | Corrija o campo que a mensagem nomeia na entrada de `avaliacao.yaml`; mensagens `avaliacao: …` apontam o cabeçalho. |
 
 5. Nunca edite `relatorio.md` nem `resultado.yaml`: eles são gerados. Toda correção vai em `avaliacao.yaml`.
 
@@ -124,7 +125,7 @@ Leia `<pasta>/relatorio.md` e confira:
 - [ ] `avaliacao.yaml` tem 43 entradas, uma por critério do catálogo.
 - [ ] Toda prova aponta um lugar verificável e o lugar existe.
 - [ ] Todo `nao_avaliado` e `fora_do_contexto` tem `razao` que diz qual fonte faltou ou qual contexto não vale.
-- [ ] Cada bloqueio traz as vias de recomendação que cabem às fontes usadas (código avaliado: código; só documentação: documentação e design; só vídeo: design e código).
+- [ ] Cada bloqueio e cada parcial traz ao menos uma via de recomendação (o script escolhe as vias pela evidência disponível; não recalcule).
 - [ ] Nenhum texto seu (provas, observações, razões, mensagem de entrega) rotula o jogo como sociointeracionista, behaviorista ou outro rótulo teórico.
 
 Entregue ao usuário:
