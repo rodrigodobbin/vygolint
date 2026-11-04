@@ -394,8 +394,9 @@ def render_resultado(res, av):
 
 
 def build_report(avaliacao_path, catalog_dir, out_dir):
-    """Return errors; on success writes relatorio.md and resultado.yaml into out_dir."""
+    """Return errors; on success writes relatorio.md, relatorio.html and resultado.yaml into out_dir."""
     from .catalog import load_catalog
+    from .html import render_relatorio_html
 
     avaliacao_path = Path(avaliacao_path)
     out_dir = Path(out_dir)
@@ -414,5 +415,6 @@ def build_report(avaliacao_path, catalog_dir, out_dir):
     res = aggregate(av, catalog)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "relatorio.md").write_text(render_relatorio(res, av, catalog), encoding="utf-8")
+    (out_dir / "relatorio.html").write_text(render_relatorio_html(res, av, catalog), encoding="utf-8")
     (out_dir / "resultado.yaml").write_text(render_resultado(res, av), encoding="utf-8")
     return []

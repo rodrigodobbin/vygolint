@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate an avaliacao.yaml against the vygolint catalog and write relatorio.md and resultado.yaml."""
+"""Validate an avaliacao.yaml against the vygolint catalog and write relatorio.md, relatorio.html and resultado.yaml."""
 
 import argparse
 import sys
@@ -29,7 +29,7 @@ def main(argv=None):
         return 1
     catalog, _ = load_catalog(args.catalog)
     nivel = aggregate(load_avaliacao(args.avaliacao), catalog)["nivel"]
-    print(f"OK: nível {nivel} -> {out}/relatorio.md, {out}/resultado.yaml")
+    print(f"OK: nível {nivel} -> {out}/relatorio.md, {out}/relatorio.html, {out}/resultado.yaml")
     return 0
 
 

@@ -7,7 +7,7 @@ description: Use when asked to evaluate an educational game against the Carvalho
 
 > O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
 
-Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório de conformidade. Ao final, o usuário recebe uma pasta com `avaliacao.yaml`, `relatorio.md` e `resultado.yaml`.
+Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório de conformidade. Ao final, o usuário recebe uma pasta com `avaliacao.yaml`, `relatorio.md`, `relatorio.html` e `resultado.yaml`.
 
 **Divisão de trabalho.** Você julga, critério a critério, o grau e as provas e grava isso em `avaliacao.yaml`. O script `scripts/vygolint_report.py` valida o arquivo, aplica dependências e aplicabilidade e calcula nível, coberturas, bloqueios e parciais. O agente nunca calcula nível, contagem nem bloqueio: grava grau e provas e roda o script.
 
@@ -98,7 +98,7 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
 ## Passo 4 — Relatório
 
 1. Rode: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml`
-2. Saída esperada: `OK: nível ... -> <pasta>/relatorio.md, <pasta>/resultado.yaml`.
+2. Saída esperada: `OK: nível ... -> <pasta>/relatorio.md, <pasta>/relatorio.html, <pasta>/resultado.yaml`. O `relatorio.html` é a mesma avaliação em página navegável (abas Resumo, Para o professor, Para quem desenvolve, Para a equipe e Todos os critérios), gerada do mesmo `avaliacao.yaml`; abre no navegador sem servidor.
 3. Se aparecer `ModuleNotFoundError: No module named 'yaml'`, peça ao usuário para instalar o PyYAML (`python3 -m pip install pyyaml`) e rode de novo.
 4. Se o script sair com código 1, ele lista um erro por linha e não gera nada. Corrija `avaliacao.yaml` e rode de novo até sair `OK`:
 
@@ -115,7 +115,7 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
 | `avaliacao: ...` | Corrija o cabeçalho (passo 1). |
 | qualquer outra mensagem `Dnn.k: …` | Corrija o campo que a mensagem nomeia na entrada de `avaliacao.yaml`; mensagens `avaliacao: …` apontam o cabeçalho. |
 
-5. Nunca edite `relatorio.md` nem `resultado.yaml`: eles são gerados. Toda correção vai em `avaliacao.yaml`.
+5. Nunca edite `relatorio.md`, `relatorio.html` nem `resultado.yaml`: eles são gerados. Toda correção vai em `avaliacao.yaml`; depois rode o script de novo, que regrava os três.
 
 ## Passo 5 — Revisão e entrega
 
@@ -130,7 +130,7 @@ Leia `<pasta>/relatorio.md` e confira:
 
 Entregue ao usuário:
 
-1. Os caminhos de `avaliacao.yaml`, `relatorio.md` e `resultado.yaml` (e de `inventario.md` e dos registros de vídeo).
+1. Os caminhos de `avaliacao.yaml`, `relatorio.md`, `relatorio.html` e `resultado.yaml` (e de `inventario.md` e dos registros de vídeo). Indique o `relatorio.html` para quem vai ler o resultado (professor, equipe de desenvolvimento, coordenação) e o `relatorio.md` para anexar em issue ou versionar.
 2. O nível alcançado como o script o imprimiu, sem reinterpretá-lo.
 3. Os bloqueios e parciais, remetendo ao relatório.
 4. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista."

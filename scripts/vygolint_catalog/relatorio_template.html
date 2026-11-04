@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ARQUIVO GERADO por scripts/vygolint_report.py a partir de avaliacao.yaml. Não edite à mão. -->
+<title>Relatório vygolint</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column (max 860px) with a sticky audience switch; coverage bars are plain HTML stacks. */
+:root{
+  --bg:#f6f8f9; --surface:#ffffff; --fg:#10232e; --fg2:#4d6270; --fg3:#7d8f9a; --line:#d7e0e5;
+  --ink:#0d3b57; --accent:#0d6a8c; --accent-soft:#dcedf3; --coral:#d9573f;
+  --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --na:#8a9aa4; --ctx:#c3ced5;
+  --good-ink:#0a6b0a; --warn-ink:#7a5300; --crit-ink:#9c2626;
+  --good-soft:#e6f5e6; --warn-soft:#fdf2d6; --crit-soft:#f9e3e3; --na-soft:#eef1f3;
+  --display:"Bricolage Grotesque","Avenir Next",Helvetica,Arial,sans-serif;
+  --body:"Atkinson Hyperlegible","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e171d; --surface:#15222a; --fg:#e8eef1; --fg2:#b4c2ca; --fg3:#87969f; --line:#2a3a44;
+  --ink:#cfe6f2; --accent:#5fb6d6; --accent-soft:#163542; --coral:#ef7b63;
+  --na:#7b8b95; --ctx:#4a5a64; --good-ink:#8fe08f; --warn-ink:#f3cf6e; --crit-ink:#f1a3a3;
+  --good-soft:#15301a; --warn-soft:#3a2f12; --crit-soft:#3b1a1a; --na-soft:#1e2a31; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e171d; --surface:#15222a; --fg:#e8eef1; --fg2:#b4c2ca; --fg3:#87969f; --line:#2a3a44;
+  --ink:#cfe6f2; --accent:#5fb6d6; --accent-soft:#163542; --coral:#ef7b63;
+  --na:#7b8b95; --ctx:#4a5a64; --good-ink:#8fe08f; --warn-ink:#f3cf6e; --crit-ink:#f1a3a3;
+  --good-soft:#15301a; --warn-soft:#3a2f12; --crit-soft:#3b1a1a; --na-soft:#1e2a31; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+h1,h2,h3{font-family:var(--display);color:var(--ink);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(28px,5vw,40px);font-weight:700}
+h2{font-size:22px;font-weight:700;margin-top:40px;margin-bottom:12px}
+h3{font-size:17px;font-weight:700;margin-top:20px;margin-bottom:6px}
+p{margin:0 0 12px;max-width:68ch}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.9em}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);font-weight:700}
+header{padding-block:28px 8px;border-bottom:1px solid var(--line)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--fg2);font-size:14px;margin-top:10px}
+.clause{border-left:3px solid var(--coral);padding:8px 14px;margin:18px 0;color:var(--fg2);font-style:italic;max-width:72ch}
+nav.views{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding-block:8px;margin-bottom:8px}
+nav.views a{white-space:nowrap;text-decoration:none;color:var(--fg2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid transparent}
+nav.views a:hover{background:var(--accent-soft)}
+nav.views a.on{background:var(--accent);color:#fff}
+nav.views a:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.level{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-top:20px}
+.level .big{font-family:var(--display);font-size:clamp(26px,4vw,34px);font-weight:700}
+.level .big.n-sem_conformidade{color:var(--crit)} .level .big.n-A,.level .big.n-AA,.level .big.n-AAA{color:var(--good-ink)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:16px 0}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.tile .n{font-family:var(--display);font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.tile .l{font-size:13px;color:var(--fg2);margin-top:4px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.g-atendido{color:var(--good-ink);background:var(--good-soft)} .g-parcial{color:var(--warn-ink);background:var(--warn-soft)} .g-nao_atendido{color:var(--crit-ink);background:var(--crit-soft)} .g-nao_avaliado{color:var(--fg2);background:var(--na-soft)} .g-fora_do_contexto{color:var(--fg3);background:var(--na-soft);border:1px dashed var(--ctx)}
+.bars{display:grid;gap:10px;margin:12px 0}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr auto;gap:10px;align-items:center;font-size:14px}
+.bar .lab{color:var(--fg2);min-width:0}
+.bar .track{display:flex;gap:2px;height:18px;min-width:0}
+.bar .seg{height:100%;border-radius:2px}
+.bar .seg[data-k="atendido"]{background:var(--good)} .bar .seg[data-k="parcial"]{background:var(--warn)} .bar .seg[data-k="nao_atendido"]{background:var(--crit)} .bar .seg[data-k="nao_avaliado"]{background:var(--na)} .bar .seg[data-k="fora_do_contexto"]{background:var(--ctx)}
+.bar .tot{font-variant-numeric:tabular-nums;color:var(--fg3);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--fg2);margin:6px 0 14px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .k-atendido::before{background:var(--good)} .legend .k-parcial::before{background:var(--warn)} .legend .k-nao_atendido::before{background:var(--crit)} .legend .k-nao_avaliado::before{background:var(--na)} .legend .k-fora_do_contexto::before{background:var(--ctx)}
+.tip{position:fixed;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px 9px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.12);z-index:20;display:none;max-width:260px}
+.card{background:var(--surface);border:1px solid var(--line);border-left-width:4px;border-radius:6px;padding:12px 14px;margin:10px 0}
+.card.b-atendido{border-left-color:var(--good)} .card.b-parcial{border-left-color:var(--warn)} .card.b-nao_atendido{border-left-color:var(--crit)} .card.b-nao_avaliado{border-left-color:var(--na)} .card.b-fora_do_contexto{border-left-color:var(--ctx)}
+.card .head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:6px}
+.id{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500}
+.lvl{font-family:var(--mono);font-size:12px;color:var(--fg3);border:1px solid var(--line);border-radius:3px;padding:0 5px}
+.cat{font-size:12.5px;color:var(--fg3)}
+.card .enun{font-weight:700;margin:0 0 6px;max-width:72ch}
+.card .dir{color:var(--fg2);font-size:14px;margin:0 0 8px}
+.card ul{margin:4px 0 8px;padding-left:18px;font-size:14.5px}
+.card li{margin:3px 0}
+.card .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);font-weight:700;margin-top:8px}
+.card .obs{color:var(--fg2);font-size:14px}
+.card .nota{color:var(--warn-ink);font-size:14px}
+.rec{display:grid;gap:6px;margin-top:6px;font-size:14.5px}
+.rec div{padding-left:10px;border-left:2px solid var(--accent-soft)}
+.rec b{color:var(--accent)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;font-size:14px}
+.filters select{font:inherit;font-size:14px;padding:5px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--fg)}
+.filters .count{color:var(--fg3);font-variant-numeric:tabular-nums}
+details{margin:6px 0}
+summary{cursor:pointer;color:var(--accent);font-weight:700;font-size:14px}
+.plain{background:var(--accent-soft);border-radius:6px;padding:12px 14px;margin:10px 0;max-width:72ch}
+.plain p:last-child{margin-bottom:0}
+table{border-collapse:collapse;font-size:14px;width:100%}
+.tablewrap{overflow-x:auto}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3)}
+td.num{font-variant-numeric:tabular-nums;text-align:right}
+.view{display:none}.view.on{display:block}
+.srcs{font-size:14px;color:var(--fg2)}
+.empty{color:var(--fg3);font-size:14px}
+@media (max-width:520px){.bar{grid-template-columns:1fr;gap:4px}.bar .tot{display:none}}
+@media (prefers-reduced-motion:no-preference){nav.views a{transition:background .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Relatório vygolint · conformidade com Carvalho (2020)</div>
+  <h1 id="title"></h1>
+  <div class="meta" id="meta"></div>
+  <div class="level"><span class="eyebrow">Nível alcançado</span><span class="big" id="nivel"></span><span id="nivel-why" style="color:var(--fg2);font-size:14px"></span></div>
+  <div class="clause" id="clausula"></div>
+</header>
+
+<nav class="views" id="nav">
+  <a href="#resumo" data-v="resumo">Resumo</a>
+  <a href="#professor" data-v="professor">Para o professor</a>
+  <a href="#desenvolvedor" data-v="desenvolvedor">Para quem desenvolve</a>
+  <a href="#equipe" data-v="equipe">Para a equipe</a>
+  <a href="#criterios" data-v="criterios">Todos os critérios</a>
+</nav>
+
+<section class="view" id="v-resumo">
+  <h2>Resumo</h2>
+  <div class="tiles" id="tiles"></div>
+  <h3>Cobertura por nível</h3>
+  <div class="legend"><span class="k-atendido">atendido</span><span class="k-parcial">parcial</span><span class="k-nao_atendido">não atendido</span><span class="k-nao_avaliado">não avaliado (conta como não atendido)</span><span class="k-fora_do_contexto">fora do contexto</span></div>
+  <div class="bars" id="bars-nivel"></div>
+  <h3>Cobertura por categoria</h3>
+  <div class="bars" id="bars-cat"></div>
+  <h3>Como ler os graus</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Grau</th><th>Significado</th></tr>
+    <tr><td><span class="pill g-atendido">atendido</span></td><td>as evidências mostram o que o critério exige, nos termos das definições do catálogo</td></tr>
+    <tr><td><span class="pill g-parcial">parcial</span></td><td>parte das ocorrências atende e parte não; o relatório diz o que falta</td></tr>
+    <tr><td><span class="pill g-nao_atendido">não atendido</span></td><td>as evidências mostram que o jogo não faz o exigido, ou o catálogo manda registrar não atendido por falta de evidência</td></tr>
+    <tr><td><span class="pill g-nao_avaliado">não avaliado</span></td><td>nenhuma fonte disponível decide: a ausência de algo nas fontes não prova que o jogo não o tem. Para o nível, conta como não atendido</td></tr>
+    <tr><td><span class="pill g-fora_do_contexto">fora do contexto</span></td><td>a diretriz só vale para jogo aplicado em sala de aula, e esse contexto não foi declarado</td></tr>
+  </table></div>
+  <h3>Fontes e limites</h3>
+  <p class="srcs" id="srcs"></p>
+</section>
+
+<section class="view" id="v-professor">
+  <h2>Para o professor</h2>
+  <div class="plain">
+    <p>Este relatório não diz se o jogo é bom ou ruim para a sua turma. Ele confere, item a item, o que o jogo faz contra 40 diretrizes de Carvalho (2020) para jogos educacionais. Abaixo, o que as evidências mostraram, organizado pelo texto das diretrizes.</p>
+    <p id="prof-avisos"></p>
+  </div>
+  <h3>O que o jogo faz</h3>
+  <div id="prof-ok"></div>
+  <h3>O que o jogo faz pela metade</h3>
+  <div id="prof-parcial"></div>
+  <h3>O que o jogo não faz (segundo as evidências)</h3>
+  <div id="prof-nao"></div>
+  <h3>O que não deu para ver</h3>
+  <p>Estes itens dependem de recursos que as fontes não mostraram. Se você conhece o jogo e sabe que algum deles existe, vale registrar isso em uma nova avaliação com as fontes que faltaram.</p>
+  <div id="prof-na"></div>
+</section>
+
+<section class="view" id="v-desenvolvedor">
+  <h2>Para quem desenvolve</h2>
+  <div class="plain">
+    <p>Ordem sugerida: primeiro os bloqueios do próximo nível (listados pelo script), depois os parciais, depois os níveis seguintes. Cada bloqueio traz a recomendação do catálogo nas vias que cabem à evidência disponível. Critério não avaliado também bloqueia: ou o recurso não existe (implementar) ou existe e não apareceu (fornecer a fonte que faltou na próxima avaliação).</p>
+  </div>
+  <h3 id="dev-a-title">Bloqueios</h3>
+  <div id="dev-a"></div>
+  <h3>Parciais</h3>
+  <div id="dev-parcial"></div>
+  <h3>Níveis seguintes</h3>
+  <div id="dev-aa"></div>
+</section>
+
+<section class="view" id="v-equipe">
+  <h2>Para a equipe e coordenação</h2>
+  <div class="plain"><p id="eq-intro"></p></div>
+  <h3>O que entregar na próxima avaliação e o que isso destrava</h3>
+  <div class="tablewrap"><table id="eq-table"></table></div>
+  <h3>Cobertura por categoria</h3>
+  <div class="bars" id="bars-cat-2"></div>
+  <h3>Pontos fortes observados</h3>
+  <div id="eq-ok"></div>
+  <h3>Prioridades</h3>
+  <ol id="eq-prio"></ol>
+</section>
+
+<section class="view" id="v-criterios">
+  <h2>Todos os critérios</h2>
+  <div class="filters">
+    <label>Grau <select id="f-grau"><option value="">todos</option><option value="atendido">atendido</option><option value="parcial">parcial</option><option value="nao_atendido">não atendido</option><option value="nao_avaliado">não avaliado</option><option value="fora_do_contexto">fora do contexto</option></select></label>
+    <label>Nível <select id="f-nivel"><option value="">todos</option><option>A</option><option>AA</option><option>AAA</option></select></label>
+    <label>Categoria <select id="f-cat"><option value="">todas</option></select></label>
+    <span class="count" id="f-count"></span>
+  </div>
+  <div id="all"></div>
+</section>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const DATA = /*__DATA__*/;
+const GL = {atendido:"atendido",parcial:"parcial",nao_atendido:"não atendido",nao_avaliado:"não avaliado",fora_do_contexto:"fora do contexto",sem_conformidade:"sem conformidade"};
+const ORDER = ["atendido","parcial","nao_atendido","nao_avaliado","fora_do_contexto"];
+const LV = {A:1,AA:2,AAA:3};
+const NIVEIS = ["A","AA","AAA"];
+const FN = {codigo:"código",documentacao:"documentação",video:"vídeo"};
+const VN = {documentacao:"Documentação",design:"Design",codigo:"Código"};
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pill = g => `<span class="pill g-${g}">${GL[g]}</span>`;
+const C = DATA.criterios;
+const catName = {}; DATA.categorias.forEach(k=>catName[k.chave]=k.nome);
+const proximo = {sem_conformidade:"A",A:"AA",AA:"AAA",AAA:null}[DATA.nivel];
+const sortLv = (a,b)=>LV[a.nivel]-LV[b.nivel] || a.id.localeCompare(b.id);
+const empty = `<p class="empty">Nenhum critério nesta situação.</p>`;
+
+// header
+document.title = `${DATA.jogo} · relatório vygolint`;
+document.getElementById("title").textContent = DATA.jogo;
+document.getElementById("clausula").textContent = DATA.clausula;
+document.getElementById("meta").innerHTML = [
+  `Data ${esc(DATA.data)}`, `Avaliador ${esc(DATA.avaliador)}`,
+  `Fontes: ${DATA.fontes.map(f=>FN[f]||f).join(", ")}`, `Sala de aula: ${DATA.sala_de_aula?"sim":"não"}`
+].map(s=>`<span>${s}</span>`).join("");
+const nivelEl = document.getElementById("nivel");
+nivelEl.textContent = GL[DATA.nivel] || DATA.nivel;
+nivelEl.classList.add("n-"+DATA.nivel);
+const pend = n => C.filter(c=>c.nivel===n && !["atendido","fora_do_contexto"].includes(c.grau));
+document.getElementById("nivel-why").textContent = proximo
+  ? `${pend(proximo).length} de ${C.filter(c=>c.nivel===proximo).length} critérios ${proximo} não estão atendidos`
+  : "todos os critérios A, AA e AAA atendidos";
+const art = Object.entries(DATA.artefatos).map(([f,v])=>`${FN[f]||f}: <code>${esc(v.join(", "))}</code>`).join("; ");
+const nNA = C.filter(c=>c.grau==="nao_avaliado").length;
+document.getElementById("srcs").innerHTML = `Fontes usadas: ${art || "nenhuma declarada"}. ${DATA.fontes.length<3?`Sem ${["codigo","documentacao","video"].filter(f=>!DATA.fontes.includes(f)).map(f=>FN[f]).join(" nem ")}. `:""}Regra do catálogo: a ausência de um recurso nas fontes não prova que o jogo não o tem; por isso ${nNA} critério${nNA===1?" ficou":"s ficaram"} não avaliado${nNA===1?"":"s"}.`;
+
+// tiles
+const count = g => C.filter(c=>c.grau===g).length;
+document.getElementById("tiles").innerHTML = ORDER.map(g=>`<div class="tile"><div class="n">${count(g)}</div><div class="l">${pill(g)}</div></div>`).join("") + `<div class="tile"><div class="n">${C.length}</div><div class="l">critérios no catálogo</div></div>`;
+
+// bars
+function bars(el, groups){
+  const tip = document.getElementById("tip");
+  el.innerHTML = groups.map(([lab, items])=>{
+    const segs = ORDER.map(g=>[g, items.filter(c=>c.grau===g).length]).filter(([,n])=>n>0);
+    return `<div class="bar"><div class="lab">${esc(lab)}</div><div class="track">${segs.map(([g,n])=>`<div class="seg" data-k="${g}" style="flex:${n}" data-t="${GL[g]}: ${n} de ${items.length}"></div>`).join("")}</div><div class="tot">${items.length}</div></div>`;
+  }).join("");
+  el.querySelectorAll(".seg").forEach(s=>{
+    s.addEventListener("mousemove",e=>{tip.style.display="block";tip.textContent=s.dataset.t;tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY+12)+"px";});
+    s.addEventListener("mouseleave",()=>tip.style.display="none");
+  });
+}
+bars(document.getElementById("bars-nivel"), NIVEIS.map(l=>[`Nível ${l}`, C.filter(c=>c.nivel===l)]));
+const byCat = DATA.categorias.map(k=>[k.nome, C.filter(c=>c.categoria===k.chave)]);
+bars(document.getElementById("bars-cat"), byCat);
+bars(document.getElementById("bars-cat-2"), byCat);
+
+// card
+function card(c, opts={}){
+  const o = Object.assign({provas:true, rec:true, dir:true}, opts);
+  let h = `<div class="card b-${c.grau}"><div class="head"><span class="id">${c.id}</span><span class="lvl">${c.nivel}</span>${pill(c.grau)}<span class="cat">${esc(catName[c.categoria]||c.categoria)}</span></div>`;
+  if (o.dir) h += `<p class="dir">Diretriz ${c.diretriz}: ${esc(c.diretriz_texto)}</p>`;
+  h += `<p class="enun">${esc(c.enunciado)}</p>`;
+  if (c.nota) h += `<p class="nota">Nota do script: ${esc(c.nota)}${c.grau_declarado!==c.grau?` (grau declarado pelo avaliador: ${GL[c.grau_declarado]})`:""}</p>`;
+  if (c.justificativa_conflito) h += `<div class="k">Justificativa de conflito</div><p class="obs">${esc(c.justificativa_conflito)}</p>`;
+  if (c.razao) h += `<div class="k">Razão</div><p class="obs">${esc(c.razao)}</p>`;
+  if (o.provas) c.fontes.forEach(f=>{
+    h += `<div class="k">${FN[f.fonte]} (${GL[f.grau]})</div><ul>${f.provas.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>`;
+    if (f.observacao) h += `<p class="obs">${esc(f.observacao)}</p>`;
+  });
+  if (o.rec && c.grau!=="atendido" && c.grau!=="fora_do_contexto" && !c.nota){
+    if (c.grau==="parcial" && c.escala.atendido) h += `<div class="k">Falta para atendido</div><p class="obs">${esc(c.escala.atendido)}</p>`;
+    if (c.vias.length) h += `<div class="k">Recomendação do catálogo</div><div class="rec">${c.vias.map(v=>`<div><b>${VN[v.via]||v.via}.</b> ${esc(v.texto)}</div>`).join("")}</div>`;
+  }
+  return h + `</div>`;
+}
+
+// professor: plain statements from the guideline text
+function profLine(c){
+  const obs = c.fontes.map(f=>f.observacao).filter(Boolean).map(t=>`<p class="obs">${esc(t)}</p>`).join("");
+  return `<div class="card b-${c.grau}"><div class="head"><span class="id">${c.id}</span>${pill(c.grau)}<span class="cat">${esc(catName[c.categoria]||c.categoria)} · nível ${c.nivel}</span></div><p class="enun" style="font-weight:400">${esc(c.diretriz_texto)}</p>${obs}${c.razao?`<p class="obs">${esc(c.razao)}</p>`:""}${c.nota?`<p class="nota">${esc(c.nota)}</p>`:""}</div>`;
+}
+const avisos = [];
+if (nNA) avisos.push(`Como nem todas as fontes estavam disponíveis, ${nNA} ${nNA===1?"item ficou":"itens ficaram"} <b>não avaliado${nNA===1?"":"s"}</b>: não vimos o recurso, mas ele pode existir.`);
+if (!DATA.sala_de_aula) avisos.push(`O jogo não foi declarado como aplicado em sala de aula, então as diretrizes sobre o papel do professor (D22) ficaram fora do contexto; se você for usá-lo em aula com mediação, vale pedir uma nova avaliação com esse contexto e com o guia do professor, se houver.`);
+document.getElementById("prof-avisos").innerHTML = avisos.join(" ");
+const fill = (id, list, fn) => document.getElementById(id).innerHTML = list.length ? list.sort(sortLv).map(fn).join("") : empty;
+fill("prof-ok", C.filter(c=>c.grau==="atendido"), profLine);
+fill("prof-parcial", C.filter(c=>c.grau==="parcial"), profLine);
+fill("prof-nao", C.filter(c=>c.grau==="nao_atendido"), profLine);
+const naList = C.filter(c=>c.grau==="nao_avaliado"||c.grau==="fora_do_contexto").sort(sortLv);
+document.getElementById("prof-na").innerHTML = naList.length ? `<details><summary>${nNA} não avaliado${nNA===1?"":"s"} e ${naList.length-nNA} fora do contexto</summary>${naList.map(profLine).join("")}</details>` : empty;
+
+// desenvolvedor
+document.getElementById("dev-a-title").textContent = proximo ? `Bloqueios do nível ${proximo}` : "Bloqueios";
+const bloq = C.filter(c=>DATA.bloqueios.includes(c.id) && c.grau!=="parcial");
+fill("dev-a", bloq, c=>card(c,{provas:false}));
+fill("dev-parcial", C.filter(c=>c.grau==="parcial"), c=>card(c,{provas:true}));
+const seguintes = C.filter(c=>proximo && LV[c.nivel]>LV[proximo] && !["atendido","fora_do_contexto","parcial"].includes(c.grau)).sort(sortLv);
+document.getElementById("dev-aa").innerHTML = seguintes.length ? `<details><summary>${seguintes.length} critérios de níveis seguintes não atendidos ou não avaliados</summary>${seguintes.map(c=>card(c,{provas:false,dir:false})).join("")}</details>` : empty;
+
+// equipe
+const nPend = proximo ? pend(proximo).length : 0;
+document.getElementById("eq-intro").innerHTML = proximo
+  ? `O nível <b>${GL[DATA.nivel]||DATA.nivel}</b> vem de qualquer critério ${proximo} não atendido, parcial ou não avaliado; hoje são <b>${nPend}</b> critérios ${proximo} nessa situação. ${nNA?`Parte do resultado é efeito da evidência disponível, não necessariamente do jogo: ${nNA} critérios ficaram não avaliados por falta de fonte.`:""}`
+  : `O jogo atende a todos os critérios do catálogo no contexto declarado.`;
+const dest = DATA.destravas;
+document.getElementById("eq-table").innerHTML = dest.length
+  ? `<tr><th>Entregar</th><th>Critérios que passam a ser decidíveis</th><th class="num">Qtd</th></tr>` + dest.map(d=>`<tr><td>${esc(d.entregar)}</td><td>${d.criterios.map(i=>`<span class="id">${i}</span>`).join(" ")}</td><td class="num">${d.criterios.length}</td></tr>`).join("")
+  : `<tr><td class="empty">Nenhum critério ficou não avaliado ou fora do contexto.</td></tr>`;
+const oks = C.filter(c=>c.grau==="atendido").sort(sortLv);
+document.getElementById("eq-ok").innerHTML = oks.length ? `<ul>${oks.map(c=>`<li><span class="id">${c.id}</span> ${esc(c.diretriz_texto)}</li>`).join("")}</ul>` : empty;
+const prio = [];
+const bNao = bloq.filter(c=>c.grau==="nao_atendido"), bNA = bloq.filter(c=>c.grau==="nao_avaliado"), parc = C.filter(c=>c.grau==="parcial");
+if (bNao.length) prio.push(`Resolver os ${bNao.length} bloqueios não atendidos do nível ${proximo}: ${bNao.map(c=>c.id).join(", ")}.`);
+if (parc.length) prio.push(`Completar os ${parc.length} parciais: ${parc.map(c=>c.id).join(", ")}.`);
+if (bNA.length) prio.push(`Fornecer as fontes que faltaram (tabela acima) para decidir os ${bNA.length} bloqueios não avaliados: ${bNA.map(c=>c.id).join(", ")}; o nível pode mudar sem alteração no jogo.`);
+if (!DATA.sala_de_aula) prio.push(`Se o jogo for usado em sala de aula, reavaliar com sala_de_aula: true e guia do professor (D22).`);
+if (!prio.length) prio.push("Manter a conformidade nas próximas versões e reavaliar quando o jogo mudar.");
+document.getElementById("eq-prio").innerHTML = prio.map(s=>`<li>${esc(s)}</li>`).join("");
+
+// all criteria with filters
+const fcat = document.getElementById("f-cat");
+DATA.categorias.forEach(k=>{const o=document.createElement("option");o.value=k.chave;o.textContent=k.nome;fcat.appendChild(o);});
+function renderAll(){
+  const g=document.getElementById("f-grau").value, n=document.getElementById("f-nivel").value, k=fcat.value;
+  const list = C.filter(c=>(!g||c.grau===g)&&(!n||c.nivel===n)&&(!k||c.categoria===k));
+  document.getElementById("all").innerHTML = list.map(c=>card(c)).join("") || `<p class="empty">Nenhum critério com esse filtro.</p>`;
+  document.getElementById("f-count").textContent = `${list.length} de ${C.length}`;
+}
+["f-grau","f-nivel","f-cat"].forEach(id=>document.getElementById(id).addEventListener("change",renderAll));
+renderAll();
+
+// hash views
+const VIEWS = ["resumo","professor","desenvolvedor","equipe","criterios"];
+function show(){
+  let v = (location.hash||"#resumo").slice(1); if(!VIEWS.includes(v)) v="resumo";
+  VIEWS.forEach(x=>{document.getElementById("v-"+x).classList.toggle("on",x===v);});
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===v));
+}
+addEventListener("hashchange",show); show();
+</script>
+</body>
+</html>
