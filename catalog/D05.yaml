@@ -33,6 +33,10 @@ criterios:
       atendido: "Todos os cenários jogáveis têm áreas ou objetos fora do caminho da missão acessíveis sem bloqueio"
       parcial: "Ao menos um cenário tem áreas ou objetos acessíveis fora do caminho da missão e ao menos outro cenário restringe o jogador ao caminho"
       nao_atendido: "Nenhum cenário permite alcançar áreas ou objetos fora do caminho da missão em curso"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente, para cada cenário jogável, os objetivos que compõem o caminho da missão e as áreas ou objetos que nenhum desses objetivos exige. Descrever o deslocamento do jogador até essas áreas durante a missão. Registrar que essas áreas ou objetos são acessíveis em qualquer estado da missão e que o jogador sai do caminho e volta a ele sem ser interrompido nem reposicionado"
+      design: "Incluir, em cada cenário jogável que restringe o jogador ao caminho da missão, áreas ou objetos que nenhum objetivo da missão exige. Permitir o acesso a essas áreas ou objetos em qualquer estado da missão, sem interromper nem reposicionar o jogador"
+      codigo: "Ativar o acesso ou a interação das áreas ou objetos fora do caminho da missão. Remover as verificações do estado da missão que bloqueiam esse acesso. Remover a lógica que interrompe o jogador ou o reposiciona no caminho da missão quando ele se afasta dele"
     depende_de: []
     definicoes:
       glossario: [missao, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente]

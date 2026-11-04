@@ -31,6 +31,10 @@ criterios:
       atendido: "Comentário escrito por um jogador, associado a um local ou objeto, é exibido a outro jogador em sessão posterior, quando este alcança esse local ou objeto"
       parcial: "Comentário escrito por um jogador é exibido a outros jogadores em sessão posterior, mas não está associado a local ou objeto do jogo (por exemplo, aparece numa lista geral)"
       nao_atendido: "Nenhum comentário escrito por um jogador é exibido a outros jogadores em sessão posterior"
+    recomendacao:
+      documentacao: null
+      design: "Prever que o jogador escreva comentários associados a um local ou objeto do jogo. Definir que o jogo exiba esses comentários a outro jogador, em sessão posterior, quando ele alcança esse local ou objeto"
+      codigo: "Gravar o texto digitado junto com o identificador do local ou objeto e o identificador do autor. Guardar o comentário fora do estado da sessão (arquivo, banco de dados ou servidor). Ler e exibir, quando o jogador alcança o local ou objeto, os comentários associados a ele cujo autor tem perfil diferente do jogador atual"
     depende_de: []
     definicoes:
       locais:

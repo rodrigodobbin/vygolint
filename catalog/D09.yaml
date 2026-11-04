@@ -31,6 +31,10 @@ criterios:
       atendido: "Em ao menos um ponto do jogo, o jogador digita texto livre, nos termos do enunciado e das definições, e o jogo recebe esse texto"
       parcial: "O jogador compõe mensagens por seleção, nos termos do enunciado e das definições, sem digitar texto livre em nenhum ponto do jogo"
       nao_atendido: "O jogador não digita texto livre nem compõe mensagem por seleção em nenhum ponto do jogo; só lê, escolhe alternativas de múltipla escolha (incluindo opções avaliadas como certas ou erradas, mesmo exibidas como mensagem do jogador), escolhe opções não textuais ou age sobre objetos"
+    recomendacao:
+      documentacao: null
+      design: "Prever ao menos um ponto do jogo em que o jogador digite texto livre, como em chat, resposta aberta, anotação ou nome de item"
+      codigo: "Acrescentar um campo de entrada de texto ou teclado na tela que aceite qualquer sequência de caracteres, sem lista fechada de opções. Ler o texto digitado em um manipulador de evento (handler) ou função que o exiba, guarde, envie ou avalie"
     depende_de: []
     definicoes:
       locais:

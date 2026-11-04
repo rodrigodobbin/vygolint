@@ -28,6 +28,10 @@ criterios:
       atendido: "Todos os conceitos listados como objetivo de aprendizagem no GDD ou documento equivalente são cobrados ao menos uma vez em missão ou cenário com estrutura de problema diferente da de introdução"
       parcial: "Ao menos um conceito listado é cobrado em missão ou cenário com estrutura de problema diferente da de introdução, e ao menos outro conceito listado não é cobrado fora da situação em que foi apresentado (inclui o conceito que não é cobrado em nenhuma missão ou cenário)"
       nao_atendido: "Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem"
+    recomendacao:
+      documentacao: "Listar no GDD ou documento equivalente os objetivos de aprendizagem. Registrar, para cada conceito listado, a missão ou cenário de introdução e a missão ou cenário de avaliação, com o objetivo e os objetos ou dados manipulados em cada uma"
+      design: "Incluir, para cada conceito listado que só é cobrado na situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente, objetivo_de_aprendizagem]

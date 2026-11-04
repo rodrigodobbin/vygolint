@@ -30,4 +30,8 @@ criterios:
       atendido: "Em ao menos uma situação, o mecanismo entrega informação, recebe a entrada do jogador e altera o que o jogo exibe a seguir conforme essa entrada"
       parcial: "Em ao menos uma situação, o mecanismo recebe a entrada do jogador, mas o que o jogo exibe a seguir é o mesmo para qualquer entrada"
       nao_atendido: "Os mecanismos apenas emitem informação ao jogador, sem receber entrada dele"
+    recomendacao:
+      documentacao: null
+      design: "Definir ao menos uma situação em que um personagem não jogável ou mecanismo entregue informação ao jogador e receba dele uma resposta, escolha ou item. Prever, para essa situação, duas ou mais entradas possíveis do jogador que levem a saídas diferentes do jogo"
+      codigo: "Ler no diálogo ou mecanismo a entrada do jogador (escolha, resposta ou item). Fazer a próxima saída do mecanismo ou o estado do jogo depender dessa entrada, com ao menos duas entradas levando a saídas diferentes"
     depende_de: []

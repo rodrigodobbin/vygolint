@@ -30,6 +30,10 @@ criterios:
       atendido: "Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado e das definições, cuja resolução exige uma decisão do jogador"
       parcial: "Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado"
       nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente, para cada missão e minijogo, a situação-problema com estado inicial, objetivo e ações possíveis. Registrar também a decisão do jogador que a resolução exige"
+      design: "Converter cada missão ou minijogo que se resolve repetindo uma ação ou escolhendo entre alternativas prontas em situação-problema, com estado inicial a ser transformado pelas ações do jogador, objetivo e mais de uma ação disponível. Condicionar a conclusão a uma decisão do jogador entre essas ações"
+      codigo: null
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, situacao_problema, documentacao_equivalente]

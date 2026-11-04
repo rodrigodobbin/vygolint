@@ -30,6 +30,10 @@ criterios:
       atendido: "Canal síncrono existe e o vídeo mostra troca de mensagens livres entre jogadores"
       parcial: "Canal existe, mas limitado a mensagens prontas, emotes ou sinais sem conteúdo livre"
       nao_atendido: "Não há comunicação entre jogadores durante a sessão"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente o canal de chat, voz ou mensagens em tempo real entre jogadores e o conteúdo livre que ele transmite"
+      design: "Prever uma sessão com dois ou mais jogadores e um canal em que eles troquem mensagens de texto ou voz em tempo real. Permitir no canal mensagens de conteúdo livre, e não apenas mensagens prontas, emotes ou sinais"
+      codigo: "Implementar um canal de mensagens de texto ou voz entre clientes conectados que entregue as mensagens durante a partida. Aceitar no canal conteúdo digitado ou falado pelo jogador, e não apenas mensagens prontas, emotes ou sinais"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]

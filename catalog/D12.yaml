@@ -33,6 +33,10 @@ criterios:
       atendido: "O jogador combina dois ou mais elementos por ação própria e obtém um artefato novo, nos termos do enunciado e das definições, que persiste no jogo"
       parcial: "O jogador combina dois ou mais elementos por ação própria, mas o resultado não permanece disponível depois da ação de combinar (por exemplo, a combinação é apenas avaliada como correta ou incorreta e descartada)"
       nao_atendido: "O jogador não combina elementos para obter resultado novo; as ações disponíveis só manipulam elementos já existentes no jogo"
+    recomendacao:
+      documentacao: "Registrar no GDD ou documento equivalente quais elementos o jogador combina e qual artefato resulta de cada combinação. Registrar onde o artefato permanece disponível depois de criado e em que condições deixa de existir"
+      design: "Definir ao menos uma combinação de dois ou mais elementos, feita por ação do jogador, que produza um artefato novo. Manter esse artefato disponível ao jogador depois da combinação, até que ele o remova ou o consuma"
+      codigo: "Instanciar, na ação de combinar, o objeto, estrutura ou configuração resultante como unidade. Adicionar o artefato ao estado do jogo (cenário, inventário ou lista) sem destruí-lo ao fim da ação. Removê-lo só por ação do jogador ou por consumo em uso posterior"
     depende_de: []
     definicoes:
       glossario: [documentacao_equivalente]
