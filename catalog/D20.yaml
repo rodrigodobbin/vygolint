@@ -29,6 +29,10 @@ criterios:
       atendido: "Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado e das definições"
       parcial: "Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado e das definições"
       nao_atendido: "Não existe mecanismo de ajuda, nos termos do enunciado e das definições, em nenhum desafio"
+    recomendacao:
+      documentacao: null
+      design: "Definir, em ao menos um desafio, um mecanismo de ajuda (botão ou comando de dica, personagem ou objeto que só oferece ajuda, ou disparo automático por número de tentativas ou por tempo sem progresso) que exiba informação sobre como resolver o desafio. Definir essa informação de modo que, depois de exibida, concluir o desafio ainda exija decisão do jogador, sem exibir a resposta final, reduzir as opções a uma só nem executar a solução"
+      codigo: "Acrescentar, em ao menos um desafio, um botão ou comando de dica, ou um disparo automático por contador de tentativas ou por temporizador de inatividade, que exiba informação sobre como resolver o desafio. Limitar a informação exibida por esse mecanismo de modo que concluir o desafio ainda exija decisão do jogador, sem exibir o valor guardado como gabarito, destacar a única opção restante nem acionar as ações finais"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio]

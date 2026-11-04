@@ -817,6 +817,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ação existe, mas a resposta vem só do sistema ou de personagem não jogável
 - Não atendido: Não há meio de pedir ajuda a outros jogadores
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a ação de pedir ajuda, com quem pede, quem recebe e o que acontece depois do pedido. Registrar que a solicitação chega a outro jogador, e não só ao sistema ou a personagem não jogável
+- Design: Definir uma ação de pedir ajuda, distinta do chat geral, que encaminhe a solicitação do jogador a outro jogador, e não só ao sistema ou a personagem não jogável
+- Código: Acrescentar uma ação, botão ou comando de pedir ajuda distinto do chat geral. Fazer o manipulador de evento (handler) dessa ação enviar a solicitação a outro jogador, e não só ao sistema ou a personagem não jogável
+
 **Depende de.** (D06.1 ou D07.1)
 
 ### D17 — O jogo deve exibir feedback construtivo para as ações do jogador
@@ -852,6 +857,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Todas as ocorrências de erro observadas recebem feedback que orienta a próxima ação
 - Parcial: Algumas ocorrências orientam; outras só sinalizam erro ou não recebem feedback
 - Não atendido: O feedback só sinaliza acerto ou erro, ou não existe
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente a tabela de ações incorretas previstas com a mensagem exibida em cada uma e a próxima ação que essa mensagem indica
+- Design: Definir, para cada ação incorreta prevista, a próxima ação que a mensagem indica ao jogador
+- Código: Trocar, em cada manipulador de erro, a mensagem que só sinaliza o erro por uma que indica a próxima ação. Acrescentar, em cada manipulador de erro que não exibe mensagem, uma mensagem que indica a próxima ação
 
 **Depende de.** —
 
@@ -901,6 +911,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, e ao menos outro ponto de feedback avaliado não o exibe, nos termos do enunciado e das definições
 - Não atendido: Nenhum ponto de feedback avaliado exibe feedback individualizado, nos termos do enunciado e das definições, ou não existe ponto de feedback avaliado
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada ponto de feedback, as mensagens previstas e a ação específica ou o histórico que seleciona cada uma. Registrar, em cada ponto de feedback, ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, cujas mensagens previstas diferem em informação que cita ou descreve o que o jogador fez
+- Design: Definir ao menos uma missão, minijogo ou tipo de interação em que o jogo exiba, em texto ou fala, mensagem em resposta a uma ação do jogador. Definir, em cada ponto de feedback, mensagens diferentes para ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, que difiram em informação que cita ou descreve o que o jogador fez
+- Código: Acrescentar ao menos um manipulador de evento (handler) que exiba, em texto ou fala, mensagem de feedback em resposta a uma ação do jogador. Fazer cada ponto de feedback escolher ou montar a mensagem a partir da ação específica (valor escolhido, objeto, resposta) ou do histórico (contadores de tentativas ou de erros, registro de ações anteriores), e não por sorteio nem apenas pelo resultado. Acrescentar, em cada ponto de feedback, ao menos dois ramos, ou um texto que insira o dado da ação, que produzam para o mesmo resultado mensagens que diferem em informação que cita ou descreve o que o jogador fez
+
 **Depende de.** —
 
 ### D19 — Os desafios devem proporcionar o desenvolvimento de competências no uso das ferramentas mentais
@@ -948,6 +963,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições, e ao menos outro exige menos de duas
 - Não atendido: Nenhum desafio documentado ou gravado exige ao menos duas funções psicológicas superiores, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente cada desafio e ao menos duas das funções psicológicas superiores (memória, atenção voluntária, planejamento, linguagem e formação de conceitos) que o desafio exige. Registrar, para cada uma dessas funções, o elemento do desafio que a exige (informação exibida e depois ocultada, estímulos simultâneos, ações dependentes, texto ou fala que define a ação, objetos ou exemplos a classificar), diferente do elemento de outra função do mesmo desafio
+- Design: Incluir, em cada desafio que exige menos de duas funções psicológicas superiores, elementos diferentes que exijam ao menos duas das funções: informação exibida e depois ocultada antes da ação que a usa (memória), estímulos simultâneos sem destaque entre os quais a ação correta exige escolher (atenção voluntária), ações dependentes entre si sem sequência ditada pelo jogo (planejamento), texto ou fala que define qual ação resolve o desafio (linguagem), objetos ou exemplos a classificar segundo um conceito dos objetivos de aprendizagem (formação de conceitos)
+- Código: não se aplica
+
 **Depende de.** —
 
 ### D20 — O jogo pode fornecer pista para o jogador resolver problemas
@@ -986,6 +1006,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: Em ao menos um desafio existe um mecanismo de ajuda cuja informação é pista, nos termos do enunciado e das definições
 - Parcial: Existe ao menos um mecanismo de ajuda, mas todos os mecanismos de ajuda existentes entregam a solução completa, nos termos do enunciado e das definições
 - Não atendido: Não existe mecanismo de ajuda, nos termos do enunciado e das definições, em nenhum desafio
+
+**Recomendações.**
+- Documentação: não se aplica
+- Design: Definir, em ao menos um desafio, um mecanismo de ajuda (botão ou comando de dica, personagem ou objeto que só oferece ajuda, ou disparo automático por número de tentativas ou por tempo sem progresso) que exiba informação sobre como resolver o desafio. Definir essa informação de modo que, depois de exibida, concluir o desafio ainda exija decisão do jogador, sem exibir a resposta final, reduzir as opções a uma só nem executar a solução
+- Código: Acrescentar, em ao menos um desafio, um botão ou comando de dica, ou um disparo automático por contador de tentativas ou por temporizador de inatividade, que exiba informação sobre como resolver o desafio. Limitar a informação exibida por esse mecanismo de modo que concluir o desafio ainda exija decisão do jogador, sem exibir o valor guardado como gabarito, destacar a única opção restante nem acionar as ações finais
 
 **Depende de.** —
 
@@ -1031,6 +1056,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado e das definições
 - Não atendido: Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar, para cada simulação, se o jogo registra o desafio como concluído ao fim da simulação e se o jogador pode jogar o desafio depois
+- Design: Definir, em ao menos um desafio, uma simulação em que o próprio jogo (personagem, animação ou repetição gravada) executa ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Definir que, ao fim dessa simulação, o jogo não registre conclusão, pontuação ou progresso do desafio e que o jogador possa jogar o desafio em seguida
+- Código: Acrescentar, em ao menos um desafio, uma rotina de demonstração que chame as mesmas funções que as ações do jogador executam e mude o estado do desafio de forma visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração
+
 **Depende de.** —
 
 ### D22 — O jogo, quando aplicado em sala de aula, cria oportunidades para o professor atuar como mediador / facilitador
@@ -1070,6 +1100,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Parcial: Ao menos um desafio descrito na documentação tem ao menos um momento de mediação, nos termos do enunciado e das definições, e ao menos outro desafio não tem
 - Não atendido: Nenhum desafio descrito na documentação tem momento de mediação, nos termos do enunciado e das definições
 
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente, para cada desafio, ao menos um momento de mediação com o ponto da sessão, a intervenção do professor prevista nesse ponto e o objetivo de aprendizagem que essa intervenção trabalha, escolhido da lista de objetivos de aprendizagem do documento
+- Design: Definir, para cada desafio, ao menos um ponto da sessão em sala de aula (ao falhar no desafio, ao concluí-lo ou em pausa indicada) em que o professor intervém. Definir, para cada um desses pontos, a intervenção do professor (perguntar, explicar, orientar ou discutir o resultado) e o objetivo de aprendizagem que essa intervenção trabalha
+- Código: não se aplica
+
 **Depende de.** —
 
 #### D22.2 — Nível AAA
@@ -1104,6 +1139,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: O jogo oferece recurso de acompanhamento do professor que mostra, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade, nos termos do enunciado e das definições
 - Parcial: O jogo oferece recurso de acompanhamento do professor que mostra dados por jogador ou por grupo e inclui o resultado por desafio ou um dado de dificuldade, mas não os dois, nos termos do enunciado e das definições
 - Não atendido: O jogo não oferece recurso de acompanhamento do professor, ou o recurso mostra apenas agregados da turma, ou mostra dados por jogador ou por grupo sem resultado por desafio nem dado de dificuldade, nos termos do enunciado e das definições
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente o recurso de acompanhamento do professor, quem o acessa e como é acessado. Registrar os campos do recurso, indicando que são por jogador ou por grupo e que incluem o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)
+- Design: Definir uma tela, painel ou relatório destinado ao professor que mostre, por jogador ou por grupo, e não apenas em agregados da turma, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio)
+- Código: Acrescentar uma tela, rota, função ou exportação com acesso restrito ao professor (perfil de professor, senha ou modo docente). Gravar, por jogador ou por grupo, o resultado por desafio e ao menos um dado de dificuldade (número de tentativas, lista de erros ou tempo gasto em cada desafio). Exibir ou exportar nesse recurso esses dados por jogador ou por grupo, e não apenas agregados da turma
 
 **Depende de.** —
 
@@ -1153,6 +1193,11 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Atendido: A narrativa apresenta ao menos um dilema, nos termos do enunciado e das definições
 - Parcial: A narrativa apresenta ao menos uma situação sobre objetivo de aprendizagem em que o jogador escolhe entre ao menos duas opções, mas nenhuma situação é dilema, nos termos do enunciado e das definições (as opções são avaliadas como certas ou erradas, ou a consequência exibida não depende da opção escolhida)
 - Não atendido: A narrativa não apresenta nenhuma situação sobre objetivo de aprendizagem em que o jogador escolha entre ao menos duas opções, nos termos do enunciado e das definições (inclui narrativa sem escolha do jogador e narrativa que não trata do conteúdo)
+
+**Recomendações.**
+- Documentação: Registrar no GDD ou documento equivalente as situações da narrativa em que o jogador toma posição, cada uma com o objetivo de aprendizagem tratado. Registrar, em ao menos uma dessas situações, ao menos duas posições que o jogo não avalia como certas ou erradas e uma consequência narrativa diferente para cada posição
+- Design: Definir ao menos uma situação da narrativa que cite ou descreva um objetivo de aprendizagem e ofereça ao jogador ao menos duas opções. Definir que nenhuma dessas opções seja avaliada como certa ou errada, isto é, que a escolha não conceda, retire nem condicione pontuação, progresso ou conclusão do desafio. Definir, para cada opção, uma consequência narrativa diferente (evento, fala de personagem ou mudança na história) que retome a opção escolhida
+- Código: Acrescentar, em ao menos um ponto da narrativa que cite um objetivo de aprendizagem, um menu de diálogo, escolha de história ou resposta aberta com ao menos duas opções. Remover dessa escolha qualquer efeito que conceda, retire ou condicione pontuação, progresso ou conclusão do desafio conforme a opção. Guardar em uma variável a opção escolhida pelo jogador. Acrescentar, para cada opção, um ramo ou evento que leia essa variável e exiba uma consequência narrativa diferente
 
 **Depende de.** —
 
