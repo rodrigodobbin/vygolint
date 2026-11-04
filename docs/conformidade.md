@@ -55,6 +55,7 @@ Regras:
 - Critério com `depende_de` não satisfeito recebe **não atendido** automaticamente.
   `depende_de` é lista de grupos: todos os grupos precisam ser satisfeitos; dentro de um
   grupo basta um critério atendido.
+- Grupo de `depende_de` sem critério atendido: se ao menos um critério do grupo está **não avaliado** e nenhum está atendido, o dependente fica **não avaliado por dependência**; se todos os critérios do grupo estão não atendidos ou parciais, o dependente fica **não atendido por dependência**. A nota do relatório cita os critérios de cada grupo não satisfeito.
 - Não existe "não se aplica" por ausência de recurso. Jogo sem multijogador não atende D06.
   `aplicabilidade` só restringe por contexto de uso (D22).
 - Critério cuja `aplicabilidade` não é satisfeita no contexto declarado da avaliação (ex.: D22 quando o jogo não é aplicado em sala de aula) é registrado como **fora do contexto**, fica fora das exigências de nível e é listado no relatório com a razão. O contexto de uso é declarado no início da avaliação.
@@ -98,6 +99,8 @@ Critérios **fora do contexto** (seção 2) não entram nas exigências desta ta
 
 ## 5. Relatório
 
+O relatório é gerado por `scripts/vygolint_report.py` a partir de `avaliacao.yaml` (seção 6); o avaliador não o edita.
+
 Todo relatório contém, nesta ordem:
 
 1. a cláusula do início deste documento;
@@ -107,10 +110,23 @@ Todo relatório contém, nesta ordem:
 4. cobertura por categoria: mesma contagem para cada uma das 12 categorias;
 5. bloqueios: critérios que impedem o próximo nível, cada um com a `recomendacao` do catálogo
    na via que cabe à evidência disponível (código avaliado: `codigo`; só documentação:
-   `documentacao` e `design`; só vídeo: `design` e `codigo`; via escolhida nula: as demais
-   vias não nulas);
+   `documentacao` e `design`; só vídeo: `design` e `codigo`; documentação e vídeo: as três;
+   via escolhida nula: as demais não nulas); bloqueio causado por dependência não satisfeita
+   cita o critério de que depende, sem recomendação própria;
 6. parciais: o que falta para pleno, com a `recomendacao` do critério contextualizada pelos
    itens que a avaliação encontrou fora do estado atendido;
 7. provas por critério.
 
 Critério que depende de um critério não avaliado é registrado como não avaliado por dependência e conta como não atendido para fins de nível.
+
+## 6. Arquivos da avaliação
+
+`avaliacao.yaml` é escrito pelo avaliador (agente ou humano), um por jogo:
+
+- `jogo`, `avaliador`, `data` (AAAA-MM-DD);
+- `contexto.sala_de_aula` (true/false: decide a aplicabilidade de D22), `contexto.fontes` (subconjunto de `codigo`, `documentacao`, `video`), `contexto.artefatos` (fonte → lista de caminhos);
+- `criterios`: uma entrada por critério do catálogo (os 43), com `grau` (`atendido`, `parcial`, `nao_atendido`, `nao_avaliado`, `fora_do_contexto`), `fontes` (por fonte usada: `grau`, `provas`, `observacao` opcional), `razao` (obrigatória para `nao_avaliado` e `fora_do_contexto`) e `justificativa_conflito` (obrigatória quando `grau` difere do grau esperado pelas fontes).
+
+Grau esperado pelas fontes: o pior entre as fontes usadas, ignorando a documentação quando há vídeo (vídeo prevalece sobre documentação). Fonte só pode ser usada se existe na `evidencia` do critério e em `contexto.fontes`. Prova: `arquivo:linha — trecho`, `documento p. N — trecho` ou `arquivo hh:mm:ss[-hh:mm:ss] — observação` (vídeo). `fontes` só existe em entradas com grau `atendido`, `parcial` ou `nao_atendido`; `nao_avaliado` e `fora_do_contexto` levam só `razao`.
+
+`scripts/vygolint_report.py <pasta>/avaliacao.yaml` valida o arquivo contra o catálogo, aplica as seções 2 a 4 e escreve `relatorio.md` (seção 5) e `resultado.yaml` (grau efetivo e grau declarado por critério, nível alcançado), que serve à comparação com avaliação humana. Exemplo em `docs/exemplo/`.

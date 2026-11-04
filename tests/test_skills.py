@@ -1,0 +1,64 @@
+import re
+import unittest
+
+from helpers import REPO
+
+SKILLS = ("using-vygolint", "vygolint-avaliar", "vygolint-criterio", "vygolint-video")
+CLAUSULA = (
+    "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) "
+    "e não classifica o jogo como sociointeracionista."
+)
+_FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
+
+
+def _frontmatter(texto):
+    m = _FM.match(texto)
+    assert m, "sem frontmatter"
+    return dict(l.split(":", 1) for l in m.group(1).splitlines() if ":" in l)
+
+
+class SkillsTest(unittest.TestCase):
+    def _ler(self, nome):
+        return (REPO / "skills" / nome / "SKILL.md").read_text(encoding="utf-8")
+
+    def test_all_skills_exist_with_frontmatter(self):
+        for nome in SKILLS:
+            with self.subTest(nome=nome):
+                fm = _frontmatter(self._ler(nome))
+                self.assertEqual(fm["name"].strip(), nome)
+                self.assertTrue(fm["description"].strip())
+                self.assertTrue(fm["description"].strip().startswith("Use when"), fm["description"])
+
+    def test_no_other_entries_in_skills_dir(self):
+        pastas = sorted(p.name for p in (REPO / "skills").iterdir() if not p.name.startswith("."))
+        self.assertEqual(pastas, sorted(SKILLS))
+        self.assertFalse((REPO / "skills" / ".gitkeep").exists())
+
+    def test_clause_in_every_skill(self):
+        for nome in SKILLS:
+            with self.subTest(nome=nome):
+                self.assertIn(CLAUSULA, self._ler(nome))
+
+    def test_avaliar_runs_the_script_and_never_computes_level(self):
+        t = self._ler("vygolint-avaliar")
+        self.assertIn("scripts/vygolint_report.py", t)
+        self.assertIn("avaliacao.yaml", t)
+        self.assertIn("vygolint-criterio", t)
+        self.assertIn("vygolint-video", t)
+        self.assertIn("nunca calcula", t)
+
+    def test_criterio_rules(self):
+        t = self._ler("vygolint-criterio")
+        for trecho in ("justificativa_conflito", "nao_avaliado", "razao", "Vídeo prevalece sobre documentação", "provas"):
+            self.assertIn(trecho, t)
+
+    def test_video_format(self):
+        t = self._ler("vygolint-video")
+        for trecho in ("ffmpeg", "ffprobe", "registro_video.yaml", "eventos", "hh:mm:ss"):
+            self.assertIn(trecho, t)
+
+    def test_using_points_to_everything(self):
+        t = self._ler("using-vygolint")
+        for trecho in ("vygolint-avaliar", "vygolint-criterio", "vygolint-video", "catalog/", "docs/conformidade.md", "VYGOLINT_ROOT"):
+            self.assertIn(trecho, t)
+        self.assertLess(len(t.splitlines()), 60)

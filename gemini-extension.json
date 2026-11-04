@@ -1,0 +1,6 @@
+{
+  "name": "vygolint",
+  "description": "Conformance evaluation of educational games against Carvalho (2020) socio-interactionist guidelines, with WCAG-style A/AA/AAA levels",
+  "version": "0.2.0",
+  "contextFileName": "GEMINI.md"
+}

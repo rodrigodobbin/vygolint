@@ -5,7 +5,7 @@ class SmokeTest(unittest.TestCase):
     def test_package_imports(self):
         import vygolint_catalog
 
-        self.assertEqual(vygolint_catalog.__version__, "0.1.0")
+        self.assertEqual(vygolint_catalog.__version__, "0.2.0")
 
     def test_yaml_available(self):
         import yaml

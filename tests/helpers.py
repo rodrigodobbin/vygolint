@@ -66,3 +66,48 @@ def diretriz_valida():
 
 def glossario_valido():
     return yaml.safe_load((REPO / "catalog" / "definicoes.yaml").read_text(encoding="utf-8"))
+
+
+def catalogo_real():
+    from vygolint_catalog.catalog import load_catalog
+
+    cat, errors = load_catalog(REPO / "catalog")
+    assert not errors, errors
+    return cat
+
+
+def _prova(fonte, cid):
+    """Proof text in the format conformidade.md asks for each source."""
+    if fonte == "codigo":
+        return f"src/{cid.lower().replace('.', '_')}.py:1 — trecho que satisfaz {cid}"
+    if fonte == "documentacao":
+        return f"docs/gdd.md p. 1 — trecho que satisfaz {cid}"
+    return f"gameplay/sessao1.mp4 00:00:00 — observação que satisfaz {cid}"
+
+
+def avaliacao_valida(fontes=("codigo", "documentacao", "video")):
+    """Every criterion atendido, one proof per source the criterion accepts and the context has."""
+    cat = catalogo_real()
+    fontes = list(fontes)
+    criterios = {}
+    for cid, item in cat["criterios"].items():
+        c = item["criterio"]
+        usadas = {}
+        for f in fontes:
+            if c["evidencia"].get(f) is not None:
+                usadas[f] = {"grau": "atendido", "provas": [_prova(f, cid)]}
+        if usadas:
+            criterios[cid] = {"grau": "atendido", "fontes": usadas}
+        else:
+            criterios[cid] = {"grau": "nao_avaliado", "razao": f"nenhuma fonte disponível avalia {cid}"}
+    return {
+        "jogo": "Jogo de teste",
+        "contexto": {
+            "sala_de_aula": True,
+            "fontes": fontes,
+            "artefatos": {f: [f"./{f}"] for f in fontes},
+        },
+        "avaliador": "teste",
+        "data": "2026-11-04",
+        "criterios": criterios,
+    }

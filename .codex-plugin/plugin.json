@@ -1,0 +1,24 @@
+{
+  "name": "vygolint",
+  "version": "0.2.0",
+  "description": "Conformance evaluation of educational games against Carvalho (2020) socio-interactionist guidelines, with WCAG-style A/AA/AAA levels",
+  "author": { "name": "Rodrigo Dobbin Fellows" },
+  "homepage": "https://github.com/rodrigodobbin/vygolint",
+  "repository": "https://github.com/rodrigodobbin/vygolint",
+  "keywords": ["educational-games", "vygotsky", "conformance", "wcag", "skills", "evaluation"],
+  "skills": "./skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "vygolint",
+    "shortDescription": "Evaluate educational games against Vygotskian design guidelines",
+    "longDescription": "Use vygolint to evaluate an educational game from its code, design documents and gameplay video against the 40 guidelines of Carvalho (2020), producing a WCAG-style conformance report with recommendations.",
+    "developerName": "Rodrigo Dobbin Fellows",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Evaluate this educational game with vygolint.",
+      "Does this game meet criterion D17.1?"
+    ],
+    "websiteURL": "https://github.com/rodrigodobbin/vygolint"
+  }
+}
