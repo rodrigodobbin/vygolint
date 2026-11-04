@@ -408,6 +408,13 @@ class RecomendacaoTest(unittest.TestCase):
         self.assertEqual(self.schema["criterio"]["recomendacao"]["vias"], ["documentacao", "design", "codigo"])
         self.assertIn("recomendacao.*", self.schema["criterio"]["definicoes"]["campos_lint"])
 
+    def test_field_is_required(self):
+        d = diretriz_valida()
+        del d["criterios"][0]["recomendacao"]
+        self.assertTrue(any("D17.1" in e and "campo obrigatório ausente: recomendacao" in e for e in self.check(d)))
+        self.assertIn("recomendacao", self.schema["criterio"]["obrigatorios"])
+        self.assertNotIn("recomendacao", self.schema["criterio"].get("opcionais", []))
+
     def test_valid_fixture_passes(self):
         self.assertEqual(self.check(diretriz_valida()), [])
 

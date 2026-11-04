@@ -119,13 +119,6 @@ class RenderMarkdownTest(unittest.TestCase):
         out = render_markdown([d], self.cats)
         self.assertIn("- Código: não se aplica\n\n**Depende de.**", out)
 
-    def test_no_recomendacoes_block_when_field_absent(self):
-        d = diretriz_valida()
-        del d["criterios"][0]["recomendacao"]
-        out = render_markdown([d], self.cats)
-        self.assertNotIn("**Recomendações.**", out)
-        self.assertIn("- Não atendido: Feedback só sinaliza acerto/erro ou inexiste\n\n**Depende de.** —", out)
-
 
 from vygolint_catalog.render import escape_latex, render_latex
 
