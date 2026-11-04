@@ -55,11 +55,13 @@ Adicione este repositório como marketplace de plugins do Codex e instale `vygol
 
 ### Cursor
 
-```text
-/add-plugin vygolint
-```
+O manifesto está em `.cursor-plugin/plugin.json`. O Cursor instala plugins pelo seu marketplace (`/add-plugin`), que ainda não lista o vygolint; instale a partir de uma cópia local deste repositório, conforme a documentação de plugins do Cursor.
 
-Se o plugin não aparecer no marketplace do Cursor, instale a partir de uma cópia local deste repositório.
+### Gemini CLI
+
+```bash
+gemini extensions install https://github.com/rodrigodobbin/vygolint
+```
 
 ### Factory Droid
 

@@ -17,3 +17,5 @@ jobs:
         run: python3 scripts/build_catalog.py
       - name: Generated docs are up to date
         run: git diff --exit-code -- docs/catalogo.md docs/catalogo.tex
+      - name: Example report is up to date
+        run: python3 scripts/vygolint_report.py docs/exemplo/avaliacao.yaml --out /tmp/exemplo && diff /tmp/exemplo/relatorio.md docs/exemplo/relatorio.md && diff /tmp/exemplo/resultado.yaml docs/exemplo/resultado.yaml
