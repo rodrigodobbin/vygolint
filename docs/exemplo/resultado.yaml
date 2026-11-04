@@ -1,0 +1,220 @@
+jogo: Jogo exemplo
+data: '2026-11-04'
+avaliador: exemplo gerado pelos testes
+nivel: sem_conformidade
+criterios:
+  D01.1:
+    nivel: A
+    grau: parcial
+    grau_declarado: parcial
+    nota: null
+  D02.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D03.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D03.2:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D03.3:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D04.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D05.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D06.1:
+    nivel: AAA
+    grau: nao_avaliado
+    grau_declarado: nao_avaliado
+    nota: null
+  D07.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D08.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D09.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D10.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D11.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D12.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D13.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D14.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D15.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D16.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D17.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D18.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D19.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D20.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D21.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D22.1:
+    nivel: AA
+    grau: fora_do_contexto
+    grau_declarado: fora_do_contexto
+    nota: null
+  D22.2:
+    nivel: AAA
+    grau: fora_do_contexto
+    grau_declarado: fora_do_contexto
+    nota: null
+  D23.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D24.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D25.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D26.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D27.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D28.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D29.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D30.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D31.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D32.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D33.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D34.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D35.1:
+    nivel: AAA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D36.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D37.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D38.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D39.1:
+    nivel: AA
+    grau: atendido
+    grau_declarado: atendido
+    nota: null
+  D40.1:
+    nivel: A
+    grau: atendido
+    grau_declarado: atendido
+    nota: null

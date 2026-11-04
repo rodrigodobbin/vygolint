@@ -1,0 +1,428 @@
+jogo: Jogo exemplo
+contexto:
+  sala_de_aula: false
+  fontes:
+  - documentacao
+  - video
+  artefatos:
+    documentacao:
+    - ./documentacao
+    video:
+    - ./video
+avaliador: exemplo gerado pelos testes
+data: '2026-11-04'
+criterios:
+  D01.1:
+    grau: parcial
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D01.1
+      video:
+        grau: parcial
+        provas:
+        - video — prova de D01.1
+        observacao: missão 2 resolvida repetindo a mesma ação
+  D02.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D02.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D02.1
+  D03.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D03.1
+  D03.2:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D03.2
+  D03.3:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D03.3
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D03.3
+  D04.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D04.1
+  D05.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D05.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D05.1
+  D06.1:
+    grau: nao_avaliado
+    razao: não há vídeo com dois jogadores
+  D07.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D07.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D07.1
+  D08.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D08.1
+  D09.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D09.1
+  D10.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D10.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D10.1
+  D11.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D11.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D11.1
+  D12.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D12.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D12.1
+  D13.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D13.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D13.1
+  D14.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D14.1
+  D15.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D15.1
+  D16.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D16.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D16.1
+  D17.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D17.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D17.1
+  D18.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D18.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D18.1
+  D19.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D19.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D19.1
+  D20.1:
+    grau: atendido
+    fontes:
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D20.1
+  D21.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D21.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D21.1
+  D22.1:
+    grau: fora_do_contexto
+    razao: o jogo não é aplicado em sala de aula
+  D22.2:
+    grau: fora_do_contexto
+    razao: o jogo não é aplicado em sala de aula
+  D23.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D23.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D23.1
+  D24.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D24.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D24.1
+  D25.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D25.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D25.1
+  D26.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D26.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D26.1
+  D27.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D27.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D27.1
+  D28.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D28.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D28.1
+  D29.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D29.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D29.1
+  D30.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D30.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D30.1
+  D31.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D31.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D31.1
+  D32.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D32.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D32.1
+  D33.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D33.1
+  D34.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D34.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D34.1
+  D35.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D35.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D35.1
+  D36.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D36.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D36.1
+  D37.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D37.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D37.1
+  D38.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D38.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D38.1
+  D39.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D39.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D39.1
+  D40.1:
+    grau: atendido
+    fontes:
+      documentacao:
+        grau: atendido
+        provas:
+        - documentacao — prova de D40.1
+      video:
+        grau: atendido
+        provas:
+        - video — prova de D40.1

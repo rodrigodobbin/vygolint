@@ -1,8 +1,17 @@
 import copy
+import subprocess
+import sys
+import tempfile
 import unittest
+from pathlib import Path
 
-from helpers import avaliacao_valida, catalogo_real
-from vygolint_catalog.report import aggregate, grau_esperado, validate_avaliacao, vias_para
+import yaml
+
+from helpers import REPO, avaliacao_valida, catalogo_real
+from vygolint_catalog.report import (
+    CLAUSULA, aggregate, build_report, grau_esperado, render_relatorio, render_resultado,
+    validate_avaliacao, vias_para,
+)
 
 
 class GrauEsperadoTest(unittest.TestCase):
@@ -248,3 +257,110 @@ class AggregateTest(unittest.TestCase):
             for f in av["criterios"][cid]["fontes"].values():
                 f["grau"] = "nao_atendido"
         self.assertEqual([b["id"] for b in self.agg(av)["bloqueios"]], ["D01.1", "D38.1"])
+
+
+def _escrever(av, pasta):
+    p = Path(pasta) / "avaliacao.yaml"
+    p.write_text(yaml.safe_dump(av, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    return p
+
+
+class RenderTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.cat = catalogo_real()
+
+    def _exemplo(self):
+        av = avaliacao_valida(fontes=("documentacao", "video"))
+        av["contexto"]["sala_de_aula"] = False
+        av["criterios"]["D22.1"] = {"grau": "fora_do_contexto", "razao": "o jogo não é aplicado em sala de aula"}
+        av["criterios"]["D22.2"] = {"grau": "fora_do_contexto", "razao": "o jogo não é aplicado em sala de aula"}
+        av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "não há vídeo com dois jogadores"}
+        av["criterios"]["D01.1"]["grau"] = "parcial"
+        av["criterios"]["D01.1"]["fontes"]["video"]["grau"] = "parcial"
+        av["criterios"]["D01.1"]["fontes"]["video"]["observacao"] = "missão 2 resolvida repetindo a mesma ação"
+        return av
+
+    def test_report_sections_and_content(self):
+        av = self._exemplo()
+        res = aggregate(av, self.cat)
+        md = render_relatorio(res, av, self.cat)
+        self.assertTrue(md.startswith("<!-- ARQUIVO GERADO por scripts/vygolint_report.py"))
+        self.assertIn("# Relatório vygolint — Jogo de teste", md)
+        self.assertIn(CLAUSULA, md)
+        for titulo in (
+            "## 1. Cláusula", "## 2. Nível alcançado", "## 3. Cobertura por nível",
+            "## 4. Cobertura por categoria", "## 5. Bloqueios", "## 6. Parciais", "## 7. Provas por critério",
+        ):
+            self.assertIn(titulo, md)
+        self.assertIn("**Nível alcançado: sem conformidade**", md)
+        self.assertIn("| A | 20 | 1 | 0 (dos quais 0 não avaliados) | 0 |", md)
+        self.assertIn("| AAA | 8 | 0 | 1 (dos quais 1 não avaliados) | 1 |", md)
+        self.assertIn("#### D01.1 — Nível A — parcial", md)
+        self.assertIn("- Documentação: " + self.cat["criterios"]["D01.1"]["criterio"]["recomendacao"]["documentacao"], md)
+        self.assertIn("- Design: " + self.cat["criterios"]["D01.1"]["criterio"]["recomendacao"]["design"], md)
+        self.assertNotIn("- Código:", md.split("## 6. Parciais")[0].split("#### D01.1")[1].split("####")[0])
+        self.assertIn("- Falta: " + self.cat["criterios"]["D01.1"]["criterio"]["escala"]["atendido"], md)
+        self.assertIn("### D22.1 — fora do contexto", md)
+        self.assertIn("o jogo não é aplicado em sala de aula", md)
+        self.assertIn("### D06.1 — não avaliado", md)
+        self.assertIn("- Vídeo (parcial):\n  - video — prova de D01.1\n  - Observação: missão 2 resolvida", md)
+
+    def test_resultado_yaml(self):
+        av = self._exemplo()
+        res = aggregate(av, self.cat)
+        doc = yaml.safe_load(render_resultado(res, av))
+        self.assertEqual(doc["jogo"], "Jogo de teste")
+        self.assertEqual(doc["nivel"], "sem_conformidade")
+        self.assertEqual(len(doc["criterios"]), 43)
+        self.assertEqual(doc["criterios"]["D01.1"], {"nivel": "A", "grau": "parcial", "grau_declarado": "parcial", "nota": None})
+        self.assertEqual(doc["criterios"]["D22.1"]["grau"], "fora_do_contexto")
+        self.assertEqual(list(doc["criterios"])[:2], ["D01.1", "D02.1"])
+
+    def test_deterministic(self):
+        av = self._exemplo()
+        res = aggregate(av, self.cat)
+        self.assertEqual(render_relatorio(res, av, self.cat), render_relatorio(aggregate(av, self.cat), av, self.cat))
+
+
+class BuildReportTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp)
+
+    def test_writes_both_files(self):
+        p = _escrever(avaliacao_valida(), self.tmp)
+        self.assertEqual(build_report(p, REPO / "catalog", self.tmp), [])
+        self.assertTrue((self.tmp / "relatorio.md").exists())
+        self.assertTrue((self.tmp / "resultado.yaml").exists())
+
+    def test_invalid_writes_nothing(self):
+        av = avaliacao_valida()
+        del av["criterios"]["D17.1"]
+        p = _escrever(av, self.tmp)
+        errors = build_report(p, REPO / "catalog", self.tmp)
+        self.assertTrue(any("D17.1" in e for e in errors))
+        self.assertFalse((self.tmp / "relatorio.md").exists())
+
+    def test_bad_yaml_reports_filename(self):
+        p = self.tmp / "avaliacao.yaml"
+        p.write_text("jogo: [unclosed\n", encoding="utf-8")
+        errors = build_report(p, REPO / "catalog", self.tmp)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("avaliacao.yaml", errors[0])
+
+    def test_cli(self):
+        p = _escrever(avaliacao_valida(), self.tmp)
+        cmd = [sys.executable, str(REPO / "scripts" / "vygolint_report.py"), str(p), "--out", str(self.tmp)]
+        ok = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(ok.returncode, 0, ok.stderr)
+        self.assertIn("OK: nível AAA", ok.stdout)
+        av = avaliacao_valida()
+        av["criterios"]["D17.1"]["grau"] = "quase"
+        p = _escrever(av, self.tmp)
+        bad = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(bad.returncode, 1)
+        self.assertIn("D17.1", bad.stderr)

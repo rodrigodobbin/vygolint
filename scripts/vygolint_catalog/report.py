@@ -246,3 +246,159 @@ def aggregate(av, catalog):
         "bloqueios": bloqueios,
         "parciais": parciais,
     }
+
+
+CLAUSULA = (
+    "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) "
+    "e não classifica o jogo como sociointeracionista."
+)
+GENERATED = "<!-- ARQUIVO GERADO por scripts/vygolint_report.py a partir de avaliacao.yaml. Não edite à mão. -->"
+_NOME_GRAU = {
+    "atendido": "atendido", "parcial": "parcial", "nao_atendido": "não atendido",
+    "nao_avaliado": "não avaliado", "fora_do_contexto": "fora do contexto", "sem_conformidade": "sem conformidade",
+}
+_NOME_FONTE = {"codigo": "Código", "documentacao": "Documentação", "video": "Vídeo"}
+_NOME_VIA = {"documentacao": "Documentação", "design": "Design", "codigo": "Código"}
+
+
+def _nome_categoria(chave, catalog):
+    for c in catalog["categorias"]["categorias"]:
+        if c["chave"] == chave:
+            return c["nome"]
+    return chave
+
+
+def _linha_contagem(rotulo, c):
+    return (
+        f"| {rotulo} | {c['atendido']} | {c['parcial']} | {c['nao_atendido']} "
+        f"(dos quais {c['nao_avaliado']} não avaliados) | {c['fora_do_contexto']} |"
+    )
+
+
+def _vias_md(vias):
+    return [f"- {_NOME_VIA[v]}: {t}" for v, t in vias]
+
+
+def render_relatorio(res, av, catalog):
+    ctx = av["contexto"]
+    fontes = ", ".join(_NOME_FONTE[f].lower() for f in ctx["fontes"])
+    linhas = [
+        GENERATED,
+        f"# Relatório vygolint — {av['jogo']}",
+        "",
+        f"- Data: {av['data']}",
+        f"- Avaliador: {av['avaliador']}",
+        f"- Aplicado em sala de aula: {'sim' if ctx['sala_de_aula'] else 'não'}",
+        f"- Fontes de evidência: {fontes}",
+        "",
+        "## 1. Cláusula",
+        "",
+        f"> {CLAUSULA}",
+        "",
+        "## 2. Nível alcançado",
+        "",
+        f"**Nível alcançado: {_NOME_GRAU.get(res['nivel'], res['nivel'])}**",
+        "",
+        "## 3. Cobertura por nível",
+        "",
+        "| Nível | Atendidos | Parciais | Não atendidos | Fora do contexto |",
+        "|---|---|---|---|---|",
+    ]
+    for n in NIVEIS:
+        linhas.append(_linha_contagem(n, res["cobertura_nivel"][n]))
+    linhas += [
+        "",
+        "## 4. Cobertura por categoria",
+        "",
+        "| Categoria | Atendidos | Parciais | Não atendidos | Fora do contexto |",
+        "|---|---|---|---|---|",
+    ]
+    for chave, c in res["cobertura_categoria"].items():
+        linhas.append(_linha_contagem(_nome_categoria(chave, catalog), c))
+    linhas += ["", "## 5. Bloqueios", ""]
+    proximo = {"sem_conformidade": "A", "A": "AA", "AA": "AAA", "AAA": None}[res["nivel"]]
+    if proximo is None:
+        linhas.append("Nenhum: o jogo alcançou AAA.")
+    elif not res["bloqueios"]:
+        linhas.append(f"Nenhum critério {proximo} bloqueia o próximo nível.")
+    else:
+        linhas.append(f"Critérios que impedem o nível {proximo}:")
+        for b in res["bloqueios"]:
+            linhas += ["", f"#### {b['id']} — Nível {b['nivel']} — {_NOME_GRAU[b['grau']]}", "", f"**Enunciado.** {b['enunciado']}", ""]
+            if b["nota"]:
+                linhas.append(f"- Nota: {b['nota']}")
+            linhas += _vias_md(b["vias"])
+    linhas += ["", "## 6. Parciais", ""]
+    if not res["parciais"]:
+        linhas.append("Nenhum critério parcial.")
+    for p in res["parciais"]:
+        linhas += [
+            f"#### {p['id']} — Nível {p['nivel']}",
+            "",
+            f"**Enunciado.** {p['enunciado']}",
+            "",
+            f"- Estado: {p['escala_parcial']}",
+            f"- Falta: {p['escala_atendido']}",
+        ]
+        linhas += _vias_md(p["vias"])
+        linhas.append("")
+    linhas += ["## 7. Provas por critério", ""]
+    for cid in sorted(res["criterios"]):
+        c = res["criterios"][cid]
+        entrada = av["criterios"][cid]
+        linhas.append(f"### {cid} — {_NOME_GRAU[c['grau']]}")
+        if c["grau_declarado"] != c["grau"]:
+            linhas.append(f"- Grau declarado: {_NOME_GRAU[c['grau_declarado']]}")
+        if c["nota"]:
+            linhas.append(f"- Nota: {c['nota']}")
+        if entrada.get("razao"):
+            linhas.append(f"- Razão: {entrada['razao']}")
+        if entrada.get("justificativa_conflito"):
+            linhas.append(f"- Justificativa do conflito entre fontes: {entrada['justificativa_conflito']}")
+        for nome in FONTES:
+            f = (entrada.get("fontes") or {}).get(nome)
+            if not f:
+                continue
+            linhas.append(f"- {_NOME_FONTE[nome]} ({_NOME_GRAU[f['grau']]}):")
+            linhas += [f"  - {p}" for p in f["provas"]]
+            if f.get("observacao"):
+                linhas.append(f"  - Observação: {f['observacao']}")
+        linhas.append("")
+    return "\n".join(linhas).rstrip() + "\n"
+
+
+def render_resultado(res, av):
+    doc = {
+        "jogo": av["jogo"],
+        "data": str(av["data"]),
+        "avaliador": av["avaliador"],
+        "nivel": res["nivel"],
+        "criterios": {
+            cid: {"nivel": c["nivel"], "grau": c["grau"], "grau_declarado": c["grau_declarado"], "nota": c["nota"]}
+            for cid, c in sorted(res["criterios"].items())
+        },
+    }
+    return yaml.safe_dump(doc, allow_unicode=True, sort_keys=False)
+
+
+def build_report(avaliacao_path, catalog_dir, out_dir):
+    """Return errors; on success writes relatorio.md and resultado.yaml into out_dir."""
+    from .catalog import load_catalog
+
+    avaliacao_path = Path(avaliacao_path)
+    out_dir = Path(out_dir)
+    catalog, errors = load_catalog(catalog_dir)
+    if errors:
+        return errors
+    try:
+        av = load_avaliacao(avaliacao_path)
+    except yaml.YAMLError as exc:
+        return [f"{avaliacao_path.name}: YAML inválido: {exc}"]
+    errors = validate_avaliacao(av, catalog)
+    if errors:
+        return errors
+    res = aggregate(av, catalog)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "relatorio.md").write_text(render_relatorio(res, av, catalog), encoding="utf-8")
+    (out_dir / "resultado.yaml").write_text(render_resultado(res, av), encoding="utf-8")
+    return []
