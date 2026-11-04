@@ -31,3 +31,5 @@ criterios:
       parcial: "Jogador só lê registros de outros, sem poder deixar os seus, ou o inverso"
       nao_atendido: "Não há troca assíncrona entre jogadores"
     depende_de: []
+    definicoes:
+      glossario: [documentacao_equivalente]

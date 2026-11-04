@@ -57,3 +57,7 @@ _DIRETRIZ = {
 
 def diretriz_valida():
     return copy.deepcopy(_DIRETRIZ)
+
+
+def glossario_valido():
+    return yaml.safe_load((REPO / "catalog" / "definicoes.yaml").read_text(encoding="utf-8"))

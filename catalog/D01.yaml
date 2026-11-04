@@ -7,7 +7,7 @@ aplicabilidade: null
 criterios:
   - id: D01.1
     nivel: A
-    enunciado: "Cada missão ou minijogo apresenta uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível, cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema"
+    enunciado: "Cada missão ou minijogo apresenta uma situação-problema cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação"
     nivel_justificativa:
       essencialidade: alta
       viabilidade: alta
@@ -15,19 +15,21 @@ criterios:
     evidencia:
       codigo: null
       documentacao:
-        procedimento: "Listar no documento de design (GDD) ou documento equivalente cada missão e minijogo e identificar a situação-problema (estado inicial, objetivo e ações possíveis) e as decisões previstas. Situação-problema exige estado inicial, objetivo e mais de uma ação possível; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta"
+        procedimento: "Listar no documento de design (GDD) ou documento equivalente cada missão e minijogo e identificar a situação-problema (estado inicial, objetivo e ações possíveis) e as decisões previstas"
         indicadores:
-          - "cada missão ou minijogo descreve uma situação-problema, isto é, uma situação com estado inicial, objetivo e mais de uma ação possível"
+          - "cada missão ou minijogo descreve uma situação-problema"
           - "a resolução descrita exige uma decisão do jogador e não se reduz a repetir uma mesma ação nem a escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador"
       video:
-        procedimento: "Registrar o início e o fim de cada missão ou minijogo observado, anotar o estado inicial, o objetivo e as ações disponíveis ao jogador e anotar qual decisão ele tomou para concluí-lo. Situação-problema exige estado inicial, objetivo e mais de uma ação possível; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta"
+        procedimento: "Registrar o início e o fim de cada missão ou minijogo observado, anotar o estado inicial, o objetivo e as ações disponíveis ao jogador e anotar qual decisão ele tomou para concluí-lo"
         indicadores:
           - "todas as missões e minijogos presentes no vídeo foram registrados (mínimo 1)"
-          - "cada um apresenta uma situação-problema: estado inicial visível, objetivo e mais de uma ação disponível ao jogador"
+          - "cada um apresenta uma situação-problema, com estado inicial visível, objetivo e mais de uma ação disponível ao jogador"
           - "o jogador resolve a situação por ações que transformam o estado inicial, e não apenas escolhendo entre alternativas prontas"
           - "concluir o desafio não depende de repetir a mesma ação até o fim"
     escala:
-      atendido: "Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado, cuja resolução exige uma decisão do jogador"
-      parcial: "Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado"
-      nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado"
+      atendido: "Todas as missões e minijogos observados ou documentados apresentam uma situação-problema, nos termos do enunciado e das definições, cuja resolução exige uma decisão do jogador"
+      parcial: "Ao menos uma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições, e ao menos outra não apresenta, por se resolver repetindo uma ação ou escolhendo entre alternativas prontas sem estado inicial a ser transformado"
+      nao_atendido: "Nenhuma missão ou minijogo apresenta uma situação-problema, nos termos do enunciado e das definições"
     depende_de: []
+    definicoes:
+      glossario: [missao, minijogo, desafio, situacao_problema, documentacao_equivalente]

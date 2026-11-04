@@ -31,3 +31,5 @@ criterios:
       parcial: "Canal existe, mas limitado a mensagens prontas, emotes ou sinais sem conteúdo livre"
       nao_atendido: "Não há comunicação entre jogadores durante a sessão"
     depende_de: []
+    definicoes:
+      glossario: [documentacao_equivalente]

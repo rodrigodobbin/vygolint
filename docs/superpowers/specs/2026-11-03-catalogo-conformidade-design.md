@@ -1,7 +1,7 @@
 # vygolint — Catálogo de conformidade sociointeracionista (etapa 1)
 
 Data: 2026-11-03
-Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada
+Status: implementado (etapa 1 concluída em 2026-11-03); revisão final aplicada; glossário de definições (2026-11-03)
 
 ## 1. Objetivo
 
@@ -40,6 +40,7 @@ vygolint/
   catalog/
     schema.yaml            # esquema do YAML de diretriz
     categorias.yaml        # 12 categorias de Carvalho, ordem, descrição, ressalva
+    definicoes.yaml        # glossário: definições compartilhadas pelos critérios
     D01.yaml … D40.yaml    # uma diretriz por arquivo
   docs/
     catalogo.md            # GERADO
@@ -88,6 +89,12 @@ criterios:
       parcial: "Algumas ocorrências orientam, outras só sinalizam erro"
       nao_atendido: "Feedback só sinaliza acerto/erro ou inexiste"
     depende_de: []             # lista de grupos; ex.: [[D06.1, D07.1]] = D06.1 ou D07.1
+    definicoes:                # opcional; obrigatório quando o texto usa um gatilho do glossário
+      glossario: [missao]      # chaves de catalog/definicoes.yaml, impressas uma vez por critério
+      locais:                  # definições só deste critério: termo -> texto (predicado, sem "termo é")
+        "ponto de feedback": "o momento em que o jogo responde a uma ação avaliada"
+      termos_comuns:           # gatilho usado no sentido corrente, com justificativa
+        "cenário": "sentido corrente de situação; não é o cenário jogável do glossário"
 ```
 
 Regras do esquema:
@@ -97,6 +104,10 @@ Regras do esquema:
 - `categoria` precisa existir em `categorias.yaml`.
 - Pelo menos uma fonte de evidência não nula por critério.
 - `depende_de` é uma lista de grupos; cada grupo é uma lista de ids de critérios existentes. Todos os grupos precisam ser satisfeitos; dentro de um grupo basta um critério atendido. `[[D06.1, D07.1]]` significa "D06.1 ou D07.1"; `[[D06.1], [D09.1]]` significa "D06.1 e D09.1". Lista vazia quando não há dependência.
+- Definição compartilhada existe uma vez, em `catalog/definicoes.yaml` (`chave`, `termo`, `gatilhos`, `ancora`, `texto`). O texto de um critério (enunciado, procedimentos, indicadores, escala) não repete definições. É erro de build o campo conter `Definição:`/`Definições:` (sem distinguir maiúsculas) ou repetir uma definição do glossário na forma `<termo ou gatilho> é|são <texto do glossário>` (sem distinguir maiúsculas nem espaçamento); o texto do glossário solto, no meio de uma frase comum, é permitido.
+- Lint: se o texto de um critério contém um gatilho de um termo do glossário, `definicoes.glossario` precisa listar a chave (ou `termos_comuns` precisa justificar o uso no sentido corrente). Chave listada sem gatilho no texto também é erro. `termos_comuns` não pode citar gatilho de chave listada em `glossario` nem gatilho ausente do texto (enunciado, evidências, escala e locais). O texto das definições listadas conta como texto do critério (uma definição que cita "missão" exige `missao`).
+- O renderizador imprime `**Definições.**` uma vez por critério, antes do enunciado, e uma seção `## Glossário` no início de `docs/catalogo.md` (antes de `## Resumo`).
+- Divergências de redação encontradas na migração e decisões respondidas: `docs/superpowers/specs/2026-11-03-definicoes-divergencias.md`.
 - Critério testável: dois avaliadores com as mesmas evidências chegam ao mesmo grau. Descritores da escala devem ser observáveis. Proibido descritor do tipo "o jogo é motivador".
 
 `categorias.yaml` lista as 12 categorias de Carvalho (interacao, mediacao, autonomia, socializacao, ludico, realismo, personalizacao, organizacao, resolucao_de_problemas, linguagem, atencao, aprendizado) com descrição curta e a ressalva da seção 4.4 da dissertação: categorias são instrumento de organização, não taxonomia da teoria de Vigotski.
@@ -166,6 +177,7 @@ Stack: Python 3 + PyYAML. Testes com `unittest`. `requirements.txt` com uma linh
 `scripts/build_catalog.py`, nesta ordem, parando na primeira falha:
 
 1. **Valida estrutura** contra `schema.yaml`: campos obrigatórios, enums, ids únicos no formato `Dnn.k`, categoria existente, `depende_de` resolvível, ao menos uma evidência não nula.
+   Valida também `definicoes.yaml` (chaves únicas, gatilhos sem colisão) e, por critério, o lint de `definicoes` descrito na seção 5 (gatilho sem chave listada, chave sem gatilho, definição inline ou repetida).
 2. **Valida coerência de nível** pela tabela da seção 6 mais a regra "pode nunca é A". Divergência gera erro apontando arquivo e critério.
 3. **Gera** `docs/catalogo.md` (tabela resumo + seção por diretriz com critérios, evidências e escalas) e `docs/catalogo.tex` (`longtable` com o resumo). Ambos com cabeçalho "arquivo gerado, não edite". Saída determinística.
 

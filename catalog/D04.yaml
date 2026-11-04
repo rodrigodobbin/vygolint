@@ -29,3 +29,5 @@ criterios:
       parcial: "Ao menos um cenário tem objeto que responde nesse sentido e ao menos outro cenário não tem"
       nao_atendido: "Nenhum cenário tem objeto que responda à interação do jogador com mudança de estado ou informação que se relaciona a um objetivo de aprendizagem do GDD"
     depende_de: []
+    definicoes:
+      glossario: [missao, minijogo, desafio, cenario_jogavel, caminho_obrigatorio, documentacao_equivalente, objetivo_de_aprendizagem]

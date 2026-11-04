@@ -1,0 +1,52 @@
+# Glossário do catálogo vygolint. Cada definição compartilhada existe uma vez aqui.
+# Um critério a referencia em `definicoes.glossario` (lista de chaves); o build
+# imprime o texto uma vez por critério e falha se o texto do critério usa um
+# gatilho sem listar a chave. `ancora` é a diretriz de onde a redação veio, com
+# «(texto novo)» quando a etapa 1 não tinha essa redação em nenhum critério.
+# Lido por scripts/vygolint_catalog/validate.py.
+termos:
+  - chave: missao
+    termo: missão
+    gatilhos: [missão, missões]
+    ancora: D28
+    texto: "uma unidade do jogo com objetivo e condição de conclusão próprios (fase, capítulo ou nível, quando têm objetivo e condição de conclusão próprios), e o jogo sem divisão em missões conta como uma única missão"
+  - chave: minijogo
+    termo: minijogo
+    gatilhos: [minijogo]
+    ancora: D37
+    texto: "uma atividade com regras, objetivo e condição de conclusão próprios, jogada dentro de uma missão ou à parte dela"
+  - chave: desafio
+    termo: desafio
+    gatilhos: [desafio]
+    ancora: D19
+    texto: "cada missão ou minijogo"
+  - chave: cenario_jogavel
+    termo: cenário jogável
+    gatilhos: [cenário]
+    ancora: D29
+    texto: "cada espaço do jogo (mapa, sala ou fase) em que o jogador executa ações e em que há uma missão em curso; cenário em que nenhuma missão está em curso (hub, sandbox) não tem caminho obrigatório e não é cenário jogável"
+  - chave: caminho_obrigatorio
+    termo: caminho obrigatório (caminho da missão)
+    gatilhos: [caminho obrigatório, caminho da missão]
+    ancora: D05
+    texto: "a sequência de objetivos exigidos para completar a missão em curso, e fora do caminho obrigatório é tudo o que nenhum desses objetivos exige"
+  - chave: situacao_problema
+    termo: situação-problema
+    gatilhos: [situação-problema]
+    ancora: D01
+    texto: "uma situação com estado inicial, objetivo e mais de uma ação possível, cuja resolução exige uma decisão do jogador, e não apenas a repetição de uma mesma ação; escolher entre alternativas prontas, sem estado inicial a ser transformado pelas ações do jogador, não conta como situação-problema"
+  - chave: documentacao_equivalente
+    termo: GDD ou documento equivalente
+    gatilhos: [GDD, documento equivalente]
+    ancora: "D22 (texto novo)"
+    texto: "o documento de design do jogo (GDD) ou outro documento de projeto que acompanha o jogo e descreve seu conteúdo (roteiro, guia do professor, plano de aula, mapa de nível ou especificação); material de divulgação ou de loja não conta"
+  - chave: objetivo_de_aprendizagem
+    termo: objetivo de aprendizagem
+    gatilhos: [objetivo de aprendizagem, objetivos de aprendizagem]
+    ancora: D31
+    texto: "cada conceito, fato ou procedimento listado como conteúdo a ser aprendido no GDD ou documento equivalente, e só essa lista define os objetivos avaliados"
+  - chave: sessao_de_jogo
+    termo: sessão de jogo
+    gatilhos: [sessão de jogo]
+    ancora: "D36 (texto novo)"
+    texto: "o período contínuo entre o jogador iniciar o jogo, ou carregar um estado salvo, e encerrá-lo (fechar o jogo ou voltar ao menu inicial)"

@@ -60,6 +60,16 @@ Regras:
 - Critério cuja `aplicabilidade` não é satisfeita no contexto declarado da avaliação (ex.: D22 quando o jogo não é aplicado em sala de aula) é registrado como **fora do contexto**, fica fora das exigências de nível e é listado no relatório com a razão. O contexto de uso é declarado no início da avaliação.
 - Quando nenhuma fonte disponível permite avaliar um critério (por exemplo, só há vídeo e o vídeo não mostra o ponto avaliado), o relatório registra **não avaliado** com a razão; para fins de conformidade de nível, o critério conta como não atendido.
 
+## 2a. Definições
+
+Todo termo que decide o grau de um critério tem definição apontável. As compartilhadas
+(missão, minijogo, desafio, cenário jogável, caminho obrigatório, situação-problema,
+GDD ou documento equivalente, objetivo de aprendizagem, sessão de jogo) existem uma
+vez em `catalog/definicoes.yaml` e aparecem no bloco **Definições** de cada critério que
+as usa; as específicas de um critério ficam em `definicoes.locais`. O avaliador aplica
+a definição impressa no critério, igual para código, documentação e vídeo. Uma palavra
+marcada como "sentido corrente" não carrega a definição do glossário.
+
 ## 3. Diretriz
 
 Diretriz atendida no nível N quando todos os seus critérios de nível N ou inferior estão

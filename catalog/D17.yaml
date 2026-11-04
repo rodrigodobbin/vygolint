@@ -32,3 +32,5 @@ criterios:
       parcial: "Algumas ocorrências orientam; outras só sinalizam erro ou não recebem feedback"
       nao_atendido: "O feedback só sinaliza acerto ou erro, ou não existe"
     depende_de: []
+    definicoes:
+      glossario: [missao, minijogo, documentacao_equivalente]
