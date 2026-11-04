@@ -36,9 +36,9 @@ criterios:
       parcial: "Existe ao menos uma simulação, mas todas as simulações existentes substituem a ação do jogador, nos termos do enunciado e das definições"
       nao_atendido: "Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio"
     recomendacao:
-      documentacao: "Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar, para cada simulação, se o jogo registra o desafio como concluído ao fim da simulação e se o jogador pode jogar o desafio depois"
+      documentacao: "Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar que, ao fim de ao menos uma simulação, o jogo não registra a conclusão do desafio e o jogador pode jogar o desafio depois"
       design: "Definir, em ao menos um desafio, uma simulação em que o próprio jogo (personagem, animação ou repetição gravada) executa ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Definir que, ao fim dessa simulação, o jogo não registre conclusão, pontuação ou progresso do desafio e que o jogador possa jogar o desafio em seguida"
-      codigo: "Acrescentar, em ao menos um desafio, uma rotina de demonstração que chame as mesmas funções que as ações do jogador executam e mude o estado do desafio de forma visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração"
+      codigo: "Acrescentar, em ao menos um desafio, uma rotina de demonstração que execute, chamando as mesmas funções que as ações do jogador executam, ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração"
     depende_de: []
     definicoes:
       glossario: [missao, minijogo, desafio, documentacao_equivalente]

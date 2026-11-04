@@ -913,7 +913,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente, para cada ponto de feedback, as mensagens previstas e a ação específica ou o histórico que seleciona cada uma. Registrar, em cada ponto de feedback, ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, cujas mensagens previstas diferem em informação que cita ou descreve o que o jogador fez
-- Design: Definir ao menos uma missão, minijogo ou tipo de interação em que o jogo exiba, em texto ou fala, mensagem em resposta a uma ação do jogador. Definir, em cada ponto de feedback, mensagens diferentes para ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, que difiram em informação que cita ou descreve o que o jogador fez
+- Design: Definir ao menos uma mensagem, em texto ou fala, que o jogo exiba em resposta a uma ação do jogador. Definir, em cada ponto de feedback, mensagens diferentes para ao menos duas ações específicas diferentes, ou dois históricos diferentes, com o mesmo resultado, que difiram em informação que cita ou descreve o que o jogador fez
 - Código: Acrescentar ao menos um manipulador de evento (handler) que exiba, em texto ou fala, mensagem de feedback em resposta a uma ação do jogador. Fazer cada ponto de feedback escolher ou montar a mensagem a partir da ação específica (valor escolhido, objeto, resposta) ou do histórico (contadores de tentativas ou de erros, registro de ações anteriores), e não por sorteio nem apenas pelo resultado. Acrescentar, em cada ponto de feedback, ao menos dois ramos, ou um texto que insira o dado da ação, que produzam para o mesmo resultado mensagens que diferem em informação que cita ou descreve o que o jogador fez
 
 **Depende de.** —
@@ -1057,9 +1057,9 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 - Não atendido: Não existe simulação, nos termos do enunciado e das definições, em nenhum desafio
 
 **Recomendações.**
-- Documentação: Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar, para cada simulação, se o jogo registra o desafio como concluído ao fim da simulação e se o jogador pode jogar o desafio depois
+- Documentação: Registrar no GDD ou documento equivalente, para cada desafio com simulação, a simulação, a forma de acionamento e a ação executada sobre o estado do desafio. Registrar que, ao fim de ao menos uma simulação, o jogo não registra a conclusão do desafio e o jogador pode jogar o desafio depois
 - Design: Definir, em ao menos um desafio, uma simulação em que o próprio jogo (personagem, animação ou repetição gravada) executa ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Definir que, ao fim dessa simulação, o jogo não registre conclusão, pontuação ou progresso do desafio e que o jogador possa jogar o desafio em seguida
-- Código: Acrescentar, em ao menos um desafio, uma rotina de demonstração que chame as mesmas funções que as ações do jogador executam e mude o estado do desafio de forma visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração
+- Código: Acrescentar, em ao menos um desafio, uma rotina de demonstração que execute, chamando as mesmas funções que as ações do jogador executam, ao menos uma ação de uma forma de resolver o desafio, com a mudança no estado do desafio visível ao jogador. Fazer essa rotina terminar sem chamar a rotina que registra conclusão, pontuação ou progresso do desafio. Devolver ao jogador o controle do desafio ao fim da rotina de demonstração
 
 **Depende de.** —
 
@@ -1197,7 +1197,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 **Recomendações.**
 - Documentação: Registrar no GDD ou documento equivalente as situações da narrativa em que o jogador toma posição, cada uma com o objetivo de aprendizagem tratado. Registrar, em ao menos uma dessas situações, ao menos duas posições que o jogo não avalia como certas ou erradas e uma consequência narrativa diferente para cada posição
 - Design: Definir ao menos uma situação da narrativa que cite ou descreva um objetivo de aprendizagem e ofereça ao jogador ao menos duas opções. Definir que nenhuma dessas opções seja avaliada como certa ou errada, isto é, que a escolha não conceda, retire nem condicione pontuação, progresso ou conclusão do desafio. Definir, para cada opção, uma consequência narrativa diferente (evento, fala de personagem ou mudança na história) que retome a opção escolhida
-- Código: Acrescentar, em ao menos um ponto da narrativa que cite um objetivo de aprendizagem, um menu de diálogo, escolha de história ou resposta aberta com ao menos duas opções. Remover dessa escolha qualquer efeito que conceda, retire ou condicione pontuação, progresso ou conclusão do desafio conforme a opção. Guardar em uma variável a opção escolhida pelo jogador. Acrescentar, para cada opção, um ramo ou evento que leia essa variável e exiba uma consequência narrativa diferente
+- Código: Acrescentar ou usar, em ao menos um ponto da narrativa que cite ou descreva um objetivo de aprendizagem, um menu de diálogo, escolha de história ou resposta aberta com ao menos duas opções. Remover dessa escolha qualquer efeito que conceda, retire ou condicione pontuação, progresso ou conclusão do desafio conforme a opção. Guardar em uma variável a opção escolhida pelo jogador. Acrescentar, para cada opção, um ramo ou evento que leia essa variável e exiba uma consequência narrativa diferente
 
 **Depende de.** —
 
