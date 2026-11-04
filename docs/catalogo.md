@@ -148,7 +148,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Listar no GDD ou documento equivalente os objetivos de aprendizagem. Registrar, para cada conceito listado, a missão ou cenário de introdução e a missão ou cenário de avaliação, com o objetivo e os objetos ou dados manipulados em cada uma
-- Design: Incluir, para cada conceito listado que só é cobrado na situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução
+- Design: Incluir, para cada conceito listado como objetivo de aprendizagem que não é cobrado fora da situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução
 - Código: não se aplica
 
 **Depende de.** —
@@ -304,7 +304,7 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 **Recomendações.**
 - Documentação: não se aplica
 - Design: Definir, para cada cenário, ao menos um objeto que responda à interação do jogador com mudança de estado ou informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele
-- Código: Acrescentar, em cada cenário, ao menos um objeto com manipulador de evento (handler) de interação (clique, toque, colisão ou uso de item). Fazer o manipulador mudar o estado do objeto ou exibir informação que se relacione a um objetivo de aprendizagem do GDD
+- Código: Acrescentar, em cada cenário, ao menos um objeto com manipulador de evento (handler) de interação (clique, toque, colisão ou uso de item). Fazer o manipulador mudar o estado do objeto ou exibir informação que enuncie, exemplifique ou teste um objetivo de aprendizagem do GDD, ou que seja dado necessário para resolver um desafio ligado a ele
 
 **Depende de.** —
 
@@ -550,8 +550,8 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: Descrever no GDD ou documento equivalente cada cena, animação, vídeo ou sequência de texto em que o jogador não tem ação que altere o estado do jogo. Declarar o comprimento integral de cada um desses trechos, inclusive dos que podem ser pulados
-- Design: Encurtar para no máximo 120 segundos cada trecho passivo com comprimento integral maior que esse limite, ou dividi-lo com ações do jogador que alterem o estado do jogo
-- Código: Reduzir a duração da linha do tempo, clipe ou animação, ou a soma das esperas mínimas antes de cada avanço de texto, de cada trecho passivo com comprimento integral maior que 120 segundos. Acrescentar, nos trechos que não forem reduzidos, manipuladores de entrada que ofereçam ao jogador ação que altere o estado do jogo
+- Design: Encurtar para no máximo 120 segundos cada trecho passivo com comprimento integral maior que esse limite, ou dividi-lo com ações do jogador que alterem o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos
+- Código: Reduzir a duração da linha do tempo, clipe ou animação, ou a soma das esperas mínimas antes de cada avanço de texto, de cada trecho passivo com comprimento integral maior que 120 segundos. Acrescentar, nos trechos que não forem reduzidos, manipuladores de entrada que ofereçam ao jogador ação que altere o estado do jogo, de modo que nenhum trecho passivo resultante tenha comprimento integral maior que 120 segundos
 
 **Depende de.** —
 
@@ -737,8 +737,8 @@ Definições compartilhadas, referenciadas pelos critérios em `definicoes.gloss
 
 **Recomendações.**
 - Documentação: não se aplica
-- Design: Prever que o jogador escreva comentários associados a um local ou objeto do jogo. Definir que o jogo exiba esses comentários a outro jogador, em sessão posterior, quando ele alcança esse local ou objeto
-- Código: Gravar o texto digitado junto com o identificador do local ou objeto e o identificador do autor. Guardar o comentário fora do estado da sessão (arquivo, banco de dados ou servidor). Ler e exibir, quando o jogador alcança o local ou objeto, os comentários associados a ele cujo autor tem perfil diferente do jogador atual
+- Design: Prever que o jogador escreva comentários associados a um local ou objeto do jogo. Definir que o jogo exiba esses comentários a outro jogador, em sessão posterior, quando este alcança esse local ou objeto
+- Código: Acrescentar um campo de entrada de texto associado ao local ou objeto. Gravar o texto digitado junto com o identificador do local ou objeto e o identificador do autor. Guardar o comentário fora do estado da sessão (arquivo, banco de dados ou servidor). Ler e exibir, quando o jogador alcança o local ou objeto, os comentários associados a ele cujo autor tem perfil diferente do jogador atual
 
 **Depende de.** —
 

@@ -30,7 +30,7 @@ criterios:
       nao_atendido: "Nenhum conceito listado é cobrado fora da situação em que foi introduzido (inclui o conceito que não é cobrado em nenhuma missão ou cenário), ou o GDD ou documento equivalente não lista objetivos de aprendizagem"
     recomendacao:
       documentacao: "Listar no GDD ou documento equivalente os objetivos de aprendizagem. Registrar, para cada conceito listado, a missão ou cenário de introdução e a missão ou cenário de avaliação, com o objetivo e os objetos ou dados manipulados em cada uma"
-      design: "Incluir, para cada conceito listado que só é cobrado na situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução"
+      design: "Incluir, para cada conceito listado como objetivo de aprendizagem que não é cobrado fora da situação de introdução, ao menos uma missão ou cenário em que ele seja cobrado com objetivo ou conjunto de objetos ou dados manipulados diferente do da introdução"
       codigo: null
     depende_de: []
     definicoes:
