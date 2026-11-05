@@ -71,6 +71,15 @@ class SkillsTest(unittest.TestCase):
         for trecho in ("ffmpeg", "ffprobe", "registro_video.yaml", "eventos", "hh:mm:ss"):
             self.assertIn(trecho, t)
 
+    def test_video_reads_contact_sheets(self):
+        t = self._ler("vygolint-video")
+        for trecho in ("fps=1,scale=640:-2", "tile=4x5", "tile=5x6", "folhas/f%03d.png", "gt(scene,0.4)", "gt(scene,0.2)",
+                       "-frames:v 1", "fps=1/5"):
+            self.assertIn(trecho, t)
+        # recent ffmpeg rejects -vsync: no command in the skill may pass it
+        for bloco in re.findall(r"```bash\n(.*?)```", t, re.S) + re.findall(r"`([^`\n]*ffmpeg[^`\n]*)`", t):
+            self.assertNotIn("-vsync", bloco)
+
     def test_using_points_to_everything(self):
         t = self._ler("using-vygolint")
         for trecho in ("vygolint-avaliar", "vygolint-criterio", "vygolint-video", "catalog/", "docs/conformidade.md", "VYGOLINT_ROOT"):
