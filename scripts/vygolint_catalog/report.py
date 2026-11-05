@@ -49,7 +49,15 @@ def _validate_cabecalho(av, errors):
     else:
         for fonte, valor in artefatos.items():
             if not isinstance(valor, list) or not all(_is_text(v) for v in valor):
-                errors.append(f"avaliacao: contexto.artefatos.{fonte} deve ser lista de caminhos ou textos")
+                errors.append(f"avaliacao: contexto.artefatos.{fonte} deve ser lista de caminhos (arquivo ou pasta)")
+    externas = ctx.get("fontes_externas")
+    if externas is not None:
+        if not isinstance(externas, dict) or any(k not in FONTES for k in externas):
+            errors.append("avaliacao: contexto.fontes_externas deve ser mapa fonte -> lista de textos")
+        else:
+            for fonte, valor in externas.items():
+                if not isinstance(valor, list) or not valor or not all(_is_text(v) for v in valor):
+                    errors.append(f"avaliacao: contexto.fontes_externas.{fonte} deve ser lista não vazia de textos")
     if not _is_text(av.get("avaliador")):
         errors.append("avaliacao: avaliador ausente ou vazio")
     if not _DATA_RE.fullmatch(str(av.get("data", ""))):
@@ -393,10 +401,17 @@ def render_resultado(res, av):
     return yaml.safe_dump(doc, allow_unicode=True, sort_keys=False)
 
 
-def build_report(avaliacao_path, catalog_dir, out_dir):
-    """Return errors; on success writes relatorio.md, relatorio.html and resultado.yaml into out_dir."""
+def build_report(avaliacao_path, catalog_dir, out_dir, strict=False, warnings=None, bases=None):
+    """Return errors; on success writes relatorio.md, relatorio.html and resultado.yaml into out_dir.
+
+    Proof lint findings (lint.py) are appended to `warnings` when a list is given. They do not block
+    the report unless `strict` is true, in which case they are returned as errors and nothing is
+    written. `bases` are the folders cited paths are tried against (default: the folder of the
+    evaluation, its parent and the current directory).
+    """
     from .catalog import load_catalog
     from .html import render_relatorio_html
+    from .lint import lint_avaliacao
 
     avaliacao_path = Path(avaliacao_path)
     out_dir = Path(out_dir)
@@ -412,6 +427,14 @@ def build_report(avaliacao_path, catalog_dir, out_dir):
     errors = validate_avaliacao(av, catalog)
     if errors:
         return errors
+    if bases is None:
+        pasta = avaliacao_path.resolve().parent
+        bases = list(dict.fromkeys([pasta, pasta.parent, Path.cwd()]))
+    avisos = lint_avaliacao(av, bases, pasta=avaliacao_path.resolve().parent)
+    if warnings is not None:
+        warnings.extend(avisos)
+    if strict and avisos:
+        return avisos
     res = aggregate(av, catalog)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "relatorio.md").write_text(render_relatorio(res, av, catalog), encoding="utf-8")

@@ -76,6 +76,10 @@ def catalogo_real():
     return cat
 
 
+# Artefato of each source (a folder for code, one file for the others); the proofs below cite files inside them.
+_ARTEFATO = {"codigo": "src", "documentacao": "docs/gdd.md", "video": "gameplay/sessao1.mp4"}
+
+
 def _prova(fonte, cid):
     """Proof text in the format conformidade.md asks for each source."""
     if fonte == "codigo":
@@ -105,7 +109,7 @@ def avaliacao_valida(fontes=("codigo", "documentacao", "video")):
         "contexto": {
             "sala_de_aula": True,
             "fontes": fontes,
-            "artefatos": {f: [f"./{f}"] for f in fontes},
+            "artefatos": {f: [_ARTEFATO[f]] for f in fontes},
         },
         "avaliador": "teste",
         "data": "2026-11-04",

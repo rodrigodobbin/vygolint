@@ -233,7 +233,8 @@ document.getElementById("nivel-why").textContent = proximo
   : "todos os critérios A, AA e AAA atendidos";
 const art = Object.entries(DATA.artefatos).map(([f,v])=>`${FN[f]||f}: <code>${esc(v.join(", "))}</code>`).join("; ");
 const nNA = C.filter(c=>c.grau==="nao_avaliado").length;
-document.getElementById("srcs").innerHTML = `Fontes usadas: ${art || "nenhuma declarada"}. ${DATA.fontes.length<3?`Sem ${["codigo","documentacao","video"].filter(f=>!DATA.fontes.includes(f)).map(f=>FN[f]).join(" nem ")}. `:""}Regra do catálogo: a ausência de um recurso nas fontes não prova que o jogo não o tem; por isso ${nNA} critério${nNA===1?" ficou":"s ficaram"} não avaliado${nNA===1?"":"s"}.`;
+const ext = Object.entries(DATA.fontes_externas||{}).map(([f,v])=>`${FN[f]||f}: ${esc(v.join("; "))}`).join("; ");
+document.getElementById("srcs").innerHTML = `Fontes usadas: ${art || "nenhuma declarada"} (uma pasta põe no escopo todos os arquivos dentro dela). ${ext?`Fontes externas, fora desta máquina: ${ext}. `:""}${DATA.fontes.length<3?`Sem ${["codigo","documentacao","video"].filter(f=>!DATA.fontes.includes(f)).map(f=>FN[f]).join(" nem ")}. `:""}Regra do catálogo: a ausência de um recurso nas fontes não prova que o jogo não o tem; por isso ${nNA} critério${nNA===1?" ficou":"s ficaram"} não avaliado${nNA===1?"":"s"}.`;
 
 // tiles
 const count = g => C.filter(c=>c.grau===g).length;

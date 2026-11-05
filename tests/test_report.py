@@ -147,6 +147,14 @@ class ValidateAvaliacaoTest(unittest.TestCase):
             av["criterios"]["D06.1"] = {"grau": "nao_avaliado", "razao": "x", "fontes": vazio}
             self.assertEqual(self.check(av), [])
 
+    def test_fontes_externas_shape(self):
+        av = avaliacao_valida()
+        av["contexto"]["fontes_externas"] = {"codigo": ["repositório sem cópia local"]}
+        self.assertEqual(self.check(av), [])
+        for ruim in ("texto", {"audio": ["x"]}, {"codigo": "x"}, {"codigo": ["x", ""]}):
+            av["contexto"]["fontes_externas"] = ruim
+            self.assertTrue(any("fontes_externas" in e for e in self.check(av)), ruim)
+
     def test_artefatos_values_must_be_lists_of_texts(self):
         av = avaliacao_valida()
         av["contexto"]["artefatos"]["codigo"] = "src"

@@ -19,17 +19,23 @@ def main(argv=None):
     parser.add_argument("avaliacao", help="caminho de avaliacao.yaml")
     parser.add_argument("--catalog", default=str(REPO / "catalog"))
     parser.add_argument("--out", default=None, help="pasta de saída (padrão: pasta do avaliacao.yaml)")
+    parser.add_argument("--strict", action="store_true", help="trata avisos do lint de provas como erro")
     args = parser.parse_args(argv)
     out = Path(args.out) if args.out else Path(args.avaliacao).resolve().parent
-    errors = build_report(args.avaliacao, args.catalog, out)
+    avisos = []
+    errors = build_report(args.avaliacao, args.catalog, out, strict=args.strict, warnings=avisos)
     if errors:
         for e in errors:
             print(e, file=sys.stderr)
-        print(f"{len(errors)} erro(s). Nada foi gerado.", file=sys.stderr)
+        motivo = " (--strict: avisos contam como erro)" if args.strict and errors == avisos else ""
+        print(f"{len(errors)} erro(s){motivo}. Nada foi gerado.", file=sys.stderr)
         return 1
+    for a in avisos:
+        print(a, file=sys.stderr)
     catalog, _ = load_catalog(args.catalog)
     nivel = aggregate(load_avaliacao(args.avaliacao), catalog)["nivel"]
-    print(f"OK: nível {nivel} -> {out}/relatorio.md, {out}/relatorio.html, {out}/resultado.yaml")
+    sufixo = f" ({len(avisos)} aviso{'s' if len(avisos) != 1 else ''})" if avisos else ""
+    print(f"OK: nível {nivel} -> {out}/relatorio.md, {out}/relatorio.html, {out}/resultado.yaml{sufixo}")
     return 0
 
 

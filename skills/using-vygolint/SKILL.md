@@ -36,7 +36,8 @@ Depois:
 
 - Catálogo: `${VYGOLINT_ROOT}/catalog/D01.yaml` … `D40.yaml`; glossário em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`; categorias em `${VYGOLINT_ROOT}/catalog/categorias.yaml`; versão legível em `${VYGOLINT_ROOT}/docs/catalogo.md`.
 - Regras de grau, nível, agregação e relatório: `${VYGOLINT_ROOT}/docs/conformidade.md`.
-- Relatório: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML).
+- Esqueleto da avaliação: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --help` (cabeçalho e as 43 entradas de `avaliacao.yaml`).
+- Relatório: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML); valida, confere o lugar das provas e gera os relatórios.
 
 ## Regras fixas
 
