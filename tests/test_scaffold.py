@@ -158,3 +158,66 @@ class ScaffoldEscopoTest(unittest.TestCase):
         r = self._run("--fontes", "video", "--artefato", "video=gameplay", "--externa", "codigo=x", "--force")
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("codigo", r.stderr)
+
+
+class InventarioTest(unittest.TestCase):
+    def test_render_lists_scope_files_with_placeholders(self):
+        from vygolint_catalog.scaffold import render_inventario
+
+        texto = render_inventario(
+            "Jogo X", ["codigo", "documentacao", "video"],
+            {"codigo": ["src"], "documentacao": ["docs"], "video": ["gameplay"]},
+            externas={"codigo": ["repositório remoto"]},
+            arquivos={"documentacao": ["docs/gdd.md", "docs/press.md"], "video": ["gameplay/s1.mp4"]},
+        )
+        self.assertTrue(texto.startswith("# Inventário — Jogo X\n"))
+        for secao in ("## Missões", "## Minijogos", "## Cenários jogáveis", "## Objetivos de aprendizagem",
+                      "## Fontes lidas", "### Documentação", "### Vídeo", "### Código", "### Fontes externas",
+                      "## Fontes que não foi possível abrir"):
+            self.assertIn(secao, texto)
+        self.assertIn("| Arquivo | Classificação | Motivo ou conteúdo |", texto)
+        self.assertIn(f"| `docs/gdd.md` | {PLACEHOLDER} | |", texto)
+        self.assertIn(f"| `docs/press.md` | {PLACEHOLDER} | |", texto)
+        self.assertIn(f"| `gameplay/s1.mp4` | {PLACEHOLDER} |", texto)
+        self.assertIn("- `src`:", texto)
+        self.assertIn("- codigo: repositório remoto", texto)
+        # every placeholder sits in a cell or line the evaluator replaces, never in the fixed comment
+        comentario = texto[texto.index("<!--"):texto.index("-->")]
+        self.assertNotIn(PLACEHOLDER, comentario)
+        preenchido = texto.replace(PLACEHOLDER, "feito")
+        self.assertNotIn(PLACEHOLDER, preenchido)
+        self.assertEqual(texto.count(PLACEHOLDER), 12 + 2 + 1 + 1 + 1 + 1)
+
+    def test_render_omits_sources_out_of_context(self):
+        from vygolint_catalog.scaffold import render_inventario
+
+        texto = render_inventario("J", ["video"], {"video": ["g"]}, arquivos={"video": []})
+        self.assertNotIn("### Documentação", texto)
+        self.assertNotIn("### Código", texto)
+        self.assertNotIn("### Fontes externas", texto)
+        self.assertIn("nenhum arquivo de vídeo encontrado em `g`", texto)
+
+    def test_cli_writes_inventario_and_keeps_an_existing_one(self):
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            (tmp / "docs").mkdir()
+            (tmp / "docs" / "gdd.md").write_text("x", encoding="utf-8")
+            cmd = [sys.executable, str(REPO / "scripts" / "vygolint_scaffold.py"), "--jogo", "J", "--sala-de-aula", "false",
+                   "--fontes", "documentacao", "--artefato", "documentacao=docs", "--out", "vygolint-out"]
+            r = subprocess.run(cmd, capture_output=True, text=True, cwd=tmp)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            inv = tmp / "vygolint-out" / "inventario.md"
+            self.assertIn("| `docs/gdd.md` |", inv.read_text(encoding="utf-8"))
+            self.assertIn("inventario.md", r.stdout)
+            inv.write_text("meu inventário", encoding="utf-8")
+            (tmp / "vygolint-out" / "avaliacao.yaml").unlink()
+            r = subprocess.run(cmd, capture_output=True, text=True, cwd=tmp)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertEqual(inv.read_text(encoding="utf-8"), "meu inventário")
+            self.assertIn("mantido", r.stdout)
+            r = subprocess.run(cmd + ["--force"], capture_output=True, text=True, cwd=tmp)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertNotEqual(inv.read_text(encoding="utf-8"), "meu inventário")
+        finally:
+            import shutil
+            shutil.rmtree(tmp)

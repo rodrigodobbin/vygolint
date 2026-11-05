@@ -61,6 +61,12 @@ class SkillsTest(unittest.TestCase):
             self.assertIn(trecho, t)
         self.assertIn("contexto.artefatos", self._ler("vygolint-criterio"))
 
+    def test_avaliar_fills_the_inventory_skeleton(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("Preencha `<pasta>/inventario.md`", "`Classificação`", "documento equivalente", "não conta",
+                       "sem classificação no inventario.md", "aviso inventario: ainda contém PREENCHER"):
+            self.assertIn(trecho, t)
+
     def test_criterio_rules(self):
         t = self._ler("vygolint-criterio")
         for trecho in ("justificativa_conflito", "nao_avaliado", "razao", "Vídeo prevalece sobre documentação", "provas"):

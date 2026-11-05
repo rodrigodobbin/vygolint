@@ -215,7 +215,7 @@ class EscopoTest(unittest.TestCase):
         self.assertEqual(avisos, ["aviso avaliacao: vídeo do escopo sem registro_video nem prova: gameplay/s3.mov"])
 
     def test_document_coverage_needs_a_proof_or_the_inventory(self):
-        (self.out / "inventario.md").write_text("Fontes lidas: docs/gdd.md\nNão conta: press.md (divulgação)\n", encoding="utf-8")
+        (self.out / "inventario.md").write_text("Fontes lidas: docs/gdd.md\nNão conta: docs/press.md (divulgação)\n", encoding="utf-8")
         (self.out / "relatorio.html").write_text("<html>", encoding="utf-8")
         avisos = self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs", "."]})
         self.assertEqual(sorted(avisos), [
@@ -238,3 +238,63 @@ class EscopoTest(unittest.TestCase):
     def test_malformed_artefatos_do_not_raise(self):
         for artefatos in ("texto", {"video": "gameplay"}, {"video": [5, None]}, None):
             self.assertEqual(self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, artefatos), [])
+
+
+class InventarioLintTest(EscopoTest):
+    """inventario.md rows classify each document in scope; the lint reads the Classificação column."""
+
+    TABELA = "## Fontes lidas\n\n### Documentação\n\n| Arquivo | Classificação | Motivo ou conteúdo |\n|---|---|---|\n"
+
+    def _inventario(self, *linhas):
+        (self.out / "inventario.md").write_text(self.TABELA + "\n".join(linhas) + "\n", encoding="utf-8")
+
+    def test_classified_rows_cover_documents(self):
+        self._inventario(
+            "| `docs/gdd.md` | documento equivalente | GDD |",
+            "| `docs/press.md` | não conta | material de divulgação |",
+            "| `docs/extra.pdf` | não abriu | arquivo corrompido |",
+        )
+        self.assertEqual(self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs"]}), [])
+
+    def test_unclassified_row_does_not_cover_and_placeholders_are_counted(self):
+        self._inventario(
+            "| `docs/gdd.md` | documento equivalente | GDD |",
+            "| `docs/press.md` | PREENCHER | |",
+            "| `docs/extra.pdf` |  | |",
+        )
+        avisos = self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs"]})
+        self.assertEqual(sorted(avisos), [
+            "aviso avaliacao: documento do escopo sem classificação no inventario.md: docs/extra.pdf",
+            "aviso avaliacao: documento do escopo sem classificação no inventario.md: docs/press.md",
+            "aviso inventario: ainda contém PREENCHER (1 ocorrência)",
+        ])
+
+    def test_proof_covers_an_unclassified_document(self):
+        self._inventario("| `docs/gdd.md` |  | |", "| `docs/press.md` | não conta | divulgação |", "| `docs/extra.pdf` | não conta | vazio |")
+        avisos = self.lint({"D02.1": _fonte("documentacao", "docs/gdd.md p. 1 — x")}, {"documentacao": ["docs"]})
+        self.assertEqual(avisos, [])
+
+    def test_proof_citing_a_document_that_does_not_count_is_reported(self):
+        self._inventario(
+            "| `docs/gdd.md` | documento equivalente | GDD |",
+            "| `./docs/press.md` | Não conta | divulgação |",
+            "| `docs/extra.pdf` | nao conta | vazio |",
+        )
+        avisos = self.lint(
+            {
+                "D02.1": _fonte("documentacao", "docs/press.md p. 1 — x", "docs/gdd.md p. 2 — ok"),
+                "D03.1": _fonte("documentacao", "./docs/press.md, seção 2 — y", "docs/extra.pdf p. 1 — z"),
+            },
+            {"documentacao": ["docs"]},
+        )
+        self.assertEqual(avisos, [
+            'aviso avaliacao: documento citado como prova mas classificado "não conta" no inventario.md: docs/press.md (2 provas: D02.1, D03.1)',
+            'aviso avaliacao: documento citado como prova mas classificado "não conta" no inventario.md: docs/extra.pdf (1 prova: D03.1)',
+        ])
+
+    def test_free_text_mention_still_covers_when_there_is_no_row(self):
+        (self.out / "inventario.md").write_text("Fontes lidas: docs/gdd.md, docs/press.md e docs/extra.pdf\n", encoding="utf-8")
+        self.assertEqual(self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs"]}), [])
+        (self.out / "inventario.md").write_text("Fontes lidas: gdd.md\n", encoding="utf-8")
+        avisos = self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs/gdd.md"]})
+        self.assertEqual(avisos, ["aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: docs/gdd.md"])

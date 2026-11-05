@@ -83,3 +83,99 @@ def render_scaffold(catalog, jogo, sala_de_aula, fontes, artefatos, avaliador, d
             )
         linhas += [f"  {cid}:", f"    grau: {grau}", f"    razao: {_q(razao)}"]
     return "\n".join(linhas) + "\n"
+
+
+_CLASSES = "`documento equivalente` (GDD, roteiro, guia do professor, plano de aula, mapa de nível ou especificação), `não conta` (material de divulgação ou de loja, ou sem conteúdo do jogo) ou `não abriu`"
+
+
+def render_inventario(jogo, fontes, artefatos, externas=None, arquivos=None):
+    """Skeleton of inventario.md: the lists every criterion counts from, and one row per file in scope.
+
+    `arquivos` maps source -> labels of the video and document files in scope (see lint.arquivos_do_escopo).
+    The lint reads the Classificação column of the documentation table.
+    """
+    fontes = [f for f in FONTES if f in fontes]
+    externas = externas or {}
+    arquivos = arquivos or {}
+    p = PLACEHOLDER
+    linhas = [
+        f"# Inventário — {jogo}",
+        "",
+        # The comment must not contain the placeholder itself: the lint counts every occurrence in the file.
+        "<!-- Esqueleto gerado por scripts/vygolint_scaffold.py. Troque cada célula marcada para preencher. Onde não houver",
+        "item, apague a tabela e escreva \"Nenhum observado\". Cada item diz onde aparece: arquivo:linha, documento p. N ou vídeo hh:mm:ss.",
+        "Aplique as definições de catalog/definicoes.yaml antes de contar. -->",
+        "",
+        "## Missões",
+        "",
+        "| # | Missão | Onde aparece | Objetivo | Condição de conclusão |",
+        "|---|---|---|---|---|",
+        f"| 1 | {p} | {p} | {p} | {p} |",
+        "",
+        "## Minijogos",
+        "",
+        "| # | Minijogo | Onde aparece | Regras e objetivo |",
+        "|---|---|---|---|",
+        f"| 1 | {p} | {p} | {p} |",
+        "",
+        "## Cenários jogáveis",
+        "",
+        "| # | Cenário | Onde aparece | Missão em curso |",
+        "|---|---|---|---|",
+        f"| 1 | {p} | {p} | {p} |",
+        "",
+        "## Objetivos de aprendizagem",
+        "",
+        "Só a lista do GDD ou documento equivalente define os objetivos avaliados. Sem esse documento, escreva",
+        "\"Nenhum objetivo de aprendizagem listado\" e o motivo.",
+        "",
+        "| # | Objetivo | Documento e página |",
+        "|---|---|---|",
+        f"| 1 | {p} | {p} |",
+        "",
+        "## Fontes lidas",
+        "",
+    ]
+    if "documentacao" in fontes:
+        linhas += [
+            "### Documentação",
+            "",
+            "Uma linha por documento do escopo. Estar no escopo não faz do arquivo evidência: leia cada um e classifique como",
+            _CLASSES + ". Só documento equivalente é citado em prova.",
+            "",
+            "| Arquivo | Classificação | Motivo ou conteúdo |",
+            "|---|---|---|",
+        ]
+        docs = list(arquivos.get("documentacao") or [])
+        linhas += [f"| `{d}` | {p} | |" for d in docs]
+        if not docs:
+            pastas = ", ".join(f"`{a}`" for a in artefatos.get("documentacao") or []) or "(sem artefato local)"
+            linhas.append(f"| _nenhum documento encontrado em {pastas}_ | | |")
+        linhas.append("")
+    if "video" in fontes:
+        linhas += [
+            "### Vídeo",
+            "",
+            "Uma linha por vídeo do escopo, com o registro gerado pela skill vygolint-video.",
+            "",
+            "| Arquivo | Registro |",
+            "|---|---|",
+        ]
+        videos = list(arquivos.get("video") or [])
+        linhas += [f"| `{v}` | {p} |" for v in videos]
+        if not videos:
+            pastas = ", ".join(f"`{a}`" for a in artefatos.get("video") or []) or "(sem artefato local)"
+            linhas.append(f"| _nenhum arquivo de vídeo encontrado em {pastas}_ | |")
+        linhas.append("")
+    if "codigo" in fontes:
+        linhas += ["### Código", "", "Por pasta ou arquivo declarado: módulos, cenas, telas, manipuladores de entrada e de rede, persistência e textos exibidos ao jogador que você leu.", ""]
+        linhas += [f"- `{a}`: {p}" for a in artefatos.get("codigo") or []] or ["- (sem artefato local)"]
+        linhas.append("")
+    com_externa = [f for f in fontes if externas.get(f)]
+    if com_externa:
+        linhas += ["### Fontes externas", "", "Fontes usadas que não estão nesta máquina; diga o que foi consultado em cada uma.", ""]
+        for f in com_externa:
+            linhas += [f"- {f}: {texto} — {p}" for texto in externas[f]]
+        linhas.append("")
+    linhas += ["## Fontes que não foi possível abrir", "", f"{p} (ou \"Nenhuma\")", ""]
+    return "\n".join(linhas)

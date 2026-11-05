@@ -43,7 +43,8 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
    - `grau: nao_avaliado` com `razao: "PREENCHER"` nos critérios que alguma fonte do contexto pode decidir;
    - `nao_avaliado` com a razão já escrita nos critérios que nenhuma fonte do contexto pode decidir;
    - `fora_do_contexto` com razão nos critérios de diretriz com `aplicabilidade` (hoje D22) quando `--sala-de-aula false`.
-8. O script recusa sobrescrever um `avaliacao.yaml` existente. Se a sessão caiu, não rode de novo: retome o arquivo que existe (passo 3). Use `--force` só para descartar a avaliação e recomeçar.
+8. O script cria também `<pasta>/inventario.md`, com as seções do passo 2 e uma linha por arquivo de documentação e de vídeo do escopo, tudo marcado `PREENCHER`.
+9. O script recusa sobrescrever um `avaliacao.yaml` existente e mantém um `inventario.md` que já exista. Se a sessão caiu, não rode de novo: retome os arquivos que existem (passos 2 e 3). Use `--force` só para descartar a avaliação e recomeçar; ele regrava os dois.
 
 ## Passo 2 — Inventário
 
@@ -51,12 +52,13 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
 2. Documentação: liste os documentos e suas seções; identifique o GDD ou documento equivalente (definição em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`, chave `documentacao_equivalente`) e a lista de objetivos de aprendizagem.
 3. Vídeo: para cada arquivo de vídeo do escopo (os listados no cabeçalho do esqueleto), aplique a skill `vygolint-video` e obtenha `<pasta>/registro_video.yaml` (um por vídeo; com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`). O campo `video` de cada registro traz o caminho do arquivo como está nos artefatos.
 4. Leia `${VYGOLINT_ROOT}/catalog/definicoes.yaml` antes de contar qualquer coisa.
-5. Escreva `<pasta>/inventario.md` com estas seções, cada item com onde aparece (`arquivo:linha`, `documento p. N` ou `vídeo hh:mm:ss`):
+5. Preencha `<pasta>/inventario.md`, que o esqueleto criou: troque cada `PREENCHER`, acrescente linhas às tabelas e, onde não há item, apague a tabela e escreva "Nenhum observado". Não renomeie a coluna `Classificação` nem tire as crases dos caminhos: o script lê essa tabela. Seções, cada item com onde aparece (`arquivo:linha`, `documento p. N` ou `vídeo hh:mm:ss`):
    - Missões (nos termos da definição de missão)
    - Minijogos
    - Cenários jogáveis
    - Objetivos de aprendizagem
-   - Fontes lidas e fontes que não foi possível abrir: uma linha por documento do escopo, com o caminho como aparece no cabeçalho do esqueleto e a classificação (GDD ou documento equivalente; ou "não conta" e o motivo, como material de divulgação); uma linha por vídeo com o registro correspondente
+   - Fontes lidas: na tabela de documentação, uma linha por documento do escopo, com a `Classificação` (`documento equivalente`; `não conta` e o motivo, como material de divulgação; ou `não abriu`); na de vídeo, uma linha por vídeo com o registro correspondente; em código, o que foi lido em cada pasta
+   - Fontes que não foi possível abrir
 6. Use essas listas em todos os critérios que contam missões, minijogos, cenários ou objetivos; não recontar por critério evita contagens divergentes.
 
 ## Passo 3 — Critérios
@@ -127,7 +129,10 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
 | `aviso avaliacao: artefato de F não encontrado: X` | Corrija o caminho em `contexto.artefatos.F`; enquanto um artefato da fonte não é achado, o script não confere o escopo dela. |
 | `aviso avaliacao: arquivo citado fora dos artefatos de F: X (N provas: ...)` | A prova cita um arquivo que não foi declarado como fonte F. Se o arquivo é fonte legítima, acrescente-o (ou a pasta dele) a `contexto.artefatos.F`; se não é, troque a prova. |
 | `aviso avaliacao: vídeo do escopo sem registro_video nem prova: X` | Aplique `vygolint-video` a X e use o registro nos critérios; ou tire X do escopo declarando arquivos em vez da pasta. |
-| `aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: X` | Leia X e liste-o em "Fontes lidas" do `inventario.md` com a classificação (conta ou não conta, e por quê). |
+| `aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: X` | Leia X e acrescente a linha dele à tabela de documentação do `inventario.md`, com a classificação. |
+| `aviso avaliacao: documento do escopo sem classificação no inventario.md: X` | A linha de X existe mas a `Classificação` está vazia ou `PREENCHER`: leia X e classifique. |
+| `aviso avaliacao: documento citado como prova mas classificado "não conta" no inventario.md: X (N provas: ...)` | Ou a classificação está errada (corrija o inventário), ou as provas citam material que não é GDD nem documento equivalente (troque as provas e regradue os critérios). |
+| `aviso inventario: ainda contém PREENCHER (N ocorrências)` | Termine o `inventario.md`: troque cada `PREENCHER` ou apague a tabela vazia e escreva "Nenhum observado". |
 | `... prova N: linha L não existe: X tem M linhas` | Releia o arquivo e cite a linha certa. |
 | `... prova N: lugar deve ter a forma arquivo:linha` | Reescreva a prova de código como `arquivo:linha — trecho`. |
 | `... prova N: lugar deve citar página ou seção` | Reescreva a prova de documentação como `documento p. N — trecho` ou `documento, seção X — trecho`. |

@@ -7,9 +7,11 @@ validate_avaliacao checks the shape of the evaluation; this module checks it aga
 - each proof cites a file inside the scope of its source. `contexto.artefatos` lists files or
   folders, and a folder puts every file inside it in scope;
 - every video and document in scope is accounted for: cited by a proof, or covered by a
-  registro_video file (video) or mentioned in inventario.md (document). Code has no per-file
-  coverage;
-- no placeholder left by the scaffold remains.
+  registro_video file (video) or classified in inventario.md (document: the Classificação cell
+  of its row, or a free-text mention of its path when the file has no row). Code has no
+  per-file coverage;
+- no proof cites a document that inventario.md classifies as "não conta";
+- no placeholder left by the scaffold remains, in avaliacao.yaml or in inventario.md.
 
 Findings are warnings: they never change a grade, and the report is still generated unless the
 caller asks for strict mode.
@@ -114,6 +116,49 @@ def arquivos_do_escopo(fonte, artefatos, bases, excluir=()):
                 vistos.add(real)
                 arquivos.append((real, _rotulo(c, base)))
     return arquivos, ausentes
+
+
+def _norm(caminho):
+    """Path as a comparable key: forward slashes, no leading ./"""
+    s = Path(caminho).as_posix()
+    while s.startswith("./"):
+        s = s[2:]
+    return s
+
+
+_LINHA_ARQUIVO = re.compile(r"^`([^`]+)`$")
+
+
+def _ler_inventario(pasta):
+    """(text, {file key: Classificação cell}) of inventario.md in the evaluation folder.
+
+    Only table rows whose first cell is a backticked path, under a header with a column starting
+    with "Classifica", are returned in the map; anything else in the file counts as free text.
+    """
+    try:
+        texto = (Path(pasta) / "inventario.md").read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return "", {}
+    linhas, coluna = {}, None
+    for linha in texto.splitlines():
+        linha = linha.strip()
+        if not linha.startswith("|"):
+            coluna = None
+            continue
+        celulas = [c.strip() for c in linha.strip("|").split("|")]
+        cabecalho = [i for i, c in enumerate(celulas) if c.lower().startswith("classifica")]
+        if cabecalho:
+            coluna = cabecalho[0]
+            continue
+        m = _LINHA_ARQUIVO.match(celulas[0]) if celulas else None
+        if m and coluna is not None:
+            linhas[_norm(m.group(1))] = celulas[coluna] if coluna < len(celulas) else ""
+    return texto, linhas
+
+
+def _nao_conta(classificacao):
+    c = classificacao.strip().lower()
+    return c.startswith("não conta") or c.startswith("nao conta")
 
 
 def _videos_com_registro(pasta, bases):
@@ -250,6 +295,7 @@ def lint_avaliacao(av, bases, duracao=duracao_ffprobe, pasta=None):
             raizes[fonte] = [_resolver(c, bases).resolve() for c in declarados]
     citados = {f: set() for f in FONTES}
     fora = {}
+    docs_citados = {}
     cache = {}
 
     def duracao_cache(path):
@@ -287,6 +333,8 @@ def lint_avaliacao(av, bases, duracao=duracao_ffprobe, pasta=None):
                     continue
                 real = alvo.resolve()
                 citados[fonte].add(real)
+                if fonte == "documentacao":
+                    docs_citados.setdefault(_norm(caminho), []).append(cid)
                 if fonte in raizes and not _dentro(real, raizes[fonte]):
                     fora.setdefault((fonte, caminho), []).append(cid)
 
@@ -303,14 +351,24 @@ def lint_avaliacao(av, bases, duracao=duracao_ffprobe, pasta=None):
     for real, rotulo in escopo["video"]:
         if real not in citados["video"] and real not in registros:
             avisos.append(f"aviso avaliacao: vídeo do escopo sem registro_video nem prova: {rotulo}")
-    inventario = ""
-    if pasta is not None:
-        try:
-            inventario = (Path(pasta) / "inventario.md").read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError):
-            inventario = ""
+    inventario, classificados = _ler_inventario(pasta) if pasta is not None else ("", {})
+    for chave, cids in docs_citados.items():
+        if _nao_conta(classificados.get(chave, "")):
+            avisos.append(
+                "aviso avaliacao: documento citado como prova mas classificado \"não conta\" no inventario.md: "
+                f"{chave} ({_provas(cids)})"
+            )
     for real, rotulo in escopo["documentacao"]:
-        if real in citados["documentacao"] or rotulo in inventario or real.name in inventario:
+        if real in citados["documentacao"]:
             continue
-        avisos.append(f"aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: {rotulo}")
+        chave = _norm(rotulo)
+        if chave in classificados:
+            classe = classificados[chave]
+            if not classe or PLACEHOLDER in classe:
+                avisos.append(f"aviso avaliacao: documento do escopo sem classificação no inventario.md: {rotulo}")
+        elif rotulo not in inventario:
+            avisos.append(f"aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: {rotulo}")
+    restantes = inventario.count(PLACEHOLDER)
+    if restantes:
+        avisos.append(f"aviso inventario: ainda contém {PLACEHOLDER} ({restantes} ocorrência{'s' if restantes != 1 else ''})")
     return avisos
