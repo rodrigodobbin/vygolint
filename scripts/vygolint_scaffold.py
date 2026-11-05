@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the skeleton of avaliacao.yaml (header and one entry per catalog criterion) into the output folder."""
+"""Write the skeletons of avaliacao.yaml (header and one entry per catalog criterion) and inventario.md into the output folder."""
 
 import argparse
 import datetime
@@ -12,7 +12,7 @@ from vygolint_catalog import __version__  # noqa: E402
 from vygolint_catalog.catalog import load_catalog  # noqa: E402
 from vygolint_catalog.lint import arquivos_do_escopo  # noqa: E402
 from vygolint_catalog.report import FONTES  # noqa: E402
-from vygolint_catalog.scaffold import PLACEHOLDER, render_scaffold  # noqa: E402
+from vygolint_catalog.scaffold import PLACEHOLDER, render_inventario, render_scaffold  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -40,7 +40,7 @@ def main(argv=None):
     parser.add_argument("--data", default=None, help="AAAA-MM-DD (padrão: hoje)")
     parser.add_argument("--out", default="vygolint-out", help="pasta de saída (padrão: vygolint-out)")
     parser.add_argument("--catalog", default=str(REPO / "catalog"))
-    parser.add_argument("--force", action="store_true", help="sobrescreve um avaliacao.yaml existente")
+    parser.add_argument("--force", action="store_true", help="sobrescreve avaliacao.yaml e inventario.md existentes")
     args = parser.parse_args(argv)
 
     fontes = [f.strip() for f in args.fontes.split(",") if f.strip()]
@@ -87,10 +87,16 @@ def main(argv=None):
     )
     out.mkdir(parents=True, exist_ok=True)
     alvo.write_text(texto, encoding="utf-8")
+    inventario = out / "inventario.md"
+    if inventario.exists() and not args.force:
+        nota = f"{inventario} já existia e foi mantido"
+    else:
+        inventario.write_text(render_inventario(args.jogo, fontes, artefatos, externas=externas, arquivos=arquivos), encoding="utf-8")
+        nota = f"{inventario} com uma linha por arquivo do escopo"
     no_escopo = sum(len(v) for v in arquivos.values())
     print(
         f"OK: {alvo} com {len(catalog['criterios'])} critérios e {no_escopo} arquivo(s) de vídeo e documentação "
-        "no escopo; preencha as entradas e rode vygolint_report.py"
+        f"no escopo; {nota}. Preencha os dois e rode vygolint_report.py"
     )
     return 0
 
