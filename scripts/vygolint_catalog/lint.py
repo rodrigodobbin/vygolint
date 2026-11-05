@@ -1,15 +1,27 @@
-"""Lint the places cited by the proofs of an avaliacao.yaml.
+"""Lint the places cited by the proofs of an avaliacao.yaml and the scope declared in its header.
 
-validate_avaliacao checks the shape of the evaluation; this module checks whether each proof points
-to something that exists: the cited file, the line inside it, the instant inside the video. It also
-flags placeholders left by the scaffold. Findings are warnings: they never change a grade, and the
-report is still generated unless the caller asks for strict mode.
+validate_avaliacao checks the shape of the evaluation; this module checks it against the disk:
+
+- each proof points to something that exists (the cited file, the line inside it, the instant
+  inside the video);
+- each proof cites a file inside the scope of its source. `contexto.artefatos` lists files or
+  folders, and a folder puts every file inside it in scope;
+- every video and document in scope is accounted for: cited by a proof, or covered by a
+  registro_video file (video) or mentioned in inventario.md (document). Code has no per-file
+  coverage;
+- no placeholder left by the scaffold remains.
+
+Findings are warnings: they never change a grade, and the report is still generated unless the
+caller asks for strict mode.
 """
 
+import os
 import re
 import shutil
 import subprocess
 from pathlib import Path
+
+import yaml
 
 from .report import FONTES
 from .scaffold import PLACEHOLDER
@@ -19,6 +31,15 @@ _TS = r"\d{1,2}:\d{2}:\d{2}"
 _CODIGO = re.compile(r"(.+?):(\d+)(?:-(\d+))?")
 _DOC = re.compile(r"\s+pp?\.\s*\d+|,\s*se[cç][aã]o\b|\s+§")
 _MAX_IDS = 5
+_EXT = {
+    "video": {".mp4", ".mov", ".mkv", ".webm", ".avi", ".m4v"},
+    "documentacao": {
+        ".md", ".markdown", ".txt", ".pdf", ".doc", ".docx", ".odt", ".rtf", ".html", ".htm", ".tex",
+        ".ppt", ".pptx", ".odp",
+    },
+}
+_PULAR = {"node_modules", "__pycache__", "Library", "Temp", "obj", "bin", "build", "dist"}
+_MAX_ARQUIVOS = 20000
 
 
 def _lugar(prova):
@@ -26,15 +47,88 @@ def _lugar(prova):
     return _SEP.split(prova, maxsplit=1)[0].strip()
 
 
-def _resolver(caminho, bases):
+def _resolver_com_base(caminho, bases):
+    """(path, base it was found under) or (None, None). The base is None for absolute paths."""
     p = Path(caminho).expanduser()
     if p.is_absolute():
-        return p if p.exists() else None
+        return (p, None) if p.exists() else (None, None)
     for base in bases:
         alvo = Path(base) / p
         if alvo.exists():
-            return alvo
-    return None
+            return alvo, Path(base)
+    return None, None
+
+
+def _resolver(caminho, bases):
+    return _resolver_com_base(caminho, bases)[0]
+
+
+def _rotulo(arquivo, base):
+    """Path as the evaluator would write it: relative to the base, with forward slashes."""
+    if base is None:
+        return str(arquivo)
+    return Path(os.path.relpath(arquivo, base)).as_posix()
+
+
+def _textos(valor):
+    return [v for v in valor if isinstance(v, str) and v.strip()] if isinstance(valor, list) else []
+
+
+def _dentro(arquivo, raizes):
+    return any(arquivo == r or r in arquivo.parents for r in raizes)
+
+
+def arquivos_do_escopo(fonte, artefatos, bases, excluir=()):
+    """Files a source's artefatos put in scope, as [(resolved path, label)], plus the artefatos not found.
+
+    A file artefato is in scope as given. A folder artefato contributes every file inside it whose
+    extension fits the source (video or document); hidden entries, dependency and build folders and
+    the folders in `excluir` are skipped. Code has no per-file scope, so its list is always empty.
+    """
+    arquivos, ausentes, vistos = [], [], set()
+    excluidos = {Path(e).resolve() for e in excluir}
+    for caminho in _textos(artefatos):
+        alvo, base = _resolver_com_base(caminho, bases)
+        if alvo is None:
+            ausentes.append(caminho)
+            continue
+        if fonte not in _EXT:
+            continue
+        if alvo.is_file():
+            candidatos = [alvo]
+        else:
+            candidatos = []
+            for raiz, pastas, nomes in os.walk(alvo):
+                pastas[:] = sorted(
+                    d for d in pastas
+                    if not d.startswith(".") and d not in _PULAR and (Path(raiz) / d).resolve() not in excluidos
+                )
+                for nome in sorted(nomes):
+                    if not nome.startswith(".") and Path(nome).suffix.lower() in _EXT[fonte]:
+                        candidatos.append(Path(raiz) / nome)
+                if len(candidatos) > _MAX_ARQUIVOS:
+                    break
+        for c in candidatos:
+            real = c.resolve()
+            if real not in vistos:
+                vistos.add(real)
+                arquivos.append((real, _rotulo(c, base)))
+    return arquivos, ausentes
+
+
+def _videos_com_registro(pasta, bases):
+    """Videos named by the `video` field of the registro_video*.yaml files in the evaluation folder."""
+    cobertos = set()
+    for reg in sorted(Path(pasta).glob("registro_video*.yaml")):
+        try:
+            doc = yaml.safe_load(reg.read_text(encoding="utf-8"))
+        except (OSError, yaml.YAMLError, UnicodeDecodeError):
+            continue
+        video = doc.get("video") if isinstance(doc, dict) else None
+        alvo = _resolver(video, bases) if isinstance(video, str) and video.strip() else None
+        if alvo is not None:
+            cobertos.add(alvo.resolve())
+    return cobertos
 
 
 def _segundos(ts):
@@ -130,14 +224,32 @@ def _lint_video(lugar, bases, duracao):
 _POR_FONTE = {"codigo": _lint_codigo, "documentacao": _lint_documentacao, "video": _lint_video}
 
 
-def lint_avaliacao(av, bases, duracao=duracao_ffprobe):
-    """Return warning strings (`aviso ...`). `bases` are the folders relative paths are tried against."""
+def lint_avaliacao(av, bases, duracao=duracao_ffprobe, pasta=None):
+    """Return warning strings (`aviso ...`).
+
+    `bases` are the folders relative paths are tried against. `pasta` is the evaluation folder
+    (where registro_video*.yaml and inventario.md live); without it, coverage counts proofs only.
+    """
     if not isinstance(av, dict):
         return []
     avisos = []
     for campo in ("jogo", "avaliador"):
         if isinstance(av.get(campo), str) and PLACEHOLDER in av[campo]:
             avisos.append(f"aviso avaliacao: {campo} ainda contém {PLACEHOLDER}")
+    contexto = av.get("contexto")
+    artefatos = contexto.get("artefatos") if isinstance(contexto, dict) else None
+    artefatos = artefatos if isinstance(artefatos, dict) else {}
+    excluir = [pasta] if pasta is not None else []
+    raizes, escopo = {}, {}
+    for fonte in FONTES:
+        declarados = _textos(artefatos.get(fonte))
+        escopo[fonte], ausentes_art = arquivos_do_escopo(fonte, declarados, bases, excluir)
+        for caminho in ausentes_art:
+            avisos.append(f"aviso avaliacao: artefato de {fonte} não encontrado: {caminho}")
+        if declarados and not ausentes_art:
+            raizes[fonte] = [_resolver(c, bases).resolve() for c in declarados]
+    citados = {f: set() for f in FONTES}
+    fora = {}
     cache = {}
 
     def duracao_cache(path):
@@ -167,11 +279,38 @@ def lint_avaliacao(av, bases, duracao=duracao_ffprobe):
                 caminho, msgs = _POR_FONTE[fonte](_lugar(prova), bases, duracao_cache)
                 for msg in msgs:
                     avisos.append(f"aviso {cid}: fonte {fonte}: prova {i}: {msg}")
-                if caminho and _resolver(caminho, bases) is None:
+                if not caminho:
+                    continue
+                alvo = _resolver(caminho, bases)
+                if alvo is None:
                     ausentes.setdefault(caminho, []).append(cid)
-    for caminho, cids in ausentes.items():
+                    continue
+                real = alvo.resolve()
+                citados[fonte].add(real)
+                if fonte in raizes and not _dentro(real, raizes[fonte]):
+                    fora.setdefault((fonte, caminho), []).append(cid)
+
+    def _provas(cids):
         unicos = list(dict.fromkeys(cids))
         ids = ", ".join(unicos[:_MAX_IDS]) + (", …" if len(unicos) > _MAX_IDS else "")
-        n = len(cids)
-        avisos.append(f"aviso avaliacao: arquivo citado não encontrado: {caminho} ({n} prova{'s' if n != 1 else ''}: {ids})")
+        return f"{len(cids)} prova{'s' if len(cids) != 1 else ''}: {ids}"
+
+    for caminho, cids in ausentes.items():
+        avisos.append(f"aviso avaliacao: arquivo citado não encontrado: {caminho} ({_provas(cids)})")
+    for (fonte, caminho), cids in fora.items():
+        avisos.append(f"aviso avaliacao: arquivo citado fora dos artefatos de {fonte}: {caminho} ({_provas(cids)})")
+    registros = _videos_com_registro(pasta, bases) if pasta is not None else set()
+    for real, rotulo in escopo["video"]:
+        if real not in citados["video"] and real not in registros:
+            avisos.append(f"aviso avaliacao: vídeo do escopo sem registro_video nem prova: {rotulo}")
+    inventario = ""
+    if pasta is not None:
+        try:
+            inventario = (Path(pasta) / "inventario.md").read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            inventario = ""
+    for real, rotulo in escopo["documentacao"]:
+        if real in citados["documentacao"] or rotulo in inventario or real.name in inventario:
+            continue
+        avisos.append(f"aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: {rotulo}")
     return avisos

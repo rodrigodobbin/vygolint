@@ -49,7 +49,15 @@ def _validate_cabecalho(av, errors):
     else:
         for fonte, valor in artefatos.items():
             if not isinstance(valor, list) or not all(_is_text(v) for v in valor):
-                errors.append(f"avaliacao: contexto.artefatos.{fonte} deve ser lista de caminhos ou textos")
+                errors.append(f"avaliacao: contexto.artefatos.{fonte} deve ser lista de caminhos (arquivo ou pasta)")
+    externas = ctx.get("fontes_externas")
+    if externas is not None:
+        if not isinstance(externas, dict) or any(k not in FONTES for k in externas):
+            errors.append("avaliacao: contexto.fontes_externas deve ser mapa fonte -> lista de textos")
+        else:
+            for fonte, valor in externas.items():
+                if not isinstance(valor, list) or not valor or not all(_is_text(v) for v in valor):
+                    errors.append(f"avaliacao: contexto.fontes_externas.{fonte} deve ser lista não vazia de textos")
     if not _is_text(av.get("avaliador")):
         errors.append("avaliacao: avaliador ausente ou vazio")
     if not _DATA_RE.fullmatch(str(av.get("data", ""))):
@@ -422,7 +430,7 @@ def build_report(avaliacao_path, catalog_dir, out_dir, strict=False, warnings=No
     if bases is None:
         pasta = avaliacao_path.resolve().parent
         bases = list(dict.fromkeys([pasta, pasta.parent, Path.cwd()]))
-    avisos = lint_avaliacao(av, bases)
+    avisos = lint_avaliacao(av, bases, pasta=avaliacao_path.resolve().parent)
     if warnings is not None:
         warnings.extend(avisos)
     if strict and avisos:

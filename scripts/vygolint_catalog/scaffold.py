@@ -26,8 +26,16 @@ def _aceitas(criterio):
     return [f for f in FONTES if (criterio.get("evidencia") or {}).get(f) is not None]
 
 
-def render_scaffold(catalog, jogo, sala_de_aula, fontes, artefatos, avaliador, data):
+_MAX_LISTADOS = 30
+
+
+def render_scaffold(catalog, jogo, sala_de_aula, fontes, artefatos, avaliador, data, externas=None, arquivos=None):
+    """`artefatos` maps source -> files or folders; `externas` maps source -> texts for sources that
+    are not on this machine; `arquivos` maps source -> labels of the files the folders put in scope,
+    printed as comments under the source so the evaluator sees what must be accounted for."""
     fontes = [f for f in FONTES if f in fontes]
+    externas = externas or {}
+    arquivos = arquivos or {}
     linhas = [
         "# Esqueleto gerado por scripts/vygolint_scaffold.py. Edite este arquivo: troque cada entrada",
         f"# pelo grau e pelas provas do critério (skill vygolint-criterio). Onde está \"{PLACEHOLDER}\", ou",
@@ -37,10 +45,23 @@ def render_scaffold(catalog, jogo, sala_de_aula, fontes, artefatos, avaliador, d
         "contexto:",
         f"  sala_de_aula: {'true' if sala_de_aula else 'false'}",
         "  fontes: [" + ", ".join(fontes) + "]",
-        "  artefatos:",
+        "  # artefatos: arquivos ou pastas; uma pasta põe no escopo todos os arquivos dentro dela.",
     ]
-    for f in fontes:
-        linhas.append(f"    {f}: {_lista(artefatos.get(f) or [])}")
+    com_artefato = [f for f in fontes if artefatos.get(f)]
+    linhas.append("  artefatos:" if com_artefato else "  artefatos: {}")
+    for f in com_artefato:
+        linhas.append(f"    {f}: {_lista(artefatos[f])}")
+        listados = list(arquivos.get(f) or [])
+        for rotulo in listados[:_MAX_LISTADOS]:
+            linhas.append(f"    #   {rotulo}")
+        if len(listados) > _MAX_LISTADOS:
+            linhas.append(f"    #   … e mais {len(listados) - _MAX_LISTADOS}")
+    com_externa = [f for f in fontes if externas.get(f)]
+    if com_externa:
+        linhas.append("  # fontes_externas: fontes usadas que não estão nesta máquina (não entram no escopo do lint).")
+        linhas.append("  fontes_externas:")
+        for f in com_externa:
+            linhas.append(f"    {f}: {_lista(externas[f])}")
     linhas += [f"avaliador: {_q(avaliador)}", f"data: {_q(data)}", "criterios:"]
     for cid in sorted(catalog["criterios"]):
         item = catalog["criterios"][cid]

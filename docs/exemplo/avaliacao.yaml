@@ -6,9 +6,9 @@ contexto:
   - video
   artefatos:
     documentacao:
-    - ./documentacao
+    - docs/gdd.md
     video:
-    - ./video
+    - gameplay/sessao1.mp4
 avaliador: exemplo gerado pelos testes
 data: '2026-11-04'
 criterios:

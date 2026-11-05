@@ -34,6 +34,10 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
 ```
 
 5. Em `--fontes`, liste só as fontes disponíveis; dê ao menos um `--artefato fonte=caminho` por fonte (repita a opção para cada caminho). Escreva os caminhos relativos ao diretório de trabalho: as provas citam os mesmos caminhos.
+   - O artefato é um arquivo ou uma pasta. **Uma pasta põe no escopo todos os arquivos dentro dela**: `--artefato documentacao=docs` significa que todo documento em `docs/` deve ser lido, e `--artefato video=gameplay` que todo vídeo em `gameplay/` deve virar registro. O esqueleto lista, em comentário sob cada fonte, os arquivos de vídeo e de documentação que entraram no escopo.
+   - Estar no escopo não é contar como evidência: todo documento do escopo é lido e classificado no inventário (passo 2), e só o que é GDD ou documento equivalente serve de prova. Material de divulgação ou de loja é lido, listado como "não conta" e não é citado.
+   - Para código, a pasta delimita onde as provas podem apontar; não há conferência arquivo a arquivo. Aponte a pasta do código do jogo, não a raiz com dependências e binários.
+   - Fonte que você usou mas não está nesta máquina (repositório sem cópia local, documento visto em outra sessão): `--externa fonte="descrição"`. Ela entra em `contexto.fontes_externas` e fica fora das conferências do script.
 6. Em `--avaliador`, escreva o harness e o modelo; o script acrescenta a versão do vygolint e a data de hoje.
 7. O esqueleto sai com o cabeçalho e as 43 entradas do catálogo, na ordem dos ids, cada uma precedida de um comentário com o enunciado e as fontes do contexto que o critério aceita:
    - `grau: nao_avaliado` com `razao: "PREENCHER"` nos critérios que alguma fonte do contexto pode decidir;
@@ -45,14 +49,14 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
 
 1. Código: liste módulos, cenas, telas, manipuladores de entrada (handlers) e de rede, persistência e textos exibidos ao jogador.
 2. Documentação: liste os documentos e suas seções; identifique o GDD ou documento equivalente (definição em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`, chave `documentacao_equivalente`) e a lista de objetivos de aprendizagem.
-3. Vídeo: para cada arquivo de vídeo, aplique a skill `vygolint-video` e obtenha `<pasta>/registro_video.yaml` (um por vídeo; com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`).
+3. Vídeo: para cada arquivo de vídeo do escopo (os listados no cabeçalho do esqueleto), aplique a skill `vygolint-video` e obtenha `<pasta>/registro_video.yaml` (um por vídeo; com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`). O campo `video` de cada registro traz o caminho do arquivo como está nos artefatos.
 4. Leia `${VYGOLINT_ROOT}/catalog/definicoes.yaml` antes de contar qualquer coisa.
 5. Escreva `<pasta>/inventario.md` com estas seções, cada item com onde aparece (`arquivo:linha`, `documento p. N` ou `vídeo hh:mm:ss`):
    - Missões (nos termos da definição de missão)
    - Minijogos
    - Cenários jogáveis
    - Objetivos de aprendizagem
-   - Fontes lidas e fontes que não foi possível abrir
+   - Fontes lidas e fontes que não foi possível abrir: uma linha por documento do escopo, com o caminho como aparece no cabeçalho do esqueleto e a classificação (GDD ou documento equivalente; ou "não conta" e o motivo, como material de divulgação); uma linha por vídeo com o registro correspondente
 6. Use essas listas em todos os critérios que contam missões, minijogos, cenários ou objetivos; não recontar por critério evita contagens divergentes.
 
 ## Passo 3 — Critérios
@@ -119,7 +123,11 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
 |---|---|
 | `aviso Dnn.k: razao ainda contém PREENCHER` | Gradue o critério, ou escreva a razão do `nao_avaliado`. |
 | `aviso avaliacao: avaliador ainda contém PREENCHER` | Escreva o harness e o modelo no cabeçalho. |
-| `aviso avaliacao: arquivo citado não encontrado: X (N provas: ...)` | Corrija o caminho nas provas (relativo ao diretório de trabalho). Se a fonte de fato não está nesta máquina, diga isso ao usuário na entrega. |
+| `aviso avaliacao: arquivo citado não encontrado: X (N provas: ...)` | Corrija o caminho nas provas (relativo ao diretório de trabalho). Se a fonte de fato não está nesta máquina, declare-a em `contexto.fontes_externas` e diga isso ao usuário na entrega. |
+| `aviso avaliacao: artefato de F não encontrado: X` | Corrija o caminho em `contexto.artefatos.F`; enquanto um artefato da fonte não é achado, o script não confere o escopo dela. |
+| `aviso avaliacao: arquivo citado fora dos artefatos de F: X (N provas: ...)` | A prova cita um arquivo que não foi declarado como fonte F. Se o arquivo é fonte legítima, acrescente-o (ou a pasta dele) a `contexto.artefatos.F`; se não é, troque a prova. |
+| `aviso avaliacao: vídeo do escopo sem registro_video nem prova: X` | Aplique `vygolint-video` a X e use o registro nos critérios; ou tire X do escopo declarando arquivos em vez da pasta. |
+| `aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: X` | Leia X e liste-o em "Fontes lidas" do `inventario.md` com a classificação (conta ou não conta, e por quê). |
 | `... prova N: linha L não existe: X tem M linhas` | Releia o arquivo e cite a linha certa. |
 | `... prova N: lugar deve ter a forma arquivo:linha` | Reescreva a prova de código como `arquivo:linha — trecho`. |
 | `... prova N: lugar deve citar página ou seção` | Reescreva a prova de documentação como `documento p. N — trecho` ou `documento, seção X — trecho`. |

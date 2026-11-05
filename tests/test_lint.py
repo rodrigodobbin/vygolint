@@ -151,3 +151,90 @@ class BuildReportLintTest(unittest.TestCase):
         bad = subprocess.run(cmd + ["--strict"], capture_output=True, text=True)
         self.assertEqual(bad.returncode, 1)
         self.assertIn("aviso", bad.stderr)
+
+
+class EscopoTest(unittest.TestCase):
+    """Artefatos are files or folders; a folder puts every file inside it in scope."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        for rel, conteudo in (
+            ("src/a.py", "um\ndois\n"), ("src/sub/b.py", "x\n"), ("outro/c.py", "x\n"),
+            ("docs/gdd.md", "# GDD\n"), ("docs/press.md", "divulgação\n"), ("docs/extra.pdf", "%PDF"),
+            ("docs/capa.png", "png"), ("docs/.oculto.md", "x"), ("README.md", "leia\n"),
+            ("gameplay/s1.mp4", "v"), ("gameplay/s2.mp4", "v"), ("gameplay/s3.mov", "v"), ("gameplay/notas.txt", "t"),
+        ):
+            p = self.tmp / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(conteudo, encoding="utf-8")
+        self.out = self.tmp / "vygolint-out"
+        self.out.mkdir()
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp)
+
+    def lint(self, criterios, artefatos, pasta=True):
+        av = _av(criterios)
+        av["contexto"]["artefatos"] = artefatos
+        return lint_avaliacao(av, [self.tmp], duracao=lambda p: None, pasta=self.out if pasta else None)
+
+    def test_proof_inside_declared_folder_or_file_passes(self):
+        avisos = self.lint(
+            {
+                "D01.1": _fonte("codigo", "src/a.py:1 — x", "src/sub/b.py:1 — y"),
+                "D02.1": _fonte("documentacao", "README.md p. 1 — z"),
+            },
+            {"codigo": ["./src"], "documentacao": ["README.md"]},
+        )
+        self.assertEqual(avisos, [])
+
+    def test_proof_outside_the_declared_scope_is_reported_once_per_file(self):
+        avisos = self.lint(
+            {
+                "D01.1": _fonte("codigo", "outro/c.py:1 — x", "src/a.py:1 — ok"),
+                "D02.1": _fonte("codigo", "outro/c.py:1 — y"),
+                "D03.1": _fonte("documentacao", "README.md p. 1 — z", "docs/gdd.md p. 1 — ok"),
+            },
+            {"codigo": ["src"], "documentacao": ["docs"]},
+            pasta=False,
+        )
+        fora = [a for a in avisos if "fora dos artefatos" in a]
+        self.assertEqual(len(fora), 2)
+        self.assertIn("fora dos artefatos de codigo: outro/c.py (2 provas: D01.1, D02.1)", fora[0])
+        self.assertIn("fora dos artefatos de documentacao: README.md (1 prova: D03.1)", fora[1])
+
+    def test_missing_artefact_is_reported_and_disables_the_scope_check(self):
+        avisos = self.lint({"D01.1": _fonte("codigo", "outro/c.py:1 — x")}, {"codigo": ["nao-existe", "src"]})
+        self.assertEqual(avisos, ["aviso avaliacao: artefato de codigo não encontrado: nao-existe"])
+
+    def test_video_coverage_needs_a_registro_or_a_proof(self):
+        (self.out / "registro_video_s1.yaml").write_text('video: "gameplay/s1.mp4"\neventos: []\n', encoding="utf-8")
+        (self.out / "registro_video_ruim.yaml").write_text("video: [", encoding="utf-8")
+        avisos = self.lint({"D03.1": _fonte("video", "gameplay/s2.mp4 00:00:01 — x")}, {"video": ["gameplay"]})
+        self.assertEqual(avisos, ["aviso avaliacao: vídeo do escopo sem registro_video nem prova: gameplay/s3.mov"])
+
+    def test_document_coverage_needs_a_proof_or_the_inventory(self):
+        (self.out / "inventario.md").write_text("Fontes lidas: docs/gdd.md\nNão conta: press.md (divulgação)\n", encoding="utf-8")
+        (self.out / "relatorio.html").write_text("<html>", encoding="utf-8")
+        avisos = self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, {"documentacao": ["docs", "."]})
+        self.assertEqual(sorted(avisos), [
+            "aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: README.md",
+            "aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: docs/extra.pdf",
+            "aviso avaliacao: documento do escopo sem prova nem menção no inventario.md: gameplay/notas.txt",
+        ])
+
+    def test_code_has_no_per_file_coverage(self):
+        self.assertEqual(self.lint({"D01.1": _fonte("codigo", "src/a.py:1 — x")}, {"codigo": ["src", "outro"]}), [])
+
+    def test_scope_listing_for_the_scaffold(self):
+        arquivos, ausentes = lint.arquivos_do_escopo("video", ["gameplay", "sumiu"], [self.tmp], excluir=[self.out])
+        self.assertEqual([rotulo for _, rotulo in arquivos], ["gameplay/s1.mp4", "gameplay/s2.mp4", "gameplay/s3.mov"])
+        self.assertEqual(ausentes, ["sumiu"])
+        arquivos, _ = lint.arquivos_do_escopo("documentacao", ["gameplay/notas.txt", "docs/capa.png"], [self.tmp])
+        self.assertEqual([rotulo for _, rotulo in arquivos], ["gameplay/notas.txt", "docs/capa.png"])
+        self.assertEqual(lint.arquivos_do_escopo("codigo", ["src"], [self.tmp]), ([], []))
+
+    def test_malformed_artefatos_do_not_raise(self):
+        for artefatos in ("texto", {"video": "gameplay"}, {"video": [5, None]}, None):
+            self.assertEqual(self.lint({"D04.1": {"grau": "nao_avaliado", "razao": "x"}}, artefatos), [])

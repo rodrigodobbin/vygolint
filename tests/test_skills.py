@@ -54,6 +54,13 @@ class SkillsTest(unittest.TestCase):
         self.assertIn("vygolint_scaffold.py", self._ler("using-vygolint"))
         self.assertIn("vygolint_scaffold.py", self._ler("vygolint-criterio"))
 
+    def test_avaliar_explains_folder_scope(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("Uma pasta põe no escopo todos os arquivos dentro dela", "--externa", "fontes_externas",
+                       "fora dos artefatos", "sem registro_video nem prova", "inventario.md"):
+            self.assertIn(trecho, t)
+        self.assertIn("contexto.artefatos", self._ler("vygolint-criterio"))
+
     def test_criterio_rules(self):
         t = self._ler("vygolint-criterio")
         for trecho in ("justificativa_conflito", "nao_avaliado", "razao", "Vídeo prevalece sobre documentação", "provas"):

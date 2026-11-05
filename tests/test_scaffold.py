@@ -110,3 +110,51 @@ class ScaffoldCliTest(unittest.TestCase):
         )
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("codigo", r.stderr)
+
+
+class ScaffoldEscopoTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        for rel in ("gameplay/s1.mp4", "gameplay/s2.mp4", "docs/gdd.md"):
+            p = self.tmp / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("x", encoding="utf-8")
+        self.base = [
+            sys.executable, str(REPO / "scripts" / "vygolint_scaffold.py"), "--jogo", "J", "--sala-de-aula", "false",
+            "--out", "vygolint-out",
+        ]
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp)
+
+    def _run(self, *extra):
+        return subprocess.run(self.base + list(extra), capture_output=True, text=True, cwd=self.tmp)
+
+    def test_folder_artefact_lists_its_files_as_comments(self):
+        r = self._run("--fontes", "video,documentacao", "--artefato", "video=gameplay", "--artefato", "documentacao=docs")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        texto = (self.tmp / "vygolint-out" / "avaliacao.yaml").read_text(encoding="utf-8")
+        for linha in ("    #   gameplay/s1.mp4", "    #   gameplay/s2.mp4", "    #   docs/gdd.md"):
+            self.assertIn(linha, texto)
+        av = yaml.safe_load(texto)
+        self.assertEqual(av["contexto"]["artefatos"], {"documentacao": ["docs"], "video": ["gameplay"]})
+        self.assertNotIn("fontes_externas", av["contexto"])
+        self.assertEqual(validate_avaliacao(av, catalogo_real()), [])
+
+    def test_missing_artefact_warns_but_writes(self):
+        r = self._run("--fontes", "video", "--artefato", "video=sumiu")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("sumiu", r.stderr)
+
+    def test_external_source_replaces_the_artefact(self):
+        r = self._run("--fontes", "video,codigo", "--artefato", "video=gameplay",
+                      "--externa", "codigo=repositório github.com/x/y, sem cópia local")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        av = yaml.safe_load((self.tmp / "vygolint-out" / "avaliacao.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(av["contexto"]["artefatos"], {"video": ["gameplay"]})
+        self.assertEqual(av["contexto"]["fontes_externas"], {"codigo": ["repositório github.com/x/y, sem cópia local"]})
+        self.assertEqual(validate_avaliacao(av, catalogo_real()), [])
+        r = self._run("--fontes", "video", "--artefato", "video=gameplay", "--externa", "codigo=x", "--force")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("codigo", r.stderr)

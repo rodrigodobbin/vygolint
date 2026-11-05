@@ -39,6 +39,8 @@ Formato das `provas` (uma lista de textos por fonte, ao menos um; texto livre ap
 | documentacao | `documento p. N — trecho` ou `documento, seção X — trecho` | `docs/gdd.pdf p. 12 — tabela de erros com mensagem orientadora` |
 | video | `arquivo hh:mm:ss[-hh:mm:ss] — observação` | `gameplay/sessao1.mp4 00:04:10-00:06:30 — missão 2 resolvida repetindo a mesma ação` |
 
+Cite só arquivos que estão nos artefatos da fonte (`contexto.artefatos` de `avaliacao.yaml`: o próprio arquivo ou um arquivo dentro de uma pasta declarada), com o caminho escrito como lá; o script avisa quando uma prova aponta para fora.
+
 Use `observacao` (opcional, uma por fonte) para o que ajuda a ler as provas, como itens que satisfazem o critério ao lado dos que não satisfazem.
 
 ## 3. Grau final

@@ -107,6 +107,7 @@ def build_data(res, av, catalog):
         "sala_de_aula": bool(av["contexto"]["sala_de_aula"]),
         "fontes": fontes_ctx,
         "artefatos": {f: list(v) for f, v in (av["contexto"].get("artefatos") or {}).items()},
+        "fontes_externas": {f: list(v) for f, v in (av["contexto"].get("fontes_externas") or {}).items()},
         "nivel": res["nivel"],
         "cobertura_nivel": res["cobertura_nivel"],
         "cobertura_categoria": res["cobertura_categoria"],
