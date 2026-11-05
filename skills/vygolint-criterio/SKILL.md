@@ -61,7 +61,7 @@ Use `observacao` (opcional, uma por fonte) para o que ajuda a ler as provas, com
 
 ## 5. Entrada YAML
 
-Grave sob `criterios:` em `avaliacao.yaml`, com dois espaços de recuo antes do id:
+Grave sob `criterios:` em `avaliacao.yaml`, com dois espaços de recuo antes do id. Quando o arquivo veio do esqueleto (`scripts/vygolint_scaffold.py`), o id já existe: substitua as linhas `grau` e `razao` dele pela entrada, sem duplicar o id:
 
 ```yaml
   D17.1:

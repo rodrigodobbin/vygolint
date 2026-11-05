@@ -47,6 +47,13 @@ class SkillsTest(unittest.TestCase):
         self.assertIn("vygolint-video", t)
         self.assertIn("nunca calcula", t)
 
+    def test_avaliar_starts_from_the_scaffold_and_reads_lint_warnings(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("scripts/vygolint_scaffold.py", "--artefato", "PREENCHER", "--force", "aviso", "--strict"):
+            self.assertIn(trecho, t)
+        self.assertIn("vygolint_scaffold.py", self._ler("using-vygolint"))
+        self.assertIn("vygolint_scaffold.py", self._ler("vygolint-criterio"))
+
     def test_criterio_rules(self):
         t = self._ler("vygolint-criterio")
         for trecho in ("justificativa_conflito", "nao_avaliado", "razao", "Vídeo prevalece sobre documentação", "provas"):

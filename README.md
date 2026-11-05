@@ -20,7 +20,8 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
 | `docs/conformidade.md` | regras de nível, grau, agregação e relatório |
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
-| `scripts/vygolint_report.py` | valida `avaliacao.yaml` e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml` |
+| `scripts/vygolint_scaffold.py` | gera o esqueleto de `avaliacao.yaml`: cabeçalho e uma entrada por critério do catálogo |
+| `scripts/vygolint_report.py` | valida `avaliacao.yaml`, confere o lugar citado em cada prova (avisos; `--strict` os trata como erro) e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml` |
 | `skills/` | quatro skills portáveis: `using-vygolint`, `vygolint-avaliar`, `vygolint-criterio`, `vygolint-video` |
 | `docs/exemplo/` | avaliação de exemplo e relatório gerado |
 | `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.kimi-plugin/`, `.opencode/`, `.pi/`, `.agents/`, `gemini-extension.json` | manifestos por harness |

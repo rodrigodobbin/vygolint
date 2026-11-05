@@ -23,26 +23,23 @@ Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório
    - Onde estão os vídeos de gameplay, se houver?
 2. Considere fonte disponível só a que o usuário apontou e que você consegue abrir. Material de divulgação ou de loja não é documentação.
 3. Pare e avise o usuário se não houver nenhuma fonte.
-4. Crie a pasta de saída: `mkdir -p vygolint-out` no diretório de trabalho (ou a pasta que o usuário indicar). Chame-a de `<pasta>` daqui em diante.
-5. Escreva o cabeçalho de `<pasta>/avaliacao.yaml`:
+4. Gere o esqueleto de `avaliacao.yaml` na pasta de saída (`vygolint-out` no diretório de trabalho, ou a pasta que o usuário indicar; chame-a de `<pasta>` daqui em diante). O script cria a pasta:
 
-```yaml
-jogo: "Nome do jogo"
-contexto:
-  sala_de_aula: false            # true se o jogo é aplicado em sala de aula
-  fontes: [codigo, documentacao, video]   # só as fontes disponíveis
-  artefatos:
-    codigo: ["./src"]
-    documentacao: ["docs/gdd.pdf", "docs/guia-professor.md"]
-    video: ["gameplay/sessao1.mp4"]
-avaliador: "Claude Code (claude-fable-5-1) com vygolint 0.2.0"
-data: "2026-11-04"
-criterios:
+```bash
+python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --sala-de-aula false \
+  --fontes codigo,documentacao,video \
+  --artefato codigo=./src --artefato documentacao=docs/gdd.pdf --artefato documentacao=docs/guia-professor.md \
+  --artefato video=gameplay/sessao1.mp4 \
+  --avaliador "Claude Code (claude-fable-5-1)" --out vygolint-out
 ```
 
-6. Em `fontes` e `artefatos`, deixe só as chaves das fontes disponíveis.
-7. Em `avaliador`, escreva o harness, o modelo e a versão do vygolint (campo `version` de `${VYGOLINT_ROOT}/package.json`; se `package.json` não existir ou não tiver `version`, escreva `versão desconhecida`).
-8. Em `data`, escreva a data de hoje no formato AAAA-MM-DD, entre aspas.
+5. Em `--fontes`, liste só as fontes disponíveis; dê ao menos um `--artefato fonte=caminho` por fonte (repita a opção para cada caminho). Escreva os caminhos relativos ao diretório de trabalho: as provas citam os mesmos caminhos.
+6. Em `--avaliador`, escreva o harness e o modelo; o script acrescenta a versão do vygolint e a data de hoje.
+7. O esqueleto sai com o cabeçalho e as 43 entradas do catálogo, na ordem dos ids, cada uma precedida de um comentário com o enunciado e as fontes do contexto que o critério aceita:
+   - `grau: nao_avaliado` com `razao: "PREENCHER"` nos critérios que alguma fonte do contexto pode decidir;
+   - `nao_avaliado` com a razão já escrita nos critérios que nenhuma fonte do contexto pode decidir;
+   - `fora_do_contexto` com razão nos critérios de diretriz com `aplicabilidade` (hoje D22) quando `--sala-de-aula false`.
+8. O script recusa sobrescrever um `avaliacao.yaml` existente. Se a sessão caiu, não rode de novo: retome o arquivo que existe (passo 3). Use `--force` só para descartar a avaliação e recomeçar.
 
 ## Passo 2 — Inventário
 
@@ -64,12 +61,12 @@ criterios:
 2. Para cada diretriz de D01 a D40, em ordem:
    1. Leia `${VYGOLINT_ROOT}/catalog/Dnn.yaml` inteiro.
    2. Leia o bloco **Definições** de cada critério em `${VYGOLINT_ROOT}/docs/catalogo.md` (seção `#### Dnn.k`), onde o texto do glossário já vem impresso.
-   3. Se a diretriz tem `aplicabilidade` não nula e o contexto não a satisfaz (hoje só D22, quando `sala_de_aula: false`), grave, em cada critério da diretriz, `grau: fora_do_contexto` com `razao` e passe à próxima diretriz.
+   3. Se a diretriz tem `aplicabilidade` não nula e o contexto não a satisfaz (hoje só D22, quando `sala_de_aula: false`), o esqueleto já traz `grau: fora_do_contexto` com `razao` em cada critério da diretriz: confira e passe à próxima diretriz.
    4. Para cada critério, aplique a skill `vygolint-criterio` e obtenha a entrada.
-   5. Acrescente as entradas da diretriz ao fim de `<pasta>/avaliacao.yaml`, sob `criterios:`.
+   5. Substitua, em `<pasta>/avaliacao.yaml`, a entrada do esqueleto de cada critério da diretriz (as linhas `grau` e `razao` sob o id) pela entrada obtida; mantenha o comentário e a ordem dos ids. Nenhuma `razao` pode continuar `"PREENCHER"`.
    6. Confira que o arquivo continua YAML válido: `python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" <pasta>/avaliacao.yaml`.
-3. Grave após cada diretriz. Se a sessão cair, releia `avaliacao.yaml` e retome na primeira diretriz sem entrada.
-4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao`.
+3. Grave após cada diretriz. Se a sessão cair, releia `avaliacao.yaml` e retome no primeiro critério cuja `razao` ainda é `"PREENCHER"`.
+4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao` que diz qual fonte faltou ou o que ela não mostrou.
 5. Não grave `recomendacao`, nível nem nota de dependência: o script os tira do catálogo. `depende_de` também é do script.
 
 Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade.md`, seção 6, e o exemplo em `${VYGOLINT_ROOT}/docs/exemplo/avaliacao.yaml`):
@@ -116,6 +113,21 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
 | qualquer outra mensagem `Dnn.k: …` | Corrija o campo que a mensagem nomeia na entrada de `avaliacao.yaml`; mensagens `avaliacao: …` apontam o cabeçalho. |
 
 5. Nunca edite `relatorio.md`, `relatorio.html` nem `resultado.yaml`: eles são gerados. Toda correção vai em `avaliacao.yaml`; depois rode o script de novo, que regrava os três.
+6. Depois de validar, o script confere o lugar citado em cada prova e imprime um aviso por problema (linhas `aviso ...`, com a contagem no fim da linha `OK`). Avisos não impedem o relatório, mas cada um aponta uma prova que o leitor não vai conseguir conferir. Corrija `avaliacao.yaml` e rode de novo até não sobrar aviso:
+
+| Aviso | O que fazer |
+|---|---|
+| `aviso Dnn.k: razao ainda contém PREENCHER` | Gradue o critério, ou escreva a razão do `nao_avaliado`. |
+| `aviso avaliacao: avaliador ainda contém PREENCHER` | Escreva o harness e o modelo no cabeçalho. |
+| `aviso avaliacao: arquivo citado não encontrado: X (N provas: ...)` | Corrija o caminho nas provas (relativo ao diretório de trabalho). Se a fonte de fato não está nesta máquina, diga isso ao usuário na entrega. |
+| `... prova N: linha L não existe: X tem M linhas` | Releia o arquivo e cite a linha certa. |
+| `... prova N: lugar deve ter a forma arquivo:linha` | Reescreva a prova de código como `arquivo:linha — trecho`. |
+| `... prova N: lugar deve citar página ou seção` | Reescreva a prova de documentação como `documento p. N — trecho` ou `documento, seção X — trecho`. |
+| `... prova N: lugar deve citar o instante em hh:mm:ss` | Reescreva a prova de vídeo como `arquivo hh:mm:ss[-hh:mm:ss] — observação`. |
+| `... prova N: instante T inválido` ou `fica depois do fim do vídeo` | Confira o instante no `registro_video.yaml` e corrija. |
+| `... prova N: intervalo A-B termina antes de começar` | Inverta ou corrija o intervalo. |
+
+7. Para exigir zero avisos (por exemplo, em CI), rode com `--strict`: avisos passam a contar como erro e nada é gerado. A duração do vídeo só é conferida quando o `ffprobe` está instalado.
 
 ## Passo 5 — Revisão e entrega
 
@@ -123,7 +135,7 @@ Leia `<pasta>/relatorio.md` e confira:
 
 - [ ] A cláusula de Carvalho (2020) está na seção 1.
 - [ ] `avaliacao.yaml` tem 43 entradas, uma por critério do catálogo.
-- [ ] Toda prova aponta um lugar verificável e o lugar existe.
+- [ ] Toda prova aponta um lugar verificável e o lugar existe: a última execução do script não imprimiu avisos, ou cada aviso restante foi explicado ao usuário.
 - [ ] Todo `nao_avaliado` e `fora_do_contexto` tem `razao` que diz qual fonte faltou ou qual contexto não vale.
 - [ ] Cada bloqueio traz ao menos uma via de recomendação ou uma nota de dependência; cada parcial traz ao menos uma via (o script escolhe as vias pela evidência disponível; não recalcule).
 - [ ] Nenhum texto seu (provas, observações, razões, mensagem de entrega) rotula o jogo como sociointeracionista, behaviorista ou outro rótulo teórico.
