@@ -69,6 +69,8 @@ def main(argv=None):
     resumo = f"{len(doc['trechos_com_som'])} trecho(s) com som"
     if falas is not None:
         resumo += f", {len(doc['falas'])} fala(s)"
+        if doc.get("falas_descartadas"):
+            resumo += f", {len(doc['falas_descartadas'])} descartada(s) por cair em silêncio"
     elif tem_faixa:
         resumo += ", sem transcrição"
     else:

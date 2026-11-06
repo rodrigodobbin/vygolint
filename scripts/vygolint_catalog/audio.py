@@ -5,7 +5,8 @@ an error plays a sound. This module turns ffmpeg's measurements into `registro_a
 
 - whether the file has an audio track, its mean and peak level;
 - the stretches with sound (the complement of what `silencedetect` reports);
-- the spoken segments, when a transcript produced by a speech recognizer is passed in.
+- the spoken segments, when a transcript produced by a speech recognizer is passed in, trimmed to
+  the measured sound; segments recognized where the track is silent are set apart as discarded.
 
 Parsing, assembly and rendering are pure functions; the CLI (scripts/vygolint_audio.py) runs ffmpeg.
 """
@@ -48,8 +49,8 @@ def parse_silencios(stderr, duracao):
     return silencios
 
 
-def trechos_com_som(silencios, duracao):
-    """Stretches with sound as [(t, fim)] in whole seconds: the complement of the silences, rounded outward and merged."""
+def intervalos_com_som(silencios, duracao):
+    """The complement of the silences, as [(start, end)] in seconds, unrounded."""
     trechos, cursor = [], 0.0
     for ini, fim in sorted(silencios):
         if ini > cursor:
@@ -57,6 +58,29 @@ def trechos_com_som(silencios, duracao):
         cursor = max(cursor, fim)
     if cursor < duracao:
         trechos.append((cursor, duracao))
+    return [(a, b) for a, b in trechos if b > a]
+
+
+def ajustar_falas(falas, sons):
+    """Fit recognized segments to the measured sound: (kept, discarded).
+
+    Recognizers stretch a segment over the silence around the speech and sometimes invent text
+    where nothing plays. A segment is trimmed to the sound it overlaps; one that overlaps no sound
+    at all is discarded, because where the track is silent nothing was said.
+    """
+    mantidas, descartadas = [], []
+    for a, b, texto in falas:
+        sobre = [(x, y) for x, y in sons if y > a and x < b]
+        if sobre:
+            mantidas.append((max(a, sobre[0][0]), min(b, sobre[-1][1]), texto))
+        else:
+            descartadas.append((a, b, texto))
+    return mantidas, descartadas
+
+
+def trechos_com_som(silencios, duracao):
+    """Stretches with sound as [(t, fim)] in whole seconds: the complement of the silences, rounded outward and merged."""
+    trechos = intervalos_com_som(silencios, duracao)
     teto = math.floor(duracao)  # the last instant hms() can name, so no stretch ends past `duracao`
     unidos = []
     for ini, fim in trechos:
@@ -114,11 +138,18 @@ def montar_registro(video, duracao, tem_faixa, volume, silencios, limiar_db, fal
     if falas is None:
         doc["transcricao"] = "nao_disponivel"
     else:
+        teto = math.floor(duracao)
+
+        def _linha(a, b, texto):
+            t = min(math.floor(a), teto)
+            return {"t": hms(t), "fim": hms(max(t, min(teto, math.ceil(b)))), "texto": texto}
+
+        mantidas, descartadas = ajustar_falas(falas, intervalos_com_som(silencios, duracao))
         doc["transcricao"] = transcritor or "transcritor não informado"
-        doc["falas"] = [
-            {"t": hms(math.floor(a)), "fim": hms(min(math.floor(duracao), math.ceil(b))), "texto": texto}
-            for a, b, texto in falas
-        ]
+        doc["falas"] = [_linha(*f) for f in mantidas]
+        if descartadas:
+            # recognized where the track is silent: kept apart so the evaluator can see what was dropped
+            doc["falas_descartadas"] = [_linha(*f) for f in descartadas]
     return doc
 
 

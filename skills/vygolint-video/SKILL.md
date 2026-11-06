@@ -165,7 +165,8 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT" --tra
 ```
 
 4. Outro reconhecedor serve, desde que gere um JSON em um destes formatos: `segments: [{start, end, text}]` com tempos em segundos (openai-whisper, faster-whisper, mlx-whisper) ou `transcription: [{offsets: {from, to}, text}]` com tempos em milissegundos (saída `-oj` do whisper.cpp). Passe o arquivo em `--transcricao` e o nome e o modelo em `--transcritor`.
-5. O registro de áudio passa a ter `falas` (`t`, `fim`, `texto`). Copie para o campo `fala` de cada evento as falas que caem no intervalo dele.
-6. Transcrição automática erra. Confira cada fala com o texto exibido na tela no mesmo instante: para nomes próprios e termos do jogo, vale a grafia da tela; se a fala diz algo que a tela não mostra, ou o contrário, registre os dois na `descricao` do evento. Trecho com som e sem fala reconhecida é música ou efeito: não invente texto.
+5. O registro de áudio passa a ter `falas` (`t`, `fim`, `texto`), já ajustadas aos trechos com som: o reconhecedor costuma esticar a fala sobre o silêncio em volta dela. Copie para o campo `fala` de cada evento as falas que caem no intervalo dele. `falas: []` com som no vídeo quer dizer que o som não é fala (música ou efeito).
+6. Se aparecer `falas_descartadas`, são textos que o reconhecedor produziu em trecho sem som: o reconhecedor inventou, nada foi dito ali. Não use esses textos.
+7. Transcrição automática erra, inclusive em palavras comuns. Confira cada fala com o texto exibido na tela no mesmo instante: para nomes próprios e termos do jogo, vale a grafia da tela; se a fala diz algo que a tela não mostra, ou o contrário, registre os dois na `descricao` do evento. Trecho com som e sem fala reconhecida é música ou efeito: não invente texto.
 
 Não rotule o jogo nas descrições: registre o que a tela mostra.

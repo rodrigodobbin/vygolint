@@ -90,7 +90,7 @@ class SkillsTest(unittest.TestCase):
         t = self._ler("vygolint-video")
         for trecho in ("scripts/vygolint_audio.py", "registro_audio_<nome>.yaml", "trechos_com_som", "som: inicia",
                        "nao | inicia | continua", "fala:", "command -v whisper", "não instale nada por conta própria",
-                       "--transcricao", "--output_format json", "-ac 1 -ar 16000"):
+                       "--transcricao", "--output_format json", "-ac 1 -ar 16000", "falas_descartadas", "`falas: []`"):
             self.assertIn(trecho, t)
         c = self._ler("vygolint-criterio")
         for trecho in ("`som: nao`", "`som: inicia`", "`som: continua`", "`fala`"):

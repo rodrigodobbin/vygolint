@@ -10,7 +10,8 @@ import yaml
 
 from helpers import REPO
 from vygolint_catalog.audio import (
-    falas_de_transcricao, hms, montar_registro, parse_silencios, parse_volume, render_registro, trechos_com_som,
+    ajustar_falas, falas_de_transcricao, hms, intervalos_com_som, montar_registro, parse_silencios, parse_volume,
+    render_registro, trechos_com_som,
 )
 
 # ffmpeg output for a real 115 s recording (volumedetect + silencedetect=noise=-50dB:d=1)
@@ -88,7 +89,28 @@ class RegistroTest(unittest.TestCase):
         self.assertEqual(doc["falas"], [{"t": "00:00:03", "fim": "00:00:06", "texto": "Olá"}])
         fim = montar_registro("v.mp4", 10.4, True, (-20.0, -3.0), [(0.0, 10.2)], -50.0, falas=[(9.9, 10.4, "Fim")])
         self.assertEqual(fim["trechos_com_som"], [{"t": "00:00:10", "fim": "00:00:10"}])
-        self.assertEqual(fim["falas"], [{"t": "00:00:09", "fim": "00:00:10", "texto": "Fim"}])
+        self.assertEqual(fim["falas"], [{"t": "00:00:10", "fim": "00:00:10", "texto": "Fim"}])
+
+    def test_segments_are_trimmed_to_the_sound_and_dropped_in_silence(self):
+        # real case: whisper returned 0.0-8.44 for speech that starts at 3 s, after 3 s of silence
+        sil = [(0.0, 3.0), (8.5, 20.0), (25.0, 30.0)]
+        sons = intervalos_com_som(sil, 30.0)
+        self.assertEqual(sons, [(3.0, 8.5), (20.0, 25.0)])
+        falas = [(0.0, 8.44, "Busque alimento."), (10.0, 14.0, "Legendas pela comunidade"), (7.0, 22.0, "Duas partes."), (26.0, 29.0, "Obrigado.")]
+        mantidas, descartadas = ajustar_falas(falas, sons)
+        self.assertEqual(mantidas, [(3.0, 8.44, "Busque alimento."), (7.0, 22.0, "Duas partes.")])
+        self.assertEqual(descartadas, [(10.0, 14.0, "Legendas pela comunidade"), (26.0, 29.0, "Obrigado.")])
+        doc = montar_registro("v.mp4", 30.0, True, (-20.0, -3.0), sil, -50.0, falas=falas, transcritor="x")
+        self.assertEqual(doc["falas"], [
+            {"t": "00:00:03", "fim": "00:00:09", "texto": "Busque alimento."},
+            {"t": "00:00:07", "fim": "00:00:22", "texto": "Duas partes."},
+        ])
+        self.assertEqual(doc["falas_descartadas"], [
+            {"t": "00:00:10", "fim": "00:00:14", "texto": "Legendas pela comunidade"},
+            {"t": "00:00:26", "fim": "00:00:29", "texto": "Obrigado."},
+        ])
+        sem = montar_registro("v.mp4", 30.0, True, (-20.0, -3.0), sil, -50.0, falas=falas[:1])
+        self.assertNotIn("falas_descartadas", sem)
 
     def test_rendered_times_are_quoted(self):
         doc = montar_registro("v.mp4", 36001.0, True, (-20.0, -3.0), [(0.0, 36000.0)], -50.0, falas=[(36000.2, 36000.9, "Olá: tudo bem?")])
