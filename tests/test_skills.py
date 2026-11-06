@@ -98,6 +98,20 @@ class SkillsTest(unittest.TestCase):
         self.assertIn("registro_audio_<nome>.yaml", self._ler("vygolint-avaliar"))
         self.assertIn("vygolint_audio.py", self._ler("using-vygolint"))
 
+    def test_avaliar_describes_the_subagent_mode(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("Passo 3 em partes, com subagentes", "scripts/vygolint_juntar.py", "<pasta>/partes/<nome>.yaml",
+                       "achados", "Agrupe as categorias pequenas", "skills/vygolint-criterio/SKILL.md",
+                       "docs/experimentos/2026-11-06-subagente-por-categoria.md"):
+            self.assertIn(trecho, t)
+        self.assertTrue((REPO / "docs" / "experimentos" / "2026-11-06-subagente-por-categoria.md").exists())
+
+    def test_criterio_decides_between_not_evaluated_and_not_met(self):
+        t = self._ler("vygolint-criterio")
+        for trecho in ("o grau é `nao_avaliado`", "Há uma única exceção", "grau por falta de evidência",
+                       "não transforma ausência em evidência", "não tudo o que o jogo oferece"):
+            self.assertIn(trecho, t)
+
     def test_using_points_to_everything(self):
         t = self._ler("using-vygolint")
         for trecho in ("vygolint-avaliar", "vygolint-criterio", "vygolint-video", "catalog/", "docs/conformidade.md", "VYGOLINT_ROOT"):

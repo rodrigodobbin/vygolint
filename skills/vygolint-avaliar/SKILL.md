@@ -96,7 +96,27 @@ Entrada completa de um critério (formato de `${VYGOLINT_ROOT}/docs/conformidade
     razao: "não há código nem vídeo com dois jogadores; a documentação não cita multijogador"
 ```
 
-**Subagentes (opcional).** Em harness com subagentes, você pode avaliar cada categoria (`${VYGOLINT_ROOT}/catalog/categorias.yaml`; a categoria de cada diretriz está no campo `categoria`) em um subagente. Entregue a ele `inventario.md`, os registros de vídeo, os caminhos das fontes e as skills `vygolint-criterio` e `vygolint-video`; peça de volta só as entradas YAML da categoria. Junte tudo em `avaliacao.yaml` na ordem dos ids.
+### Passo 3 em partes, com subagentes (opcional)
+
+Em harness com subagentes, o passo 3 pode ser dividido: cada subagente gradua um grupo de critérios e grava um arquivo; um script junta os arquivos. Os passos 1, 2, 4 e 5 continuam com você. Em teste com um jogo só de vídeo, um subagente por categoria deu os mesmos graus da avaliação em sequência em 32 de 43 critérios, e 41 de 43 quando se olha só atendido contra não atendido; os 12 subagentes somaram cerca de 1,2 milhão de tokens e terminaram em pouco mais de 4 minutos (`${VYGOLINT_ROOT}/docs/experimentos/2026-11-06-subagente-por-categoria.md`). O custo da avaliação em sequência não foi medido, então o teste não diz qual dos dois modos é mais barato.
+
+1. Termine antes os passos 1 e 2. Os subagentes graduam a partir de `inventario.md` e dos registros; sem eles, cada um reconta e reassiste por conta própria.
+2. Divida os critérios. Um subagente gasta dezenas de milhares de tokens só para ler a skill, as regras e os registros, mesmo para um critério. Agrupe as categorias pequenas: por exemplo, Interação; Mediação; Autonomia, Socialização, Lúdico e Realismo; Personalização, Organização, Resolução de problemas, Linguagem, Atenção e Aprendizado. A categoria de cada diretriz está no campo `categoria` de `${VYGOLINT_ROOT}/catalog/Dnn.yaml`.
+3. Entregue a cada subagente, por escrito, tudo de que ele precisa; ele não vê esta conversa:
+   - a lista exata dos ids que ele gradua;
+   - o caminho de `${VYGOLINT_ROOT}/skills/vygolint-criterio/SKILL.md`, para ler inteiro e seguir (não conte com a skill estar carregada nele), e os de `${VYGOLINT_ROOT}/catalog/`, `${VYGOLINT_ROOT}/docs/catalogo.md` e `${VYGOLINT_ROOT}/docs/conformidade.md`;
+   - o contexto do cabeçalho: `sala_de_aula`, `fontes` e `artefatos`, com os caminhos como estão em `avaliacao.yaml`;
+   - os caminhos de `inventario.md`, de cada `registro_video*.yaml` e `registro_audio_*.yaml`, e da pasta de quadros;
+   - o arquivo de saída: `<pasta>/partes/<nome>.yaml`, um mapa cujas chaves de topo são os ids (sem `criterios:` em volta), cada um com a entrada no formato de `vygolint-criterio`;
+   - o que responder: uma linha `id: grau` por critério, as dúvidas, e os **achados**, descritos no item 4.
+4. Os fatos vêm do registro e do inventário, que são os mesmos para todos. O subagente pode abrir quadros para conferir, mas, se vir algo que o registro não traz ou contradiz, não deve só usá-lo nas provas: deve relatar o achado na resposta, com o instante e o que viu. No teste, dois subagentes olharam as mesmas folhas e descreveram uma barra que crescia sozinha; um terceiro mediu quadro a quadro e mostrou que ela só subia em degraus. Sem o relato, o relatório final sairia com provas que se contradizem.
+5. Não deixe um subagente ler a parte de outro, nem um `avaliacao.yaml` já preenchido.
+6. Junte as partes: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_juntar.py" <pasta>/avaliacao.yaml`. O script lê `<pasta>/partes/*.yaml`, confere cada id contra o catálogo, recusa id repetido em duas partes e grava cada entrada no lugar do bloco do esqueleto, mantendo cabeçalho e comentários. Parte com o nome de uma categoria (`mediacao.yaml`) ganha uma nota se faltar critério dela. Com erro, o script não altera o arquivo.
+7. Revise antes do passo 4, porque ninguém além de você viu o conjunto:
+   - confira cada achado no vídeo; se procede, corrija `registro_video.yaml` e `inventario.md` e regradue os critérios que citam aquele fato;
+   - leia as dúvidas de cada subagente e decida os casos em que ele mesmo apontou a leitura alternativa;
+   - compare critérios que julgam o mesmo fato em partes diferentes (os erros do jogador em D17.1 e D40.1; o desafio em D01.1, D08.1 e D19.1) e alinhe as provas;
+   - confira `nao_avaliado` contra `nao_atendido` pela regra de `vygolint-criterio` (seção 3, item 5): é onde os subagentes mais divergem entre si.
 
 ## Passo 4 — Relatório
 

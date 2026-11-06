@@ -50,7 +50,11 @@ Use `observacao` (opcional, uma por fonte) para o que ajuda a ler as provas, com
 2. Vídeo prevalece sobre documentação: documentação promete, vídeo confirma. Se a entrada tem a fonte `video`, a documentação não entra no cálculo do pior grau.
 3. Código e vídeo sempre entram no cálculo.
 4. Para gravar um grau final diferente do calculado (para melhor ou para pior), escreva `justificativa_conflito` com o motivo e as provas que o sustentam. Exemplo: o código tem um manipulador de erro sem orientação, mas nenhuma cena o chama, e o vídeo mostra orientação em todos os erros. Sem `justificativa_conflito`, o script rejeita a entrada.
-5. Use `nao_avaliado` quando nenhuma fonte disponível permite decidir; `razao` é obrigatória e diz qual fonte faltou ou o que ela não mostrou. Para o nível, o script conta `nao_avaliado` como não atendido.
+5. Quando a fonte disponível não mostra o que o critério avalia, o grau é `nao_avaliado`, com `razao` que diz qual fonte faltou ou o que ela não mostrou. Há uma única exceção: o próprio critério traz grau por falta de evidência. Procure na `escala` e no `procedimento` da fonte frases como "por falta de evidência, o grau padrão é não atendido", "sem item observado, o grau pelo vídeo é nao_atendido", ou um descritor de `nao_atendido` que nomeia a falta (por exemplo, "o GDD não lista objetivos de aprendizagem", "GDD sem descrição do público-alvo"). Se o critério traz isso, grave `nao_atendido` na fonte usada, com a prova do que foi olhado e, na `observacao`, "grau por falta de evidência".
+   - Não é exceção a gravação que cobre o jogo do menu à tela final: ela mostra o que o jogador gravado fez, não tudo o que o jogo oferece.
+   - Não é exceção a regra de desempate do critério ("sem código nem GDD, vale o vídeo"): ela decide entre fontes que divergem sobre algo observado e não transforma ausência em evidência.
+   - Fonte que o critério não aceita (`null` no catálogo), sem outra disponível: `nao_avaliado`.
+   - Para o nível, o script conta `nao_avaliado` como não atendido; a diferença é o que o relatório diz ao leitor: "não vimos" ou "vimos que não faz".
 6. Use `fora_do_contexto` só quando a diretriz tem `aplicabilidade` não nula e o contexto declarado não a satisfaz (hoje só D22, com `sala_de_aula: false`); `razao` obrigatória. Falta de recurso nunca é `fora_do_contexto`: jogo sem multijogador não atende D06.
 
 ## 4. Proibições
