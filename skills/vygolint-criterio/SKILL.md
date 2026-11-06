@@ -29,7 +29,8 @@ Faça, para cada fonte não nula no critério e disponível no contexto (`contex
 3. Use as listas de `inventario.md` (missões, minijogos, cenários jogáveis, objetivos de aprendizagem) quando o critério contar algo.
 4. Anote as provas no formato abaixo.
 5. Atribua o grau da fonte comparando o que achou com os descritores da `escala`: `atendido`, `parcial` ou `nao_atendido`.
-6. Se a fonte existe mas não mostra o ponto avaliado (ex.: o vídeo não chega à missão em questão), não a use nesta entrada e anote o motivo para a `razao` ou para a `observacao` de outra fonte.
+6. Em vídeo, o que você afirma sobre áudio vem do registro (`som` e `fala` de cada evento, ver `vygolint-video`): `fala` é fala de conteúdo determinado, e serve onde o critério aceita "texto ou fala" ou compara o texto com o áudio; `som: nao` prova que o evento não tem som; `som: inicia` sem `fala` é som de conteúdo não determinado (efeito ou música disparado pelo evento); `som: continua` é fundo e não conta como resposta ao evento. Sem registro de áudio, não afirme nada sobre som ou fala e diga isso na `observacao`.
+7. Se a fonte existe mas não mostra o ponto avaliado (ex.: o vídeo não chega à missão em questão), não a use nesta entrada e anote o motivo para a `razao` ou para a `observacao` de outra fonte.
 
 Formato das `provas` (uma lista de textos por fonte, ao menos um; texto livre após o travessão):
 

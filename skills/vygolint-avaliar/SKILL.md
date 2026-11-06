@@ -50,7 +50,7 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
 
 1. Código: liste módulos, cenas, telas, manipuladores de entrada (handlers) e de rede, persistência e textos exibidos ao jogador.
 2. Documentação: liste os documentos e suas seções; identifique o GDD ou documento equivalente (definição em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`, chave `documentacao_equivalente`) e a lista de objetivos de aprendizagem.
-3. Vídeo: para cada arquivo de vídeo do escopo (os listados no cabeçalho do esqueleto), aplique a skill `vygolint-video` e obtenha `<pasta>/registro_video.yaml` (um por vídeo; com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`). O campo `video` de cada registro traz o caminho do arquivo como está nos artefatos.
+3. Vídeo: para cada arquivo de vídeo do escopo (os listados no cabeçalho do esqueleto), aplique a skill `vygolint-video` e obtenha `<pasta>/registro_video.yaml` (um por vídeo; com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`). O campo `video` de cada registro traz o caminho do arquivo como está nos artefatos. A skill grava também `<pasta>/registro_audio_<nome>.yaml` (trechos com som e, havendo reconhecedor de fala, a transcrição).
 4. Leia `${VYGOLINT_ROOT}/catalog/definicoes.yaml` antes de contar qualquer coisa.
 5. Preencha `<pasta>/inventario.md`, que o esqueleto criou: troque cada `PREENCHER`, acrescente linhas às tabelas e, onde não há item, apague a tabela e escreva "Nenhum observado". Não renomeie a coluna `Classificação` nem tire as crases dos caminhos: o script lê essa tabela. Seções, cada item com onde aparece (`arquivo:linha`, `documento p. N` ou `vídeo hh:mm:ss`):
    - Missões (nos termos da definição de missão)
@@ -155,7 +155,8 @@ Leia `<pasta>/relatorio.md` e confira:
 
 Entregue ao usuário:
 
-1. Os caminhos de `avaliacao.yaml`, `relatorio.md`, `relatorio.html` e `resultado.yaml` (e de `inventario.md` e dos registros de vídeo). Indique o `relatorio.html` para quem vai ler o resultado (professor, equipe de desenvolvimento, coordenação) e o `relatorio.md` para anexar em issue ou versionar.
+1. Os caminhos de `avaliacao.yaml`, `relatorio.md`, `relatorio.html` e `resultado.yaml` (e de `inventario.md` e dos registros de vídeo e de áudio). Indique o `relatorio.html` para quem vai ler o resultado (professor, equipe de desenvolvimento, coordenação) e o `relatorio.md` para anexar em issue ou versionar.
 2. O nível alcançado como o script o imprimiu, sem reinterpretá-lo.
 3. Os bloqueios e parciais, remetendo ao relatório.
-4. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista."
+4. Se algum vídeo tem som e não foi transcrito, diga isso e quais critérios dependeram de áudio.
+5. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista."
