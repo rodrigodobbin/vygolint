@@ -1,6 +1,6 @@
 ---
 name: vygolint-video
-description: Use when a gameplay video must become evidence for a vygolint evaluation - extracts one thumbnail per second with ffmpeg, tiles them into contact sheets, reads the sheets as images and writes registro_video.yaml with timestamped events; accepts a hand-written log when ffmpeg is missing
+description: Use when a gameplay video must become evidence for a vygolint evaluation - extracts one thumbnail per second with ffmpeg, tiles them into contact sheets, reads the sheets as images, measures where the audio track has sound and writes registro_video.yaml with timestamped events; accepts a hand-written log when ffmpeg is missing
 ---
 
 # Transformar vídeo de gameplay em evidência
@@ -9,7 +9,7 @@ description: Use when a gameplay video must become evidence for a vygolint evalu
 
 Você não assiste vídeo: você extrai quadros, monta folhas de contato, lê as folhas como imagens e escreve um registro com timestamps. O registro (`registro_video.yaml`) é a prova que os critérios citam no formato `arquivo hh:mm:ss[-hh:mm:ss] — observação`.
 
-Entrada: um arquivo de vídeo e a pasta de saída da avaliação (`<pasta>`, padrão `vygolint-out/`). Saída: `<pasta>/registro_video.yaml` (com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`, um por vídeo).
+Entrada: um arquivo de vídeo e a pasta de saída da avaliação (`<pasta>`, padrão `vygolint-out/`). Saída: `<pasta>/registro_video.yaml` (com mais de um vídeo, `<pasta>/registro_video_<nome>.yaml`, um por vídeo) e `<pasta>/registro_audio_<nome>.yaml`, que diz em que trechos a faixa de áudio tem som e, havendo reconhecedor de fala, o que é dito.
 
 ## 1. Verifique as ferramentas
 
@@ -47,6 +47,20 @@ ffmpeg -hide_banner -i "$VIDEO" -vf "select='gt(scene,0.4)',showinfo" -an -f nul
 ```
 
 6. Se não sair nenhum instante, confira primeiro se o ffmpeg imprimiu erro (rode sem o `grep`). Se o comando funcionou e saiu menos de um instante por minuto de vídeo, repita com `gt(scene,0.2)`.
+7. Meça o áudio. Os quadros não mostram se uma legenda também é falada nem se um erro toca um som; a faixa de áudio mostra:
+
+```bash
+VIDEO="gameplay/sessao1.mp4"; OUT="vygolint-out"
+python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT"
+```
+
+   O script grava `$OUT/registro_audio_<nome>.yaml` (`<nome>` é o nome do vídeo sem extensão) com:
+   - `faixa_de_audio`: se o arquivo tem áudio;
+   - `trechos_com_som`: intervalos `t`–`fim` em que o áudio passa do limiar de silêncio (−50 dB, ajustável com `--limiar`). O trecho diz que há som, não o que ele é: pode ser fala, música ou efeito;
+   - `transcricao`: `nao_disponivel` até você juntar uma transcrição (seção 7), ou `sem_faixa_de_audio`.
+
+   Fora dos trechos com som não há fala nem efeito: isso é fato medido, e vale como evidência de ausência de som naquele instante.
+   Quando um único trecho cobre quase todo o vídeo (música ou ambiente contínuo), o mapa não separa efeito de fundo: marque `continua` nos eventos e não conclua nada sobre efeito sonoro. Subir o limiar (`--limiar -35 --nome <nome>_alto`) às vezes isola os sons mais altos; trate o resultado como indício, não como prova.
 
 Instante de cada quadro (PASSO é 1 s, ou 2 s no vídeo longo; COLS x LINS é a grade, 4x5 ou 5x6):
 
@@ -72,7 +86,8 @@ ffmpeg -y -ss 00:04:05 -i "$VIDEO" -frames:v 1 "$OUT/frames/$NOME/x000405.png"
 
 5. Para achar o segundo exato de uma transição (início de missão, momento de um feedback) quando o passo é de 2 s, extraia um quadro por segundo do trecho: `VIDEO="gameplay/sessao1.mp4"; OUT="vygolint-out"; NOME="sessao1"; ffmpeg -y -ss 00:04:05 -t 10 -i "$VIDEO" -vf "fps=1" "$OUT/frames/$NOME/x0405_%02d.png"` (o quadro k mostra 00:04:05 + (k − 1) s).
 6. Transcreva o texto da tela literalmente; não parafraseie mensagens de feedback.
-7. Plano B, se o harness não lê imagens grandes ou as folhas saem ilegíveis: extraia um quadro em resolução cheia a cada 5 s (10 s no vídeo longo) com `ffmpeg -y -i "$VIDEO" -vf "fps=1/5" "$OUT/frames/$NOME/t%05d.png"` e leia em lotes de 10 a 20; o quadro de índice k mostra (k − 1) × 5 s, com erro de até 2,5 s.
+7. Cruze cada evento com `trechos_com_som` do registro de áudio e anote o campo `som` (seção 4).
+8. Plano B, se o harness não lê imagens grandes ou as folhas saem ilegíveis: extraia um quadro em resolução cheia a cada 5 s (10 s no vídeo longo) com `ffmpeg -y -i "$VIDEO" -vf "fps=1/5" "$OUT/frames/$NOME/t%05d.png"` e leia em lotes de 10 a 20; o quadro de índice k mostra (k − 1) × 5 s, com erro de até 2,5 s.
 
 ## 4. Registre os eventos
 
@@ -88,6 +103,12 @@ Uma entrada em `eventos` por evento observável, em ordem de tempo. Para cada ti
 | `passivo` | início e fim | o que o jogador assiste sem agir (cena, animação, texto sem interação); quando surgiu a opção de avançar |
 | `outro` | instante (e `fim` se houver) | menus, configurações, pausa, perfil, comunicação com outros jogadores, tudo o que não cabe acima |
 
+Áudio de cada evento, a partir de `registro_audio_<nome>.yaml`:
+
+- `som`: `nao` quando o evento cai inteiro fora dos trechos com som; `inicia` quando um trecho com som começa no evento (até 1 s antes ou depois do `t` do evento); `continua` quando o som já tocava antes do evento e segue por ele. Só `inicia` indica som disparado pelo evento; `continua` costuma ser música ou ambiente de fundo.
+- `fala`: o texto literal das falas da transcrição que caem no intervalo do evento, quando há transcrição (seção 7). Sem transcrição, não escreva `fala` e não suponha que uma legenda é narrada.
+- Registre `som` em todo evento `feedback`, `texto` e `passivo`; nos demais, quando ajudar.
+
 Medidas de tempo seguem o conteúdo, não o ritmo do jogador gravado (regra 14 de autoria do catálogo):
 
 1. A duração de uma cena ou trecho passivo vai do início até a primeira oportunidade de avançar (botão "continuar", fim da animação), não até o momento em que o jogador avançou.
@@ -101,6 +122,7 @@ Medidas de tempo seguem o conteúdo, não o ritmo do jogador gravado (regra 14 d
 video: "gameplay/sessao1.mp4"
 duracao: "00:12:31"
 quadros: "vygolint-out/frames/sessao1"   # pasta raiz dos quadros (sec/, folhas/, x*.png), quando extraídos
+audio: "vygolint-out/registro_audio_sessao1.yaml"   # registro de áudio, quando medido
 eventos:
   - t: "00:00:40"
     fim: "00:03:50"
@@ -109,12 +131,15 @@ eventos:
   - t: "00:03:12"
     tipo: feedback
     descricao: "erro na balança; texto: 'Some as massas antes de pesar'; indica a próxima ação"
+    som: inicia             # nao | inicia | continua
+    fala: "Some as massas antes de pesar."   # só com transcrição
 ```
 
 1. Todo tempo no formato "hh:mm:ss", entre aspas.
 2. `fim` só nos eventos com duração.
 3. Confira o YAML do arquivo que você gravou (use o mesmo `ARQ` do nome do arquivo: `registro_video.yaml` ou `registro_video_<nome>.yaml`): `OUT="vygolint-out"; ARQ="registro_video.yaml"; python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" "$OUT/$ARQ"`.
-4. Nas provas de `avaliacao.yaml`, cite o arquivo de vídeo e o tempo do evento, nunca o arquivo de quadro nem a folha de contato.
+4. Nas provas de `avaliacao.yaml`, cite o arquivo de vídeo e o tempo do evento, nunca o arquivo de quadro nem a folha de contato. O que a prova afirma sobre som ou fala vem dos campos `som` e `fala` do evento.
+5. Em `observacoes_gerais` (lista opcional de textos no topo do registro), diga se o áudio foi medido e se foi transcrito, e com qual reconhecedor.
 
 ## 6. Sem ffmpeg
 
@@ -122,5 +147,25 @@ eventos:
 2. Para o registro à mão, mostre ao usuário o formato da seção 5 e a tabela de tipos da seção 4, e peça um `registro_video.yaml` por vídeo, com `quadros` omitido.
 3. Ao receber o registro, confira o YAML e siga a avaliação usando-o como fonte `video`.
 4. Se o usuário não puder fornecer nem ffmpeg nem registro, retire `video` de `contexto.fontes` e de `contexto.artefatos` em `avaliacao.yaml` e avise que os critérios que dependem só de vídeo ficarão `nao_avaliado`.
+
+## 7. Transcreva a fala (opcional)
+
+Só faz sentido quando `trechos_com_som` não está vazio. A transcrição depende de um reconhecedor de fala instalado na máquina.
+
+1. Procure um reconhecedor: `command -v whisper whisper-cli mlx_whisper`.
+2. Se nenhum caminho aparece, não instale nada por conta própria: siga sem transcrição (`transcricao: nao_disponivel` já está no registro), não preencha `fala` em nenhum evento e, na entrega, diga ao usuário que há som no vídeo que não foi transcrito e que um reconhecedor de fala (por exemplo, o `openai-whisper`) permite transcrevê-lo.
+3. Com o `whisper` (pacote `openai-whisper`), extraia o áudio, transcreva e junte a transcrição ao registro de áudio. Troque `pt` pelo idioma das falas do jogo:
+
+```bash
+VIDEO="gameplay/sessao1.mp4"; OUT="vygolint-out"; NOME="sessao1"
+mkdir -p "$OUT/frames/$NOME"
+ffmpeg -y -i "$VIDEO" -vn -ac 1 -ar 16000 "$OUT/frames/$NOME/audio.wav"
+whisper "$OUT/frames/$NOME/audio.wav" --language pt --model small --output_format json --output_dir "$OUT/frames/$NOME"
+python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT" --transcricao "$OUT/frames/$NOME/audio.json" --transcritor "openai-whisper small"
+```
+
+4. Outro reconhecedor serve, desde que gere um JSON em um destes formatos: `segments: [{start, end, text}]` com tempos em segundos (openai-whisper, faster-whisper, mlx-whisper) ou `transcription: [{offsets: {from, to}, text}]` com tempos em milissegundos (saída `-oj` do whisper.cpp). Passe o arquivo em `--transcricao` e o nome e o modelo em `--transcritor`.
+5. O registro de áudio passa a ter `falas` (`t`, `fim`, `texto`). Copie para o campo `fala` de cada evento as falas que caem no intervalo dele.
+6. Transcrição automática erra. Confira cada fala com o texto exibido na tela no mesmo instante: para nomes próprios e termos do jogo, vale a grafia da tela; se a fala diz algo que a tela não mostra, ou o contrário, registre os dois na `descricao` do evento. Trecho com som e sem fala reconhecida é música ou efeito: não invente texto.
 
 Não rotule o jogo nas descrições: registre o que a tela mostra.

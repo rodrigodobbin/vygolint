@@ -22,6 +22,7 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
 | `scripts/vygolint_scaffold.py` | gera o esqueleto de `avaliacao.yaml`: cabeçalho (artefatos como arquivos ou pastas; uma pasta põe no escopo tudo o que está dentro) e uma entrada por critério do catálogo; gera também o de `inventario.md`, com uma linha por arquivo do escopo |
 | `scripts/vygolint_report.py` | valida `avaliacao.yaml`, confere o lugar citado em cada prova e a cobertura do escopo declarado (avisos; `--strict` os trata como erro) e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml` |
+| `scripts/vygolint_audio.py` | mede a faixa de áudio de um vídeo e gera `registro_audio_<nome>.yaml`: trechos com som e, com a transcrição de um reconhecedor de fala, as falas |
 | `skills/` | quatro skills portáveis: `using-vygolint`, `vygolint-avaliar`, `vygolint-criterio`, `vygolint-video` |
 | `docs/exemplo/` | avaliação de exemplo e relatório gerado |
 | `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.kimi-plugin/`, `.opencode/`, `.pi/`, `.agents/`, `gemini-extension.json` | manifestos por harness |
@@ -107,7 +108,7 @@ Para desenvolvimento local: `pi -e /caminho/para/vygolint`.
 3. Peça: "Avalie este jogo com o vygolint", informando onde estão o código, a documentação e os vídeos de gameplay e se o jogo é aplicado em sala de aula.
 4. Receba `vygolint-out/avaliacao.yaml` (julgamento do agente, com provas), `relatorio.md`, `relatorio.html` e `resultado.yaml` (gerados por `scripts/vygolint_report.py`). O `relatorio.html` abre em qualquer navegador e organiza o mesmo conteúdo em abas para professor, equipe de desenvolvimento e coordenação, com filtros por grau, nível e categoria.
 
-As skills exigem Python 3 com PyYAML disponível ao agente (para o script do relatório); ffmpeg é opcional (extração de quadros de vídeo).
+As skills exigem Python 3 com PyYAML disponível ao agente (para o script do relatório); ffmpeg é opcional (extração de quadros e medição do áudio do vídeo); um reconhecedor de fala como o `openai-whisper` é opcional (transcrição das falas).
 
 ## Como funciona o nível
 

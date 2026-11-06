@@ -86,6 +86,18 @@ class SkillsTest(unittest.TestCase):
         for bloco in re.findall(r"```bash\n(.*?)```", t, re.S) + re.findall(r"`([^`\n]*ffmpeg[^`\n]*)`", t):
             self.assertNotIn("-vsync", bloco)
 
+    def test_video_measures_audio_and_never_installs_a_recognizer(self):
+        t = self._ler("vygolint-video")
+        for trecho in ("scripts/vygolint_audio.py", "registro_audio_<nome>.yaml", "trechos_com_som", "som: inicia",
+                       "nao | inicia | continua", "fala:", "command -v whisper", "não instale nada por conta própria",
+                       "--transcricao", "--output_format json", "-ac 1 -ar 16000"):
+            self.assertIn(trecho, t)
+        c = self._ler("vygolint-criterio")
+        for trecho in ("`som: nao`", "`som: inicia`", "`som: continua`", "`fala`"):
+            self.assertIn(trecho, c)
+        self.assertIn("registro_audio_<nome>.yaml", self._ler("vygolint-avaliar"))
+        self.assertIn("vygolint_audio.py", self._ler("using-vygolint"))
+
     def test_using_points_to_everything(self):
         t = self._ler("using-vygolint")
         for trecho in ("vygolint-avaliar", "vygolint-criterio", "vygolint-video", "catalog/", "docs/conformidade.md", "VYGOLINT_ROOT"):
