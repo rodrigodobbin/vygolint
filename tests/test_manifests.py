@@ -111,9 +111,12 @@ class ManifestsTest(unittest.TestCase):
                                  capture_output=True, text=True, check=True)
             contexto = json.loads(out.stdout)["additionalContext"]
             self.assertIn(f"VYGOLINT_PYTHON={envoltorio}", contexto)
-            # a python3 without PyYAML, and no .venv: the line says so and tells the agent to ask, not to install
-            falso = caminho / "python3"
-            falso.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+            # python3 and python without PyYAML, and no .venv: the line says so and tells the agent to ask, not to install
+            # (both are shadowed: CI runners ship a /usr/bin/python that imports yaml)
+            for nome in ("python3", "python"):
+                falso = caminho / nome
+                falso.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+                falso.chmod(falso.stat().st_mode | stat.S_IEXEC)
             out = subprocess.run(["bash", str(copia / "hooks" / "run-hook.cmd"), "session-start"], env=env,
                                  capture_output=True, text=True, check=True)
             contexto = json.loads(out.stdout)["additionalContext"]
