@@ -81,6 +81,49 @@ class ManifestsTest(unittest.TestCase):
         )
         contexto = json.loads(out.stdout)["additionalContext"]
         self.assertIn(f"VYGOLINT_ROOT={REPO}", contexto)
+        for chave in ("VYGOLINT_PYTHON=", "VYGOLINT_FFMPEG=", "VYGOLINT_TRANSCRITOR="):
+            self.assertIn(chave, contexto)
+
+    def test_session_start_finds_a_python_with_yaml(self):
+        import shutil
+        import stat
+        import sys
+        import tempfile
+
+        from pathlib import Path
+
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            # a copy of the plugin without .venv, and a PATH whose python3 is the test interpreter (has PyYAML)
+            copia = tmp / "plugin"
+            (copia / "hooks").mkdir(parents=True)
+            (copia / "skills" / "using-vygolint").mkdir(parents=True)
+            for nome in ("run-hook.cmd", "session-start"):
+                shutil.copy(REPO / "hooks" / nome, copia / "hooks" / nome)
+            shutil.copy(REPO / "skills" / "using-vygolint" / "SKILL.md", copia / "skills" / "using-vygolint" / "SKILL.md")
+            caminho = tmp / "bin"
+            caminho.mkdir()
+            envoltorio = caminho / "python3"
+            envoltorio.write_text(f'#!/bin/sh\nexec "{sys.executable}" "$@"\n', encoding="utf-8")
+            envoltorio.chmod(envoltorio.stat().st_mode | stat.S_IEXEC)
+            env = {"PATH": f"{caminho}:/usr/bin:/bin", "HOME": os.environ.get("HOME", "/")}
+            out = subprocess.run(["bash", str(copia / "hooks" / "run-hook.cmd"), "session-start"], env=env,
+                                 capture_output=True, text=True, check=True)
+            contexto = json.loads(out.stdout)["additionalContext"]
+            self.assertIn(f"VYGOLINT_PYTHON={envoltorio}", contexto)
+            # python3 and python without PyYAML, and no .venv: the line says so and tells the agent to ask, not to install
+            # (both are shadowed: CI runners ship a /usr/bin/python that imports yaml)
+            for nome in ("python3", "python"):
+                falso = caminho / nome
+                falso.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+                falso.chmod(falso.stat().st_mode | stat.S_IEXEC)
+            out = subprocess.run(["bash", str(copia / "hooks" / "run-hook.cmd"), "session-start"], env=env,
+                                 capture_output=True, text=True, check=True)
+            contexto = json.loads(out.stdout)["additionalContext"]
+            self.assertIn("VYGOLINT_PYTHON= (nenhum interpretador com PyYAML", contexto)
+            self.assertIn("não instale por conta própria", contexto)
+        finally:
+            shutil.rmtree(tmp)
 
     def test_bootstrap_sources_inject_plugin_root(self):
         for rel in (".opencode/plugins/vygolint.js", ".pi/extensions/vygolint.ts", "hooks/session-start"):

@@ -112,6 +112,17 @@ class SkillsTest(unittest.TestCase):
                        "não transforma ausência em evidência", "não tudo o que o jogo oferece"):
             self.assertIn(trecho, t)
 
+    def test_scripts_run_with_the_detected_interpreter(self):
+        for nome in SKILLS:
+            with self.subTest(nome=nome):
+                t = self._ler(nome)
+                self.assertNotIn('python3 "${VYGOLINT_ROOT}/scripts/', t)
+                self.assertNotIn('python3 -c "import sys, yaml', t)
+        self.assertIn('"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py"', self._ler("vygolint-avaliar"))
+        u = self._ler("using-vygolint")
+        for trecho in ("VYGOLINT_PYTHON", "VYGOLINT_FFMPEG", "VYGOLINT_TRANSCRITOR", "não instale nada por conta própria"):
+            self.assertIn(trecho, u)
+
     def test_using_points_to_everything(self):
         t = self._ler("using-vygolint")
         for trecho in ("vygolint-avaliar", "vygolint-criterio", "vygolint-video", "catalog/", "docs/conformidade.md", "VYGOLINT_ROOT"):

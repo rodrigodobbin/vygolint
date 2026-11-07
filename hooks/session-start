@@ -10,6 +10,51 @@ PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 # Read using-vygolint content
 using_vygolint_content=$(cat "${PLUGIN_ROOT}/skills/using-vygolint/SKILL.md" 2>&1 || echo "Error reading using-vygolint skill")
 
+# Find a Python interpreter that can import PyYAML: the scripts need it, and the
+# system python3 often lacks it. Order: python3 on PATH, the plugin's own .venv,
+# python on PATH. The skills tell the agent to use VYGOLINT_PYTHON instead of
+# python3, and never to install anything by itself.
+find_python_with_yaml() {
+    local cand resolved
+    for cand in python3 "${PLUGIN_ROOT}/.venv/bin/python" "${PLUGIN_ROOT}/.venv/Scripts/python.exe" python; do
+        case "$cand" in
+            */*) resolved="$cand" ;;
+            *) resolved="$(command -v "$cand" 2>/dev/null || true)" ;;
+        esac
+        [ -n "$resolved" ] && [ -x "$resolved" ] || continue
+        if "$resolved" -c "import yaml" >/dev/null 2>&1; then
+            printf '%s' "$resolved"
+            return 0
+        fi
+    done
+    return 1
+}
+
+vygolint_python="$(find_python_with_yaml || true)"
+if [ -n "$vygolint_python" ]; then
+    python_line="VYGOLINT_PYTHON=${vygolint_python}"
+else
+    python_line="VYGOLINT_PYTHON= (nenhum interpretador com PyYAML encontrado: python3, ${PLUGIN_ROOT}/.venv e python foram testados. Peça ao usuário para instalar, por exemplo com 'python3 -m pip install pyyaml' ou, dentro de ${PLUGIN_ROOT}, 'uv venv .venv && uv pip install pyyaml'; não instale por conta própria.)"
+fi
+if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+    ffmpeg_line="VYGOLINT_FFMPEG=$(command -v ffmpeg)"
+else
+    ffmpeg_line="VYGOLINT_FFMPEG= (ffmpeg ou ffprobe ausente: a skill vygolint-video usa a seção 6, registro à mão)"
+fi
+transcritor=""
+for cand in whisper whisper-cli mlx_whisper; do
+    if command -v "$cand" >/dev/null 2>&1; then
+        transcritor="$(command -v "$cand")"
+        break
+    fi
+done
+if [ -n "$transcritor" ]; then
+    transcritor_line="VYGOLINT_TRANSCRITOR=${transcritor}"
+else
+    transcritor_line="VYGOLINT_TRANSCRITOR= (nenhum reconhecedor de fala: a skill vygolint-video segue sem transcrição)"
+fi
+ambiente="${python_line}\n${ffmpeg_line}\n${transcritor_line}"
+
 # Escape string for JSON embedding using bash parameter substitution.
 # Each ${s//old/new} is a single C-level pass - orders of magnitude
 # faster than the character-by-character loop this replaces.
@@ -25,7 +70,10 @@ escape_for_json() {
 
 using_vygolint_escaped=$(escape_for_json "$using_vygolint_content")
 plugin_root_escaped=$(escape_for_json "$PLUGIN_ROOT")
-session_context="<EXTREMELY_IMPORTANT>\nYou have vygolint.\n\n**Below is the full content of your 'vygolint:using-vygolint' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_vygolint_escaped}\n\nVYGOLINT_ROOT=${plugin_root_escaped}\n</EXTREMELY_IMPORTANT>"
+ambiente_escaped=$(escape_for_json "$ambiente")
+# escape_for_json turned the literal \n separators into \\n; put them back as JSON newlines
+ambiente_escaped="${ambiente_escaped//\\\\n/\\n}"
+session_context="<EXTREMELY_IMPORTANT>\nYou have vygolint.\n\n**Below is the full content of your 'vygolint:using-vygolint' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_vygolint_escaped}\n\nVYGOLINT_ROOT=${plugin_root_escaped}\n${ambiente_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context (snake_case).
