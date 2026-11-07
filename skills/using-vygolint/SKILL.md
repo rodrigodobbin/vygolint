@@ -24,6 +24,16 @@ Depois:
 1. Confirme com `ls "${VYGOLINT_ROOT}/catalog/D01.yaml"`.
 2. Em todo comando, substitua `${VYGOLINT_ROOT}` pelo caminho absoluto da raiz (ou prefixe o comando com `VYGOLINT_ROOT=/caminho/absoluto`); o shell não guarda variáveis entre comandos.
 
+## Interpretador e ferramentas
+
+O início da sessão injeta, junto com `VYGOLINT_ROOT`, três linhas:
+
+- `VYGOLINT_PYTHON=/caminho/python`: o interpretador que tem PyYAML. Use-o no lugar de `python3` em todo comando dos scripts (substitua `${VYGOLINT_PYTHON}` pelo caminho, como faz com `${VYGOLINT_ROOT}`). Se a linha vier vazia, ela diz o que pedir ao usuário; não instale nada por conta própria.
+- `VYGOLINT_FFMPEG`: ffmpeg e ffprobe presentes ou não (decide a seção 6 de `vygolint-video`).
+- `VYGOLINT_TRANSCRITOR`: reconhecedor de fala presente ou não (decide a seção 7 de `vygolint-video`).
+
+Sem essas linhas (harness sem hook), teste você mesmo: `python3 -c "import yaml"`, `command -v ffmpeg ffprobe`, `command -v whisper whisper-cli mlx_whisper`.
+
 ## Qual skill usar
 
 | Pedido | Skill |
@@ -36,9 +46,9 @@ Depois:
 
 - Catálogo: `${VYGOLINT_ROOT}/catalog/D01.yaml` … `D40.yaml`; glossário em `${VYGOLINT_ROOT}/catalog/definicoes.yaml`; categorias em `${VYGOLINT_ROOT}/catalog/categorias.yaml`; versão legível em `${VYGOLINT_ROOT}/docs/catalogo.md`.
 - Regras de grau, nível, agregação e relatório: `${VYGOLINT_ROOT}/docs/conformidade.md`.
-- Esqueleto da avaliação: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --help` (cabeçalho e as 43 entradas de `avaliacao.yaml`).
-- Áudio de um vídeo: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" <vídeo> --out <pasta>` (trechos com som; chamado por `vygolint-video`).
-- Relatório: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` (precisa de Python 3 e PyYAML); valida, confere o lugar das provas e gera os relatórios.
+- Esqueleto da avaliação: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --help` (cabeçalho e as 43 entradas de `avaliacao.yaml`).
+- Áudio de um vídeo: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" <vídeo> --out <pasta>` (trechos com som; chamado por `vygolint-video`).
+- Relatório: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` ; valida, confere o lugar das provas e gera os relatórios.
 
 ## Regras fixas
 

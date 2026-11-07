@@ -13,7 +13,7 @@ Entrada: um arquivo de vídeo e a pasta de saída da avaliação (`<pasta>`, pad
 
 ## 1. Verifique as ferramentas
 
-1. Rode `command -v ffmpeg ffprobe`.
+1. Veja a linha `VYGOLINT_FFMPEG` injetada no início da sessão, ou rode `command -v ffmpeg ffprobe`.
 2. Se os dois caminhos aparecem, siga para a seção 2.
 3. Se algum falta, vá para a seção 6 (sem ffmpeg).
 
@@ -51,7 +51,7 @@ ffmpeg -hide_banner -i "$VIDEO" -vf "select='gt(scene,0.4)',showinfo" -an -f nul
 
 ```bash
 VIDEO="gameplay/sessao1.mp4"; OUT="vygolint-out"
-python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT"
+"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT"
 ```
 
    O script grava `$OUT/registro_audio_<nome>.yaml` (`<nome>` é o nome do vídeo sem extensão) com:
@@ -137,7 +137,7 @@ eventos:
 
 1. Todo tempo no formato "hh:mm:ss", entre aspas.
 2. `fim` só nos eventos com duração.
-3. Confira o YAML do arquivo que você gravou (use o mesmo `ARQ` do nome do arquivo: `registro_video.yaml` ou `registro_video_<nome>.yaml`): `OUT="vygolint-out"; ARQ="registro_video.yaml"; python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" "$OUT/$ARQ"`.
+3. Confira o YAML do arquivo que você gravou (use o mesmo `ARQ` do nome do arquivo: `registro_video.yaml` ou `registro_video_<nome>.yaml`): `OUT="vygolint-out"; ARQ="registro_video.yaml"; "${VYGOLINT_PYTHON}" -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" "$OUT/$ARQ"`.
 4. Nas provas de `avaliacao.yaml`, cite o arquivo de vídeo e o tempo do evento, nunca o arquivo de quadro nem a folha de contato. O que a prova afirma sobre som ou fala vem dos campos `som` e `fala` do evento.
 5. Em `observacoes_gerais` (lista opcional de textos no topo do registro), diga se o áudio foi medido e se foi transcrito, e com qual reconhecedor.
 
@@ -152,7 +152,7 @@ eventos:
 
 Só faz sentido quando `trechos_com_som` não está vazio. A transcrição depende de um reconhecedor de fala instalado na máquina.
 
-1. Procure um reconhecedor: `command -v whisper whisper-cli mlx_whisper`.
+1. Veja a linha `VYGOLINT_TRANSCRITOR` injetada no início da sessão, ou rode `command -v whisper whisper-cli mlx_whisper`.
 2. Se nenhum caminho aparece, não instale nada por conta própria: siga sem transcrição (`transcricao: nao_disponivel` já está no registro), não preencha `fala` em nenhum evento e, na entrega, diga ao usuário que há som no vídeo que não foi transcrito e que um reconhecedor de fala (por exemplo, o `openai-whisper`) permite transcrevê-lo.
 3. Com o `whisper` (pacote `openai-whisper`), extraia o áudio, transcreva e junte a transcrição ao registro de áudio. Troque `pt` pelo idioma das falas do jogo:
 
@@ -161,7 +161,7 @@ VIDEO="gameplay/sessao1.mp4"; OUT="vygolint-out"; NOME="sessao1"
 mkdir -p "$OUT/frames/$NOME"
 ffmpeg -y -i "$VIDEO" -vn -ac 1 -ar 16000 "$OUT/frames/$NOME/audio.wav"
 whisper "$OUT/frames/$NOME/audio.wav" --language pt --model small --output_format json --output_dir "$OUT/frames/$NOME"
-python3 "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT" --transcricao "$OUT/frames/$NOME/audio.json" --transcritor "openai-whisper small"
+"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" "$VIDEO" --out "$OUT" --transcricao "$OUT/frames/$NOME/audio.json" --transcritor "openai-whisper small"
 ```
 
 4. Outro reconhecedor serve, desde que gere um JSON em um destes formatos: `segments: [{start, end, text}]` com tempos em segundos (openai-whisper, faster-whisper, mlx-whisper) ou `transcription: [{offsets: {from, to}, text}]` com tempos em milissegundos (saída `-oj` do whisper.cpp). Passe o arquivo em `--transcricao` e o nome e o modelo em `--transcritor`.

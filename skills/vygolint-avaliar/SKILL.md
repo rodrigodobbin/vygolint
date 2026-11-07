@@ -26,7 +26,7 @@ Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório
 4. Gere o esqueleto de `avaliacao.yaml` na pasta de saída (`vygolint-out` no diretório de trabalho, ou a pasta que o usuário indicar; chame-a de `<pasta>` daqui em diante). O script cria a pasta:
 
 ```bash
-python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --sala-de-aula false \
+"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --sala-de-aula false \
   --fontes codigo,documentacao,video \
   --artefato codigo=./src --artefato documentacao=docs/gdd.pdf --artefato documentacao=docs/guia-professor.md \
   --artefato video=gameplay/sessao1.mp4 \
@@ -70,7 +70,7 @@ python3 "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --jogo "Nome do jogo" --
    3. Se a diretriz tem `aplicabilidade` não nula e o contexto não a satisfaz (hoje só D22, quando `sala_de_aula: false`), o esqueleto já traz `grau: fora_do_contexto` com `razao` em cada critério da diretriz: confira e passe à próxima diretriz.
    4. Para cada critério, aplique a skill `vygolint-criterio` e obtenha a entrada.
    5. Substitua, em `<pasta>/avaliacao.yaml`, a entrada do esqueleto de cada critério da diretriz (as linhas `grau` e `razao` sob o id) pela entrada obtida; mantenha o comentário e a ordem dos ids. Nenhuma `razao` pode continuar `"PREENCHER"`.
-   6. Confira que o arquivo continua YAML válido: `python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" <pasta>/avaliacao.yaml`.
+   6. Confira que o arquivo continua YAML válido: `"${VYGOLINT_PYTHON}" -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" <pasta>/avaliacao.yaml`.
 3. Grave após cada diretriz. Se a sessão cair, releia `avaliacao.yaml` e retome no primeiro critério cuja `razao` ainda é `"PREENCHER"`.
 4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao` que diz qual fonte faltou ou o que ela não mostrou.
 5. Não grave `recomendacao`, nível nem nota de dependência: o script os tira do catálogo. `depende_de` também é do script.
@@ -111,7 +111,7 @@ Em harness com subagentes, o passo 3 pode ser dividido: cada subagente gradua um
    - o que responder: uma linha `id: grau` por critério, as dúvidas, e os **achados**, descritos no item 4.
 4. Os fatos vêm do registro e do inventário, que são os mesmos para todos. O subagente pode abrir quadros para conferir, mas, se vir algo que o registro não traz ou contradiz, não deve só usá-lo nas provas: deve relatar o achado na resposta, com o instante e o que viu. No teste, dois subagentes olharam as mesmas folhas e descreveram uma barra que crescia sozinha; um terceiro mediu quadro a quadro e mostrou que ela só subia em degraus. Sem o relato, o relatório final sairia com provas que se contradizem.
 5. Não deixe um subagente ler a parte de outro, nem um `avaliacao.yaml` já preenchido.
-6. Junte as partes: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_juntar.py" <pasta>/avaliacao.yaml`. O script lê `<pasta>/partes/*.yaml`, confere cada id contra o catálogo, recusa id repetido em duas partes e grava cada entrada no lugar do bloco do esqueleto, mantendo cabeçalho e comentários. Parte com o nome de uma categoria (`mediacao.yaml`) ganha uma nota se faltar critério dela. Com erro, o script não altera o arquivo.
+6. Junte as partes: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_juntar.py" <pasta>/avaliacao.yaml`. O script lê `<pasta>/partes/*.yaml`, confere cada id contra o catálogo, recusa id repetido em duas partes e grava cada entrada no lugar do bloco do esqueleto, mantendo cabeçalho e comentários. Parte com o nome de uma categoria (`mediacao.yaml`) ganha uma nota se faltar critério dela. Com erro, o script não altera o arquivo.
 7. Revise antes do passo 4, porque ninguém além de você viu o conjunto:
    - confira cada achado no vídeo; se procede, corrija `registro_video.yaml` e `inventario.md` e regradue os critérios que citam aquele fato;
    - leia as dúvidas de cada subagente e decida os casos em que ele mesmo apontou a leitura alternativa;
@@ -120,9 +120,9 @@ Em harness com subagentes, o passo 3 pode ser dividido: cada subagente gradua um
 
 ## Passo 4 — Relatório
 
-1. Rode: `python3 "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml`
+1. Rode: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml`
 2. Saída esperada: `OK: nível ... -> <pasta>/relatorio.md, <pasta>/relatorio.html, <pasta>/resultado.yaml`. O `relatorio.html` é a mesma avaliação em página navegável (abas Resumo, Para o professor, Para quem desenvolve, Para a equipe e Todos os critérios), gerada do mesmo `avaliacao.yaml`; abre no navegador sem servidor.
-3. Se aparecer `ModuleNotFoundError: No module named 'yaml'`, peça ao usuário para instalar o PyYAML (`python3 -m pip install pyyaml`) e rode de novo.
+3. Se aparecer `ModuleNotFoundError: No module named 'yaml'`, você rodou um interpretador sem PyYAML: use o de `VYGOLINT_PYTHON` (ver `using-vygolint`). Se a linha `VYGOLINT_PYTHON` veio vazia, peça ao usuário para instalar o PyYAML como ela indica e rode de novo; não instale por conta própria.
 4. Se o script sair com código 1, ele lista um erro por linha e não gera nada. Corrija `avaliacao.yaml` e rode de novo até sair `OK`:
 
 | Erro | O que fazer |

@@ -109,7 +109,7 @@ Para desenvolvimento local: `pi -e /caminho/para/vygolint`.
 3. Peça: "Avalie este jogo com o vygolint", informando onde estão o código, a documentação e os vídeos de gameplay e se o jogo é aplicado em sala de aula.
 4. Receba `vygolint-out/avaliacao.yaml` (julgamento do agente, com provas), `relatorio.md`, `relatorio.html` e `resultado.yaml` (gerados por `scripts/vygolint_report.py`). O `relatorio.html` abre em qualquer navegador e organiza o mesmo conteúdo em abas para professor, equipe de desenvolvimento e coordenação, com filtros por grau, nível e categoria.
 
-As skills exigem Python 3 com PyYAML disponível ao agente (para o script do relatório); ffmpeg é opcional (extração de quadros e medição do áudio do vídeo); um reconhecedor de fala como o `openai-whisper` é opcional (transcrição das falas).
+As skills exigem Python 3 com PyYAML disponível ao agente (para os scripts); o hook de início de sessão procura um interpretador que importe `yaml` (`python3`, depois `.venv` do plugin, depois `python`) e injeta o caminho como `VYGOLINT_PYTHON`, junto com a presença de ffmpeg e de um reconhecedor de fala; ffmpeg é opcional (extração de quadros e medição do áudio do vídeo); um reconhecedor de fala como o `openai-whisper` é opcional (transcrição das falas).
 
 ## Como funciona o nível
 
