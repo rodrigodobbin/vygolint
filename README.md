@@ -18,7 +18,9 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `catalog/categorias.yaml` | 12 categorias e a ressalva de Carvalho (2020) |
 | `docs/catalogo.md` | catálogo completo, gerado |
 | `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
-| `docs/conformidade.md` | regras de nível, grau, agregação e relatório |
+| `docs/conformidade.md` | regras de nível, grau, agregação e relatório; §6 descreve cada arquivo e script da avaliação |
+| `docs/experimentos/` | experimentos com o fluxo (ex.: critérios graduados por subagentes) |
+| `CHANGELOG.md` | o que mudou em cada versão |
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
 | `scripts/vygolint_scaffold.py` | gera o esqueleto de `avaliacao.yaml`: cabeçalho (artefatos como arquivos ou pastas; uma pasta põe no escopo tudo o que está dentro) e uma entrada por critério do catálogo; gera também o de `inventario.md`, com uma linha por arquivo do escopo |
 | `scripts/vygolint_report.py` | valida `avaliacao.yaml`, confere o lugar citado em cada prova e a cobertura do escopo declarado (avisos; `--strict` os trata como erro e é a execução final da entrega) e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml`; `--status` só diz quantos critérios estão preenchidos e qual é o próximo |
@@ -108,7 +110,21 @@ Para desenvolvimento local: `pi -e /caminho/para/vygolint`.
 1. Instale o vygolint no seu agente (seção anterior).
 2. Abra o agente na pasta do jogo.
 3. Peça: "Avalie este jogo com o vygolint", informando onde estão o código, a documentação e os vídeos de gameplay e se o jogo é aplicado em sala de aula.
-4. Receba `vygolint-out/avaliacao.yaml` (julgamento do agente, com provas), `relatorio.md`, `relatorio.html` e `resultado.yaml` (gerados por `scripts/vygolint_report.py`). O `relatorio.html` abre em qualquer navegador e organiza o mesmo conteúdo em abas para professor, equipe de desenvolvimento e coordenação, com filtros por grau, nível e categoria.
+4. Receba, em `vygolint-out/`:
+   - `avaliacao.yaml`: o julgamento do agente, critério a critério, com as provas (lugar em arquivo, página ou instante do vídeo);
+   - `inventario.md`: missões, minijogos, cenários jogáveis, objetivos de aprendizagem e a classificação de cada documento lido;
+   - `registro_video_<nome>.yaml` e `registro_audio_<nome>.yaml`: eventos com instante e trechos com som (e falas, quando há reconhecedor) de cada vídeo;
+   - `relatorio.md`, `relatorio.html` e `resultado.yaml`, gerados por `scripts/vygolint_report.py`. O `relatorio.html` abre em qualquer navegador e organiza o mesmo conteúdo em abas para professor, equipe de desenvolvimento e coordenação, com filtros por grau, nível e categoria; o `relatorio.md` serve para anexar em issue ou versionar; o `resultado.yaml` alimenta `scripts/vygolint_diff.py` para comparar com outra avaliação (versão anterior do jogo, ou avaliação humana).
+
+O fluxo que a skill segue, com o script de cada passo:
+
+| Passo | O que acontece | Script |
+|---|---|---|
+| 1. Contexto | nome, sala de aula, fontes e artefatos (arquivos ou pastas); esqueleto de `avaliacao.yaml` e de `inventario.md` | `vygolint_scaffold.py` |
+| 2. Inventário | leitura das fontes; vídeo vira registro de eventos e de áudio | `vygolint_audio.py` (+ ffmpeg) |
+| 3. Critérios | um grau e provas por critério, gravados no esqueleto; opcionalmente em partes por subagente | `vygolint_juntar.py`; `vygolint_report.py --status` para retomar |
+| 4. Relatório | validação, lint de provas e cobertura do escopo, relatórios | `vygolint_report.py` |
+| 5. Entrega | execução final com `--strict`, comparação com avaliação anterior se houver | `vygolint_report.py --strict`; `vygolint_diff.py` |
 
 As skills exigem Python 3 com PyYAML disponível ao agente (para os scripts); o hook de início de sessão procura um interpretador que importe `yaml` (`python3`, depois `.venv` do plugin, depois `python`) e injeta o caminho como `VYGOLINT_PYTHON`, junto com a presença de ffmpeg e de um reconhecedor de fala; ffmpeg é opcional (extração de quadros e medição do áudio do vídeo); um reconhecedor de fala como o `openai-whisper` é opcional (transcrição das falas).
 

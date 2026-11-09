@@ -1,7 +1,7 @@
 {
   "name": "vygolint",
   "description": "Conformance evaluation of educational games against Carvalho (2020) socio-interactionist guidelines, with WCAG-style A/AA/AAA levels",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": { "name": "Rodrigo Dobbin Fellows" },
   "homepage": "https://github.com/rodrigodobbin/vygolint",
   "repository": "https://github.com/rodrigodobbin/vygolint",
