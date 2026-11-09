@@ -49,6 +49,7 @@ Sem essas linhas (harness sem hook), teste você mesmo: `python3 -c "import yaml
 - Esqueleto da avaliação: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_scaffold.py" --help` (cabeçalho e as 43 entradas de `avaliacao.yaml`).
 - Áudio de um vídeo: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_audio.py" <vídeo> --out <pasta>` (trechos com som; chamado por `vygolint-video`).
 - Relatório: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml` ; valida, confere o lugar das provas e gera os relatórios.
+- Comparação entre duas avaliações: `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_diff.py" <antes>/resultado.yaml <depois>/resultado.yaml` (nível, contagem por grau e critérios que mudaram).
 
 ## Regras fixas
 
