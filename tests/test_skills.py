@@ -106,6 +106,14 @@ class SkillsTest(unittest.TestCase):
             self.assertIn(trecho, t)
         self.assertTrue((REPO / "docs" / "experimentos" / "2026-11-06-subagente-por-categoria.md").exists())
 
+    def test_avaliar_resumes_with_status_and_delivers_with_strict(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("--status", "Próximo: Dnn.k (categoria)", "A execução final foi", "--strict` e saiu `OK`",
+                       "não entregue aviso sem explicação"):
+            self.assertIn(trecho, t)
+        self.assertNotIn("retome no primeiro critério cuja `razao`", t)
+        self.assertIn("--status", self._ler("using-vygolint"))
+
     def test_avaliar_and_using_point_to_the_diff_script(self):
         t = self._ler("vygolint-avaliar")
         for trecho in ("### Reavaliação", "scripts/vygolint_diff.py", "comparacao.md", "o diff mostra o quê, não o porquê"):

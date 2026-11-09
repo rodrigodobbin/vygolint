@@ -71,7 +71,7 @@ Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório
    4. Para cada critério, aplique a skill `vygolint-criterio` e obtenha a entrada.
    5. Substitua, em `<pasta>/avaliacao.yaml`, a entrada do esqueleto de cada critério da diretriz (as linhas `grau` e `razao` sob o id) pela entrada obtida; mantenha o comentário e a ordem dos ids. Nenhuma `razao` pode continuar `"PREENCHER"`.
    6. Confira que o arquivo continua YAML válido: `"${VYGOLINT_PYTHON}" -c "import sys, yaml; yaml.safe_load(open(sys.argv[1], encoding='utf-8'))" <pasta>/avaliacao.yaml`.
-3. Grave após cada diretriz. Se a sessão cair, releia `avaliacao.yaml` e retome no primeiro critério cuja `razao` ainda é `"PREENCHER"`.
+3. Grave após cada diretriz. Para saber onde parou (nesta sessão ou depois de uma queda), rode `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml --status`: ele imprime quantos critérios estão preenchidos, a contagem por categoria com os ids que faltam, os `PREENCHER` que sobraram no cabeçalho e no `inventario.md`, e a linha `Próximo: Dnn.k (categoria)`. Retome nesse critério. O `--status` não valida nem gera nada; só procura o marcador do esqueleto.
 4. Todo critério do catálogo precisa de entrada. Sem fonte que decida, use `grau: nao_avaliado` com `razao` que diz qual fonte faltou ou o que ela não mostrou.
 5. Não grave `recomendacao`, nível nem nota de dependência: o script os tira do catálogo. `depende_de` também é do script.
 
@@ -160,7 +160,7 @@ Em harness com subagentes, o passo 3 pode ser dividido: cada subagente gradua um
 | `... prova N: instante T inválido` ou `fica depois do fim do vídeo` | Confira o instante no `registro_video.yaml` e corrija. |
 | `... prova N: intervalo A-B termina antes de começar` | Inverta ou corrija o intervalo. |
 
-7. Para exigir zero avisos (por exemplo, em CI), rode com `--strict`: avisos passam a contar como erro e nada é gerado. A duração do vídeo só é conferida quando o `ffprobe` está instalado.
+7. Enquanto corrige, rode sem `--strict`: o relatório sai e você vê os avisos. Na entrega (Passo 5) a execução final é com `--strict`. A duração do vídeo só é conferida quando o `ffprobe` está instalado.
 
 ## Passo 5 — Revisão e entrega
 
@@ -168,7 +168,7 @@ Leia `<pasta>/relatorio.md` e confira:
 
 - [ ] A cláusula de Carvalho (2020) está na seção 1.
 - [ ] `avaliacao.yaml` tem 43 entradas, uma por critério do catálogo.
-- [ ] Toda prova aponta um lugar verificável e o lugar existe: a última execução do script não imprimiu avisos, ou cada aviso restante foi explicado ao usuário.
+- [ ] A execução final foi `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml --strict` e saiu `OK`: toda prova aponta um lugar verificável e o lugar existe, e nenhum `PREENCHER` sobrou. Se um aviso não tem correção possível (fonte que não está nesta máquina e já foi declarada em `fontes_externas`, vídeo do escopo que o usuário mandou ignorar), rode sem `--strict` para gerar os arquivos e liste ao usuário cada aviso restante com o motivo; não entregue aviso sem explicação.
 - [ ] Todo `nao_avaliado` e `fora_do_contexto` tem `razao` que diz qual fonte faltou ou qual contexto não vale.
 - [ ] Cada bloqueio traz ao menos uma via de recomendação ou uma nota de dependência; cada parcial traz ao menos uma via (o script escolhe as vias pela evidência disponível; não recalcule).
 - [ ] Nenhum texto seu (provas, observações, razões, mensagem de entrega) rotula o jogo como sociointeracionista, behaviorista ou outro rótulo teórico.
