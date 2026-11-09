@@ -106,6 +106,12 @@ class SkillsTest(unittest.TestCase):
             self.assertIn(trecho, t)
         self.assertTrue((REPO / "docs" / "experimentos" / "2026-11-06-subagente-por-categoria.md").exists())
 
+    def test_avaliar_and_using_point_to_the_diff_script(self):
+        t = self._ler("vygolint-avaliar")
+        for trecho in ("### Reavaliação", "scripts/vygolint_diff.py", "comparacao.md", "o diff mostra o quê, não o porquê"):
+            self.assertIn(trecho, t)
+        self.assertIn("scripts/vygolint_diff.py", self._ler("using-vygolint"))
+
     def test_criterio_decides_between_not_evaluated_and_not_met(self):
         t = self._ler("vygolint-criterio")
         for trecho in ("o grau é `nao_avaliado`", "Há uma única exceção", "grau por falta de evidência",

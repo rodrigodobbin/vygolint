@@ -180,3 +180,13 @@ Entregue ao usuário:
 3. Os bloqueios e parciais, remetendo ao relatório.
 4. Se algum vídeo tem som e não foi transcrito, diga isso e quais critérios dependeram de áudio.
 5. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista."
+
+### Reavaliação
+
+Se o jogo já tem um `resultado.yaml` de avaliação anterior (outra pasta de saída, outra versão do jogo ou do catálogo), compare os dois depois de gerar o relatório:
+
+```bash
+"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_diff.py" <antes>/resultado.yaml <pasta>/resultado.yaml --out <pasta>/comparacao.md
+```
+
+O script lista nível antes e depois, a contagem por grau e cada critério que mudou de grau, separados em melhoras, pioras, critérios que passaram ou deixaram de ser avaliados e critérios que entraram ou saíram do contexto; notas que mudaram com o mesmo grau e graus declarados que o script sobrescreveu aparecem à parte. Entregue `comparacao.md` junto com o relatório e, para cada critério que mudou, diga em uma linha o que mudou na evidência (fonte nova, leitura corrigida, versão do jogo); o diff mostra o quê, não o porquê. Não trate melhora de contagem como melhora do jogo quando a mudança veio de fonte nova ou de leitura corrigida.
