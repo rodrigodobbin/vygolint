@@ -2,7 +2,9 @@
 
 Formato de [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); versões seguem [SemVer](https://semver.org/lang/pt-BR/). A versão vale para o catálogo, os scripts, as skills e os manifestos de todos os harnesses (`tests/test_manifests.py` falha se divergirem).
 
-## [Não lançado]
+## [0.4.0] — 2026-11-10
+
+Autoria, licenças e fontes declaradas; a cláusula passa a nomear os critérios do vygolint. Primeira versão com licença.
 
 ### Adicionado
 
@@ -52,7 +54,7 @@ Sem tag; corresponde ao commit `98b78bb`.
 
 - Catálogo: 40 diretrizes de Carvalho (2020) em 43 critérios com nível A, AA ou AAA derivado de essencialidade e viabilidade; glossário `definicoes.yaml`; 12 categorias; validação cruzada e `docs/catalogo.md` e `docs/catalogo.tex` gerados por `scripts/build_catalog.py`.
 
-[Não lançado]: https://github.com/rodrigodobbin/vygolint/compare/v0.3.0...HEAD
+[0.4.0]: https://github.com/rodrigodobbin/vygolint/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rodrigodobbin/vygolint/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rodrigodobbin/vygolint/compare/98b78bb...v0.2.0
 [0.1.0]: https://github.com/rodrigodobbin/vygolint/commits/98b78bb

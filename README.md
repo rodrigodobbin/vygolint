@@ -157,7 +157,7 @@ Detalhes e avisos de licença de terceiros em `NOTICE`.
 
 ### Como citar
 
-> FELLOWS, Rodrigo Dobbin. **vygolint**: avaliação de conformidade de jogos educacionais digitais com critérios sociointeracionistas. Versão 0.3.0. 2026. Disponível em: <https://github.com/rodrigodobbin/vygolint>.
+> FELLOWS, Rodrigo Dobbin. **vygolint**: avaliação de conformidade de jogos educacionais digitais com critérios sociointeracionistas. Versão 0.4.0. 2026. Disponível em: <https://github.com/rodrigodobbin/vygolint>.
 
 `CITATION.cff` traz os mesmos dados em formato legível por máquina (o GitHub mostra "Cite this repository"). Quem usar o texto das diretrizes cita também Carvalho (2020).
 

@@ -1,6 +1,6 @@
 {
   "name": "vygolint",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Conformance evaluation of educational games against 43 socio-interactionist criteria, with levels A, AA and AAA",
   "author": { "name": "Rodrigo Dobbin Fellows" },
   "homepage": "https://github.com/rodrigodobbin/vygolint",
