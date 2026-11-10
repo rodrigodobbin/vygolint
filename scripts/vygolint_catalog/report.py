@@ -269,8 +269,12 @@ def aggregate(av, catalog):
 
 
 CLAUSULA = (
-    "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) "
-    "e não classifica o jogo como sociointeracionista."
+    "O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, "
+    "derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista."
+)
+RODAPE = (
+    "Gerado pelo vygolint (https://github.com/rodrigodobbin/vygolint), de Rodrigo Dobbin Fellows. "
+    "Critérios, níveis e recomendações são do vygolint; o texto das diretrizes é de Carvalho (2020)."
 )
 GENERATED = "<!-- ARQUIVO GERADO por scripts/vygolint_report.py a partir de avaliacao.yaml. Não edite à mão. -->"
 _NOME_GRAU = {
@@ -384,6 +388,9 @@ def render_relatorio(res, av, catalog):
             if f.get("observacao"):
                 linhas.append(f"  - Observação: {f['observacao']}")
         linhas.append("")
+    while linhas and linhas[-1] == "":
+        linhas.pop()
+    linhas += ["", "---", "", RODAPE]
     return "\n".join(linhas).rstrip() + "\n"
 
 

@@ -43,6 +43,8 @@ code{font-family:var(--mono);font-size:.9em}
 .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);font-weight:700}
 header{padding-block:28px 8px;border-bottom:1px solid var(--line)}
 .meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--fg2);font-size:14px;margin-top:10px}
+.foot{margin-top:40px;padding-top:12px;border-top:1px solid var(--line);color:var(--fg3);font-size:12px}
+.foot a{color:inherit}
 .clause{border-left:3px solid var(--coral);padding:8px 14px;margin:18px 0;color:var(--fg2);font-style:italic;max-width:72ch}
 nav.views{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding-block:8px;margin-bottom:8px}
 nav.views a{white-space:nowrap;text-decoration:none;color:var(--fg2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid transparent}
@@ -108,7 +110,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <body>
 <div class="wrap">
 <header>
-  <div class="eyebrow">Relatório vygolint · conformidade com Carvalho (2020)</div>
+  <div class="eyebrow">Relatório vygolint</div>
   <h1 id="title"></h1>
   <div class="meta" id="meta"></div>
   <div class="level"><span class="eyebrow">Nível alcançado</span><span class="big" id="nivel"></span><span id="nivel-why" style="color:var(--fg2);font-size:14px"></span></div>
@@ -147,7 +149,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <section class="view" id="v-professor">
   <h2>Para o professor</h2>
   <div class="plain">
-    <p>Este relatório não diz se o jogo é bom ou ruim para a sua turma. Ele confere, item a item, o que o jogo faz contra 40 diretrizes de Carvalho (2020) para jogos educacionais. Abaixo, o que as evidências mostraram, organizado pelo texto das diretrizes.</p>
+    <p>Este relatório não diz se o jogo é bom ou ruim para a sua turma. Ele confere, item a item, o que o jogo faz contra os 43 critérios do vygolint, derivados das 40 diretrizes de Carvalho (2020) para jogos educacionais. Abaixo, o que as evidências mostraram, organizado pelo texto das diretrizes.</p>
     <p id="prof-avisos"></p>
   </div>
   <h3>O que o jogo faz</h3>
@@ -197,6 +199,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
   </div>
   <div id="all"></div>
 </section>
+<footer class="foot">Gerado pelo <a href="https://github.com/rodrigodobbin/vygolint">vygolint</a>, de Rodrigo Dobbin Fellows. Critérios, níveis e recomendações são do vygolint; o texto das diretrizes é de Carvalho (2020).</footer>
 </div>
 <div class="tip" id="tip"></div>
 

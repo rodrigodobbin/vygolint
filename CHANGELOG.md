@@ -2,6 +2,20 @@
 
 Formato de [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); versões seguem [SemVer](https://semver.org/lang/pt-BR/). A versão vale para o catálogo, os scripts, as skills e os manifestos de todos os harnesses (`tests/test_manifests.py` falha se divergirem).
 
+## [Não lançado]
+
+### Adicionado
+
+- `LICENSE` (Apache-2.0, código), `LICENSE-CONTENT.md` (CC BY 4.0, catálogo e docs), `NOTICE` (autoria, texto das diretrizes de Carvalho (2020) fora das licenças, modelo de níveis das WCAG, adaptadores do superpowers sob MIT) e `CITATION.cff`.
+- README: seções "Autoria e fontes", "Como citar" e "Licença".
+- Rodapé de autoria em `relatorio.md` e `relatorio.html`; linha de autoria dos critérios em `docs/catalogo.md`.
+
+### Alterado
+
+- Cláusula: "O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista." (antes: "conformidade com as diretrizes de Carvalho (2020)"). Vale para relatórios, skills, `docs/conformidade.md` e `vygolint_diff.py`, que agora lê a cláusula de `report.py`.
+- Descrição dos manifestos apresenta o vygolint pelos 43 critérios e níveis A, AA e AAA; a fonte das diretrizes fica na descrição longa. Palavra-chave `wcag` removida; campo `license` acrescentado.
+- Cabeçalho do `relatorio.html`: "Relatório vygolint".
+
 ## [0.3.0] — 2026-11-09
 
 Fluxo de avaliação completo e conferível: esqueleto, inventário, vídeo com áudio, lint de provas, relatório HTML, retomada, comparação entre avaliações.
@@ -38,6 +52,7 @@ Sem tag; corresponde ao commit `98b78bb`.
 
 - Catálogo: 40 diretrizes de Carvalho (2020) em 43 critérios com nível A, AA ou AAA derivado de essencialidade e viabilidade; glossário `definicoes.yaml`; 12 categorias; validação cruzada e `docs/catalogo.md` e `docs/catalogo.tex` gerados por `scripts/build_catalog.py`.
 
+[Não lançado]: https://github.com/rodrigodobbin/vygolint/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/rodrigodobbin/vygolint/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rodrigodobbin/vygolint/compare/98b78bb...v0.2.0
 [0.1.0]: https://github.com/rodrigodobbin/vygolint/commits/98b78bb

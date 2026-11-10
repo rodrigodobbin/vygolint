@@ -44,6 +44,27 @@ class ManifestsTest(unittest.TestCase):
                 self.assertEqual(_json(rel)["version"], vygolint_catalog.__version__)
         self.assertEqual(_json(".claude-plugin/marketplace.json")["plugins"][0]["version"], vygolint_catalog.__version__)
 
+    def test_authorship_license_and_citation(self):
+        for rel in ("LICENSE", "LICENSE-CONTENT.md", "NOTICE", "CITATION.cff"):
+            with self.subTest(rel=rel):
+                self.assertTrue((REPO / rel).exists(), rel)
+        self.assertIn("Apache License", (REPO / "LICENSE").read_text(encoding="utf-8"))
+        notice = (REPO / "NOTICE").read_text(encoding="utf-8")
+        for trecho in ("Rodrigo Dobbin Fellows", "CARVALHO, Diego Marques", "WCAG", "Jesse Vincent"):
+            self.assertIn(trecho, notice)
+        import yaml
+        cff = yaml.safe_load((REPO / "CITATION.cff").read_text(encoding="utf-8"))
+        self.assertEqual(str(cff["version"]), vygolint_catalog.__version__)
+        self.assertEqual(cff["authors"][0]["family-names"], "Fellows")
+        self.assertEqual(cff["references"][0]["authors"][0]["family-names"], "Carvalho")
+        for rel in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".cursor-plugin/plugin.json", ".kimi-plugin/plugin.json"):
+            with self.subTest(rel=rel):
+                m = _json(rel)
+                self.assertEqual(m["author"]["name"], "Rodrigo Dobbin Fellows")
+                self.assertEqual(m["license"], "Apache-2.0 AND CC-BY-4.0")
+                self.assertNotIn("wcag", m["keywords"])
+                self.assertTrue(m["description"].startswith("Conformance evaluation of educational games against 43"))
+
     def test_names(self):
         for rel in MANIFESTOS:
             with self.subTest(rel=rel):

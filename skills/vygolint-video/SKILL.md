@@ -5,7 +5,7 @@ description: Use when a gameplay video must become evidence for a vygolint evalu
 
 # Transformar vídeo de gameplay em evidência
 
-> O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
+> O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista.
 
 Você não assiste vídeo: você extrai quadros, monta folhas de contato, lê as folhas como imagens e escreve um registro com timestamps. O registro (`registro_video.yaml`) é a prova que os critérios citam no formato `arquivo hh:mm:ss[-hh:mm:ss] — observação`.
 

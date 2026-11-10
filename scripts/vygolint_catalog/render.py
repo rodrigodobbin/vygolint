@@ -73,6 +73,8 @@ def render_markdown(diretrizes, categorias, glossario=None):
         GENERATED_MD,
         "# Catálogo vygolint — diretrizes e critérios de conformidade",
         "",
+        "Critérios, níveis, definições, evidências, escalas e recomendações: Rodrigo Dobbin Fellows (vygolint).",
+        "",
         "Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolvimento de jogos "
         "educacionais digitais embasados na teoria sociointeracionista de Lev Semionovich Vigotski*. "
         "Dissertação (Mestrado), UFABC, 2020. Quadro 3.",

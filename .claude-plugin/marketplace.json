@@ -5,7 +5,7 @@
   "plugins": [
     {
       "name": "vygolint",
-      "description": "Conformance evaluation of educational games against Carvalho (2020) socio-interactionist guidelines, with WCAG-style A/AA/AAA levels",
+      "description": "Conformance evaluation of educational games against 43 socio-interactionist criteria, with levels A, AA and AAA",
       "version": "0.3.0",
       "source": "./",
       "author": { "name": "Rodrigo Dobbin Fellows" }

@@ -5,7 +5,8 @@ from helpers import REPO
 
 SKILLS = ("using-vygolint", "vygolint-avaliar", "vygolint-criterio", "vygolint-video")
 CLAUSULA = (
-    "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) "
+    "O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, "
+    "derivados das diretrizes de Carvalho (2020), "
     "e não classifica o jogo como sociointeracionista."
 )
 _FM = re.compile(r"^---\n(.*?)\n---\n", re.S)

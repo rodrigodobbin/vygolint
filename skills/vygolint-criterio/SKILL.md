@@ -5,7 +5,7 @@ description: Use when grading one vygolint criterion from code, documentation or
 
 # Graduar um critério do vygolint
 
-> O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
+> O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista.
 
 Entrada: um id de critério (ex.: `D17.1`), as fontes disponíveis e, quando houver, `inventario.md` e `registro_video.yaml` (ver `vygolint-avaliar` e `vygolint-video`). Saída: a entrada YAML do critério para `avaliacao.yaml`. Você grava grau e provas; nível, dependências e recomendação são do script `scripts/vygolint_report.py`.
 

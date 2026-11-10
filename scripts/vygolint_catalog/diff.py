@@ -1,9 +1,6 @@
 """Compare two resultado.yaml files (the output of vygolint_report.py) criterion by criterion."""
 
-CLAUSULA = (
-    "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) "
-    "e não classifica o jogo como sociointeracionista."
-)
+from .report import CLAUSULA
 
 ESCALA = {"nao_atendido": 0, "parcial": 1, "atendido": 2}
 GRAUS = ["atendido", "parcial", "nao_atendido", "nao_avaliado", "fora_do_contexto"]

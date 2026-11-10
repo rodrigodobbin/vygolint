@@ -1,6 +1,8 @@
 <!-- ARQUIVO GERADO por scripts/build_catalog.py. Não edite à mão. -->
 # Catálogo vygolint — diretrizes e critérios de conformidade
 
+Critérios, níveis, definições, evidências, escalas e recomendações: Rodrigo Dobbin Fellows (vygolint).
+
 Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolvimento de jogos educacionais digitais embasados na teoria sociointeracionista de Lev Semionovich Vigotski*. Dissertação (Mestrado), UFABC, 2020. Quadro 3.
 
 > Carvalho (2020, seção 4.4) suprimiu as categorias na apresentação final das diretrizes por considerar que rotular, classificar e ordenar requisitos pode gerar a falsa impressão de que a teoria de Vigotski também pode ser classificada assim. O vygolint usa as categorias apenas como instrumento de organização e de relatório, não como taxonomia da teoria.

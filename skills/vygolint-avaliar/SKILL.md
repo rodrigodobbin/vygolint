@@ -1,11 +1,11 @@
 ---
 name: vygolint-avaliar
-description: Use when asked to evaluate an educational game against the Carvalho (2020) guidelines or to produce a vygolint conformance report - orchestrates context, inventory, per-criterion grading, avaliacao.yaml and the report script
+description: Use when asked to evaluate an educational game with vygolint, to check it against the vygolint criteria (derived from the Carvalho (2020) guidelines) or to produce a vygolint conformance report - orchestrates context, inventory, per-criterion grading, avaliacao.yaml and the report script
 ---
 
 # Avaliar um jogo com o vygolint
 
-> O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
+> O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista.
 
 Use esta skill quando pedirem "avalie este jogo com o vygolint" ou um relatório de conformidade. Ao final, o usuário recebe uma pasta com `avaliacao.yaml`, `relatorio.md`, `relatorio.html` e `resultado.yaml`.
 
@@ -166,7 +166,7 @@ Em harness com subagentes, o passo 3 pode ser dividido: cada subagente gradua um
 
 Leia `<pasta>/relatorio.md` e confira:
 
-- [ ] A cláusula de Carvalho (2020) está na seção 1.
+- [ ] A cláusula do vygolint está na seção 1.
 - [ ] `avaliacao.yaml` tem 43 entradas, uma por critério do catálogo.
 - [ ] A execução final foi `"${VYGOLINT_PYTHON}" "${VYGOLINT_ROOT}/scripts/vygolint_report.py" <pasta>/avaliacao.yaml --strict` e saiu `OK`: toda prova aponta um lugar verificável e o lugar existe, e nenhum `PREENCHER` sobrou. Se um aviso não tem correção possível (fonte que não está nesta máquina e já foi declarada em `fontes_externas`, vídeo do escopo que o usuário mandou ignorar), rode sem `--strict` para gerar os arquivos e liste ao usuário cada aviso restante com o motivo; não entregue aviso sem explicação.
 - [ ] Todo `nao_avaliado` e `fora_do_contexto` tem `razao` que diz qual fonte faltou ou qual contexto não vale.
@@ -179,7 +179,7 @@ Entregue ao usuário:
 2. O nível alcançado como o script o imprimiu, sem reinterpretá-lo.
 3. Os bloqueios e parciais, remetendo ao relatório.
 4. Se algum vídeo tem som e não foi transcrito, diga isso e quais critérios dependeram de áudio.
-5. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista."
+5. A cláusula, literal: "O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista."
 
 ### Reavaliação
 
