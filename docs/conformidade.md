@@ -1,7 +1,8 @@
 # Regras de conformidade do vygolint
 
-> O resultado de uma avaliação vygolint expressa **conformidade com as diretrizes de
-> Carvalho (2020)** e **não classifica o jogo como sociointeracionista**. Carvalho (2020,
+> O resultado de uma avaliação vygolint expressa **conformidade com os critérios do
+> vygolint, derivados das diretrizes de Carvalho (2020)**, e **não classifica o jogo como
+> sociointeracionista**. Carvalho (2020,
 > seção 4.4 e considerações finais) alerta que rotular o jogo e ordenar as diretrizes pode
 > distorcer a teoria de Vigotski. Os níveis abaixo ordenam critérios de verificação, não
 > a teoria.

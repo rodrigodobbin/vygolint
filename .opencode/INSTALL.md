@@ -42,6 +42,6 @@ To pin a specific version:
 
 ```json
 {
-  "plugin": ["vygolint@git+https://github.com/rodrigodobbin/vygolint.git#v0.3.0"]
+  "plugin": ["vygolint@git+https://github.com/rodrigodobbin/vygolint.git#v0.4.0"]
 }
 ```

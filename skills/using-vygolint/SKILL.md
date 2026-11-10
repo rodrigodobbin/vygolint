@@ -5,9 +5,9 @@ description: Use when a session starts with the vygolint plugin installed - expl
 
 # Usando o vygolint
 
-O vygolint avalia um jogo educacional digital contra 43 critérios derivados das 40 diretrizes de Carvalho (2020) para jogos sociointeracionistas, com níveis A, AA e AAA no modelo das WCAG. Entradas: código, documentação (GDD ou documento equivalente) e vídeos de gameplay.
+O vygolint avalia um jogo educacional digital contra 43 critérios próprios, com níveis A, AA e AAA, derivados das 40 diretrizes de Carvalho (2020) para jogos sociointeracionistas. Entradas: código, documentação (GDD ou documento equivalente) e vídeos de gameplay.
 
-> O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
+> O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista.
 
 ## Raiz do plugin
 

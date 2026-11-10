@@ -1,0 +1,65 @@
+vygolint
+Copyright 2026 Rodrigo Dobbin Fellows
+
+Autoria
+-------
+O vygolint foi criado e é mantido por Rodrigo Dobbin Fellows. São dele os 43
+critérios e seus enunciados, a derivação do nível de cada critério, o glossário
+de definições, os procedimentos e indicadores de evidência, as escalas de grau,
+as dependências entre critérios, as recomendações por via, as regras de
+conformidade, os scripts, as skills e os relatórios.
+
+Licenças
+--------
+- Código (scripts/, hooks/, skills/, tests/, manifestos e adaptadores de
+  harness): Apache License, Version 2.0. Ver LICENSE.
+- Conteúdo (catalog/ e docs/, com a exceção indicada abaixo): Creative Commons
+  Attribution 4.0 International (CC BY 4.0). Ver LICENSE-CONTENT.md.
+
+Material de terceiros
+---------------------
+1. Diretrizes de Carvalho (2020). O texto de cada diretriz (campo `diretriz` de
+   catalog/D01.yaml a catalog/D40.yaml, reproduzido em docs/catalogo.md e
+   docs/catalogo.tex), os nomes das 12 categorias e a ressalva sobre elas
+   (catalog/categorias.yaml) vêm de:
+
+     CARVALHO, Diego Marques. Diretrizes para o desenvolvimento de jogos
+     educacionais digitais embasados na teoria sociointeracionista de Lev
+     Semionovich Vigotski. Dissertação (Mestrado em Ciência da Computação),
+     Universidade Federal do ABC, 2020. Quadro 3 e seção 4.4.
+
+   Esse texto é reproduzido como citação, com indicação da fonte em cada
+   arquivo. Ele não é coberto pelas licenças acima, e os direitos sobre ele
+   permanecem com o autor.
+
+2. WCAG. A divisão em níveis A, AA e AAA e a regra de que cada nível exige os
+   critérios dos níveis anteriores seguem o modelo de conformidade das Web
+   Content Accessibility Guidelines (W3C). Nenhum texto das WCAG é reproduzido.
+   O vygolint não é extensão das WCAG e não trata de acessibilidade.
+
+3. superpowers. Os adaptadores de harness (.opencode/, .pi/, .agents/,
+   hooks/hooks.json, hooks/hooks-cursor.json, hooks/run-hook.cmd, a estrutura
+   de hooks/session-start e a dos manifestos de plugin) foram adaptados do
+   superpowers (https://github.com/obra/superpowers), sob a licença MIT:
+
+     MIT License
+
+     Copyright (c) 2025 Jesse Vincent
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.

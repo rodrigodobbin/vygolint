@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "Se você usar o vygolint, cite-o como abaixo."
+title: "vygolint: avaliação de conformidade de jogos educacionais digitais com critérios sociointeracionistas"
+type: software
+authors:
+  - family-names: Fellows
+    given-names: Rodrigo Dobbin
+version: 0.4.0
+date-released: "2026-11-10"
+repository-code: "https://github.com/rodrigodobbin/vygolint"
+url: "https://github.com/rodrigodobbin/vygolint"
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+keywords:
+  - jogos educacionais
+  - sociointeracionismo
+  - Vigotski
+  - conformidade
+  - avaliação
+abstract: >-
+  Catálogo de 43 critérios testáveis, com níveis A, AA e AAA, e plugin para
+  agentes de código que avalia um jogo educacional digital a partir do código,
+  da documentação e de vídeos de gameplay e gera o relatório de conformidade.
+  Os critérios derivam das 40 diretrizes de Carvalho (2020).
+references:
+  - type: thesis
+    authors:
+      - family-names: Carvalho
+        given-names: Diego Marques
+    title: "Diretrizes para o desenvolvimento de jogos educacionais digitais embasados na teoria sociointeracionista de Lev Semionovich Vigotski"
+    thesis-type: "Dissertação (Mestrado em Ciência da Computação)"
+    institution:
+      name: "Universidade Federal do ABC"
+    year: 2020

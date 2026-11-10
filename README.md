@@ -1,12 +1,13 @@
 # vygolint
 
-Catálogo de conformidade e plugin de avaliação de jogos educacionais digitais
-contra as 40 diretrizes sociointeracionistas de Carvalho (2020), com níveis
-A, AA e AAA no modelo das WCAG.
+Ferramenta de avaliação de conformidade de jogos educacionais digitais: um
+catálogo de 43 critérios testáveis, com níveis A, AA e AAA, e um plugin para
+agentes de código que avalia um jogo a partir do código, da documentação e de
+vídeos de gameplay e gera o relatório.
 
-Fonte das diretrizes: CARVALHO, Diego Marques. *Diretrizes para o desenvolvimento
-de jogos educacionais digitais embasados na teoria sociointeracionista de Lev
-Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFABC, 2020.
+Criado e mantido por Rodrigo Dobbin Fellows. Os critérios derivam das 40
+diretrizes sociointeracionistas de Carvalho (2020); ver
+[Autoria e fontes](#autoria-e-fontes).
 
 ## O que há aqui
 
@@ -15,12 +16,13 @@ Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFA
 | `catalog/D01.yaml` … `D40.yaml` | uma diretriz por arquivo: texto literal, critérios, níveis, evidências, escalas, recomendações por via (documentação, design, código) |
 | `catalog/schema.yaml` | esquema validado pelo build |
 | `catalog/definicoes.yaml` | glossário: definições compartilhadas pelos critérios, impressas uma vez por critério |
-| `catalog/categorias.yaml` | 12 categorias e a ressalva de Carvalho (2020) |
+| `catalog/categorias.yaml` | 12 categorias e a ressalva de Carvalho (2020) sobre elas |
 | `docs/catalogo.md` | catálogo completo, gerado |
 | `docs/catalogo.tex` | tabela resumo para LaTeX, gerada |
 | `docs/conformidade.md` | regras de nível, grau, agregação e relatório; §6 descreve cada arquivo e script da avaliação |
 | `docs/experimentos/` | experimentos com o fluxo (ex.: critérios graduados por subagentes) |
 | `CHANGELOG.md` | o que mudou em cada versão |
+| `LICENSE`, `LICENSE-CONTENT.md`, `NOTICE`, `CITATION.cff` | licenças (código e conteúdo), material de terceiros e como citar |
 | `scripts/build_catalog.py` | valida o catálogo e regenera os docs |
 | `scripts/vygolint_scaffold.py` | gera o esqueleto de `avaliacao.yaml`: cabeçalho (artefatos como arquivos ou pastas; uma pasta põe no escopo tudo o que está dentro) e uma entrada por critério do catálogo; gera também o de `inventario.md`, com uma linha por arquivo do escopo |
 | `scripts/vygolint_report.py` | valida `avaliacao.yaml`, confere o lugar citado em cada prova e a cobertura do escopo declarado (avisos; `--strict` os trata como erro e é a execução final da entrega) e gera `relatorio.md`, `relatorio.html` (página navegável por público) e `resultado.yaml`; `--status` só diz quantos critérios estão preenchidos e qual é o próximo |
@@ -132,8 +134,37 @@ As skills exigem Python 3 com PyYAML disponível ao agente (para os scripts); o 
 
 Cada critério declara essencialidade teórica e viabilidade; o nível sai de uma
 tabela fixa (ver `docs/conformidade.md`). O build falha se o YAML declarar outro
-nível. O resultado de uma avaliação expressa conformidade com as diretrizes, não
-um rótulo de "jogo sociointeracionista".
+nível. O resultado de uma avaliação expressa conformidade com os critérios do
+vygolint, não um rótulo de "jogo sociointeracionista".
+
+## Autoria e fontes
+
+O vygolint foi criado e é mantido por **Rodrigo Dobbin Fellows**. São do vygolint:
+
+- os 43 critérios testáveis e seus enunciados;
+- o nível de cada critério e a regra que o deriva (essencialidade teórica × viabilidade);
+- o glossário de definições, os procedimentos e indicadores de evidência por fonte (código, documentação, vídeo) e as escalas de grau;
+- as dependências entre critérios e as recomendações por via (documentação, design, código);
+- as regras de conformidade (`docs/conformidade.md`), os scripts, as skills e os relatórios.
+
+O que vem de outros trabalhos:
+
+- **Diretrizes.** O texto das 40 diretrizes (campo `diretriz` de cada `catalog/Dnn.yaml`, com a fonte em `fonte`), as 12 categorias e a ressalva sobre elas são de: CARVALHO, Diego Marques. *Diretrizes para o desenvolvimento de jogos educacionais digitais embasados na teoria sociointeracionista de Lev Semionovich Vigotski*. Dissertação (Mestrado em Ciência da Computação), UFABC, 2020. O vygolint não altera esse texto; ele o desdobra em critérios verificáveis.
+- **Níveis.** A divisão em A, AA e AAA, com cada nível exigindo os anteriores, segue o modelo de conformidade das WCAG (W3C). O vygolint não é extensão das WCAG e não trata de acessibilidade.
+- **Adaptadores de harness.** A estrutura de manifestos e hooks foi adaptada do [superpowers](https://github.com/obra/superpowers) (MIT).
+
+Detalhes e avisos de licença de terceiros em `NOTICE`.
+
+### Como citar
+
+> FELLOWS, Rodrigo Dobbin. **vygolint**: avaliação de conformidade de jogos educacionais digitais com critérios sociointeracionistas. Versão 0.4.0. 2026. Disponível em: <https://github.com/rodrigodobbin/vygolint>.
+
+`CITATION.cff` traz os mesmos dados em formato legível por máquina (o GitHub mostra "Cite this repository"). Quem usar o texto das diretrizes cita também Carvalho (2020).
+
+## Licença
+
+- Código (`scripts/`, `hooks/`, `skills/`, `tests/`, manifestos): [Apache License 2.0](LICENSE).
+- Conteúdo (`catalog/`, `docs/`): [CC BY 4.0](LICENSE-CONTENT.md). O texto das diretrizes de Carvalho (2020) fica fora dessa licença.
 
 ## Desenvolvimento
 

@@ -8,7 +8,7 @@
 
 ## 1. Cláusula
 
-> O resultado de uma avaliação vygolint expressa conformidade com as diretrizes de Carvalho (2020) e não classifica o jogo como sociointeracionista.
+> O resultado de uma avaliação vygolint expressa conformidade com os critérios do vygolint, derivados das diretrizes de Carvalho (2020), e não classifica o jogo como sociointeracionista.
 
 ## 2. Nível alcançado
 
@@ -294,3 +294,7 @@ Critérios que impedem o nível A:
   - docs/gdd.md p. 1 — trecho que satisfaz D40.1
 - Vídeo (atendido):
   - gameplay/sessao1.mp4 00:00:00 — observação que satisfaz D40.1
+
+---
+
+Gerado pelo vygolint (https://github.com/rodrigodobbin/vygolint), de Rodrigo Dobbin Fellows. Critérios, níveis e recomendações são do vygolint; o texto das diretrizes é de Carvalho (2020).
